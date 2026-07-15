@@ -1,18 +1,46 @@
 <h1>The Slop Index</h1>
 
 **Which AI writes the least like AI?** A benchmark that ranks 18 frontier LLMs by how much
-recognizable *AI slop* their writing contains — measured mechanically against real human writing
-that provably predates ChatGPT, across email, social posts, essays, and chat.
+recognizable *AI slop* their writing contains, across email, social posts, essays, and chat.
 
-No LLM judges scoring other LLMs. Every number is a token statistic computed against a pre-AI
-human baseline, so a model that writes like a person scores near **0** and a model that writes
-like a chatbot scores high.
+The published **Human Score** (0–100, where **100 = writes like a real person**) blends two
+independent signals: **human preference (40%)** — a live crowd Elo from a blind pairwise game —
+and **four mechanical axes (15% each)** measured against real human writing that provably predates
+ChatGPT. No LLM judges scoring other LLMs; every mechanical number is a token statistic against a
+pre-AI baseline.
 
 - **The report:** https://slop-game.vercel.app/benchmark.html
 - **The game (Spot the Slop):** https://slop-game.vercel.app — flag the sloppier of two blind
-  samples; a live human-preference Elo runs alongside the mechanical board.
+  samples (or "both are slop"); the vote feeds 40% of the score.
 
-## Results (overall Slop Index, 0 = writes like a pre-AI human)
+## How the score is calculated
+
+The headline **Human Score** is a weighted blend of five axes. Each axis is first put on a 0–100
+human-likeness scale (100 = the most human-like of the models tested), then blended:
+
+| Axis | Weight | What it captures |
+|---|---|---|
+| **Human preference** | **40%** | Live crowd Elo. People flag the sloppier of two blind samples; least-flagged rises. This is the biggest single input. |
+| Conciseness | 15% | Resisting length inflation vs a human doing the same task. |
+| Templating | 15% | Avoiding reused openers & skeletons across different prompts (homogeneity). |
+| Rhythm | 15% | Natural paragraph-length variance. |
+| Tells | 15% | Avoiding over-used AI words & constructions, vs the human baseline's own rate. |
+
+```
+Human Score = 0.40·human + 0.15·(conciseness + templating + rhythm + tells)     # higher = more human
+```
+
+The **mechanical 60%** is fully reproducible offline (below); the **human 40%** is live and needs
+real vote volume before it's meaningful, so the public board updates as votes arrive. `score.py`
+computes the four mechanical axes as raw *slop distance* from the human baseline (0 = human-like);
+the site inverts and blends them with the crowd Elo. A leading AI *detector* (Pangram) was tried
+only as a control — it flags all 18 models at ~100% AI, which is exactly why a mechanical **and**
+human measure is needed to tell them apart.
+
+## The mechanical layer (reproducible offline)
+
+The 60% mechanical component, ranked by raw Slop Index (0 = writes like a pre-AI human, higher =
+more slop). This is what `score.py` reproduces exactly from the committed outputs:
 
 | Rank | Model | Lab | Slop Index |
 |---|---|---|---|
@@ -24,24 +52,10 @@ like a chatbot scores high.
 | 17 | Muse Spark | Meta | 23.1 |
 | 18 (cleanest) | Kimi K2.6 | Moonshot | 21.1 |
 
-The full 18-model board, the four sub-axes, per-domain splits, tie groups, and a price-vs-slop
-scatter are in `runs/full-merged-score.log` and rendered at the report link above. Headline
-finding beyond the ranking: **slop does not track price** — the most expensive model on the board
-is near the top of the slop ranking, one of the cheapest is near the clean end.
-
-## What it measures
-
-Four mechanical axes, each 0–100 (0 = human-like), computed purely from token statistics:
-
-- **Conciseness** — length inflation vs a human doing the same task.
-- **Templating** — reused openers and skeletons across different prompts (homogeneity).
-- **Rhythm** — flattened paragraph-length variance.
-- **Tells** — over-used AI words and constructions, relative to the human baseline's own rate.
-
-Blended `0.35 / 0.30 / 0.20 / 0.15`. Because that blend is subjective, the ranking is published
-with bootstrap **tie groups**, not as a false-precision leaderboard. A leading AI *detector*
-(Pangram) is run only as a control: it flags all 18 models at ~100% AI, which is exactly why a
-mechanical slop measure is needed to tell them apart.
+Full board, per-axis, per-domain splits, tie groups, and a price-vs-slop scatter are in
+`runs/full-merged-score.log` and rendered at the report link. Headline finding beyond the ranking:
+**slop does not track price** — the priciest model on the board is near the sloppy end, one of the
+cheapest is near the clean end.
 
 ## Reproduce it
 

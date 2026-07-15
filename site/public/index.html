@@ -31,7 +31,7 @@
   /* the question is the hero of the task block; scenario context sits just above the cards */
   #question{text-align:center;font-size:clamp(23px,3.9vw,31px);font-weight:700;
     letter-spacing:-.025em;color:var(--ink);margin:0 auto 10px;max-width:640px;line-height:1.18}
-  .setup{text-align:center;font-size:13.5px;color:var(--muted);margin:0 auto 32px;max-width:560px;line-height:1.5}
+  .setup{text-align:center;font-size:13.5px;color:var(--muted);margin:0 auto 18px;max-width:560px;line-height:1.5}
   .setup b{color:var(--body);font-weight:600}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:680px){.cards{grid-template-columns:1fr;gap:22px}}
@@ -65,7 +65,7 @@
     transition:opacity .15s,transform .12s}
   .next:hover{opacity:.8;transform:scale(1.02)}
   /* neutral "both are slop" tie option, shown while choosing */
-  .both{display:block;margin:18px auto 0;background:var(--card);color:var(--muted);
+  .both{display:block;margin:0 auto 22px;background:var(--card);color:var(--muted);
     border:1px solid var(--divider);border-radius:10px;font-family:var(--sans);font-size:13.5px;
     font-weight:500;padding:9px 22px;cursor:pointer;transition:opacity .15s,transform .12s,border-color .12s,color .12s}
   .both:hover{border-color:var(--dark);color:var(--body);transform:scale(1.01)}
@@ -118,11 +118,11 @@
   <div class="badgewrap"><span class="domainbadge" id="domainbadge"></span></div>
   <div id="question">Which feels more like AI slop?</div>
   <div class="setup" id="setup"></div>
+  <button class="both" id="bothbtn">Both are slop</button>
   <div class="cards" id="cards">
     <div class="card" id="ca" tabindex="0" role="button"><span class="num">1</span><span class="txt"></span><span class="tagname"></span></div>
     <div class="card" id="cb" tabindex="0" role="button"><span class="num">2</span><span class="txt"></span><span class="tagname"></span></div>
   </div>
-  <button class="both" id="bothbtn">Both are slop</button>
   <button class="next" id="next" style="display:none">Next &rarr;</button>
   <div class="kbd">tap <b>1</b> or <b>2</b> to flag the slop &middot; <b>3</b> if both are &middot; tap again for the next pair</div>
 
@@ -240,7 +240,6 @@ function show(){
   const A=swap?cur.b:cur.a, B=swap?cur.a:cur.b;
   $('cards').classList.remove('reveal');
   $('next').style.display='none';
-  $('bothbtn').style.display='block';
   $('ca').classList.remove('picked'); $('cb').classList.remove('picked');
   $('ca').querySelector('.txt').innerHTML=md(A.text);
   $('cb').querySelector('.txt').innerHTML=md(B.text);
@@ -276,7 +275,6 @@ function pick(side){
   const winner=cleaner.model, loser=flagged.model;
   // reveal immediately (responsive); reconcile the vote's fate below
   $('cards').classList.add('reveal');
-  $('bothbtn').style.display='none';
   $('ca').querySelector('.tagname').textContent=cur._A.model;
   $('cb').querySelector('.tagname').textContent=cur._B.model;
   (side==='a'?$('ca'):$('cb')).classList.add('picked');
@@ -292,7 +290,6 @@ function bothSlop(){
   if(now-lastVote<MIN_GAP){$('me').innerHTML='one sec';return;}
   lastVote=now;
   $('cards').classList.add('reveal');
-  $('bothbtn').style.display='none';
   $('ca').querySelector('.tagname').textContent=cur._A.model;
   $('cb').querySelector('.tagname').textContent=cur._B.model;
   $('ca').classList.add('picked'); $('cb').classList.add('picked');   // both flagged
@@ -333,7 +330,8 @@ function notCountedMsg(reason){
 // clicking a card votes; once revealed, clicking either card advances to the next
 function cardClick(side){ if($('cards').classList.contains('reveal')){i++;show();} else pick(side); }
 $('ca').onclick=()=>cardClick('a'); $('cb').onclick=()=>cardClick('b');
-$('bothbtn').onclick=bothSlop;
+// stays put above the cards; once revealed a click just advances (no layout jump)
+$('bothbtn').onclick=()=>{ if($('cards').classList.contains('reveal')){i++;show();} else bothSlop(); };
 $('next').onclick=()=>{i++;show()};
 // keyboard: 1/2 flags the slop, 3 flags both (a tie); after reveal, any of those advances.
 document.addEventListener('keydown',e=>{
