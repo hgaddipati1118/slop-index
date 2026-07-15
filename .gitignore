@@ -1,0 +1,22 @@
+# secrets — never commit
+harness/.run-keys.env
+site/.admin-secrets
+.env
+*.key
+
+# deploy / local
+.vercel/
+site/.vercel/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# raw human corpora (third-party licensed — derive stats, don't redistribute)
+baselines/*/clean.jsonl
+baselines/*/raw/
+
+# scratch
+*.tmp
+.DS_Store

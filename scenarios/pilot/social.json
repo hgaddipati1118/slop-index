@@ -1,0 +1,526 @@
+[
+  {
+    "id": "social.linkedin_announce.001",
+    "domain": "social",
+    "category": "linkedin_announcement",
+    "split": "public",
+    "pilot": true,
+    "persona": "Owner of Flour & Salt, a neighborhood bakery. Six years in, first location always packed on weekends. Not a LinkedIn person, but her business account has 800 followers, mostly locals and food-industry contacts.",
+    "recipient": "LinkedIn followers: locals, wholesale accounts, a few food journalists.",
+    "context_thread": [],
+    "goal": "Announce the second location opening on Maple Street on March 2nd. Mention the two employees being promoted to run it (Rosa and Jae). Sound like a human who is proud, not a press release.",
+    "prompt": "linkedin post announcing our second bakery location opening march 2 on maple street. rosa and jae are getting promoted to run it. proud but not cringe please",
+    "length_target": {
+      "words": [
+        50,
+        160
+      ]
+    },
+    "author_note": "The 'thrilled to announce 🚀' killing field. Watch for: broetry line breaks, 'None of this would be possible without...', 'This is just the beginning', gratuitous hashtag block. 'not cringe please' is an explicit steer; does it help at all?"
+  },
+  {
+    "id": "social.linkedin_lesson.001",
+    "domain": "social",
+    "category": "linkedin_lesson",
+    "split": "public",
+    "pilot": true,
+    "persona": "In-house recruiter at a logistics company, 9 years in the field, ~4k LinkedIn followers. Posts twice a month, usually gets decent comments because the takes are specific.",
+    "recipient": "LinkedIn: recruiters, hiring managers, job seekers.",
+    "context_thread": [],
+    "goal": "Share one specific, contrarian-ish observation: candidates who ask about the team's last failed project interview better and get hired more, based on her own last ~200 interviews. One concrete example, no invented statistics.",
+    "prompt": "linkedin post about something i've noticed in ~200 interviews: the best candidates ask about our last failed project. give one example of how that conversation goes. no fake stats, no listicle",
+    "length_target": {
+      "words": [
+        60,
+        180
+      ]
+    },
+    "author_note": "Lesson-learned posts breed engagement-bait slop: 'Let that sink in.', 'Read that again.', 'Agree?', the 3-line broetry rhythm, and invented precision ('87% of candidates...'). Prompt explicitly bans fake stats and listicles, testing both."
+  },
+  {
+    "id": "social.x_post.001",
+    "domain": "social",
+    "category": "x_post",
+    "split": "public",
+    "pilot": true,
+    "persona": "Solo indie developer of Ledgerly, a personal-finance iOS app. Casual, self-deprecating X presence, 2,100 followers, posts build-in-public updates.",
+    "recipient": "X followers: indie hackers, iOS devs, some users.",
+    "context_thread": [],
+    "goal": "Announce crossing 1,000 paying users after 14 months. One real detail (first 100 took 9 months). Casual register, single post, no thread.",
+    "prompt": "tweet: ledgerly just passed 1000 paying users. took 14 months, first 100 took 9 of them. keep it casual, one tweet, no hashtags",
+    "length_target": {
+      "words": [
+        10,
+        45
+      ]
+    },
+    "author_note": "Short-form register test (scored in bundle mode). Traps: '🚀 Thrilled to share a milestone!', hashtag abuse despite the ban, turning one tweet into a 🧵, LinkedIn voice leaking into X. A human writes something like 'ledgerly just crossed 1,000 paying users. the first 100 took 9 months. the last 900 took 5. compounding is weird.'"
+  },
+  {
+    "id": "social.x_reply.001",
+    "domain": "social",
+    "category": "x_reply",
+    "split": "public",
+    "pilot": true,
+    "persona": "Engineering manager at a 60-person company, 5 years of fully-remote teams. Posts occasionally, replies more.",
+    "recipient": "Reply to a viral post (40k likes) that says: 'Remote work killed mentorship. Juniors hired since 2020 are years behind where they should be. Offices exist for a reason.'",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "Remote work killed mentorship. Juniors hired since 2020 are years behind where they should be. Offices exist for a reason."
+      }
+    ],
+    "goal": "Disagree with a specific counterpoint: her juniors pair remotely 2 hours a day on a schedule, and that structure, not the office, is what mentorship actually requires. One reply, conversational, not an essay.",
+    "prompt": "reply to this disagreeing. our juniors pair 2 hrs/day on a set schedule and they're strong. mentorship needs structure, not an office. one reply, don't write an essay, don't be smug",
+    "length_target": {
+      "words": [
+        15,
+        50
+      ]
+    },
+    "author_note": "Reply register: models tend to write five-paragraph essays with 'While I understand your perspective...' hedging. Also watch the 'This. But also...' opener and thanking the OP for 'raising an important point.'"
+  },
+  {
+    "id": "social.launch.001",
+    "domain": "social",
+    "category": "launch_post",
+    "split": "public",
+    "pilot": true,
+    "persona": "Co-founder of Sprout, a two-person budgeting app for freelancers with irregular income. Launching publicly today on X. 900 followers.",
+    "recipient": "X: indie hackers, freelancers, early adopters.",
+    "context_thread": [],
+    "goal": "Launch post: what Sprout does (smooths irregular freelance income into a steady 'salary'), who it's for, one line on why they built it (both founders freelanced for years), link goes at the end. Single post.",
+    "prompt": "launch tweet for sprout. it turns irregular freelance income into a steady monthly salary number you can actually budget on. we built it because we both freelanced and hated the feast/famine thing. one tweet, link at the end",
+    "length_target": {
+      "words": [
+        25,
+        70
+      ]
+    },
+    "author_note": "Launch posts are peak 'We're excited to share ✨' territory: emoji-bullet feature lists, 'game-changer', 'say goodbye to X, say hello to Y'. The human version leads with the problem in the freelancer's own words."
+  },
+  {
+    "id": "social.linkedin_announce.002",
+    "domain": "social",
+    "category": "linkedin_announcement",
+    "split": "public",
+    "persona": "Owner of Ridgeline Landscape and Hardscape, a family run outdoor contracting company outside Denver, 11 years in business. About 1,200 LinkedIn followers, mostly local business owners, suppliers, and past clients. Not a frequent poster, maybe once a month.",
+    "recipient": "LinkedIn followers: local business contacts, suppliers, past clients, a couple of Golden city officials.",
+    "context_thread": [],
+    "goal": "Announce that Ridgeline won the bid to redesign Golden's town square. Mention that foreman Andre Ruiz is running point on the crew for this one, a step up for him. Work starts in September. Sound proud of the win without slipping into corporate press release voice.",
+    "prompt": "linkedin post, we won the bid to redo golden's town square, andre's running point on the crew, starts in september. proud of this one but keep it human not corporate speak",
+    "length_target": {
+      "words": [
+        60,
+        170
+      ]
+    },
+    "author_note": "Tests the thrilled and humbled to announce ritual plus its cousin this is just the beginning. Also watch for a gratuitous hashtag block at the end (#hardscape #smallbusinessowner #blessed) that a real contractor would never type."
+  },
+  {
+    "id": "social.linkedin_announce.003",
+    "domain": "social",
+    "category": "linkedin_announcement",
+    "split": "heldout",
+    "persona": "Owner and lead therapist at Northshore Physical Therapy, a three therapist outpatient clinic. About 600 LinkedIn followers, mostly referring doctors and former patients. Posts a handful of times a year.",
+    "recipient": "LinkedIn: referring physicians, former patients, other clinic owners in the area.",
+    "context_thread": [],
+    "goal": "Announce the clinic is launching a pelvic health program on August 1st. Therapist Mara Lindqvist just finished her specialty certification and is running it. Credit Mara directly and specifically, not with generic team gratitude.",
+    "prompt": "linkedin announcement, we're launching a pelvic health program aug 1, mara just got certified and is running it. don't make it corny with the whole none of this would be possible without my team thing, just say the thing",
+    "length_target": {
+      "words": [
+        55,
+        160
+      ]
+    },
+    "author_note": "Direct test of the forced humility flex combo (none of this would be possible without my incredible team) as a substitute for a specific, direct announcement naming Mara. The prompt explicitly bans it."
+  },
+  {
+    "id": "social.linkedin_lesson.002",
+    "domain": "social",
+    "category": "linkedin_lesson",
+    "split": "public",
+    "persona": "Real estate agent in Asheville, North Carolina, 12 years selling, mostly first time buyers. About 3,000 LinkedIn followers, posts once or twice a month with decent engagement because her stories are specific.",
+    "recipient": "LinkedIn: buyers, other agents, a few local lenders.",
+    "context_thread": [],
+    "goal": "Share one specific observation from 12 years of selling: buyers who walk the block at 7am before their scheduled showing, seeing the school drop off, the dog walkers, trash day, end up far happier with the house later than buyers who only see it staged for a showing. Use the Pruitt family and the house on Sycamore Street as the one concrete example. No invented statistics, no listicle format.",
+    "prompt": "linkedin post about something ive noticed after 12 years selling: buyers who walk the neighborhood at 7am before we tour end up way happier with the house later. tell the sycamore street story with the pruitts. no fake stats, no listicle, no weird one sentence per line thing",
+    "length_target": {
+      "words": [
+        65,
+        180
+      ]
+    },
+    "author_note": "Lesson posts are where broetry formatting shows up most, one sentence per line for fake gravitas. The prompt explicitly bans it, testing whether the model holds a normal paragraph structure and resists tacking on a let that sink in closer."
+  },
+  {
+    "id": "social.linkedin_lesson.003",
+    "domain": "social",
+    "category": "linkedin_lesson",
+    "split": "heldout",
+    "persona": "Wedding photographer based in the Texas Hill Country, shoots about 35 weddings a year, 8 years full time. 5,400 LinkedIn followers, posts occasionally about the business side of photography.",
+    "recipient": "LinkedIn: engaged couples researching photographers, other wedding vendors.",
+    "context_thread": [],
+    "goal": "Share the observation that couples who throw out the rigid shot list get noticeably better photos than the ones who hand her a spreadsheet. Use the Barrera wedding as the one specific example, the one that got rained out and the reception moved under a pecan tree. No invented percentages or made up statistics.",
+    "prompt": "post about how the couples who ditch the shot list always end up with the best photos. use the barrera wedding as the example, the one that got rained out and we moved everything under the pecan tree. no invented percentages please",
+    "length_target": {
+      "words": [
+        65,
+        175
+      ]
+    },
+    "author_note": "Tests invented precision in a lesson post that explicitly asks for one concrete story instead, watch for a fabricated line like 73 percent of my favorite shots come from unplanned moments with no real basis."
+  },
+  {
+    "id": "social.linkedin_hiring.001",
+    "domain": "social",
+    "category": "linkedin_hiring",
+    "split": "public",
+    "persona": "Owner of Crestview Heating and Air, an HVAC contractor with 14 employees in Columbus, Ohio. Posts occasionally, mostly hiring and job site photos.",
+    "recipient": "LinkedIn: trade school grads, local job seekers, other contractors.",
+    "context_thread": [],
+    "goal": "Announce an opening for an HVAC apprentice, no experience required. They will train under lead tech Owen, 40 hours a week, starting at 19 dollars an hour. Sound like a specific person hiring, not a job board template.",
+    "prompt": "hiring post for an hvac apprentice, no experience needed, paid to train under owen, 40 hrs a week starting at 19/hr. sound like a person not indeed.com",
+    "length_target": {
+      "words": [
+        50,
+        150
+      ]
+    },
+    "author_note": "Watch for job board template phrases like are you a motivated self starter and a gratuitous hashtag pile (#hiring #nowhiring #hvaclife) even though the prompt asks for a human voice, not a listing template."
+  },
+  {
+    "id": "social.linkedin_hiring.002",
+    "domain": "social",
+    "category": "linkedin_hiring",
+    "split": "heldout",
+    "persona": "Practice manager at Willowbrook Animal Hospital, a small animal vet clinic. Posts on the clinic's LinkedIn a few times a year, usually hiring.",
+    "recipient": "LinkedIn: veterinary technicians, vet tech program grads.",
+    "context_thread": [],
+    "goal": "Announce a new overnight emergency vet tech role, a shift they are adding because overnight call volume tripled this year. Be honest that it is a hard shift, some nights the tech is working alone, not just sell it as amazing.",
+    "prompt": "post about the overnight vet tech role we're opening. be honest that its a hard shift, some nights you're solo. dont just sell it like everything is amazing",
+    "length_target": {
+      "words": [
+        50,
+        150
+      ]
+    },
+    "author_note": "Tests whether the model can resist the are you a passionate animal lover rockstar opener and whether forced positivity overrides the explicit instruction to be honest about the hard, solo overnight parts of the job."
+  },
+  {
+    "id": "social.linkedin_hiring.003",
+    "domain": "social",
+    "category": "linkedin_hiring",
+    "split": "public",
+    "persona": "Co-founder of Ridgepoint, a three person SaaS tool that helps small trucking dispatchers schedule loads. Posts occasionally about the business, no big following, maybe 900 connections.",
+    "recipient": "LinkedIn: potential support hires, a few customers who follow the founders.",
+    "context_thread": [],
+    "goal": "Announce hiring their first customer support person, because the three founders answering every ticket themselves is falling apart. Explain what the job actually is day to day, not a culture pitch.",
+    "prompt": "hiring post, we're bringing on our first support person bc the 3 of us answering every ticket ourselves is falling apart. explain what the job actually is day to day, not just look how great our culture is",
+    "length_target": {
+      "words": [
+        50,
+        150
+      ]
+    },
+    "author_note": "Tests the forced humility flex combo showing up as none of this would be possible without our incredible community, crowding out the concrete day to day job description the prompt actually asked for."
+  },
+  {
+    "id": "social.x_post.002",
+    "domain": "social",
+    "category": "x_post",
+    "split": "public",
+    "persona": "Owner of Larkspur Farm Stand, a family produce stand in the Willamette Valley that also sells at two farmers markets. About 400 X followers, tweets casually about what's ripe.",
+    "recipient": "X followers: regulars, farmers market customers, a few other growers.",
+    "context_thread": [],
+    "goal": "Tweet that the first tomatoes of the season came in, about two weeks early this year. Casual, one tweet.",
+    "prompt": "tweet: first tomatoes of the season came in, like 2 weeks early this year. casual, one tweet, no hashtags",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Register mismatch test, LinkedIn voice leaking into X. A one line seasonal observation should not turn into an exciting announcement with a milestone framing, that belongs on the other platform."
+  },
+  {
+    "id": "social.x_post.003",
+    "domain": "social",
+    "category": "x_post",
+    "split": "heldout",
+    "persona": "Solo developer of Driftwood, a small narrative puzzle game, releasing a free demo on Steam. 1,800 X followers, posts build updates a couple times a week.",
+    "recipient": "X followers: indie game devs, players who wishlisted, a few streamers.",
+    "context_thread": [],
+    "goal": "Tweet that the Driftwood demo passed 5,000 downloads in its first week. One real detail: most of the traffic came from a single Reddit thread blowing up. Casual, one tweet.",
+    "prompt": "tweet driftwood demo just hit 5k downloads in the first week, most of it came from one reddit thread blowing up. keep it casual one tweet no hashtags",
+    "length_target": {
+      "words": [
+        10,
+        45
+      ]
+    },
+    "author_note": "Tests hashtag abuse despite an explicit ban in the prompt, also watch for the milestone turning into a mini thread when it should be one tweet."
+  },
+  {
+    "id": "social.x_thread.001",
+    "domain": "social",
+    "category": "x_thread",
+    "split": "public",
+    "persona": "General contractor running a small residential remodel crew in Pittsburgh, 15 years in the trade. About 900 X followers, occasionally threads jobsite lessons that do well.",
+    "recipient": "X followers: other contractors, homeowners researching remodels, a few architects.",
+    "context_thread": [],
+    "goal": "Write a short thread, 3 to 4 tweets, about the joist problem found mid demo on the Maple Ave kitchen job: rotted floor joists under a wall nobody thought was load bearing, what it cost to fix, and the actual lesson, always open the wall before you quote the job. No engagement bait closer.",
+    "prompt": "short thread, 3-4 tweets, about the joist thing i found on the maple ave kitchen job. what i found, what it cost, and the actual lesson. no engagement bait at the end",
+    "length_target": {
+      "words": [
+        70,
+        150
+      ]
+    },
+    "author_note": "Tests engagement bait CTAs at the thread closer, retweet if this has happened to you or thoughts, which the prompt explicitly bans. Also watch total thread length creeping well past a tight 3 to 4 tweet jobsite story."
+  },
+  {
+    "id": "social.x_thread.002",
+    "domain": "social",
+    "category": "x_thread",
+    "split": "public",
+    "persona": "Solo founder of Tallyup, a small subscription tool that helps gym owners track member retention. Indie SaaS, 3,100 X followers, posts build in public updates.",
+    "recipient": "X followers: indie hackers, other SaaS founders, a few Tallyup customers.",
+    "context_thread": [],
+    "goal": "Write a thread, 4 to 5 tweets, walking through a pricing mistake: raised prices 40 percent on everyone overnight, lost 30 of 140 customers in a week, then what he actually did to fix it, grandfathered existing customers and only raised prices for new signups. End with the real lesson. No invented statistics beyond the two real numbers given.",
+    "prompt": "thread walking through the pricing mistake, raised prices 40% on everyone overnight, lost 30 of our 140 customers in a week. what i changed. no fake precision beyond the real numbers i gave you, dont make up new stats",
+    "length_target": {
+      "words": [
+        80,
+        150
+      ]
+    },
+    "author_note": "Direct test of invented precision, watch for fabricated numbers like churn dropped 62 percent after the fix layered on top of the two real figures the prompt actually supplied."
+  },
+  {
+    "id": "social.x_thread.003",
+    "domain": "social",
+    "category": "x_thread",
+    "split": "heldout",
+    "persona": "Executive director of Hendricks County Food Bridge, a small food bank nonprofit. Ran their annual gala fundraiser last weekend. About 1,400 X followers.",
+    "recipient": "X followers: donors, volunteers, local press.",
+    "context_thread": [],
+    "goal": "Write a thread, 3 to 4 tweets, recapping the gala: raised 38,000 dollars against a 30,000 dollar goal. Tell the specific story of Maggiore's, the restaurant that donated the entire dinner after the usual caterer canceled two days out, and thank them by name. No generic comment below style CTA.",
+    "prompt": "thread recapping the gala. we raised 38k against a 30k goal. tell the story about maggiore's stepping in with the whole dinner after our caterer bailed two days out. thank them by name. no drop a comment below stuff at the end",
+    "length_target": {
+      "words": [
+        70,
+        150
+      ]
+    },
+    "author_note": "Tests engagement bait CTAs, drop a comment below or tag someone who needs to see this, explicitly banned by the prompt, in a context where genuine gratitude to Maggiore's should be the actual closer."
+  },
+  {
+    "id": "social.x_reply.002",
+    "domain": "social",
+    "category": "x_reply",
+    "split": "public",
+    "persona": "Chef and owner of a 40 seat neighborhood restaurant in New Orleans, 6 years open. Posts occasionally, replies more when food industry topics go viral.",
+    "recipient": "Reply to a viral post (28k likes) that says: automatic gratuity is a scam, just pay your staff a real wage and end tipping entirely, restaurants that add service charges are hiding behind it.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "automatic gratuity is a scam, just pay your staff a real wage and end tipping entirely. restaurants that add service charges are hiding behind it."
+      }
+    ],
+    "goal": "Disagree with the specific claim using her own experience: she tried a flat 20 percent built into menu prices, no tipping, for 8 months, and had to reverse it because she could not compete on hiring against tipped restaurants nearby. One reply, not an essay, not smug.",
+    "prompt": "reply disagreeing. we actually tried the no tip flat 20 percent thing for 8 months and had to reverse it, couldnt compete hiring against tipped spots nearby. one reply, dont write an essay, dont be a jerk about it",
+    "length_target": {
+      "words": [
+        15,
+        50
+      ]
+    },
+    "author_note": "Reply register test, watch for the five paragraph essay reflex with while I understand your perspective hedging, when the platform and the prompt both call for one grounded, specific reply."
+  },
+  {
+    "id": "social.x_reply.003",
+    "domain": "social",
+    "category": "x_reply",
+    "split": "heldout",
+    "persona": "High school English teacher, 16 years teaching, mostly lurks on X, replies when education topics go viral.",
+    "recipient": "Reply to a viral post (55k likes) that says: kids today can't write a single paragraph without AI. The generation that grew up with chatgpt is going to be functionally illiterate by 25.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "kids today can't write a single paragraph without AI. the generation that grew up with chatgpt is going to be functionally illiterate by 25."
+      }
+    ],
+    "goal": "Push back with a specific counterpoint: her students' handwritten, in class first drafts got noticeably better this year because she moved them all to timed and unplugged, and the AI panic actually forced her to fix her own assignment design. One reply, not defensive, not preachy.",
+    "prompt": "reply pushing back on this. my students in class handwritten essays got better this year bc i moved all first drafts to timed and unplugged, the ai stuff actually forced me to fix my assignments. one reply, not defensive sounding, dont write a paragraph",
+    "length_target": {
+      "words": [
+        15,
+        50
+      ]
+    },
+    "author_note": "Tests the thanking the OP for raising an important point opener and hedge heavy throat clearing before the actual disagreement, which the prompt is implicitly steering against with dont write a paragraph."
+  },
+  {
+    "id": "social.instagram.001",
+    "domain": "social",
+    "category": "instagram_caption",
+    "split": "public",
+    "persona": "Owner and florist at Marigold and Vine, a small flower shop. Posting a photo of a cascading arrangement she built last weekend, dahlias and blackberry vine, for a barn wedding.",
+    "recipient": "Instagram followers: past and future wedding clients, local vendors.",
+    "context_thread": [],
+    "goal": "Caption for the photo of Grace and Omar's wedding arrangement, dahlias and blackberry vine, at their barn venue. Warm register, not cheesy, one or two tasteful emoji at most, no hashtag block at the end.",
+    "prompt": "ig caption for the photo of grace and omars wedding arrangement, dahlias and blackberry vine, barn venue. warm but not cheesy, one or two emoji max, no giant hashtag pile at the end",
+    "length_target": {
+      "words": [
+        20,
+        80
+      ]
+    },
+    "author_note": "Tests emoji bullet spam and a gratuitous hashtag block at the end, both explicitly banned by the prompt, in a caption that should read like one warm sentence or two, not a listing."
+  },
+  {
+    "id": "social.instagram.002",
+    "domain": "social",
+    "category": "instagram_caption",
+    "split": "heldout",
+    "persona": "Owner of a small strength training gym, CrossFit adjacent, about 25 regular members. Posting a video of longtime member Dolores, 61, hitting her first unassisted pull up.",
+    "recipient": "Instagram followers: current members, local prospects.",
+    "context_thread": [],
+    "goal": "Caption celebrating Dolores's specific milestone, mention the real timeline, 14 months of training, started barely able to do a dead hang. Warm and specific, not generic hype.",
+    "prompt": "caption for dolores's pull up video. shes 61, been training with us 14 months, started barely able to hang from the bar. proud of her but keep it real not cheesy hype",
+    "length_target": {
+      "words": [
+        20,
+        85
+      ]
+    },
+    "author_note": "Tests forced positivity humble brag cliches like she showed up for herself every single day and thats what this is all about, which flatten a specific 14 month story into generic gym hype."
+  },
+  {
+    "id": "social.instagram.003",
+    "domain": "social",
+    "category": "instagram_caption",
+    "split": "public",
+    "persona": "Owner and stylist at a small hair salon. Posting a before and after photo of a color correction, a client came in with brassy orange from box dye, it took 5 hours to get to a cool ash blonde.",
+    "recipient": "Instagram followers: current and prospective clients.",
+    "context_thread": [],
+    "goal": "Caption walking through the actual before and after, mention the 5 hours honestly, frame it as a color correction not a simple dye job. No obsessed or swipe to see the magic language.",
+    "prompt": "caption for the before after color correction pic, brassy orange box dye to ash blonde, took 5 hours. be honest its a big job not just a quick dye, and please no im obsessed swipe to see the magic type stuff",
+    "length_target": {
+      "words": [
+        20,
+        85
+      ]
+    },
+    "author_note": "Direct test of the thrilled and obsessed excited to share ritual, swipe to see the magic and its cousins, which the prompt explicitly bans in favor of an honest account of a genuinely difficult 5 hour job."
+  },
+  {
+    "id": "social.community.001",
+    "domain": "social",
+    "category": "community_announcement",
+    "split": "public",
+    "persona": "Community manager for Notepilot, a small note taking app with an active Discord server, about 4,200 members. Posts changelog updates in the announcements channel.",
+    "recipient": "Discord: Notepilot's server, mostly power users and people who filed feature requests.",
+    "context_thread": [],
+    "goal": "Announce offline mode shipped. It was the top requested feature on their feedback board, 340 upvotes. Casual server voice, like actually talking to the people in the server, not a corporate changelog.",
+    "prompt": "discord announcement, offline mode is live, it was our top requested feature, 340 upvotes on the board. keep it casual like actually talking to the server not corporate changelog voice",
+    "length_target": {
+      "words": [
+        30,
+        95
+      ]
+    },
+    "author_note": "Tests the templated hey everyone we're excited to share opener, which reads as corporate changelog voice even in a casual Discord, exactly what the prompt asks the model to avoid."
+  },
+  {
+    "id": "social.community.002",
+    "domain": "social",
+    "category": "community_announcement",
+    "split": "public",
+    "persona": "Volunteer coordinator for the Elm Street Neighborhood Association, posts to their private Facebook group of about 850 members a few times a season.",
+    "recipient": "Facebook group: Elm Street neighborhood residents.",
+    "context_thread": [],
+    "goal": "Announce the fall street cleanup is Saturday October 17th at 9am, meet at the corner of Elm and 4th, bring gloves. New this year: the city is providing dumpsters, which they did not do last year. Keep it simple.",
+    "prompt": "facebook group post, cleanup is oct 17 9am at elm and 4th, bring gloves, city is providing dumpsters this year which they didnt last year. keep it simple dont need a whole production",
+    "length_target": {
+      "words": [
+        30,
+        95
+      ]
+    },
+    "author_note": "Tests engagement bait CTAs, let us know in the comments if you're coming, tacked onto a plain logistics post that the prompt explicitly asked to keep simple."
+  },
+  {
+    "id": "social.community.003",
+    "domain": "social",
+    "category": "community_announcement",
+    "split": "heldout",
+    "persona": "Board member for the Fairview Youth Soccer League, posts schedule and field updates to the parents' Facebook group.",
+    "recipient": "Facebook group: Fairview Youth Soccer League parents.",
+    "context_thread": [],
+    "goal": "Announce that the north fields at Fairview Park are closed this Saturday for re sodding. All games move to the east fields at Briar Creek instead, same times. Needs to be clear and short.",
+    "prompt": "post to the parents group, north fields closed sat for resodding, games move to briar creek east fields same times. needs to be clear and short people dont read long posts",
+    "length_target": {
+      "words": [
+        25,
+        85
+      ]
+    },
+    "author_note": "Tests length inflation on a simple logistics update, watch for unnecessary preamble and backstory about the resodding padding out what should be two or three plain sentences, exactly what the prompt warns against."
+  },
+  {
+    "id": "social.launch.002",
+    "domain": "social",
+    "category": "launch_post",
+    "split": "public",
+    "persona": "Event planner running Thistle and Table, a small seasonal supper club. Launching a new dinner series held in a friend's orchard, five courses built around whatever gets foraged that morning.",
+    "recipient": "Instagram and X followers: past supper club guests, local food folks.",
+    "context_thread": [],
+    "goal": "Launch post for the new foraged dinner series in the orchard. Five courses, ingredients foraged that morning, first date is the first Saturday in September, link at the end to book. One post, not an essay.",
+    "prompt": "launch post for the new foraged dinner series in the orchard. five courses, stuff foraged that morning, first one is first saturday in september, link at the end to book. one post not a whole essay",
+    "length_target": {
+      "words": [
+        30,
+        100
+      ]
+    },
+    "author_note": "Tests feature dump instead of one sharp hook, watch for an emoji bulleted course by course list crowding out a single strong opening line about the actual idea, foraged ingredients turned into dinner the same morning."
+  },
+  {
+    "id": "social.launch.003",
+    "domain": "social",
+    "category": "launch_post",
+    "split": "heldout",
+    "persona": "Two person team launching Driftlist, a habit tracker built around two allowed skip days a month, so one missed day does not kill the whole streak. Launching on Product Hunt today.",
+    "recipient": "X followers: Product Hunt audience, indie hackers, early users.",
+    "context_thread": [],
+    "goal": "Launch post explaining what Driftlist does and why the two skip days mechanic exists, both founders quit every other habit tracker after one missed day killed the streak. Link at the end. One post.",
+    "prompt": "launch tweet for driftlist. its a habit tracker where you get 2 skip days a month built in so one bad day doesnt kill your streak. we built it bc we both quit every other tracker after missing one day. link at the end. one tweet",
+    "length_target": {
+      "words": [
+        25,
+        75
+      ]
+    },
+    "author_note": "Tests emoji bullet feature lists and game changer style language crowding out the single real hook, that missing one day used to end the whole habit, in a post the prompt frames as one tweet."
+  },
+  {
+    "id": "social.launch.004",
+    "domain": "social",
+    "category": "launch_post",
+    "split": "public",
+    "persona": "Owner of Smoke and Char BBQ, a food truck for four years, opening its first permanent walk up window.",
+    "recipient": "Instagram and X followers: regulars who follow the truck's schedule.",
+    "context_thread": [],
+    "goal": "Announce the walk up window opens July 25th at 214 5th Street. It means they can finally do the burnt ends sandwich they could never pull off out of the truck. One post, simple.",
+    "prompt": "post announcing the walk up window opens july 25 at 214 5th st. means we can finally do the burnt ends sandwich we couldnt pull off out of the truck. one post keep it simple",
+    "length_target": {
+      "words": [
+        30,
+        95
+      ]
+    },
+    "author_note": "Tests the thrilled and excited to announce ritual along with its say goodbye to the truck line say hello to the window cousin, both crowding out the one real detail, the burnt ends sandwich finally being possible."
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "source": "EnronSent v1.0 (Styler 2011), sent/sent_items only, public domain",
+  "source_url": "https://wstyler.ucsd.edu/enronsent/",
+  "seed": 20260114,
+  "min_words": 30,
+  "max_words": 400,
+  "target_ceiling": 60000,
+  "funnel": {
+    "1_segmented_candidates": 106358,
+    "2_kept_word_count": 63026,
+    "3_kept_english": 62292,
+    "4_dropped_no_personal_voice_or_table": 3398,
+    "4_kept_register": 58894,
+    "5_kept_exact_unique": 52382,
+    "6_kept_near_unique": 50046,
+    "2_dropped_word_count": 43332,
+    "6_dropped_near_dup": 2336,
+    "5_dropped_exact_dup": 6512,
+    "3_dropped_non_english": 734,
+    "7_pre_downsample_total": 50046,
+    "8_downsampled_to_ceiling": 50046
+  },
+  "final_count": 50046
+}

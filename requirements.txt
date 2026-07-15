@@ -1,0 +1,6 @@
+# Core pipeline. Scoring (score.py, rank_spread.py) is pure stdlib; only
+# generation needs LiteLLM.
+litellm>=1.50
+# Optional, only for rebuilding baselines from raw corpora (parquet inputs):
+#   pandas
+#   pyarrow

@@ -1,0 +1,493 @@
+[
+  {
+    "id": "essay.opinion.001",
+    "domain": "essay",
+    "category": "opinion_piece",
+    "split": "public",
+    "pilot": true,
+    "persona": "Parent of two middle-schoolers in Millbrook, writing a letter-to-the-editor / op-ed for the local paper. Not a professional writer; has read the school board's proposal closely.",
+    "recipient": "Readers of the Millbrook Gazette; indirectly, the school board voting next month.",
+    "context_thread": [],
+    "goal": "Argue the district should adopt the proposed 8:45am start time for middle schools. Use two concrete points: the AAP recommendation on adolescent sleep, and the district's own pilot at Lincoln Middle (attendance up, first-period grades up). Acknowledge the bus-schedule objection and answer it briefly (the district's proposal already re-tiers routes).",
+    "prompt": "write a ~400 word op-ed for our local paper supporting the 8:45 school start time proposal. use the AAP sleep recommendation and the lincoln middle pilot results (attendance and first period grades went up). address the bus schedule objection (the proposal already re-tiers the routes). sound like a parent, not a policy paper",
+    "length_target": {
+      "words": [
+        350,
+        500
+      ]
+    },
+    "author_note": "Op-eds tempt 'In today's fast-paced world', rule-of-three crescendos, and 'It is important to note'. Also tests whether provided evidence gets used concretely or melted into generic advocacy. 'Sound like a parent, not a policy paper' is the register steer."
+  },
+  {
+    "id": "essay.coverletter.001",
+    "domain": "essay",
+    "category": "cover_letter",
+    "split": "public",
+    "pilot": true,
+    "persona": "High-school biology teacher, 8 years, leaving teaching. Applying for a customer success role at an edtech company whose product she actually used in her classroom for two years.",
+    "recipient": "Hiring manager for Customer Success at the edtech company.",
+    "context_thread": [],
+    "goal": "Cover letter that converts teaching experience into CS strengths concretely (ran onboarding for 30 new students every semester, de-escalated parent complaints, was campus point-person for the company's own product). No 'I am writing to express my interest'. Under 300 words.",
+    "prompt": "cover letter for a customer success job at the edtech company whose software i used for 2 years as a bio teacher. teaching = onboarding 30 kids a semester, handling angry parents, being the campus admin for their product. under 300 words, skip the 'i am writing to express' stuff",
+    "length_target": {
+      "words": [
+        200,
+        320
+      ]
+    },
+    "author_note": "Cover letters are dense with template slop: 'I am writing to express my keen interest', 'leverage my passion', 'dynamic team player'. The prompt bans the opener explicitly. Watch whether the three concrete experiences survive or get abstracted into 'strong communication skills'."
+  },
+  {
+    "id": "essay.review.001",
+    "domain": "essay",
+    "category": "product_review",
+    "split": "public",
+    "pilot": true,
+    "persona": "Remote software engineer who bought the Jarvik L2 standing desk 6 months ago and posts detailed reviews on her blog. Opinionated, specific, no affiliate links.",
+    "recipient": "Blog readers researching standing desks.",
+    "context_thread": [],
+    "goal": "A 6-month review with real texture: motor is quiet and fast, wobbles noticeably at full height when typing hard, the controller's memory presets drift ~1cm over months, cable tray is an afterthought. Verdict: buy it at the $549 sale price, not at $749 list.",
+    "prompt": "write my 6-month review of the jarvik L2 standing desk. quiet fast motor, wobbles at full height when i type hard, memory presets drift about a cm, cable tray is garbage. verdict: worth it at the $549 sale price, not at $749. be specific and opinionated, no fluff",
+    "length_target": {
+      "words": [
+        250,
+        500
+      ]
+    },
+    "author_note": "Reviews tempt hedge-everything balance ('That said, your mileage may vary!'), 'game-changer', and padding each provided fact into a paragraph of filler. Tests whether the sharp verdict survives or gets rounded off to 'overall, a solid choice for most users.'"
+  },
+  {
+    "id": "essay.blog.001",
+    "domain": "essay",
+    "category": "how_to_blog",
+    "split": "public",
+    "pilot": true,
+    "persona": "Owner of a family plumbing company in Minneapolis, writing for the company blog. The posts exist to rank locally and to actually help homeowners; he dictates drafts between jobs.",
+    "recipient": "Minneapolis homeowners googling how to winterize outdoor pipes.",
+    "context_thread": [],
+    "goal": "A practical how-to: shut off the interior valve, drain the exterior spigot, disconnect hoses, foam covers are $3 insurance, and the one mistake that causes most January calls (leaving the hose connected). Include when to actually call a plumber (no interior shutoff valve). No throat-clearing intro.",
+    "prompt": "blog post for our plumbing company: how to winterize your outside spigots. steps: shut interior valve, drain spigot, disconnect hoses, $3 foam cover. the big mistake is leaving hoses connected, that's most of our january burst-pipe calls. tell people to call us if they don't have an interior shutoff. get straight into it, no 'winter is coming' intro",
+    "length_target": {
+      "words": [
+        350,
+        650
+      ]
+    },
+    "author_note": "SEO-adjacent how-tos are where 'delve', 'It's important to note', and restating-the-title intros live ('As the temperatures begin to drop...', which the prompt explicitly bans). Also watch heading/bullet abuse vs the dictated-by-a-tradesman voice."
+  },
+  {
+    "id": "essay.personal.001",
+    "domain": "essay",
+    "category": "personal_essay",
+    "split": "public",
+    "pilot": true,
+    "persona": "High-school senior applying to state universities. Has worked every weekend since sophomore year at her family's Vietnamese restaurant. Plain, honest writer when not trying to impress.",
+    "recipient": "College admissions readers.",
+    "context_thread": [],
+    "goal": "A 500-ish word personal essay about the restaurant job built on specific scenes (the Saturday the POS died and she ran tickets by hand; teaching her grandmother's spring-roll fold to a new hire; doing calculus homework in the walk-in during breaks), not a moral-of-the-story essay. No 'little did I know'.",
+    "prompt": "college essay draft about working weekends at my family's restaurant. scenes to use: the saturday the register system died and i hand-wrote every ticket, teaching a new hire my grandma's spring roll fold, doing calc homework in the walk-in cooler on breaks. don't make it a lesson-learned essay, no 'little did i know', keep my voice plain",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Admissions-essay slop is its own genre: 'tapestry', 'testament to resilience', inflated vocabulary, and the forced epiphany paragraph. The prompt hands over real scenes and bans the moral, testing whether the model can stay concrete or reflexively manufactures meaning."
+  },
+  {
+    "id": "essay.opinion.002",
+    "domain": "essay",
+    "category": "opinion_piece",
+    "split": "public",
+    "persona": "Retired rural mail carrier who drove the same 38-mile Route 4 for 22 years before retiring last year in a small town called Kettle Falls. Writes occasional letters to the local paper but does not think of himself as a writer.",
+    "recipient": "Readers of the Kettle Falls Courier; indirectly, the USPS district manager attending the July 28 public forum.",
+    "context_thread": [],
+    "goal": "Argue against the planned closure of the town post office's counter window, which would force residents to a cluster box four miles out. Use the actual numbers: USPS says the branch loses $40,000 a year, but that is after they already cut counter hours from 8am to 5pm down to just 8am to noon, which is what tanked the traffic they are now citing as the reason to close it. Include one real anecdote: Mrs. Halloran on Kettle Hill, who is in her 80s, gets her heart medication by mail and cannot drive the twenty minutes to Fairview to buy a money order once the counter is gone. Push readers to show up to the July 28 public forum at the grange hall.",
+    "prompt": "letter to editor about the post office closing our counter service. i drove route 4 for 22 years so i know this town. usps says the branch loses 40k a year but thats only because they already cut the hours from 8 to noon, of course traffic dropped after that, theyre pointing at a problem they made themselves. mention mrs halloran on kettle hill, shes in her 80s and gets her heart meds by mail, she cant drive twenty minutes to fairview for a money order once the counter closes. push people to show up to the july 28 forum at the grange hall. keep it plain, im not a writer",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Rule of three crescendo padding trap: the writer hands over exactly one hard number and one anecdote, not three of each. Tests whether the model manufactures a second and third matching example, another elderly resident, another inflated stat, to build a triad instead of staying with the two real details it was given."
+  },
+  {
+    "id": "essay.opinion.003",
+    "domain": "essay",
+    "category": "opinion_piece",
+    "split": "heldout",
+    "persona": "Girls' soccer and track coach at a public high school, writing an op-ed for the local paper. Coaches for the stipend, not because she wants to be a writer; direct and a little blunt.",
+    "recipient": "Readers of the local paper; the school board voting on next year's facilities budget.",
+    "context_thread": [],
+    "goal": "Argue the district should fund turf for the girls' soccer field using three specific facts: 9 games rained out or relocated over the past two seasons because the grass field floods, a player tore her ACL stepping in a rut during a match last October, and the boys' football field already got turf back in 2019, so this is also a fairness issue. Explicitly skip any 'in today's world of youth sports' style windup.",
+    "prompt": "op ed for the paper about getting turf on the girls soccer field. weve had 9 games rained out or moved the last two seasons bc the grass field floods, one of my girls tore her acl stepping in a rut last october, and the boys football field already got turf back in 2019 so this is also a fairness thing. dont open with some in todays world of youth sports garbage, just get into it",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Throat clearing opener trap: the prompt explicitly bans an 'in today's world of youth sports' windup. Tests whether the model just swaps in an equivalent generic opener, like 'it's no secret that' or 'when we talk about equity in sports', instead of actually starting on the material."
+  },
+  {
+    "id": "essay.blogpost.001",
+    "domain": "essay",
+    "category": "blog_post",
+    "split": "public",
+    "persona": "Owner of a three-person independent bakery, writing a post for the shop's own blog and newsletter. Bakes starting at 4am most days and writes the blog herself in whatever time is left.",
+    "recipient": "The bakery's blog and email subscribers, mostly regular local customers.",
+    "context_thread": [],
+    "goal": "Explain, warmly and not defensively, why the bakery is discontinuing custom wedding cake orders. Use three real reasons: each custom order eats roughly 14 hours of unpaid consultation and tasting time, there were 3 last-minute cancellations this year that ate the cost of the ordered ingredients, and the custom orders were pulling staff time away from the everyday walk-in case, which is what actually pays the rent. Written as continuous prose in her voice, not an FAQ.",
+    "prompt": "blog post for the bakery site explaining why were not doing custom wedding cakes anymore. reasons: each order eats about 14 hours of free consult and tasting time, we had 3 last minute cancellations this year that ate the ingredient cost, and it was pulling us away from the everyday case which is what actually pays rent. want it warm not defensive, and please dont turn it into some faq with headers and bullet points, it should just read like me talking",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Heading and bullet point abuse trap: the prompt explicitly asks for continuous prose in the owner's voice with no headers or bullets. Tests whether the model still reaches for an FAQ style breakdown, like 'Why We Made This Decision:', instead of writing it as one person talking to her customers."
+  },
+  {
+    "id": "essay.blogpost.002",
+    "domain": "essay",
+    "category": "blog_post",
+    "split": "heldout",
+    "persona": "Solo indie game developer, three years of nights and weekends work on his first commercial release. Writes a devlog blog that a few hundred people follow.",
+    "recipient": "His devlog and blog subscribers, mostly other indie developers and early players.",
+    "context_thread": [],
+    "goal": "Recap the launch week of his game concretely: sold 412 copies in the first week, hit the front page of a small subreddit for about 6 hours, and one review said the movement feels floaty, which he actually agrees with and is fixing. Mention he is patching the movement in a 1.1 update next month. Explicitly do not end on a lesson learned or growth journey paragraph, just report what happened and what's next.",
+    "prompt": "devlog post about launching my game last week. sold 412 copies in the first week, hit the front page of a small subreddit for like 6 hours, one review said the movement feels floaty and honestly theyre right so im patching that in 1.1 next month. dont wrap it up with some big lesson learned thing, i just want to say what happened and whats next",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Forced epiphany trap: the prompt explicitly bans a lesson learned close. Tests whether the model still tacks on a reflective closing paragraph about growth or what the launch taught him instead of ending on the concrete 1.1 patch plan."
+  },
+  {
+    "id": "essay.blogpost.003",
+    "domain": "essay",
+    "category": "blog_post",
+    "split": "public",
+    "persona": "Freelance wedding photographer, six years shooting mostly in one metro area, writing a post for her own studio website aimed at couples deciding when to book.",
+    "recipient": "Couples browsing her photography website, deciding when to book their wedding.",
+    "context_thread": [],
+    "goal": "Make the case for booking a winter wedding using three specific facts, without melting them into generic 'weddings are beautiful year round' language: winter bookings run about 30% cheaper for the couple, and she's shot 11 of them in the past two years; the light through bare trees around 3pm in November is better for portraits than the flat overcast light common on June afternoons; she isn't sharing the venue parking lot with 3 or 4 other vendors the way she is in peak season.",
+    "prompt": "blog post for my site about why i actually like shooting winter weddings now. facts to use: winter bookings run about 30% cheaper for the couple but ive shot 11 of them the last two years, the light through bare trees around 3pm in november is honestly better for portraits than flat overcast june light, and im not sharing the parking lot with 3 or 4 other vendors like i am in june. keep the specifics, dont just turn it into weddings are beautiful year round mush",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Abstracting concrete details into generic claims trap: the prompt hands over three specific, usable facts, the 30% and 11-weddings figure, the November 3pm light quality, the parking and vendor crowding detail, and explicitly warns against generic 'weddings are beautiful year round' filler. Tests whether the specifics survive into the draft or get smoothed into vague seasonal poetry."
+  },
+  {
+    "id": "essay.personal.002",
+    "domain": "essay",
+    "category": "personal_essay",
+    "split": "public",
+    "persona": "First-year nursing student, writing a personal essay for a scholarship application after her first clinical rotation in the ER. Plain-spoken outside of school writing.",
+    "recipient": "Scholarship committee readers.",
+    "context_thread": [],
+    "goal": "Write about her first week in the ER using three specific scenes, in plain language with no thesaurus-style vocabulary: holding a stranger's hand during a wound cleaning because his wife was stuck in traffic; getting sent to restock gauze during a code and hearing the countdown through the curtain; missing a blood draw three times on a diabetic patient with difficult veins before finally getting it on the fourth try.",
+    "prompt": "essay for a scholarship app about my first week in the er. scenes: holding a strangers hand during a wound cleaning bc his wife was stuck in traffic, getting sent to restock gauze during a code and hearing them counting through the curtain, missing a blood draw 3 times on a diabetic guy with bad veins before finally getting it on the 4th try. keep my voice plain, i dont want it to sound like a thesaurus, no big fancy words",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Inflated vocabulary trap: the prompt explicitly asks for plain language and no thesaurus voice around genuinely plain, concrete material. Tests whether words like 'profound' or 'testament', or generally elevated clinical sounding phrasing, creep in anyway."
+  },
+  {
+    "id": "essay.personal.003",
+    "domain": "essay",
+    "category": "personal_essay",
+    "split": "heldout",
+    "persona": "Retired Army staff sergeant, two deployments, now attends a veterans' writing workshop that publishes a small annual anthology. Writes plainly, not used to writing about himself.",
+    "recipient": "Readers of the veterans' writing workshop anthology.",
+    "context_thread": [],
+    "goal": "Write about coming home after his second deployment using three specific scenes and no closing moral: standing in the cereal aisle for about 20 minutes because there were suddenly 40 kinds of cereal and he couldn't pick one; his 6-year-old daughter hiding behind her mother's leg at the airport because she didn't recognize him at first; re-learning to sleep with the bedroom door open after a year of habitually sleeping facing the door.",
+    "prompt": "personal essay for the vets writing workshop about coming home from my second deployment. scenes: standing in the cereal aisle for like 20 min bc there were suddenly 40 kinds of cereal and i couldnt pick one, my daughter hiding behind her moms leg at the airport bc she didnt recognize me at first, she was 6, and re learning to sleep with the bedroom door open after a year of sleeping facing the door out of habit. dont end it with some big meaning of it all paragraph, just tell it",
+    "length_target": {
+      "words": [
+        400,
+        650
+      ]
+    },
+    "author_note": "Forced epiphany trap: the prompt explicitly forbids a closing meaning-of-it-all paragraph. Tests whether the model still reaches for a reflective coda about resilience or what coming home taught him instead of trusting the three scenes to carry the essay on their own."
+  },
+  {
+    "id": "essay.review.002",
+    "domain": "essay",
+    "category": "product_review",
+    "split": "public",
+    "persona": "Home baker who sells sourdough at the farmers market on weekends and writes occasional gear reviews on her own baking blog.",
+    "recipient": "Blog readers who bake, deciding whether to buy the mixer.",
+    "context_thread": [],
+    "goal": "Review the Corlane SM6 stand mixer after 8 months of near-daily use. Use four facts and land on a clear conditional verdict, not a hedge: the motor handles a double batch of stiff bagel dough without stalling; the bowl-lift lever squeaks and needs WD-40 about once a month; the included dough hook is too short for the deep bowl, so she bought a third-party one; it costs $429, about $80 more than the equivalent KitchenAid. Verdict: worth it if you knead heavy dough weekly, skip it if you're mostly doing cookies and cake batter.",
+    "prompt": "review of the corlane sm6 stand mixer after 8 months, i use it almost daily for market sourdough. motor handles a double batch of stiff bagel dough with no stalling, bowl lift lever squeaks and i have to wd40 it once a month, the dough hook that comes with it is too short for the deep bowl so i bought a third party one, its 429 dollars which is 80 more than the equivalent kitchenaid. verdict: worth it if you knead heavy dough every week, skip it if youre mostly doing cookies and cake batter. be specific and give an actual verdict, dont hedge it into depends on your needs",
+    "length_target": {
+      "words": [
+        250,
+        500
+      ]
+    },
+    "author_note": "Hedge everything balance trap: the prompt supplies a clear, conditional verdict and explicitly bans hedging it into 'it depends on your needs'. Tests whether the sharp call survives or gets sanded down into on-the-one-hand balance."
+  },
+  {
+    "id": "essay.review.003",
+    "domain": "essay",
+    "category": "product_review",
+    "split": "heldout",
+    "persona": "Owner-operator long-haul trucker, 14 months and about 140,000 miles on his current rig, posts short gear reviews for other owner-operators on a trucking forum.",
+    "recipient": "Other owner-operators on the trucking forum.",
+    "context_thread": [],
+    "goal": "Review the Roadstar DC4 dual dash cam using four facts, staying under the hard word cap he sets himself: rear-cam night footage gets grainy past 30 feet; it caught a lane-change accident on camera that got his insurance claim approved in 9 days instead of the usual 6 weeks; the suction mount fell off twice in summer heat until he switched to the adhesive mount; the companion app needs wifi to pull footage, which is useless at most truck stops, so he just pulls the SD card instead.",
+    "prompt": "review of the roadstar dc4 dash cam, ive had it 14 months and put like 140k miles on it. rear cam night footage gets grainy past 30 feet, it caught a lane change accident on camera that got my insurance claim approved in 9 days instead of the usual 6 weeks, suction mount fell off twice in the summer heat till i switched to the adhesive mount, the app needs wifi to pull footage which is useless at most truck stops so i just pull the sd card instead. keep this under 350 words max, im not writing a novel about a camera",
+    "length_target": {
+      "words": [
+        250,
+        350
+      ]
+    },
+    "author_note": "Length inflation trap: the persona sets an explicit hard ceiling, under 350 words, on top of four dense facts to cover. Essay domain reviews showed some of the largest overage in past runs; this tests whether a model given four facts and a tight explicit cap compresses to fit or blows past the stated limit anyway."
+  },
+  {
+    "id": "essay.argumentative.001",
+    "domain": "essay",
+    "category": "argumentative_essay",
+    "split": "public",
+    "persona": "High school junior on the debate team, writing a straight argumentative essay for an English class assignment, not a debate round.",
+    "recipient": "Her English teacher, grading the assignment; classmates who will hear some essays read aloud.",
+    "context_thread": [],
+    "goal": "Argue the school should allow open campus lunch for juniors and seniors, using three pieces of evidence without padding each into a rule of three: three nearby districts, Fairmont, West Linn, and Cascade, already allow it with no rise in tardiness according to their published stats; a survey she personally ran of 80 students showed 71 in favor; the cafeteria seats only 220 people but the lunch wave has 340 students in it, an overcrowding problem this would help fix.",
+    "prompt": "argumentative essay for english class on open campus lunch for juniors and seniors. evidence: 3 nearby districts (fairmont, west linn, and cascade) already allow it and their published stats show no rise in tardiness, i surveyed 80 kids at our school and 71 were in favor, and our cafeteria only seats 220 people but we have 340 kids in that lunch wave so its actually overcrowded right now. this is a real school assignment so keep the structure normal but dont pad every paragraph into a rule of three, some of my points only have one or two supports and thats fine",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Rule of three padding trap: the prompt explicitly says not to force every paragraph into a triplet since some points only have one or two real supports. Tests whether the model invents a third supporting detail per paragraph anyway for false symmetry."
+  },
+  {
+    "id": "essay.argumentative.002",
+    "domain": "essay",
+    "category": "argumentative_essay",
+    "split": "public",
+    "persona": "Owner of a small independent coffee shop on Main Street, writing out testimony as a submitted essay for a city council meeting on a proposed parking meter rate increase.",
+    "recipient": "City council members and the public record at the meeting.",
+    "context_thread": [],
+    "goal": "Argue against tripling the downtown parking meter rate from $0.50 to $1.50 an hour, using three specific numbers kept intact, not softened into vague claims: he tracked his own register for 6 weeks after a similar hike in a neighboring town's downtown in 2019 and saw foot traffic there drop 18%; his own customers average a 22-minute visit, which the current one-hour minimum already covers comfortably; the city's own report shows meter revenue only funds 4% of the downtown budget, so the increase doesn't solve a real budget problem.",
+    "prompt": "write out my testimony as an essay for the city council meeting on the parking meter increase from 50 cents to a dollar fifty an hour downtown. evidence: i tracked my own register for 6 weeks after a similar hike in the next town over back in 2019 and saw foot traffic drop 18% there, my customers average a 22 minute visit so the current hour minimum already covers them fine, and the citys own report says meter revenue only covers 4% of the downtown budget so this isnt actually solving anything. use the real numbers dont just say something vague like this could hurt local businesses, i need the specific numbers in there",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Abstracting concrete details into generic claims trap: the prompt supplies three hard numbers, the 18% foot traffic drop, the 22 minute average visit versus the hour minimum, meter revenue covering only 4% of budget, and explicitly demands they stay specific rather than get summarized into 'this could hurt local businesses'. Tests whether the numbers survive into the final draft."
+  },
+  {
+    "id": "essay.argumentative.003",
+    "domain": "essay",
+    "category": "argumentative_essay",
+    "split": "heldout",
+    "persona": "Third-year electrical apprentice with the local IBEW union, writing an argumentative essay for the union newsletter opposing a proposed cut to state apprenticeship funding.",
+    "recipient": "Readers of the union local's newsletter; state legislators being made aware of it.",
+    "context_thread": [],
+    "goal": "Argue against the state's proposed 15% cut to apprenticeship program funding using plain, direct language and four real numbers: his cohort started with 24 apprentices, 21 finished and are working journeyman jobs now; apprentices start around $19 an hour and top out around $46 an hour as journeymen, which gets people off public assistance fast; the total public cost per apprentice who completes the program is about $14,000, versus roughly $48,000 average public subsidy per four-year grad who completes a degree.",
+    "prompt": "essay for the union newsletter arguing against the states proposed 15% cut to apprenticeship funding. use real numbers: my cohort started with 24 apprentices, 21 finished and are working journeyman jobs now, apprentices start around 19 an hour and top out around 46 an hour as journeymen so people are off assistance programs fast, and the total public cost per apprentice who finishes is about 14k versus something like 48k average public subsidy per four year grad who finishes. dont dress this up with big words, im an electrician not an english professor, keep it plain and direct",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Inflated vocabulary trap: the persona explicitly asks for plain, direct language over four hard numbers, 'im an electrician not an english professor'. Tests whether the model reaches for elevated policy essay vocabulary, like 'underscores' or 'the imperative of investment', instead of staying in the stated voice."
+  },
+  {
+    "id": "essay.coverletter.002",
+    "domain": "essay",
+    "category": "cover_letter",
+    "split": "public",
+    "persona": "Former Army logistics staff sergeant, 12 years of service, honorably discharged and recently separated, applying for a civilian supply chain coordinator role.",
+    "recipient": "Hiring manager at Cascade Regional Distribution.",
+    "context_thread": [],
+    "goal": "Convert three concrete military logistics achievements into fit for the role, using the actual numbers rather than generic skill language: ran resupply convoys for an 800-soldier battalion across 3 forward operating bases; managed inventory accuracy on a $40 million equipment account with zero loss on his last audit; personally redesigned the unit's parts request process, cutting average fulfillment time from 11 days to 4. Under 300 words.",
+    "prompt": "cover letter for a supply chain coordinator job at cascade regional distribution. my real experience: ran resupply convoys for an 800 soldier battalion across 3 bases, managed a 40 million dollar equipment account with zero loss on my last audit, redesigned our parts request process and cut fulfillment time from 11 days to 4. dont turn this into strong leadership and communication skills, use the actual numbers and what i actually did. under 300 words",
+    "length_target": {
+      "words": [
+        220,
+        300
+      ]
+    },
+    "author_note": "Abstracting concrete details into generic claims trap: the prompt explicitly bans melting the three concrete achievements, the 800-soldier convoy operation, zero loss on a 40M account, cutting fulfillment from 11 to 4 days, into generic 'strong leadership and communication skills' language. Tests whether the real numbers make it into the final letter."
+  },
+  {
+    "id": "essay.coverletter.003",
+    "domain": "essay",
+    "category": "cover_letter",
+    "split": "heldout",
+    "persona": "IT helpdesk technician, 5 years at a mid-size hospital system, applying for a junior UX and product support role at the healthcare software company whose ticketing tool he uses at work every day.",
+    "recipient": "Hiring manager for the junior product and UX role at the software vendor.",
+    "context_thread": [],
+    "goal": "Use three concrete facts to make the case, staying under a hard 280-word cap: fields about 35 tickets a day; built an internal troubleshooting wiki with over 60 articles that cut repeat tickets by about a third; has submitted 14 feature requests to this exact vendor's product team over 3 years, 4 of which shipped.",
+    "prompt": "cover letter for a junior ux role at the healthcare software company whose ticketing tool i use every single day at my helpdesk job. stuff to use: i field about 35 tickets a day, i built an internal wiki with 60+ troubleshooting articles that cut repeat tickets by about a third, and ive actually submitted 14 feature requests to their product team over the last 3 years and 4 of them shipped. keep this under 280 words hard cap, i dont want a wall of text",
+    "length_target": {
+      "words": [
+        200,
+        280
+      ]
+    },
+    "author_note": "Length inflation trap: the prompt sets an explicit hard cap, under 280 words, tighter than the category's usual ceiling. Cover letters and reviews were where past runs showed the worst overage; this tests whether three dense, countable facts get compressed to fit or the model blows past the stated cap trying to include all of them."
+  },
+  {
+    "id": "essay.newsletter.001",
+    "domain": "essay",
+    "category": "newsletter_intro",
+    "split": "public",
+    "persona": "Owner and lead instructor of a small independent yoga studio, writes the monthly email newsletter to students herself.",
+    "recipient": "The studio's email list of current students.",
+    "context_thread": [],
+    "goal": "Write just the short intro section, not the whole newsletter, teasing three items: a new Thursday 6am class starting; a teacher named Bonnie's 10-year anniversary teaching at the studio, marked with a free Saturday class; the back parking lot reopening this week now that repaving is finally done. Warm, not corporate, under 200 words since it's only the intro.",
+    "prompt": "intro paragraph for this months studio newsletter, keep it short this is just the intro not the whole newsletter. things to tease: new thursday 6am class starting, bonnies 10 year anniversary teaching here which were marking with a free saturday class, and the back parking lot reopens this week since the repaving is finally done. keep it under like 200 words, warm not corporate",
+    "length_target": {
+      "words": [
+        100,
+        200
+      ]
+    },
+    "author_note": "Length inflation trap: newsletter_intro is deliberately the short opening section, not the whole newsletter, and the prompt asks for under 200 words. Tests whether the model treats three teased items as license to spell out full details on each, defeating the point of an intro, instead of staying brief."
+  },
+  {
+    "id": "essay.newsletter.002",
+    "domain": "essay",
+    "category": "newsletter_intro",
+    "split": "heldout",
+    "persona": "Owner of a small independent hardware store, writes the seasonal email newsletter to customers himself.",
+    "recipient": "The hardware store's email list.",
+    "context_thread": [],
+    "goal": "Write just the short intro section of a fall newsletter, as one continuous paragraph rather than a bulleted flyer, teasing three items: chainsaws and leaf blowers 15% off through the weekend; a free gutter-cleaning safety demo Saturday at 10am from a local roofer; the shop finally restocked the Kinco 901 work gloves customers keep asking about.",
+    "prompt": "intro for our fall email newsletter to customers. tease: chainsaws and leaf blowers 15% off through the weekend, a free gutter cleaning safety demo saturday at 10am from a local roofer, and we finally restocked the kinco 901 gloves people keep asking about. write it as one paragraph like im talking to them, not some bulleted flyer list, keep it short its just the intro",
+    "length_target": {
+      "words": [
+        100,
+        220
+      ]
+    },
+    "author_note": "Heading and bullet abuse trap: the prompt explicitly asks for one continuous paragraph, 'like im talking to them', not a bulleted flyer list. Tests whether the model still reaches for a bulleted 'This Week's Deals:' breakdown instead of writing it as a short, personal paragraph."
+  },
+  {
+    "id": "essay.newsletter.003",
+    "domain": "essay",
+    "category": "newsletter_intro",
+    "split": "public",
+    "persona": "Solo founder of Paperstack, a small invoicing app for freelancers, writes the monthly product newsletter to about 2,000 subscribers himself.",
+    "recipient": "Paperstack's newsletter subscribers.",
+    "context_thread": [],
+    "goal": "Write just the short intro section mentioning three things, staying upfront rather than soft-pedaling about the bug: recurring invoices shipped last week; a bug that was double-charging some Stripe customers got fixed, and he wants to be upfront about it rather than bury it; he's doing free 15-minute onboarding calls this month for anyone who books one. Sound like an actual person, not a company, and skip any 'in today's fast-moving world of freelance work' style opener.",
+    "prompt": "intro for this months paperstack newsletter, keep it short its just the intro. things to mention: recurring invoices shipped last week, we fixed a bug that was double charging some stripe customers (want to be upfront about that one not bury it), and im doing free 15 min onboarding calls this month if people book one. sound like an actual person not a company, and please dont open with some in todays fast moving world of freelance work garbage",
+    "length_target": {
+      "words": [
+        100,
+        220
+      ]
+    },
+    "author_note": "Throat clearing opener trap, paired with a soft-pedaling risk: the prompt bans an 'in today's fast-moving world of freelance work' style windup and asks the founder to be upfront, not soft-pedaled, about the billing bug. Tests both whether an equivalent generic opener sneaks in and whether the bug admission gets vaguened into 'behind the scenes improvements'."
+  },
+  {
+    "id": "essay.commentary.001",
+    "domain": "essay",
+    "category": "commentary",
+    "split": "public",
+    "persona": "Local AM sports radio host and part-time newspaper sports columnist in a small town, writing a short commentary column after the high school football team's season ended.",
+    "recipient": "Readers of the local paper's sports section.",
+    "context_thread": [],
+    "goal": "Give a specific opinionated take, not a season recap, using given facts without padding each point into three examples: the team went 8-2, lost in round 2 of the state playoffs to a team they had beaten by 20 points in week 3 of the regular season, and senior quarterback Dez Kowalski threw for 2,340 yards this season, a school record. His actual take: they lost the playoff game because they abandoned the run game in the second half even though it was working, while only down by 3.",
+    "prompt": "sports column on the high school teams season after the playoff loss. facts: they went 8-2, lost in round 2 of state to a team they beat by 20 back in week 3, dez kowalski threw for 2340 yards this year which is a school record. my actual take: they lost because they abandoned the run game in the second half even though it was working, they were only down 3. give an actual opinion dont just recap the season, and dont pad it out with three examples for every point, some points just need one",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Rule of three padding trap: the prompt explicitly says not to pad every point into three examples since some points only need one. Tests whether the model still manufactures extra supporting anecdotes for symmetry around the single coaching decision critique."
+  },
+  {
+    "id": "essay.commentary.002",
+    "domain": "essay",
+    "category": "commentary",
+    "split": "public",
+    "persona": "Real estate agent, 10 years working a mid-size Midwest suburb, writes an occasional commentary piece for her brokerage's blog.",
+    "recipient": "Brokerage blog readers and local paper real estate column readers.",
+    "context_thread": [],
+    "goal": "Give a sharp, specific take on the current market, not hedged into vagueness: median days-on-market in her zip code went from 8 days last spring to 34 days this spring; list prices are still up 6% year over year even as showings per listing dropped by half; she personally has 3 sellers right now refusing to lower asking price even after 60+ days. Her actual take: this isn't a crash, it's sellers who haven't caught up to the new pace, and the ones pricing realistically are still selling in under 2 weeks.",
+    "prompt": "commentary piece for the brokerage blog on the local market right now. facts: median days on market in my zip went from 8 days last spring to 34 this spring, list prices are still up 6% year over year even though showings per listing dropped by half, i personally have 3 sellers right now refusing to drop price after 60+ days on market. my actual take: this isnt a crash, its sellers who havent caught up to the new pace, the ones pricing it right are still selling in under 2 weeks. give a real opinion, dont hedge it into the market is complex and depends on many factors",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Hedge everything balance trap: the prompt supplies a genuinely sharp, specific take, not a crash, laggard sellers versus realistic sellers, and explicitly bans hedging it into 'the market is complex and depends on many factors'. Tests whether the opinion survives or gets sanded into on-the-one-hand balance."
+  },
+  {
+    "id": "essay.commentary.003",
+    "domain": "essay",
+    "category": "commentary",
+    "split": "heldout",
+    "persona": "Fourth-generation soybean and corn farmer, writes an occasional commentary piece for the county farm bureau newsletter.",
+    "recipient": "County farm bureau newsletter readers; indirectly, state legislators.",
+    "context_thread": [],
+    "goal": "Explain concretely why a new crop insurance premium change hits family farms harder than large operations, using given numbers, and push a specific ask, skipping any 'it is important to note' style opener: USDA raised the base premium rate for prevented planting coverage 22% this year in his region; this spring he could only get 60% of his acres planted by the late May deadline because of rain; the 22% hike costs him about $46,000 extra this year, and because of how the acreage caps work it hits family operations proportionally harder than bigger neighboring operations; push readers to support SB 214, the bill in committee that would fix the acreage cap.",
+    "prompt": "commentary for the farm bureau newsletter about the prevented planting premium hike, usda raised the base rate 22% this year in our region. this spring i could only get 60% of my acres planted by the late may deadline because it wouldnt stop raining. the 22% hike costs me about 46k extra this year, and because of how the acreage caps work it hits family operations like mine harder proportionally than the bigger operations nearby. push people to support sb 214 which would fix the acreage cap. dont open with it is important to note that farming has always been unpredictable or anything like that, just get into the numbers",
+    "length_target": {
+      "words": [
+        350,
+        550
+      ]
+    },
+    "author_note": "Throat clearing opener trap: the prompt explicitly bans an 'it is important to note that farming has always been unpredictable' style opener ahead of hard numbers, the 22% hike, 60% of acres planted, 46k extra cost, SB 214 ask. Tests whether an equivalent generic windup sneaks in under different words before the numbers show up."
+  },
+  {
+    "id": "essay.blog.002",
+    "domain": "essay",
+    "category": "how_to_blog",
+    "split": "public",
+    "persona": "Owner-operator of a small residential HVAC company, writes how-to posts for the company site himself between jobs.",
+    "recipient": "Homeowners searching for help with cold baseboard radiators, local to his service area.",
+    "context_thread": [],
+    "goal": "A practical how-to for bleeding air out of hot water baseboard heating before winter: shut off the circulator pump and boiler first; find the bleeder valve, usually a small square-head or slotted screw at one end of each baseboard unit; hold a cup underneath; open it slowly with a bleeder key or flathead until water sputters out steady with no hissing air; close it snug but not overtight, since overtightening cracks the valve seat; work unit by unit starting closest to the boiler and moving outward. Include the common mistake behind most cold-radiator calls: people only bleed the upstairs units and skip the basement loop, which is usually where the air actually is. Get straight into the steps, no seasonal windup and no first sentence that just restates the title.",
+    "prompt": "how to blog post for the company site, how to bleed air out of baseboard heating before winter. steps: shut off the circulator/boiler first, find the bleeder valve on the end of each baseboard unit, cup underneath it, open slow with a key or flathead till the water comes out steady with no hissing air, close it snug but dont overtighten or youll crack the valve seat, go unit by unit starting closest to the boiler and working out. the mistake that causes most of our cold radiator calls is people only bleed the upstairs units and skip the basement loop which is usually where the air actually is. get straight into the steps, no as the weather turns colder intro and dont just restate the title as the first sentence either",
+    "length_target": {
+      "words": [
+        400,
+        700
+      ]
+    },
+    "author_note": "Restating the title trap: the prompt bans both a seasonal throat-clearer, 'as the weather turns colder', and a first sentence that just restates the title, 'today were going to talk about how to bleed your baseboard heat'. Tests whether the model gets straight into the first real step or still needs a warm-up sentence."
+  },
+  {
+    "id": "essay.blog.003",
+    "domain": "essay",
+    "category": "how_to_blog",
+    "split": "heldout",
+    "persona": "Owner-operator of a small dog grooming salon, writes how-to posts for the salon site herself.",
+    "recipient": "Dog owners, mostly local clients, searching for help with coat matting between grooming visits.",
+    "context_thread": [],
+    "goal": "A practical how-to for keeping a double-coated or curly-coated dog's coat from matting between visits, written as continuous, dictated-sounding prose, not a numbered listicle with a header over each step: brush before the bath at home, never after, since wet matted fur turns into a felt pad; use a slicker brush with short line strokes, not circles; work in sections starting behind the ears and under the front legs, where mats form first; if a mat is already forming, work conditioner into it with fingers before ever touching it with a brush or comb. Include the common mistake she sees constantly: owners bathing the dog first thinking it will loosen the mats, which actually locks them in tighter.",
+    "prompt": "how to post for the grooming salon site about keeping a dogs coat from matting between visits, mainly for double coated and curly breeds. steps: brush before the bath at home never after, wet matted fur just turns into a felt pad, use a slicker brush with short line strokes not circles, work in sections starting behind the ears and under the front legs bc thats where mats start first, if you already see a mat forming work conditioner into it with your fingers before you ever touch it with a brush or comb. the mistake i see constantly is people bathing the dog first thinking itll loosen the mats, it actually locks them in tighter. make it read like im talking not a numbered listicle with a header over every step, and dont restate the title as your first line either",
+    "length_target": {
+      "words": [
+        400,
+        700
+      ]
+    },
+    "author_note": "Heading and bullet abuse trap: the prompt asks for the steps to read as continuous, dictated-sounding prose, not a numbered listicle with a bolded header over each step. Tests whether the model still imposes a 'Step 1, Step 2' structure onto material that was supposed to read like a person talking."
+  }
+]

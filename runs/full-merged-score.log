@@ -1,0 +1,85 @@
+########## SLOP INDEX ##########
+==============================================================================
+THE SLOP INDEX  run=full-merged   0 = writes like a pre-AI human
+==============================================================================
+
+model                       email    essay    slack   social    OVERALL
+mistral-large                39.9     42.6     32.1     47.8       40.6
+claude-fable-5               43.4     32.1     27.0     39.8       35.6
+gpt-5.6-terra                35.1     35.1     25.1     36.0       32.8
+claude-opus-4-8              38.4     31.7     24.7     32.4       31.8
+gpt-5.6-sol                  35.5     30.7     29.1     31.6       31.7
+gpt-5.6-luna                 33.6     31.0     28.4     33.6       31.7
+glm-5.2                      39.3     30.9     21.3     33.4       31.2
+claude-sonnet-5              34.7     28.9     22.8     35.6       30.5
+qwen3.7-max                  32.4     22.6     22.8     37.0       28.7
+gemini-3.5-flash             39.3     18.9     21.8     30.9       27.8
+gpt-5.4-mini                 30.9     28.8     20.8     26.8       26.8
+claude-haiku-4-5             33.6     27.4     18.1     20.6       24.9
+gemini-3.1-pro-preview       30.8     20.0     20.7     25.6       24.3
+grok-4.5                     27.3     20.4     19.0     29.6       24.1
+deepseek-v4-pro              20.3     20.9     13.5     40.4       23.8
+minimax-m3                   30.7     20.2     15.4     26.0       23.1
+muse-spark-1.1               35.7     15.2     18.4     23.0       23.1
+kimi-k2p6                    26.9     16.7     16.1     24.6       21.1
+
+model                     conciseness   templating       rhythm        tells
+mistral-large                     4.7         91.2          6.1         43.2
+claude-fable-5                   17.8         65.8          6.9         35.5
+gpt-5.6-terra                     6.3         68.6         15.0         33.1
+claude-opus-4-8                   8.9         63.5         10.9         35.7
+gpt-5.6-sol                       2.7         72.3         13.7         30.8
+gpt-5.6-luna                      4.5         68.4         12.5         34.0
+glm-5.2                          16.8         50.0          5.5         43.8
+claude-sonnet-5                  12.9         57.5          6.0         32.9
+qwen3.7-max                      11.4         47.3          9.5         44.1
+gemini-3.5-flash                 16.3         41.8         10.0         40.1
+gpt-5.4-mini                      3.6         56.3         18.3         27.1
+claude-haiku-4-5                  5.7         45.9         11.4         37.4
+gemini-3.1-pro-preview           11.9         38.0         10.0         36.4
+grok-4.5                          3.2         44.8          9.7         40.4
+deepseek-v4-pro                  19.2         24.8          1.2         43.0
+minimax-m3                       15.7         28.1          6.5         41.5
+muse-spark-1.1                    9.4         39.9         18.0         27.5
+kimi-k2p6                         8.0         32.2         12.6         35.5
+
+sensitivity (500 random reweightings, each axis 0.10-0.45):
+  exact ranking preserved in 0% of trials
+  sloppiest  = mistral-large            in 97% of trials
+  cleanest   = kimi-k2p6                in 58% of trials
+  ! ranking is weight-sensitive. Report the axes separately, not one index.
+
+weights: {'conciseness': 0.35, 'templating': 0.3, 'rhythm': 0.2, 'tells': 0.15}   ceiling: 3.0x human rate = 100
+excluded axes and why: see the module docstring (MTLD is wrong-signed,
+em-dash-alone measures typography era, detectors pin at 100% for all).
+
+########## RANK SPREAD ##########
+======================================================================
+SLOP INDEX — RANK SPREAD   run=full-merged   500 bootstraps
+higher Slop Index = sloppier. rank 1 = sloppiest.
+======================================================================
+      rank  model                      slop   spread
+         1  mistral-large              40.6   ranks 1
+         2  claude-fable-5             35.6   ranks 2–3
+         3  gpt-5.6-terra              32.8   ranks 3–6
+         4  claude-opus-4-8            31.8   ranks 3–8
+         5  gpt-5.6-sol                31.7   ranks 3–8
+         6  gpt-5.6-luna               31.7   ranks 3–8
+         7  glm-5.2                    31.2   ranks 4–9
+         8  claude-sonnet-5            30.5   ranks 4–9
+         9  qwen3.7-max                28.7   ranks 8–11
+        10  gemini-3.5-flash           27.8   ranks 9–12
+        11  gpt-5.4-mini               26.8   ranks 9–12
+        12  claude-haiku-4-5           24.9   ranks 12–16
+        13  gemini-3.1-pro-preview     24.3   ranks 12–17
+        14  grok-4.5                   24.1   ranks 13–17
+        15  deepseek-v4-pro            23.8   ranks 8–18
+        16  minimax-m3                 23.1   ranks 13–18
+        17  muse-spark-1.1             23.1   ranks 12–18
+        18  kimi-k2p6                  21.1   ranks 16–18
+
+TIE GROUPS (overlapping rank spreads = statistically indistinguishable):
+  group 1: mistral-large
+  group 2: claude-fable-5, gpt-5.6-terra, claude-opus-4-8, gpt-5.6-sol, gpt-5.6-luna
+  group 3: glm-5.2, claude-sonnet-5, qwen3.7-max, gemini-3.5-flash, gpt-5.4-mini, deepseek-v4-pro
+  group 4: claude-haiku-4-5, gemini-3.1-pro-preview, grok-4.5, minimax-m3, muse-spark-1.1, kimi-k2p6

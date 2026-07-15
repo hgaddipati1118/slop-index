@@ -1,0 +1,569 @@
+[
+  {
+    "id": "slack.favor.001",
+    "domain": "slack",
+    "category": "favor_ask",
+    "split": "public",
+    "pilot": true,
+    "persona": "Backend engineer on a 6-person platform team. It's Thursday afternoon; her sister's wedding is this weekend and she's on the on-call rotation.",
+    "recipient": "Marcus, teammate, same rotation, has swapped shifts with her once before (she covered his July 4th weekend).",
+    "context_thread": [],
+    "goal": "Ask Marcus to take her on-call shift Sat-Sun. Offer a specific trade (she'll take his next weekend slot, Nov 8-9). DM register.",
+    "prompt": "slack dm to marcus asking him to cover my on-call this sat-sun for my sister's wedding. offer to take his nov 8-9 shift. i covered his july 4th so he owes me one but don't say it like that",
+    "length_target": {
+      "words": [
+        20,
+        70
+      ]
+    },
+    "author_note": "Favor asks in Slack tempt email-shaped messages: 'Hi Marcus, I hope you're doing well!' + paragraph + 'Best regards'. Human version is two or three lines. The 'don't say it like that' nuance tests social register: can it imply reciprocity without invoking it?"
+  },
+  {
+    "id": "slack.delay.001",
+    "domain": "slack",
+    "category": "delay_to_boss",
+    "split": "public",
+    "pilot": true,
+    "persona": "Data analyst, 2 years at the company. The quarterly churn report she owns is due to her manager tomorrow (Friday) morning.",
+    "recipient": "Her manager Priya: reasonable, hates surprises more than delays.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "still good for the churn report tomorrow AM? want to skim it before the leadership sync at 2"
+      }
+    ],
+    "goal": "Tell Priya it'll be Monday morning instead: the billing data export was corrupted and finance re-ran it today, so she lost a day and won't fake the analysis. Offer the one thing Priya actually needs for the 2pm (the topline churn number, which is solid) by noon tomorrow.",
+    "prompt": "reply to priya. report slips to monday because the billing export was corrupted and finance had to rerun it. i can get her the topline churn number by noon tomorrow for her 2pm. own it, no essay",
+    "length_target": {
+      "words": [
+        25,
+        80
+      ]
+    },
+    "author_note": "Bad news to a boss in chat: watch apology stacking, formal-memo structure with a greeting line, and burying the Monday date. Good version leads with the new date, one-line cause, the noon offer. 'No essay' is the register steer."
+  },
+  {
+    "id": "slack.standup.001",
+    "domain": "slack",
+    "category": "standup_update",
+    "split": "public",
+    "pilot": true,
+    "persona": "Frontend engineer on a team that does async standup in #eng-standup every morning. Team norm is 2-4 casual lines; nobody uses headers.",
+    "recipient": "#eng-standup channel, 8 teammates.",
+    "context_thread": [],
+    "goal": "Post today's update: yesterday shipped the invoice-PDF fix and reviewed Kai's PR; today pairing with Kai on the export flow at 11, then starting the date-picker bug; blocked on staging access for the payments sandbox (asked IT yesterday, ticket #4412).",
+    "prompt": "write my standup for #eng-standup. yesterday: shipped the invoice pdf fix, reviewed kai's pr. today: pairing with kai at 11 on export flow, then starting the datepicker bug. blocked: still waiting on staging access for payments sandbox, ticket 4412 with IT. match how people actually write standups, not a formatted report",
+    "length_target": {
+      "words": [
+        30,
+        90
+      ]
+    },
+    "author_note": "Standups expose format abuse: bold headers ('**Yesterday:**'), bullet trees for three items, emoji section markers. The channel norm is stated in the persona; tests whether the model matches ambient register or imposes report formatting."
+  },
+  {
+    "id": "slack.decline.001",
+    "domain": "slack",
+    "category": "decline_meeting",
+    "split": "public",
+    "pilot": true,
+    "persona": "Product designer, calendar already wrecked this week, protective of maker time. Friendly with Alex.",
+    "recipient": "Alex, a PM on a sister team, who just DM'd an invite.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "hey! threw 30 min on your calendar thursday to brainstorm onboarding ideas for the Q3 flow, that work?"
+      }
+    ],
+    "goal": "Decline the Thursday meeting, propose async instead: Alex drops the three roughest ideas in the thread, she'll respond with sketches by Friday EOD. Leave the door open for a call next week if async stalls.",
+    "prompt": "reply to alex declining thursday. ask him to drop his top 3 ideas here instead and i'll respond with sketches by friday eod. if that doesn't work we can grab time next week. keep it warm, 2-3 lines",
+    "length_target": {
+      "words": [
+        15,
+        60
+      ]
+    },
+    "author_note": "Declining in chat tempts hedge-stacking ('I would love to but unfortunately...'), fake enthusiasm inflation, and the greeting+signoff email skeleton. The 2-3 line constraint is explicit, a clean register check."
+  },
+  {
+    "id": "slack.question.001",
+    "domain": "slack",
+    "category": "quick_question",
+    "split": "public",
+    "pilot": true,
+    "persona": "New marketing hire, week 2. Needs the Q2 campaign performance deck for a client call at 3pm today.",
+    "recipient": "Jordan, the marketing ops person who owns the drive folders. They've exchanged maybe five messages.",
+    "context_thread": [],
+    "goal": "Ask where the Q2 campaign deck lives. Mention the 3pm call so Jordan knows it's time-sensitive but not an emergency. One message, no preamble ritual.",
+    "prompt": "dm jordan asking where the q2 campaign performance deck lives in the drive, i need it for a 3pm client call. i'm new so be friendly but just ask, no long windup",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "The purest register test in the set. Slop version: 'Hi Jordan! I hope your week is going well! I had a quick question when you get a chance...' Human version: one line plus the 3pm context. Also watch for the sign-off reflex ('Thanks so much in advance!')."
+  },
+  {
+    "id": "slack.favor.002",
+    "domain": "slack",
+    "category": "favor_ask",
+    "split": "public",
+    "persona": "Vet tech at a four-doctor animal clinic, six years in. It's Monday; her old dog needs a cardiology workup at a specialist two hours away, and Friday 1pm is the only slot open for the next six weeks.",
+    "recipient": "Teresa, fellow vet tech on the same rotation. They cover each other informally; Teresa took a Saturday shift for her back in the spring.",
+    "context_thread": [],
+    "goal": "Ask Teresa to cover the Friday 1-5pm shift (front desk plus two treatment rooms). Offer to take Teresa's Sunday closing shift next week as a trade. Needs an answer by end of day tomorrow (Tuesday) to lock the specialist appointment.",
+    "prompt": "dm to teresa asking her to cover my fri 1-5 shift, my dog has a cardiology appt 2 hrs away and its the only slot for weeks. offer to take her sunday closing shift next week instead. i have to confirm the appt by eod tomorrow so mention that but dont make it sound pushy",
+    "length_target": {
+      "words": [
+        20,
+        70
+      ]
+    },
+    "author_note": "Trap: hedge-stacking. This is a genuinely time-boxed ask (needs an answer by EOD tomorrow) but tempts piling on 'no worries at all if not', 'whenever works for you', 'totally understand either way' past the point of usefulness, which buries the real deadline. Good version states the ask, the trade, and the EOD-tomorrow window in two or three lines."
+  },
+  {
+    "id": "slack.favor.003",
+    "domain": "slack",
+    "category": "favor_ask",
+    "split": "heldout",
+    "persona": "Field coordinator at a construction and field-service company, five years in. It's Monday; the city just moved her Baker Ave permit inspection to Wednesday 7-9am, the exact window she's supposed to sign for a concrete delivery at the Elm St site.",
+    "recipient": "Mike, another field coordinator. They swap coverage often and don't keep score.",
+    "context_thread": [],
+    "goal": "Ask Mike to take Wednesday's concrete delivery signoff at Elm St, 7-9am window, because her permit inspection got moved to the same morning at Baker Ave.",
+    "prompt": "message mike, need him to sign for the concrete delivery wed morning 7-9am at elm st bc my permit inspection got moved to baker ave same window. just ask straight up dont bury it in a paragraph about the permit stuff",
+    "length_target": {
+      "words": [
+        20,
+        70
+      ]
+    },
+    "author_note": "Trap: burying the ask. The permit-inspection backstory is real but secondary; slop version front-loads it and drops the actual ask (site, day, time window) in the middle or at the end. Good version leads with what he needs to do."
+  },
+  {
+    "id": "slack.delay.002",
+    "domain": "slack",
+    "category": "delay_to_boss",
+    "split": "public",
+    "persona": "Account manager at a marketing and creative agency, owns the pitch deck for a Thursday new-business meeting with a furniture retailer prospect.",
+    "recipient": "Elena, her manager. Checks in early, does not like being blindsided the morning of.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "how's the halden deck coming? want to review before we walk into thursday"
+      }
+    ],
+    "goal": "Tell Elena the deck needs to slip a day: the client sent new brand guidelines late Friday that contradict half of what's built, so it's getting rebuilt. Promise a reviewable version by tomorrow (Tuesday) 5pm, still leaving time before Thursday.",
+    "prompt": "reply to elena. deck is getting rebuilt bc halden sent new brand guidelines late fri that contradict half of what we built. ill have a reviewable version to her by tmrw 5pm, still leaves time before thursday. own it dont over apologize",
+    "length_target": {
+      "words": [
+        25,
+        80
+      ]
+    },
+    "author_note": "Trap: apology stacking. The situation calls for one clean acknowledgment plus the new plan; slop version stacks 'so sorry', 'sorry again', 'apologies for the back and forth' across multiple lines instead of naming the new date once and moving on."
+  },
+  {
+    "id": "slack.delay.003",
+    "domain": "slack",
+    "category": "delay_to_boss",
+    "split": "heldout",
+    "persona": "Program coordinator at a nonprofit housing organization, owns a grant report due to the executive director today for a foundation deadline.",
+    "recipient": "Rudy, the executive director. Reasonable, but wants a clean status update, not a narrative.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "you still on track for the packard grant report today?"
+      }
+    ],
+    "goal": "Tell Rudy it slips to Wednesday end of day: the county sent updated intake numbers this morning that don't match the current draft, and reconciling them will take a day.",
+    "prompt": "reply to rudy. report slips to wed eod bc the county sent updated intake numbers this morning that dont match the draft, need to reconcile before it goes out. keep it short dont give me a whole backstory on the data partnership",
+    "length_target": {
+      "words": [
+        25,
+        80
+      ]
+    },
+    "author_note": "Trap: over-explaining and justifying. The honest message is one line of cause plus the new date; slop version pads it with paragraphs of context about the county partnership, past data issues, and methodology that the ED didn't ask for."
+  },
+  {
+    "id": "slack.standup.002",
+    "domain": "slack",
+    "category": "standup_update",
+    "split": "public",
+    "persona": "SRE on a small platform team at a software company. Async standups post in #ops-standup every morning; team norm is two or three plain lines, nobody uses headers or checklists.",
+    "recipient": "#ops-standup channel, 6 teammates.",
+    "context_thread": [],
+    "goal": "Post today's update: yesterday rotated the expiring TLS cert on the ingest gateway and paired with Angela on alerting-noise cleanup; today finishing the alerting cleanup then starting the postgres replica-lag investigation; blocked on a maintenance window from Jill to rotate the cert on the second gateway, asked Friday.",
+    "prompt": "standup for ops-standup. yesterday: rotated the expiring tls cert on the ingest gateway, paired with angela on alerting noise cleanup. today: finish the alerting cleanup then start on the postgres replica lag thing. blocked: still need jill to approve a maintenance window for the second gateway cert, asked her friday. write it like people actually type standups not a report",
+    "length_target": {
+      "words": [
+        30,
+        90
+      ]
+    },
+    "author_note": "Trap: formatted-report imposition. Slop version reaches for bold Yesterday/Today/Blocked headers, a bullet tree for two or three items, or emoji section markers on a channel whose stated norm is plain casual lines. Good version matches the ambient format."
+  },
+  {
+    "id": "slack.standup.003",
+    "domain": "slack",
+    "category": "standup_update",
+    "split": "heldout",
+    "persona": "Transaction coordinator at a real-estate brokerage, posts a daily update in the team's #closings channel. Team writes in short casual lines, no formatting, no headers.",
+    "recipient": "#closings channel, 5 agents plus the broker.",
+    "context_thread": [],
+    "goal": "Post: yesterday got the Hendricks closing docs over to title and chased the inspection report on the Castellanos listing; today following up with the lender on the Nakamura file since the appraisal came in low, and prepping the Hendricks closing packet; no blockers, just flag that Hendricks closes Thursday 10am at the title office if anyone wants to be there.",
+    "prompt": "post my update in closings. yesterday got hendricks docs over to title, chased the castellanos inspection report. today following up with the lender on nakamura bc the appraisal came in low, and prepping the hendricks closing packet. no blockers, just flag hendricks closes thurs 10am at the title office if anyone wants to swing by. keep it casual like always not a formatted report",
+    "length_target": {
+      "words": [
+        30,
+        90
+      ]
+    },
+    "author_note": "Trap: length inflation. The honest update is four short facts; the pull is to pad each into a full sentence with throat-clearing framing ('I wanted to give everyone a quick update on where things stand with...') before landing on the content."
+  },
+  {
+    "id": "slack.decline.002",
+    "domain": "slack",
+    "category": "decline_meeting",
+    "split": "heldout",
+    "persona": "Ops manager overseeing four locations for a hospitality group, calendar full this week running walkthroughs. Friendly with the recipient.",
+    "recipient": "Ramona, the group's marketing manager, who just DM'd an invite.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "hey! grabbed 45 min weds at 2 to workshop the fall launch posts together, does that work?"
+      }
+    ],
+    "goal": "Decline Wednesday (doing line checks at two locations that day). Propose Ramona drop the draft posts in the thread and get comments back by Friday. Leave the door open for a call next week if async doesn't cut it.",
+    "prompt": "reply to ramona declining weds, im doing line checks at two locations that day. ask her to drop the draft posts here and ill comment by friday, can hop on a call next week if we need to. keep it short and warm",
+    "length_target": {
+      "words": [
+        15,
+        60
+      ]
+    },
+    "author_note": "Trap: hedge-stacking. A clean decline is one line plus the alternative; slop version stacks softeners like 'I would really love to but unfortunately', 'no worries at all if this timing is bad', 'so sorry to push this on you' well past what a two-line decline needs."
+  },
+  {
+    "id": "slack.question.002",
+    "domain": "slack",
+    "category": "quick_question",
+    "split": "public",
+    "persona": "5th grade teacher at a K-8 school, first year there. A field trip permission deadline is tomorrow and she needs the sign-out roster template.",
+    "recipient": "Nina, the front office admin who manages permission forms. They've spoken maybe three times.",
+    "context_thread": [],
+    "goal": "Ask where the field trip sign-out roster template lives (shared drive vs the binder in the office). Needs it by end of day tomorrow to send home to parents for Thursday's trip.",
+    "prompt": "dm nina asking where the field trip sign out roster template is, google drive or the binder in the office. need it by end of day tmrw to send to parents for thursdays trip. im new so friendly but just ask no big windup",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Trap: preamble ritual. Slop version opens with 'Hi Nina! Hope you're having a great start to the week!' before the actual question; good version asks in the first line and states the deadline in the second."
+  },
+  {
+    "id": "slack.question.003",
+    "domain": "slack",
+    "category": "quick_question",
+    "split": "heldout",
+    "persona": "Store manager at one location of a mid-size retail chain. Wants to know if regional already ordered replacement POS terminals after last week's outage before she orders her own.",
+    "recipient": "Clyde, regional ops coordinator. She's messaged him maybe twice before.",
+    "context_thread": [],
+    "goal": "Ask if replacement POS terminals for store 214 are already on order from the outage ticket she filed last week, since she doesn't want to double-order.",
+    "prompt": "message clyde asking if replacement pos terminals for store 214 are already on order from the outage ticket i filed last week, dont want to double order. put the actual question up front",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Trap: burying the question. Slop version leads with the outage backstory and ticket history before the actual question; good version asks in the first sentence."
+  },
+  {
+    "id": "slack.review.001",
+    "domain": "slack",
+    "category": "review_request",
+    "split": "public",
+    "persona": "Backend engineer, opened a PR fixing a race condition in the webhook retry queue. Wants it merged before Thursday's on-call handoff.",
+    "recipient": "Sanjay, a teammate who usually reviews her PRs.",
+    "context_thread": [],
+    "goal": "Ask Sanjay to review PR 482 (webhook retry race condition fix). It's small, about 60 lines. Wants it merged by Thursday before the on-call handoff.",
+    "prompt": "ask sanjay to review pr 482, fixes the race condition in the webhook retry queue. its small, like 60 lines. want it merged by thursday before oncall handoff. keep it to like 2 sentences its not a big deal",
+    "length_target": {
+      "words": [
+        20,
+        60
+      ]
+    },
+    "author_note": "Trap: length inflation. The honest ask is a link, a size, and a deadline; slop version pads with justification of why the bug matters, restates the PR title in full, and adds throat-clearing about being busy this week."
+  },
+  {
+    "id": "slack.review.002",
+    "domain": "slack",
+    "category": "review_request",
+    "split": "heldout",
+    "persona": "Copywriter at a creative agency, drafted three subject line options for a client's back-to-school email campaign. Client call is tomorrow at 11am.",
+    "recipient": "Bianca, the creative director. Usually gives quick gut checks over Slack.",
+    "context_thread": [],
+    "goal": "Ask Bianca to pick her favorite of three subject lines before tomorrow's 11am client call. Doesn't need a full critique, just a pick.",
+    "prompt": "ask bianca to look at the 3 subject lines for the back to school campaign and just tell me which one she likes best before the 11am client call tmrw. dont need a whole critique just a pick. dont turn this into a formatted doc just ask her in chat",
+    "length_target": {
+      "words": [
+        20,
+        60
+      ]
+    },
+    "author_note": "Trap: formatted-report imposition. Slop version turns a one-line gut-check into a numbered breakdown of the three options with bolded headers and pros and cons before even asking the question; good version pastes the lines plainly and asks for a pick."
+  },
+  {
+    "id": "slack.review.003",
+    "domain": "slack",
+    "category": "review_request",
+    "split": "public",
+    "persona": "Estimator at a construction and field-service company, put together a bid for a warehouse re-roofing job. Needs a second set of eyes before it goes out Wednesday morning.",
+    "recipient": "Gary, a senior estimator with 15 years at the company who catches pricing mistakes.",
+    "context_thread": [],
+    "goal": "Ask Gary to check the labor hours and material markup on the Fenwick Ave bid before she sends it Wednesday morning, especially the membrane cost line, which she's not confident on.",
+    "prompt": "ask gary to check the fenwick ave reroof bid before i send it wed morning, mainly the labor hours and the membrane material markup, not confident on that line. dont write a huge explanation of the whole bid just point him at what to check",
+    "length_target": {
+      "words": [
+        20,
+        80
+      ]
+    },
+    "author_note": "Trap: over-explaining and justifying. Slop version walks through the entire bid line by line as backstory before asking; good version names the specific line to check and the deadline."
+  },
+  {
+    "id": "slack.channel.001",
+    "domain": "slack",
+    "category": "channel_announcement",
+    "split": "public",
+    "persona": "Store manager posting to the staff channel for her location, a mid-size retail chain. Casual team, nobody uses formal announcements.",
+    "recipient": "#store214 channel, 14 staff.",
+    "context_thread": [],
+    "goal": "Announce that starting Monday July 20, weeknight closing shift moves from 9pm to 8:30pm per corporate's new store hours. Ask staff to check the updated schedule posted in the back office and flag her if it conflicts with anything.",
+    "prompt": "post to store214. starting mon july 20 weeknight closing shift moves from 9 to 830pm, corporate changed store hours. updated schedule is posted in the back office, flag me if it messes with anything. keep it like a normal staff note not some big formal announcement",
+    "length_target": {
+      "words": [
+        20,
+        90
+      ]
+    },
+    "author_note": "Trap: formatted-report imposition. Slop version reaches for a bolded 'ANNOUNCEMENT' header, a bullet list, and emoji dividers for what's normally a two-line staff note; good version states the change and the ask plainly."
+  },
+  {
+    "id": "slack.channel.002",
+    "domain": "slack",
+    "category": "channel_announcement",
+    "split": "public",
+    "persona": "IT and security lead at a software company, posting to #general about a mandatory password manager rollout.",
+    "recipient": "#general channel, whole company, about 80 people.",
+    "context_thread": [],
+    "goal": "Announce that starting Friday everyone needs to install the company password manager and migrate saved passwords by end of month. IT sends individual invites today. Questions go to #it-help. This is routine, not an emergency.",
+    "prompt": "post to general. starting friday everyone needs 1password installed, migrate your saved passwords by end of month, IT sends invites today, questions in it-help. this is routine dont make it sound like a fire drill",
+    "length_target": {
+      "words": [
+        20,
+        90
+      ]
+    },
+    "author_note": "Trap: fake urgency inflation. Slop version adds urgent framing, stacked exclamation points, or all-caps 'IMPORTANT' for a routine rollout with a three-week runway; good version states the change and deadline calmly."
+  },
+  {
+    "id": "slack.channel.003",
+    "domain": "slack",
+    "category": "channel_announcement",
+    "split": "heldout",
+    "persona": "Office manager at a multi-provider medical clinic, posting to the staff channel about a new patient intake protocol.",
+    "recipient": "#clinic-team channel, front desk and clinical staff, 20 people.",
+    "context_thread": [],
+    "goal": "Announce that starting tomorrow, front desk verifies insurance eligibility before checking patients in, not after, because of a billing backlog last month. New laptops with the eligibility tool are already set up at both front desk stations.",
+    "prompt": "post to clinic team. starting tmrw front desk verifies insurance eligibility before checkin not after, we had a billing backlog last month from doing it after. laptops with the eligibility tool are already set up at both desks. dont do a whole windup just tell them the change",
+    "length_target": {
+      "words": [
+        20,
+        90
+      ]
+    },
+    "author_note": "Trap: preamble ritual. Slop version opens with several lines of context and history about the billing backlog before stating the actual process change; good version leads with what's changing starting tomorrow."
+  },
+  {
+    "id": "slack.urgent.001",
+    "domain": "slack",
+    "category": "urgent_ping_reply",
+    "split": "public",
+    "persona": "On-call backend engineer, just got paged.",
+    "recipient": "Wes, a teammate who pinged in #incidents.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "hey you around? checkout is throwing 500s for like 10% of requests, need eyes on this now"
+      }
+    ],
+    "goal": "Reply that she's on it, checking the payment-service logs first since that's the most recent deploy, will post an update in 10 minutes.",
+    "prompt": "reply to wes in incidents. im on it, checking payment service logs first since thats the most recent deploy, update in 10 min. this is genuinely urgent dont make it sound casual or slow it down",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Trap: flattening genuine urgency. Slop version softens a live page into a mild 'I can take a look when I get a chance' tone; good version matches the urgency with a short, immediate reply that names the next concrete step and a time-boxed update."
+  },
+  {
+    "id": "slack.urgent.002",
+    "domain": "slack",
+    "category": "urgent_ping_reply",
+    "split": "heldout",
+    "persona": "Permits clerk at a city permits and inspections office.",
+    "recipient": "Trisha in the records office, who pinged urgently.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "need the scanned copy of the Ferris Rd survey ASAP, applicant is standing at my counter and the file's not in the shared drive"
+      }
+    ],
+    "goal": "Reply that the file is on her desktop, mislabeled as 'Ferris Road survey FINAL v2', and she's sending it over right now.",
+    "prompt": "reply to trisha. i have the ferris rd survey, its on my desktop just mislabeled as final v2, sending it over right now. she needs this fast dont pad it out",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Trap: preamble ritual. Even a one-line urgent reply tempts a windup like 'Hey! So sorry, let me check on that for you' before the actual answer; good version states where the file is and that it's coming, nothing else."
+  },
+  {
+    "id": "slack.urgent.003",
+    "domain": "slack",
+    "category": "urgent_ping_reply",
+    "split": "public",
+    "persona": "GM at a restaurant, two line cooks just called out for tonight's dinner service.",
+    "recipient": "Doug, her regional manager, who pinged asking for a status update.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "heard two of your cooks called out, are you covered for tonight or do you need me to send someone from the Elm St location"
+      }
+    ],
+    "goal": "Reply that she's not covered, needs one cook sent from Elm St by 4pm, and will run the line herself until then.",
+    "prompt": "reply to doug. not covered, need one cook from elm st by 4pm, ill run the line myself till then. this is a real problem so dont undersell it or bury the ask",
+    "length_target": {
+      "words": [
+        10,
+        40
+      ]
+    },
+    "author_note": "Trap: flattening genuine urgency. Slop version hedges with 'I think we might be okay but if you have anyone available that would be great' when the honest answer is a clear no plus a specific ask; good version states the gap and the exact need."
+  },
+  {
+    "id": "slack.missed.001",
+    "domain": "slack",
+    "category": "missed_message_apology",
+    "split": "public",
+    "persona": "Caseworker at a nonprofit housing organization. Missed a message from a partner org two days ago about a shared client's housing appointment.",
+    "recipient": "Nadia at a partner shelter network, who sent the original message Saturday.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "(sent 2 days ago) hey, can you confirm Malik T. is still good for the housing intake appointment weds at 10? need to lock the slot"
+      }
+    ],
+    "goal": "Apologize briefly for the slow reply (was out over the weekend), confirm Malik is still good for Wednesday 10am, ask if she needs anything else to lock it in.",
+    "prompt": "reply to nadia. sorry for the slow reply, was out over the weekend. malik is still good for weds 10am, let me know if you need anything else to lock it in. one clean apology not a bunch of sorries",
+    "length_target": {
+      "words": [
+        15,
+        60
+      ]
+    },
+    "author_note": "Trap: apology stacking. Slop version repeats 'so sorry', 'sorry again', 'sorry for the delay' across multiple lines; good version apologizes once and gets straight to the useful answer."
+  },
+  {
+    "id": "slack.missed.002",
+    "domain": "slack",
+    "category": "missed_message_apology",
+    "split": "heldout",
+    "persona": "Real-estate agent. Missed a message from a title company coordinator sent three days ago about a signature needed on a closing document.",
+    "recipient": "Farah at the title company.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "(sent 3 days ago) need your signature on the amended closing disclosure for 118 Winslow before we can schedule closing, can you send it back today or tmrw?"
+      }
+    ],
+    "goal": "Apologize once for missing it (was traveling for another closing), confirm she's signing it now and sending it back within the hour.",
+    "prompt": "reply to farah. missed this, was traveling for another closing, signing it now and sending it back within the hour. one apology dont over explain the whole trip",
+    "length_target": {
+      "words": [
+        15,
+        60
+      ]
+    },
+    "author_note": "Trap: over-explaining and justifying. Slop version turns the excuse into a paragraph about the travel schedule and the missed message; good version apologizes once, states the fix, and gives a concrete timeline."
+  },
+  {
+    "id": "slack.groupsched.001",
+    "domain": "slack",
+    "category": "group_scheduling",
+    "split": "public",
+    "persona": "3rd grade team lead at an elementary school, needs to lock a time this week for the three 3rd grade teachers to align on field trip logistics before Thursday.",
+    "recipient": "Group DM with Kevin and Priti, fellow 3rd grade teachers.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "Kevin: cant do tuesday, i have car duty till 330"
+      },
+      {
+        "from": "other",
+        "text": "Priti: wednesday after school works for me, or thursday morning before first bell"
+      },
+      {
+        "from": "other",
+        "text": "Kevin: thursday morning works better for me actually, tuesday and weds are rough"
+      }
+    ],
+    "goal": "Consolidate: lock Thursday morning, propose 7:45am in her room before first bell, ask both to confirm.",
+    "prompt": "reply in the group dm. lock thursday morning 745 in my room before first bell, ask kevin and priti to confirm. dont recap the whole back and forth just land on the time",
+    "length_target": {
+      "words": [
+        20,
+        80
+      ]
+    },
+    "author_note": "Trap: numbered restatement of the conversation. Slop version recaps everyone's availability ('1. Kevin said... 2. Priti said...') before landing on a time; good version states the consolidated time immediately and asks for a thumbs up."
+  },
+  {
+    "id": "slack.groupsched.002",
+    "domain": "slack",
+    "category": "group_scheduling",
+    "split": "heldout",
+    "persona": "Engineering manager scheduling a 30-minute sprint planning make-up session since Monday's got cancelled for an all-hands.",
+    "recipient": "Group DM with three engineers: Charmaine, Jon, and Wale.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "Charmaine: tuesday afternoon is out for me, doctor appt"
+      },
+      {
+        "from": "other",
+        "text": "Jon: wednesday 10am or friday 2pm both work for me"
+      },
+      {
+        "from": "other",
+        "text": "Wale: friday 2pm is bad, i have the vendor call, wednesday works"
+      }
+    ],
+    "goal": "Consolidate: lock Wednesday 10am, confirm with all three, note she'll send the calendar invite after.",
+    "prompt": "reply in the group dm. wednesday 10am works for everyone based on what they said, lock it in and say ill send the invite after. dont list out who said what just land on the time",
+    "length_target": {
+      "words": [
+        20,
+        80
+      ]
+    },
+    "author_note": "Trap: burying the consolidated time. Slop version reprocesses each person's constraint before naming the time; good version states 'Wednesday 10am' up front and confirms the invite is coming."
+  }
+]

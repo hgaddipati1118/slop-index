@@ -1,0 +1,28 @@
+{
+  "source": "Blog Authorship Corpus (Schler, Koppel, Argamon, Pennebaker 2006), scraped Aug 2004",
+  "source_url": "https://huggingface.co/datasets/barilan/blog_authorship_corpus",
+  "license": "research / non-commercial -- stats-only output, raw text never committed",
+  "seed": 20260114,
+  "min_words": 150,
+  "max_words": 1500,
+  "target_ceiling": 60000,
+  "mojibake_note": "raw text has 0 literal U+2014 but nonzero cp1252-as-Unicode mojibake em/en dashes and curly quotes in the C1 control range (U+0080-U+009F); fixed via cp1252 remap before any tell-counting",
+  "funnel": {
+    "1_raw_posts": 689793,
+    "2_kept_not_template": 686287,
+    "3_kept_word_count": 264748,
+    "4_kept_english": 262458,
+    "5_kept_not_spam": 261752,
+    "6_kept_exact_unique": 244310,
+    "7_kept_near_unique": 243508,
+    "3_dropped_word_count": 421539,
+    "6_dropped_exact_dup": 17442,
+    "2_dropped_quiz_template": 3506,
+    "7_dropped_near_dup": 802,
+    "4_dropped_non_english": 2290,
+    "5_dropped_spam_dump": 706,
+    "8_pre_downsample_total": 243508,
+    "9_downsampled_to_ceiling": 60000
+  },
+  "final_count": 60000
+}

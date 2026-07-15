@@ -1,0 +1,654 @@
+[
+  {
+    "id": "email.cold.001",
+    "domain": "email",
+    "category": "cold_outreach",
+    "split": "public",
+    "pilot": true,
+    "persona": "Owner of a two-person web design studio in Austin. Direct, no-nonsense, gets maybe one reply per ten cold emails and knows it.",
+    "recipient": "Maria Delgado, owner of Ironworks Gym, a local independent gym whose website is visibly outdated (last updated 2019, not mobile-friendly). No prior contact.",
+    "context_thread": [],
+    "goal": "Get Maria to agree to a 15-minute call about redesigning the gym's website. One concrete observation about her current site, one clear ask.",
+    "prompt": "write a cold email to the owner of a local gym pitching a website redesign. her site is ancient and breaks on mobile. i want a 15 min call. don't be salesy",
+    "length_target": {
+      "words": [
+        60,
+        120
+      ]
+    },
+    "author_note": "Classic slop trap: 'I hope this email finds you well', generic flattery ('I love what you're doing at Ironworks!'), feature-dump paragraphs, 'seamless online presence'. A good human version is 4-6 sentences, leads with the mobile bug, asks once. 'don't be salesy' is in the prompt; it tests whether that instruction does anything."
+  },
+  {
+    "id": "email.decline.001",
+    "domain": "email",
+    "category": "decline_pushback",
+    "split": "public",
+    "pilot": true,
+    "persona": "Founder of a 4-person devtools startup. Friendly but firm on pricing; the product is $500/mo and the only discount ever offered is 10% for annual prepay.",
+    "recipient": "Dana Kim, procurement lead at a 300-person company, three emails into the conversation, clearly interested but pushing hard on price.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Thanks for the demo yesterday, the team was impressed. Before I take this to finance: we'd need to see 40% off the list price to make this work this quarter. Budget approval on our side takes about two weeks, so the sooner we can lock numbers the better."
+      }
+    ],
+    "goal": "Decline the 40% clearly, offer the 10% annual-prepay option, keep the deal alive without groveling.",
+    "prompt": "reply to dana. no way on 40% but we can do 10% if they prepay annual. keep it friendly, keep the deal moving",
+    "length_target": {
+      "words": [
+        40,
+        110
+      ]
+    },
+    "author_note": "The canonical spine scenario. Slop traps: apology stacking ('I completely understand, and I'm so sorry...'), 'not just a vendor, but a partner', burying the 'no' in paragraph three. Good human version says no in sentence one or two."
+  },
+  {
+    "id": "email.badnews.001",
+    "domain": "email",
+    "category": "bad_news",
+    "split": "public",
+    "pilot": true,
+    "persona": "Freelance brand designer, solo, three years in. Values the client relationship but has learned not to over-apologize.",
+    "recipient": "Tom Okafor, marketing lead at a mid-size coffee roaster, the client on a packaging redesign due Friday. Easygoing but has a launch date downstream of this.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Hey! Just checking we're still on track for Friday's handoff, printer needs files Monday morning."
+      }
+    ],
+    "goal": "Tell Tom the files will be 4 days late (next Tuesday) because the illustrator subcontractor delivered late. Own it, give the new date, offer one concrete mitigation (send the front-label files Friday so the printer can start setup).",
+    "prompt": "need to tell tom the packaging files are gonna be tuesday not friday. illustrator was late. offer to send the front labels friday so the printer isn't totally blocked. don't grovel",
+    "length_target": {
+      "words": [
+        50,
+        130
+      ]
+    },
+    "author_note": "Bad-news delivery tempts maximum slop: triple apologies, 'I wanted to reach out and provide an update', passive voice to dodge blame ('delays were encountered'), and length inflation from over-explaining. 'don't grovel' tests instruction-following on tone."
+  },
+  {
+    "id": "email.followup.001",
+    "domain": "email",
+    "category": "follow_up",
+    "split": "public",
+    "pilot": true,
+    "persona": "Freelance videographer who delivered a wedding video 6 weeks ago. Invoice #47 for $1,800 is now 3 weeks overdue. Second nudge; the first one got no reply.",
+    "recipient": "Priya and Sam, the couple. Lovely people, chaotic inboxes. Almost certainly not malicious, just disorganized.",
+    "context_thread": [
+      {
+        "from": "persona",
+        "text": "Hi both! Hope married life is treating you well. Just a gentle reminder that invoice #47 ($1,800) was due on the 14th, link's in my earlier email. Let me know if anything's unclear!"
+      }
+    ],
+    "goal": "Get paid. Firmer than the first nudge, still warm, gives an easy out (resend link, offer to split into two payments), sets a soft deadline of this Friday.",
+    "prompt": "second followup on the overdue invoice. be warm but firmer this time, give them a friday deadline, offer to split it in two payments if that helps",
+    "length_target": {
+      "words": [
+        40,
+        100
+      ]
+    },
+    "author_note": "Follow-ups are where 'Just circling back' and 'I know you're busy!' live. Also tests whether the model escalates appropriately or writes the same soft nudge again. Watch for passive-aggressive slop ('Per my previous email')."
+  },
+  {
+    "id": "email.intro_reply.001",
+    "domain": "email",
+    "category": "warm_intro_reply",
+    "split": "public",
+    "pilot": true,
+    "persona": "Founder of a bookkeeping service for restaurants (8 clients, wants 20). Genuinely good at the work, awkward at selling it.",
+    "recipient": "Jess Alvarez, owner of two taco spots, introduced by mutual friend Danny. Jess was cc'd on the intro and replied '@you, Danny says you're the person for restaurant books. our current setup is a mess of spreadsheets.'",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "(Danny) Connecting you two! Jess runs Norte Tacos, two locations and growing fast, and the books are eating her Sundays. You two should talk."
+      },
+      {
+        "from": "recipient",
+        "text": "Danny says you're the person for restaurant books. Our current setup is a mess of spreadsheets and I do it all on Sunday nights. What would working with you actually look like?"
+      }
+    ],
+    "goal": "Answer Jess's actual question (what working together looks like) in concrete terms, propose a 20-minute call this week, thank Danny briefly without gushing.",
+    "prompt": "reply to jess. explain simply what working with me looks like (monthly close, weekly categorization, i handle sales tax filings) and get a 20 min call on the calendar. thank danny but don't gush",
+    "length_target": {
+      "words": [
+        50,
+        120
+      ]
+    },
+    "author_note": "Warm intros tempt gushing ('So thrilled Danny connected us!'), restating the whole intro back, and burying the answer to the direct question under pleasantries. Good version answers 'what does it look like' in plain concrete terms within the first two sentences."
+  },
+  {
+    "id": "email.cold.002",
+    "domain": "email",
+    "category": "cold_outreach",
+    "split": "public",
+    "persona": "Owner-operator of a one-van mobile dog grooming business in Denver. Books through word of mouth and Instagram, wants recurring corporate accounts to fill weekday slots that currently sit empty.",
+    "recipient": "Denise Okonkwo, property manager of The Preserve at Cherry Creek, a 300-unit luxury apartment complex with a large dog park amenity. No prior contact.",
+    "context_thread": [],
+    "goal": "Get Denise to agree to try a monthly mobile grooming pop-up in the complex's dog park as a resident amenity. One concrete hook (the amenity angle), one clear ask (a trial date or a 15 minute call), no service laundry list.",
+    "prompt": "cold email to an apartment complex property manager, they have a big dog park. pitching a monthly mobile grooming day for residents as an amenity. one clear ask, keep it tight, don't list every service i offer",
+    "length_target": {
+      "words": [
+        50,
+        110
+      ]
+    },
+    "author_note": "Feature-dump trap. The prompt explicitly says don't list every service, which is exactly the pull models resist poorly: they tend to still enumerate baths, nail trims, de-shedding, teeth brushing in a paragraph instead of naming the amenity idea once and asking for a trial date."
+  },
+  {
+    "id": "email.cold.003",
+    "domain": "email",
+    "category": "cold_outreach",
+    "split": "heldout",
+    "persona": "Independent piano tuner and technician, 20 years in the trade, already tunes for two other private schools nearby. Wants a standing twice-a-year maintenance contract instead of chasing one-off calls.",
+    "recipient": "Karen Whitfield, head of the music department at Brookline Country Day School, a K-8 private school with six pianos across three practice rooms and the main hall. Found through the school's public staff directory, no prior contact.",
+    "context_thread": [],
+    "goal": "Propose a twice-yearly tuning contract covering all six pianos at a flat rate, name the rate, ask for a reply to lock in a fall date.",
+    "prompt": "cold email to a school music teacher about setting up a twice a year tuning contract for their pianos. i tune for two other schools nearby so i know the drill. get straight to it, no 'hope this finds you well' stuff",
+    "length_target": {
+      "words": [
+        55,
+        110
+      ]
+    },
+    "author_note": "Opener/greeting-ritual trap. The prompt bans the classic 'hope this finds you well' opener by name, testing whether the model reaches for an equivalent stock preamble ('My name is... I am writing to...') instead of opening cold with the concrete offer and the flat rate."
+  },
+  {
+    "id": "email.intro_reply.002",
+    "domain": "email",
+    "category": "warm_intro_reply",
+    "split": "public",
+    "persona": "Physical therapist running a small outpatient clinic, specializes in runner injuries, wants a referral pipeline from local running groups.",
+    "recipient": "Curtis Webb, coach of the Denver Distance Collective, a 40-person marathon training group. Introduced by Renee, a mutual client who is both the PT's patient and a member of Curtis's group.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "(Renee) Curtis, meet my PT! She fixed my IT band thing in like 6 weeks and half the group has the same issue. You two should talk."
+      },
+      {
+        "from": "recipient",
+        "text": "Renee's been raving about you for weeks. A bunch of my runners are dealing with IT band and shin stuff right now. What would it actually look like if we sent people your way, do you do anything with groups or is it all one on one?"
+      }
+    ],
+    "goal": "Answer Curtis's direct question (one-on-one treatment, but a free 15 minute injury screen for his runners as a low-friction entry point), propose a call, thank Renee briefly without gushing.",
+    "prompt": "reply to curtis. answer his actual question, i do 1:1 but can offer his runners a free 15 min injury screen so it's low friction for them to try me. suggest a quick call. thank renee but keep it short, don't gush",
+    "length_target": {
+      "words": [
+        50,
+        120
+      ]
+    },
+    "author_note": "Burying-the-answer trap. Curtis asked a direct, specific question (group work or one-on-one, what does the pathway look like). The slop failure pads with warmth about the introduction and Renee before ever answering, or answers vaguely instead of naming the free-screen mechanic in the first two sentences."
+  },
+  {
+    "id": "email.intro_reply.003",
+    "domain": "email",
+    "category": "warm_intro_reply",
+    "split": "heldout",
+    "persona": "Owner-operator of a 3-person residential solar installation company. Installs mostly through neighbor referrals since word of mouth converts far better than any ad spend.",
+    "recipient": "Doug Feldman, owner of a house two doors down from a recent installer job. Introduced by that neighbor, Carla, after Doug saw the panels go up.",
+    "context_thread": [
+      {
+        "from": "other",
+        "text": "(Carla) Hey, connecting you with Doug down the street, he was asking about my panels over the fence yesterday and I told him you guys were great to work with."
+      },
+      {
+        "from": "recipient",
+        "text": "Hi, yeah Carla's system looks great and she said her bill dropped a ton. My roof is a similar pitch to hers I think. Not sure where to even start with this stuff."
+      }
+    ],
+    "goal": "Meet Doug where he is, he said he doesn't know where to start, so name the simple next step directly: a free on-site roof assessment. Ask for a day/time. Thank Carla without going overboard.",
+    "prompt": "reply to doug, he doesnt know where to start so just tell him the next step is a free roof assessment, we can look at pitch and shading in person. ask when works. thank carla for the intro but dont go overboard",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Hedge-stacking trap. 'He doesn't know where to start' invites piling qualifiers onto a request that should just state the next step plainly, things like 'if that's okay with you' or 'whenever works, totally no pressure, no rush at all' stacked around a simple ask for a day."
+  },
+  {
+    "id": "email.scheduling.001",
+    "domain": "email",
+    "category": "scheduling",
+    "split": "public",
+    "persona": "Engineering manager at a 15-person startup, hiring for a backend role. The candidate came through a referral from an existing engineer, Jason.",
+    "recipient": "Carla Chandrasekaran, backend engineer candidate referred by current employee Jason.",
+    "context_thread": [],
+    "goal": "Propose a 45 minute technical screen, offer two specific time windows, ask her to pick one or suggest her own. Nothing more.",
+    "prompt": "email to a candidate to set up a 45 min tech screen. give her tuesday 2pm or wednesday 10am pacific, or she can suggest her own time. keep it short its just scheduling",
+    "length_target": {
+      "words": [
+        30,
+        70
+      ]
+    },
+    "author_note": "Verbosity/length-inflation trap, the purest case in this batch. The honest human answer is two to three sentences: propose the screen, give two slots, ask her to pick. The trap is whether the model pads it with company context, role description, or interview-process explanation that wasn't asked for."
+  },
+  {
+    "id": "email.scheduling.002",
+    "domain": "email",
+    "category": "scheduling",
+    "split": "public",
+    "persona": "Wedding photographer booked solid on Saturdays through October. Needs to lock an engagement shoot date with a couple before her calendar fills.",
+    "recipient": "Ellie and Dwayne, an engaged couple who booked their wedding package two weeks ago and now need to schedule the included engagement session.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Hi! We're so excited, just wondering when we should plan the engagement shoot? We're flexible on weekends in September."
+      }
+    ],
+    "goal": "Propose two specific September dates and times around golden hour, ask them to confirm one, mention that the botanical garden location needs a permit booked two weeks out so an answer soon matters.",
+    "prompt": "reply with two date options for their engagement shoot, sept 12 or sept 19, both around 6pm for golden hour at the botanical garden. mention i need to book the garden permit 2 weeks out so need an answer soon-ish. keep it light and short",
+    "length_target": {
+      "words": [
+        40,
+        90
+      ]
+    },
+    "author_note": "Opener-repetition trap. The couple already opened warmly, so a good reply matches their energy and gets straight to the two dates, rather than restating their own excitement back at them as a preamble ('Hi! I hope you're doing well! So excited for you two!') before the actual content."
+  },
+  {
+    "id": "email.scheduling.003",
+    "domain": "email",
+    "category": "scheduling",
+    "split": "heldout",
+    "persona": "HVAC technician at a small three-truck residential company. Needs to get on customers' calendars before the first cold snap of the season.",
+    "recipient": "A homeowner whose furnace failed its fall inspection last year and is now due for the annual check before winter.",
+    "context_thread": [],
+    "goal": "Remind the homeowner it's time for the annual furnace inspection, offer two open slots this week, ask which works.",
+    "prompt": "email a customer that its time for their annual furnace check before it gets cold, i have thursday morning or friday afternoon open this week. just need a yes or a time that works better. dont overdo it its a routine reminder",
+    "length_target": {
+      "words": [
+        35,
+        75
+      ]
+    },
+    "author_note": "Verbosity/length-inflation trap. This is explicitly a routine reminder, which is exactly where models manufacture urgency and padding, safety warnings, energy-efficiency tips, seasonal small talk, around what should be a three-sentence heads-up plus two time slots."
+  },
+  {
+    "id": "email.decline.002",
+    "domain": "email",
+    "category": "decline_pushback",
+    "split": "public",
+    "persona": "Owner-operator of a small catering company. Standard policy is no menu changes inside 72 hours of an event because it throws off her prep and shopping schedule.",
+    "recipient": "Yvette Nair, a client with an anniversary dinner event this Saturday, two days away, who just asked for a last-minute menu change.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Hey! Quick ask, can we swap the salmon and the chicken parm for something else, and can you also add a vegan entree? A few more guests confirmed and some are vegan. Thank you!!"
+      }
+    ],
+    "goal": "Say no to the entree swap clearly, the 72 hour cutoff has already passed and prep is bought and started, but say yes to adding a vegan side dish as a workaround since that doesn't touch the mains.",
+    "prompt": "tell them no on swapping the entrees this late, ive already bought and prepped for salmon and chicken parm. but i can add a vegan side option no problem. be clear about the no, dont apologize a ton",
+    "length_target": {
+      "words": [
+        45,
+        110
+      ]
+    },
+    "author_note": "Burying-the-no trap. The honest structure is no to the swap, here's why, yes to the workaround, in that order. Slop tends to open with the easy yes, soften the no with hedges, and land the actual no three sentences deep after praising the guest count news."
+  },
+  {
+    "id": "email.decline.003",
+    "domain": "email",
+    "category": "decline_pushback",
+    "split": "heldout",
+    "persona": "Cofounder of a 6-person SaaS company that makes scheduling software for small clinics. Roadmap is fixed for the next two quarters and the team has a firm no-custom-integrations policy after getting burned by one-off builds before.",
+    "recipient": "Carol Jimenez, office manager at Lakeview Family Dental, a paying customer for 8 months, asking for a custom one-off integration with their specific lab software that no other customer uses.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Our billing coordinator asked if you all could build a direct integration with our lab's software, Fusion Dental Labs. We're the only practice using them locally but it would save us a ton of manual entry. Is that something you could do for us?"
+      }
+    ],
+    "goal": "Decline the custom one-off integration clearly, it's not on the roadmap and sets a precedent a 6-person team can't sustain, and offer the actual workaround that exists today (CSV export/import) without overexplaining the internal reasoning.",
+    "prompt": "reply to the dental office. no on the custom integration, we cant do one off builds for a single customer's lab software, its not sustainable for a 6 person team. point them to the csv export/import we already have as the workaround. dont ramble about why, just say it",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Passive-voice-to-dodge-blame trap. A founder declining a specific ask should own the no in first person; slop tends to reach for passive deflection like 'that functionality is not currently supported' or 'this has been deprioritized' instead of a direct 'we won't build this.'"
+  },
+  {
+    "id": "email.badnews.002",
+    "domain": "email",
+    "category": "bad_news",
+    "split": "public",
+    "persona": "Office manager at a small veterinary clinic. Has to bump a scheduled surgery because an emergency case, a dog hit by a car, just came in and needs the same OR slot.",
+    "recipient": "Vera Alvarado, owner of Luna, a cat scheduled for a routine spay this afternoon and a regular Tuesday client of the practice.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Hi, just confirming I'm still dropping Luna off at 1pm today for her spay?"
+      }
+    ],
+    "goal": "Tell Vera the spay has to move, name the real reason (a true emergency, a dog hit by a car needs the OR now), give the new options (tomorrow morning first slot, or Thursday), own it in one clean acknowledgment.",
+    "prompt": "tell luna's owner we have to push her spay, we had a dog come in hit by a car and need the OR. offer tomorrow morning first thing or thursday. one sorry is fine dont pile them on",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Apology-stacking trap. Even a legitimate emergency reason tempts multiple 'I'm so sorry' and 'we sincerely apologize for any inconvenience this may cause' lines instead of one clean acknowledgment plus the concrete reschedule options."
+  },
+  {
+    "id": "email.badnews.003",
+    "domain": "email",
+    "category": "bad_news",
+    "split": "heldout",
+    "persona": "General contractor running a kitchen remodel. His electrician found the house's original 1962 wiring behind the wall once demo started, meaning an unplanned panel and wiring upgrade before the wall can close.",
+    "recipient": "Gloria and Paul Whitaker, homeowners mid-remodel whose budget was already tight, expecting the job to stay on the original $38,000 quote.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Hey, saw the crew pulled out early yesterday, everything okay? Are we still on track for the cabinets going in next week?"
+      }
+    ],
+    "goal": "Tell the homeowners the timeline slips about a week and a half and the cost goes up by roughly $2,800 for the wiring and panel work, because the old aluminum wiring behind the wall isn't safe to close over. Own the news directly, give the real number, don't dodge into passive phrasing.",
+    "prompt": "tell the homeowner we found old aluminum wiring behind the kitchen wall thats not up to code, has to get fixed before we close the wall back up. its gonna add about 2800 bucks and push cabinets back a week and a half. just say it straight, dont hide behind passive language like 'issues were discovered'",
+    "length_target": {
+      "words": [
+        55,
+        130
+      ]
+    },
+    "author_note": "Passive-voice-to-dodge-blame trap. The prompt names the exact tell to avoid, 'issues were discovered.' Tests whether the model can deliver a cost increase and delay in active, first-person sentences ('we found', 'this adds') instead of sliding into ownerless passive construction to soften it."
+  },
+  {
+    "id": "email.followup.002",
+    "domain": "email",
+    "category": "follow_up",
+    "split": "public",
+    "persona": "Executive director of a small youth literacy nonprofit. Submitted a $15,000 program grant application six weeks ago to a community foundation and hasn't heard back.",
+    "recipient": "Angela Reyes, program officer at the Hartwell Community Foundation, who confirmed receipt of the application when it was submitted.",
+    "context_thread": [
+      {
+        "from": "persona",
+        "text": "Hi Angela, wanted to follow up and see if there's any update on our grant application submitted back in May. Happy to answer any questions on our end. Thanks so much!"
+      }
+    ],
+    "goal": "Second follow up, more direct than the first, ask specifically when a decision is expected and whether Angela needs anything else, mention the program's September start date is time-sensitive.",
+    "prompt": "second followup to angela on the grant, first one got no reply. ask when we can expect a decision and if she needs anything else from us. mention our program is supposed to start in september so timing matters. no 'just circling back' stuff, get to it",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Greeting-and-preamble-ritual trap. The prompt bans 'just circling back' by name, but the deeper risk is the whole ritual around it, 'I hope you're doing well, I wanted to touch base.' A good second follow-up states the ask, decision timeline and September deadline, in the first line or two."
+  },
+  {
+    "id": "email.followup.003",
+    "domain": "email",
+    "category": "follow_up",
+    "split": "heldout",
+    "persona": "Owner of a small produce farm. Sells weekly to four area restaurants on invoice terms. One restaurant is now three weeks past due on a $640 invoice for July deliveries.",
+    "recipient": "Chef Louis Marchetti, owner of Bistro Louis, a steady account for two years and generally reliable. This is the first time payment has slipped.",
+    "context_thread": [],
+    "goal": "Ask directly for payment on the $640 invoice, note it's three weeks past normal terms, ask for a date this week it'll go out. No threats, and no excessive softening either since this is a long relationship worth being straightforward with.",
+    "prompt": "email the chef about the overdue invoice, 640 bucks, three weeks late now. weve worked together two years so no need to be weird about it, just ask when i can expect payment this week",
+    "length_target": {
+      "words": [
+        30,
+        80
+      ]
+    },
+    "author_note": "Hedge-stacking trap. 'No need to be weird about it' is the tell. The slop failure still hedges the direct ask for money with qualifiers, 'whenever you get a chance', 'no rush at all', 'just wanted to check', that undercut the actual request for a payment date."
+  },
+  {
+    "id": "email.support.001",
+    "domain": "email",
+    "category": "support_reply",
+    "split": "public",
+    "persona": "Owner of a home-based daycare licensed for 8 kids. Yesterday a substitute helper almost released a child to someone not on the approved pickup list before catching it and calling the parent to confirm.",
+    "recipient": "Nadine Alvarado, mother of Mia, one of the children involved, upset and emailing to ask what happened and what's being done to prevent it.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "I need to understand what happened yesterday. I got a call asking if it was okay for someone I've never heard of to pick up Mia. That's terrifying, what is going on with your pickup process?"
+      }
+    ],
+    "goal": "Explain plainly what happened, the substitute didn't recognize the person and correctly called before releasing her, but should never have gotten that far since the person wasn't on the list, and what's changing (an ID check at the door for anyone not already known, substitute retraining before her next shift). Own it without corporate distancing.",
+    "prompt": "reply to mia's mom. explain what actually happened, the sub didnt recognize the pickup person and called to check before releasing her which is why it didnt go further, but she shouldnt have even gotten that far. saying were adding an id check at the door and retraining the sub before she works again. talk like a person who runs a daycare, not customer service",
+    "length_target": {
+      "words": [
+        60,
+        140
+      ]
+    },
+    "author_note": "Corporate-speak-leakage trap. The prompt names it directly. A home daycare owner writing to a parent she knows personally should never reach for 'we take this matter very seriously' or 'rest assured, your child's safety is our top priority,' language that reads like a franchise's legal department wrote it."
+  },
+  {
+    "id": "email.support.002",
+    "domain": "email",
+    "category": "support_reply",
+    "split": "heldout",
+    "persona": "Service advisor at an independent auto repair shop. A customer came back a second time with the same squeaky brake noise, two weeks after a brake job.",
+    "recipient": "Gary Petrosyan, a customer who paid $410 for front brake pads and rotors, noise returned within days.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "The squeaking is back, same as before I brought it in. I paid over $400 for this. Kind of frustrating to be honest."
+      }
+    ],
+    "goal": "Acknowledge it's a legitimate problem, explain the likely cause in plain terms (probably a bad pad or a hardware clip, not something new), tell him to bring it back in and it'll be fixed at no charge under the shop's 12 month parts and labor warranty, propose he bring it by this week.",
+    "prompt": "reply to the customer about the squeaky brakes coming back. tell him bring it back in, its covered under our 12 month warranty so no charge, probably a bad pad or a clip that needs adjusting. dont pad it out with a bunch of reassurance, just fix his problem and tell him what to do",
+    "length_target": {
+      "words": [
+        50,
+        110
+      ]
+    },
+    "author_note": "Verbosity/length-inflation trap. The prompt says not to pad with reassurance, but this is exactly where models stack extra sentences of empathy and brand-trust language, 'we understand how frustrating this must be, we want you to know we stand behind our work', around what should be a short, concrete 'bring it in, no charge, here's why' reply."
+  },
+  {
+    "id": "email.support.003",
+    "domain": "email",
+    "category": "support_reply",
+    "split": "public",
+    "persona": "Support lead at a 9-person SaaS company that makes a project management tool for small agencies. A customer's CSV export has been silently dropping the assignee column for about a week due to a bug just identified this morning.",
+    "recipient": "Lauren Chen, owner of a 6-person creative agency and a customer for over a year, who emailed asking why her exported reports to a client are missing assignee names.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "My weekly export to a client is missing the assignee column entirely, has been for at least the last two reports. Is this a known issue? I need this fixed, I look bad sending incomplete reports."
+      }
+    ],
+    "goal": "Confirm it's a known bug found this morning, affecting CSV exports specifically, give a real fix timeline (patch shipping tomorrow), and offer an immediate workaround (the shared view link includes the assignee column and works right now). One clean acknowledgment that this caused her a real problem.",
+    "prompt": "reply to the agency owner about the missing assignee column bug. confirm its real, we found it this morning, fix ships tomorrow. tell her the shared view link has the assignee column and works right now as a workaround so she can use that today. one apology is enough, dont stack them",
+    "length_target": {
+      "words": [
+        55,
+        120
+      ]
+    },
+    "author_note": "Apology-stacking trap. SaaS support replies are a classic home for 'we're so sorry for the inconvenience this has caused, we sincerely apologize, and we want to assure you.' The prompt caps it at one, testing whether the model delivers status, fix, and workaround without larding the top and bottom with redundant sorries."
+  },
+  {
+    "id": "email.internal.001",
+    "domain": "email",
+    "category": "internal_update",
+    "split": "public",
+    "persona": "General manager of a 45-seat neighborhood restaurant, reporting to the two owners who aren't in the building day to day, after a slow June where sales came in under target.",
+    "recipient": "Co-owners Frank and Bethany Choi, expecting the monthly numbers update.",
+    "context_thread": [],
+    "goal": "Give the actual numbers (June revenue $91,400 against a $104,000 target, down about 12 percent), name the two real reasons (a competing restaurant opened two blocks away in May, and the AC was out for 4 days mid-month), name one concrete thing already in motion (a Thursday industry-night promo starting in July). Keep it to the real content without padding.",
+    "prompt": "monthly update to the owners on june numbers. we did 91.4k against a 104k target, down about 12 percent. two real reasons, the new place two blocks over opened in may and pulled some of our regulars, and our ac was out 4 days mid month which killed a slow week even more. starting a thursday industry night promo in july to try to claw some back. just give them the real picture dont sugarcoat or pad it",
+    "length_target": {
+      "words": [
+        80,
+        160
+      ]
+    },
+    "author_note": "Verbosity/length-inflation trap. This scenario has real substance, three concrete facts: numbers, two causes, one fix, which is exactly where models tend to both pad and soften with unnecessary positivity ('despite these challenges, we remain optimistic') instead of laying out the facts at the length they actually require."
+  },
+  {
+    "id": "email.internal.002",
+    "domain": "email",
+    "category": "internal_update",
+    "split": "public",
+    "persona": "Part-time administrator for a 200-member community church, updating the volunteer board on the roof repair fund ahead of their monthly meeting.",
+    "recipient": "The church's 5-person volunteer board, who voted in March to fundraise for a $22,000 roof repair. Board chair Hector Reyes sent the request for an update.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Can you send a quick update on where the roof fund stands before Tuesday's meeting? Board wants to know if we're on track."
+      }
+    ],
+    "goal": "Give the actual number, the fund is at $14,200 of the $22,000 goal, name where it came from (the spring pledge drive plus a $2,500 memorial gift in honor of Frank), name the gap and the plan (a fall pancake breakfast fundraiser already scheduled, projected to bring in another $3,000 to $4,000). Be plain, not preachy or corporate.",
+    "prompt": "update to the board on the roof fund before tuesday. were at 14,200 of the 22k goal, came from the spring pledge drive plus a 2500 memorial gift somebody gave in honor of frank. fall pancake breakfast is already on the calendar and should bring in another 3 to 4k. keep it plain, this isnt a fundraising letter its just an update to people who already know the situation",
+    "length_target": {
+      "words": [
+        70,
+        140
+      ]
+    },
+    "author_note": "Corporate-speak-leakage trap. The prompt flags it directly, this isn't a fundraising letter. A part-time church administrator updating five people she knows personally should never slide into nonprofit-appeal register, 'thanks to your generosity, we are one step closer to our goal', when they just asked for a number."
+  },
+  {
+    "id": "email.internal.003",
+    "domain": "email",
+    "category": "internal_update",
+    "split": "heldout",
+    "persona": "Engineering and ops lead at a 12-person startup, sending a postmortem update to the whole company after a 40 minute outage the day before caused by a bad database migration during a routine deploy.",
+    "recipient": "The whole company, roughly 12 people, mixed technical and non-technical, some of whom got customer complaints during the outage and want to know what happened.",
+    "context_thread": [],
+    "goal": "State plainly what happened, 40 minutes down yesterday around 2pm, caused by a migration that locked a table longer than expected during deploy. State what's already fixed, rolled back within the 40 minutes, migrations now run in a maintenance window instead of during normal deploys. No jargon-dump for the non-technical half of the company, status up front, not buried under process explanation.",
+    "prompt": "update to the whole company on yesterdays outage. 40 min down around 2pm, caused by a database migration that locked a table way longer than it should have during a normal deploy. we rolled it back and its fixed, and going forward those migrations run in a maintenance window instead of during deploys. half the company isnt technical so dont drown them in jargon, and put the actual status first not last",
+    "length_target": {
+      "words": [
+        70,
+        150
+      ]
+    },
+    "author_note": "Burying-the-lede trap. The prompt says put status first. Slop postmortems tend to open with process narrative and timeline-of-events scaffolding, 'At approximately 2:00 PM, our team began investigating', before ever stating in plain language that the issue is resolved, testing whether the model leads with the status non-technical readers actually need."
+  },
+  {
+    "id": "email.negotiation.001",
+    "domain": "email",
+    "category": "negotiation",
+    "split": "public",
+    "persona": "Personal chef who runs private dinner parties and small events, quotes per-person pricing. A repeat client is trying to negotiate a lower per-head rate by pointing to referrals she's sent.",
+    "recipient": "Sandra Ferreira, a repeat client planning a 12-person anniversary dinner, previously used the chef twice at $95 a head, now asking for $75 a head citing referrals.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "We'd love to book you again for our anniversary, 12 people. Given I've sent you two referrals already, could we do $75 a head this time instead of $95? Feels fair given the business I've sent your way."
+      }
+    ],
+    "goal": "Hold the line on price, $75 doesn't cover the menu and labor for 12 people, but acknowledge the referrals mean something concretely: offer $85 a head just for this booking as a one-time thank-you, not a permanent rate change. State the number plainly rather than justifying it with a feature list.",
+    "prompt": "reply to her about the anniversary dinner. cant do 75 a head, doesnt cover the menu for 12 people at that level. but the referrals are appreciated so ill do 85 a head just for this one as a thank you, not a permanent thing. say the number dont write a paragraph justifying my pricing",
+    "length_target": {
+      "words": [
+        45,
+        110
+      ]
+    },
+    "author_note": "Feature-dump trap. The prompt explicitly warns against justifying the price with a paragraph. The natural slop failure defends the $85 number by listing ingredients, sourcing, hours of prep, and service quality instead of just stating the number and the one reason, referral thank-you, one-time only."
+  },
+  {
+    "id": "email.negotiation.002",
+    "domain": "email",
+    "category": "negotiation",
+    "split": "heldout",
+    "persona": "Solo mobile app developer working a fixed-price $18,000 contract to build an iOS app for a small retail client. The client keeps adding requests, now push notifications and a loyalty points system, that weren't in the original scope.",
+    "recipient": "Ben Ostrowski, owner of a small retail business, currently mid-build on the fixed-price app, who just asked for the two new features to be folded into the current price and timeline.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Can we also get push notifications and a loyalty points system added in? Figure since we're already working together it makes sense to just fold it into what we're doing now."
+      }
+    ],
+    "goal": "Say clearly this is out of the current scope and price, not in the original $18,000 spec, give a real number for the addition (roughly $4,200 more and 2 extra weeks) rather than a vague 'it depends', state it directly instead of burying the no under reassurance about the relationship.",
+    "prompt": "reply to the client. push notifications and loyalty points are not in the original scope or the 18k price, i can add them for about 4200 more and it adds 2 weeks. say that clearly, dont bury the no under a bunch of 'we love working with you' stuff",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Burying-the-no trap. Freelancers negotiating scope creep are prone to wrapping the real answer, it costs more, here's the number, inside relationship-management padding. The prompt calls this out directly, testing whether the model leads with the scope and cost fact instead of rapport-building first."
+  },
+  {
+    "id": "email.negotiation.003",
+    "domain": "email",
+    "category": "negotiation",
+    "split": "public",
+    "persona": "Real estate agent representing a buyer, negotiating the commission split with the listing agent on a co-op deal where the listing agent initially offered a lower-than-standard split.",
+    "recipient": "Dave Kowalski, listing agent on a $540,000 home sale, offered a 2 percent buyer's-side commission instead of the standard 2.5 percent shown in the MLS listing.",
+    "context_thread": [
+      {
+        "from": "recipient",
+        "text": "Just flagging our listing shows 2% co-op on this one, seller's tight on the numbers. Wanted to give you a heads up before your client makes an offer."
+      }
+    ],
+    "goal": "Push back on the 2 percent, standard in this market is 2.5, and the agent's buyer is a strong pre-approved offer that benefits the seller. Ask directly if there's room to move to 2.5. Note the offer is coming either way but wants this settled first.",
+    "prompt": "reply to the listing agent, push back on the 2 percent, standard here is 2.5 and my buyer is preapproved and ready to move fast which is good for the seller. ask straight up if there's room to get to 2.5. were submitting the offer either way just want this settled first. skip the 'hope you're doing well' stuff we talk all the time",
+    "length_target": {
+      "words": [
+        40,
+        95
+      ]
+    },
+    "author_note": "Opener-repetition trap. The prompt explicitly waives the greeting ritual since these two agents already talk regularly, testing whether the model still defaults to a templated professional-courtesy opener out of habit instead of writing like two people who already have a working relationship."
+  },
+  {
+    "id": "email.thankyou.001",
+    "domain": "email",
+    "category": "thank_you",
+    "split": "public",
+    "persona": "Event coordinator at a wedding venue. The venue lost power for two hours during a Saturday reception last month, and the DJ kept the party going acoustic on his own battery speaker until power came back, saving the night.",
+    "recipient": "Wesley, the DJ who covered for the outage without being asked.",
+    "context_thread": [],
+    "goal": "Thank him specifically for what he actually did, kept 150 guests dancing without power for two hours on his own gear, never made it the venue's problem in front of the couple, and let him know she's recommending him by name to every couple who books going forward.",
+    "prompt": "thank you email to the dj who saved our butts during the power outage last month at the martinez wedding. specifically thank him for keeping it going acoustic on his own battery speaker for 2 hours and not making it a big deal in front of the couple. tell him im recommending him by name to every couple from now on. keep it short and real not a form thank you",
+    "length_target": {
+      "words": [
+        40,
+        90
+      ]
+    },
+    "author_note": "Greeting-and-preamble-ritual trap. The prompt asks for 'not a form thank you.' The tell is whether the model still opens with a generic pleasantry, 'Hi Wesley, I hope this email finds you well', before the specific earned thanks, instead of naming the actual thing he did in the first line."
+  },
+  {
+    "id": "email.thankyou.002",
+    "domain": "email",
+    "category": "thank_you",
+    "split": "public",
+    "persona": "Volunteer coordinator for a youth soccer league, 14 teams, ages 6 to 12. A local hardware store owner sponsored new goal nets and jerseys for two teams that couldn't afford them this season.",
+    "recipient": "Pete Vandermeer, owner of Vandermeer Hardware, who donated roughly $1,400 in equipment.",
+    "context_thread": [],
+    "goal": "Thank him specifically, name the two teams and what it covered, mention the kids will wear the store's logo on jerseys all season for visibility. Keep it short since this is a routine but genuine thank you, not a big letter.",
+    "prompt": "quick thank you to the hardware store owner who covered nets and jerseys for the two teams that couldnt afford them, about 1400 bucks worth. mention the kids will have his logo on their jerseys all season. keep it actually short, this doesnt need to be a whole letter",
+    "length_target": {
+      "words": [
+        30,
+        70
+      ]
+    },
+    "author_note": "Verbosity/length-inflation trap. The prompt explicitly says this doesn't need to be a whole letter, precisely where models tend to inflate a genuinely short, warm thank-you into three paragraphs of community-impact language instead of four or five direct sentences."
+  },
+  {
+    "id": "email.thankyou.003",
+    "domain": "email",
+    "category": "thank_you",
+    "split": "heldout",
+    "persona": "High school English teacher. A parent volunteer, Renata Cole, single-handedly ran the school's used book fair fundraiser for a week, recruiting other volunteers and hauling boxes before and after school, and raised more than double last year's total.",
+    "recipient": "Renata Cole, the parent volunteer.",
+    "context_thread": [],
+    "goal": "Thank Renata specifically for what she actually did, organized the whole week solo, recruited the other volunteers, the fair raised more than double last year's amount which funds the classroom book budget for the year. Personal and specific, not a form letter.",
+    "prompt": "thank you note to renata, she basically ran the whole book fair by herself this week, recruited volunteers, hauled boxes before and after school every day. it raised more than double last years total which funds our classroom books for the year. make it personal and specific to what she actually did, not some generic thank you note",
+    "length_target": {
+      "words": [
+        45,
+        100
+      ]
+    },
+    "author_note": "Corporate-speak-leakage trap. 'Make it personal and specific' is the direct instruction. The failure mode is a teacher's genuine thank-you sliding into newsletter register, 'your dedication and commitment to our school community do not go unnoticed', instead of naming the concrete things Renata actually did that week."
+  }
+]

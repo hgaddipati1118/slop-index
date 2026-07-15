@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Slop Index: which AI writes the least like AI?</title>
+<meta name="description" content="A benchmark ranking 18 frontier LLMs by how much recognizable 'AI slop' they produce, measured against pre-AI human writing across email, social, essays, and chat.">
+<meta property="og:title" content="The Slop Index">
+<meta property="og:description" content="18 frontier models, ranked by how much they write like AI slop, measured against real pre-AI human writing and by human vote.">
+<meta property="og:type" content="website">
+<style>
+  /* Slashy brand: warm, light, sans, black-and-white + one accent (terracotta =
+     "slop heat"). Deliberately single-theme to match the product world. */
+  :root{
+    --bg:#FBFAF9; --card:#FFFFFF; --surface:#F5F3F0; --ink:rgba(0,0,0,.9);
+    --body:#565B64; --muted:rgba(0,0,0,.55); --faint:rgba(0,0,0,.38);
+    --line:#E8E6E1; --divider:#ECEAE5; --dark:#191918;
+    --heat:#C2673E; --heat-soft:#E5C4AE; --clean:#DCD8D1;
+    --sans:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  a{color:var(--ink);text-decoration-color:var(--line);text-underline-offset:2px}
+  h1,h2,h3{color:var(--ink);letter-spacing:-.02em;text-wrap:balance}
+
+  /* ---- hero ---- */
+  header{padding:64px 0 20px;text-align:center}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--heat);font-weight:600;margin-bottom:18px}
+  h1{font-size:clamp(38px,7vw,68px);margin:0;font-weight:700;line-height:1.02}
+  .thesis{font-size:clamp(17px,2.4vw,21px);color:var(--body);max-width:640px;margin:22px auto 0;line-height:1.5}
+  .thesis b{color:var(--ink);font-weight:600}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:40px 0 8px}
+  @media(max-width:640px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px;text-align:left}
+  .stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .stat .v{font-size:23px;font-weight:700;color:var(--ink);margin-top:8px;letter-spacing:-.01em;line-height:1.15}
+  .stat .d{font-size:13px;color:var(--muted);margin-top:5px}
+  .stat.hot{border-color:var(--heat-soft)}
+  .stat.hot .v{color:var(--heat)}
+
+  /* ---- section scaffolding ---- */
+  section{padding:38px 0}
+  .sec-h{font-size:clamp(24px,3.4vw,32px);font-weight:700;margin:0 0 6px}
+  .sec-sub{font-size:15px;color:var(--muted);max-width:660px;margin:0 0 26px;line-height:1.5}
+  .rule{height:1px;background:var(--divider);border:none;margin:0}
+
+  /* ---- domain tabs ---- */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+  .tab{background:var(--card);color:var(--muted);border:1px solid var(--divider);border-radius:20px;
+    font-family:var(--sans);font-size:13px;font-weight:500;padding:7px 16px;cursor:pointer;transition:opacity .15s,transform .1s}
+  .tab:hover{opacity:.82}
+  .tab.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+
+  /* ---- bar chart ---- */
+  .chart{display:flex;align-items:flex-end;gap:8px;overflow-x:auto;padding:14px 2px 0;min-height:340px}
+  .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:0 0 auto;width:56px}
+  .col .val{font-family:var(--mono);font-size:11px;color:var(--body);margin-bottom:6px;font-variant-numeric:tabular-nums}
+  .col.top .val{color:var(--heat);font-weight:700}
+  .bar{width:38px;border-radius:6px 6px 0 0;transition:height .6s cubic-bezier(.2,.7,.2,1),background .3s}
+  .col .logo{margin-top:10px;width:26px;height:26px;border-radius:8px;background:var(--card);border:1px solid var(--line);
+    color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .col .logo svg{width:15px;height:15px;display:block}
+  .col .logo .mono{font-family:var(--mono);font-size:9px;font-weight:600}
+  .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px}
+  .col .rk{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
+  .legend{display:flex;align-items:center;gap:10px;justify-content:center;margin:20px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,var(--clean),var(--heat-soft),var(--heat))}
+
+  /* ---- table ---- */
+  .twrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:720px;font-size:13.5px}
+  thead th{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+    font-weight:500;text-align:right;padding:13px 12px;border-bottom:1px solid var(--divider);white-space:nowrap;position:sticky;top:0;background:var(--card)}
+  thead th.l{text-align:left}
+  tbody td{padding:11px 12px;border-bottom:1px solid var(--divider);text-align:right;
+    font-variant-numeric:tabular-nums;color:var(--body);white-space:nowrap}
+  tbody td.l{text-align:left;color:var(--ink)}
+  tbody tr:last-child td{border-bottom:none}
+  .rank{font-family:var(--mono);color:var(--faint);width:34px}
+  .mlogo{display:inline-flex;vertical-align:-3px;margin-right:8px;color:var(--ink)}
+  .mlogo svg{width:15px;height:15px;display:block}
+  .mlogo .mono{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--muted)}
+  .mname{font-weight:600;color:var(--ink)}
+  .lab{font-size:11px;color:var(--muted);font-weight:400;margin-left:7px}
+  .si{font-family:var(--mono);font-weight:700;color:var(--ink)}
+  .chip{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:11px;
+    background:var(--surface);border:1px solid var(--line);color:var(--body)}
+  .tier{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .pg{font-family:var(--mono);font-size:11px;color:var(--heat);font-weight:600}
+  .axis-hint{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.55}
+  .axis-hint b{color:var(--body);font-weight:600}
+  /* subtle tie-group banding (set inline) */
+  tr[data-tier="0"] td{background:rgba(194,103,62,.05)}
+  tr[data-tier="2"] td{background:rgba(0,0,0,.018)}
+
+  /* ---- scatter ---- */
+  .scatter{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 14px 8px}
+  .scatter svg{width:100%;height:auto;display:block}
+  .sc-note{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
+  .sc-note b{color:var(--ink);font-weight:600}
+  /* crowd / human-preference */
+  .stat.crowd{border-color:var(--line);background:linear-gradient(var(--card),var(--surface))}
+  .stat.crowd .k::after{content:'● live';color:var(--heat);font-size:9px;margin-left:8px;letter-spacing:.04em}
+  .crowd-meta{text-align:center;font-size:13.5px;color:var(--muted);margin-top:18px}
+  .crowd-meta b{color:var(--ink);font-weight:600}
+  .crowd-meta a{font-weight:600}
+
+  /* ---- pangram callout ---- */
+  .callout{background:var(--dark);color:#EDEBE7;border-radius:18px;padding:38px 34px;text-align:center}
+  .callout h2{color:#fff;font-size:clamp(22px,3vw,30px);margin:0 0 12px}
+  .callout p{color:#B9B6B0;max-width:620px;margin:0 auto;font-size:15.5px;line-height:1.6}
+  .callout .big{font-family:var(--mono);font-size:clamp(44px,9vw,84px);font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1;margin:8px 0 14px}
+  .callout .big span{color:var(--heat)}
+
+  /* ---- methodology ---- */
+  .method{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.method{grid-template-columns:1fr}}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+  .mcard h3{font-size:16px;margin:0 0 8px}
+  .mcard p{font-size:13.5px;color:var(--body);margin:0;line-height:1.6}
+  .mcard code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:1px 5px;border-radius:4px;color:var(--ink)}
+  .mcard ul{margin:8px 0 0;padding-left:18px;font-size:13.5px}
+  .mcard li{margin:3px 0}
+
+  /* ---- CTA / footer ---- */
+  .cta{text-align:center;padding:52px 0 12px}
+  .cta h2{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px}
+  .cta p{color:var(--muted);max-width:520px;margin:0 auto 22px}
+  .btn{display:inline-block;background:var(--dark);color:#fff;border-radius:12px;padding:14px 30px;
+    font-size:15px;font-weight:600;text-decoration:none;transition:opacity .15s,transform .12s}
+  .btn:hover{opacity:.88;transform:scale(1.02)}
+  footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint);padding:34px 0 60px;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">A Slashy research report</div>
+    <h1>The Slop Index</h1>
+    <p class="thesis">Every frontier model can write. The question is whether it writes like a
+      <b>person</b>, or like <b>AI slop</b>. We ranked 18 of them two ways: <b>mechanically</b>,
+      against real pre-AI human writing, and by <b>human vote</b> (blind, one pair at a time).</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <hr class="rule">
+
+  <section>
+    <h2 class="sec-h">The board</h2>
+    <p class="sec-sub">Slop Index = how far each model's writing drifts from a pre-AI human baseline
+      (0 = writes like a human). Lower is better. Switch domains to see who slips where.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="chart" id="chart"></div>
+    <div class="legend"><span>cleaner</span><span class="ramp"></span><span>sloppier</span></div>
+  </section>
+
+  <section>
+    <h2 class="sec-h">Every model, every axis</h2>
+    <p class="sec-sub">Ranked 1–18 by overall Slop Index (sloppiest first), with the four axes it's
+      built from broken out. Toward the middle the scores run close, so small gaps in rank mean less
+      than the axis numbers themselves.</p>
+    <div class="twrap">
+      <table>
+        <thead><tr>
+          <th class="l">#</th><th class="l">model</th>
+          <th>slop index</th>
+          <th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
+          <th>$/M</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="axis-hint">
+      <b>Conciseness</b> = length inflation vs a human doing the same task ·
+      <b>Templating</b> = reused openers &amp; skeletons across prompts (homogeneity) ·
+      <b>Rhythm</b> = flattened paragraph-length variance ·
+      <b>Tells</b> = over-used AI words &amp; constructions. Each 0–100; 0 = human-like.</p>
+  </section>
+
+  <section>
+    <h2 class="sec-h">Does paying more buy less slop?</h2>
+    <p class="sec-sub">Price per million tokens (blended) against Slop Index. If cost bought quality,
+      this would trend down-right. It doesn't.</p>
+    <div class="scatter"><svg id="scatter" viewBox="0 0 900 440" role="img" aria-label="price vs slop scatter"></svg></div>
+    <p class="sc-note" id="scnote"></p>
+  </section>
+
+  <section>
+    <h2 class="sec-h">The other axis: what humans actually pick</h2>
+    <p class="sec-sub">The board above is the machine's verdict. This is the crowd's: a live Elo from
+      the companion game, where people flag the sloppier of two blind samples one pair at a time.
+      Least-flagged (cleanest) rises to the top, and it updates as votes come in.</p>
+    <div id="crowdWrap">
+      <div class="chart" id="crowdChart"><div class="lbempty" style="margin:auto;color:var(--muted);align-self:center">loading the crowd vote…</div></div>
+      <div class="crowd-meta" id="crowdMeta"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-h">How it works</h2>
+    <p class="sec-sub">Open method, open data. No LLM judges scoring other LLMs. Every number is a
+      mechanical measurement against writing that provably predates ChatGPT.</p>
+    <div class="method">
+      <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from
+        genuine human writing collected before generative AI existed, so no model can have shaped it:
+        Enron email, a blog-authorship corpus and student essays, archived tweets, and Discord chat.</p></div>
+      <div class="mcard"><h3>Four mechanical axes</h3><p>Conciseness, templating, rhythm, and tells,
+        each computed from token statistics, not opinions. Weights
+        <code>0.35 / 0.30 / 0.20 / 0.15</code>. Models are ranked on the blended index; the four raw
+        axes are published alongside so you can weigh them yourself.</p></div>
+      <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios
+        across four domains, five samples each, for <b>19,928</b> real, unedited generations. Default
+        settings per model (reasoning effort disclosed), no cherry-picking.</p></div>
+      <div class="mcard"><h3>Human preference, in parallel</h3><p>The mechanical index measures slop
+        by rule. The companion game measures it by <b>vote</b>: blind pairwise picks turned into an
+        Elo. Two independent lenses on the same question, and where they agree, the signal is strong.</p></div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Think you can spot the slop?</h2>
+    <p>The board above is the machine's verdict. The companion game collects the crowd's, blind, one
+      pair at a time. Play a round and see if humans agree.</p>
+    <a class="btn" href="/">Play “Spot the Slop” →</a>
+  </div>
+
+  <footer>
+    a research report from <a href="https://slashy.com">Slashy</a>, the email client that saves you
+    time instead of generating more AI slop<br>
+    18 models · 112 scenarios · 19,928 generations · methodology &amp; raw outputs published
+  </footer>
+</div>
+
+<script>
+const DOMAINS=[['overall','Overall'],['email','Email'],['social','Social'],['essay','Essay'],['slack','Chat']];
+// real brand glyphs (inline monochrome SVG, self-contained), monogram fallback
+const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','DeepSeek':'DS',
+  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
+let LOGOS={};
+const logo=lab=>(LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`);
+let DATA=null, dom='overall';
+const $=id=>document.getElementById(id);
+
+// terracotta "heat" ramp: clean grey -> soft -> terracotta, by normalized slop
+function heat(t){ // t in 0..1 (0 clean, 1 sloppy)
+  const stops=[[220,216,209],[229,196,174],[194,103,62]];
+  const seg=t<.5?0:1, f=t<.5?t/.5:(t-.5)/.5;
+  const a=stops[seg],b=stops[seg+1];
+  return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
+}
+const fmt=v=>v==null?'n/a':(+v).toFixed(1);
+
+function tierOf(model){
+  const g=DATA.tie_groups;
+  for(let i=0;i<g.length;i++) if(g[i].includes(model)) return i;
+  return -1;
+}
+
+function renderStats(){
+  const rows=DATA.models;
+  const sloppiest=rows.find(r=>r.rank===1), cleanest=rows.reduce((a,b)=>b.overall<a.overall?b:a);
+  $('stats').innerHTML=[
+    ['hot','Sloppiest (machine)',sloppiest.name,`Slop Index ${fmt(sloppiest.overall)} · ${sloppiest.lab}`],
+    ['','Cleanest (machine)',cleanest.name,`Slop Index ${fmt(cleanest.overall)} · ${cleanest.lab}`],
+    ['crowd','Crowd’s cleanest','<span id="crowdLeader">live</span>','<span id="crowdSub">cast the first vote below</span>']
+  ].map(([c,k,v,d])=>`<div class="stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
+}
+
+function renderTabs(){
+  $('tabs').innerHTML=DOMAINS.map(([k,l])=>
+    `<button class="tab${k===dom?' on':''}" data-k="${k}">${l}</button>`).join('');
+  [...$('tabs').children].forEach(b=>b.onclick=()=>{dom=b.dataset.k;renderTabs();renderChart();});
+}
+
+function renderChart(){
+  const key=dom==='overall'?'overall':dom;
+  const rows=[...DATA.models].filter(r=>r[key]!=null).sort((a,b)=>a[key]-b[key]); // cleanest first
+  const vals=rows.map(r=>r[key]), mn=Math.min(...vals), mx=Math.max(...vals), span=Math.max(1,mx-mn);
+  $('chart').innerHTML=rows.map((r,n)=>{
+    const norm=(r[key]-mn)/span;           // 0 clean .. 1 sloppy
+    const h=Math.round(70+norm*220);
+    return `<div class="col${n===rows.length-1?' top':''}">
+      <div class="val">${fmt(r[key])}</div>
+      <div class="bar" style="height:${h}px;background:${heat(norm)}"></div>
+      <div class="logo" title="${r.lab}">${logo(r.lab)}</div>
+      <div class="nm">${r.name}</div><div class="rk">#${n+1}</div></div>`;
+  }).join('');
+}
+
+function renderTable(){
+  const rows=DATA.models; // already rank-sorted (sloppiest first)
+  $('tbody').innerHTML=rows.map((r,n)=>{
+    return `<tr>
+      <td class="rank l">${n+1}</td>
+      <td class="l"><span class="mlogo">${logo(r.lab)}</span><span class="mname">${r.name}</span><span class="lab">${r.lab}</span></td>
+      <td class="si">${fmt(r.overall)}</td>
+      <td>${fmt(r.conciseness)}</td><td>${fmt(r.templating)}</td>
+      <td>${fmt(r.rhythm)}</td><td>${fmt(r.tells)}</td>
+      <td><span class="chip">$${r.blended==null?'n/a':r.blended}</span></td></tr>`;
+  }).join('');
+}
+
+function renderScatter(){
+  const W=900,H=440,pl=64,pr=24,pt=24,pb=54;
+  const rows=DATA.models.filter(r=>r.blended!=null);
+  const xs=rows.map(r=>Math.log10(r.blended)), ys=rows.map(r=>r.overall);
+  const xmin=Math.min(...xs)-.08, xmax=Math.max(...xs)+.08;
+  const ymin=Math.min(...ys)-2, ymax=Math.max(...ys)+2;
+  const X=x=>pl+(x-xmin)/(xmax-xmin)*(W-pl-pr);
+  const Y=y=>H-pb-(y-ymin)/(ymax-ymin)*(H-pt-pb);
+  let s=`<rect x="0" y="0" width="${W}" height="${H}" fill="none"/>`;
+  // gridlines + x ticks at $1,$3,$10,$30
+  [1,3,10,30].forEach(p=>{const x=X(Math.log10(p));
+    s+=`<line x1="${x}" y1="${pt}" x2="${x}" y2="${H-pb}" stroke="#ECEAE5"/>`;
+    s+=`<text x="${x}" y="${H-pb+22}" font-family="var(--mono)" font-size="12" fill="#565B64" text-anchor="middle">$${p}</text>`;});
+  [25,30,35,40].forEach(v=>{const y=Y(v);
+    s+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="#ECEAE5"/>`;
+    s+=`<text x="${pl-10}" y="${y+4}" font-family="var(--mono)" font-size="12" fill="#565B64" text-anchor="end">${v}</text>`;});
+  s+=`<text x="${(pl+W-pr)/2}" y="${H-8}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle">blended price ($/M tokens, log scale) →</text>`;
+  s+=`<text x="16" y="${(pt+H-pb)/2}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle" transform="rotate(-90 16 ${(pt+H-pb)/2})">Slop Index →</text>`;
+  rows.forEach(r=>{const x=X(Math.log10(r.blended)),y=Y(r.overall);
+    const norm=(r.overall-21)/(41-21);
+    s+=`<circle cx="${x}" cy="${y}" r="6" fill="${heat(norm)}" stroke="#fff" stroke-width="1.5"/>`;
+    s+=`<text x="${x+9}" y="${y+4}" font-family="var(--sans)" font-size="11" fill="#33373E">${r.name}</text>`;});
+  $('scatter').innerHTML=s;
+  $('scnote').innerHTML=`The priciest model on the board (<b>Fable 5, $30/M</b>) is the 2nd-sloppiest; one of the cheapest (<b>MiniMax, $0.75/M</b>) sits near the clean end. Slop doesn't track price.`;
+}
+
+// ---- live crowd vote (Elo from the companion game) ----
+let byId={};
+const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
+async function renderCrowd(){
+  let rows=[], total=0;
+  try{ const d=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json());
+       rows=d.rows||[]; total=d.totalVotes||0; }catch(e){}
+  const el=$('crowdChart');
+  if(!rows.length){
+    el.innerHTML='<div style="margin:auto;align-self:center;color:var(--muted);font-size:14px">No votes yet. <a href="/">Be the first to flag some slop →</a></div>';
+    $('crowdMeta').innerHTML='';
+    const cs=$('crowdSub'); if(cs) cs.textContent='cast the first vote below';
+    return;
+  }
+  const elos=rows.map(r=>+r.elo), mn=Math.min(...elos), mx=Math.max(...elos), span=Math.max(1,mx-mn);
+  el.innerHTML=rows.map((r,n)=>{
+    const hNorm=(+r.elo-mn)/span;            // 1 = highest Elo (most preferred / cleanest)
+    const slopNorm=1-hNorm;                  // 1 = sloppiest (lowest Elo) -> warmest colour
+    const h=Math.round(96+hNorm*250);        // higher rating = taller bar
+    return `<div class="col${n===0?' top':''}">
+      <div class="val">${r.elo}</div>
+      <div class="bar" style="height:${h}px;background:${heat(slopNorm)}"></div>
+      <div class="logo" title="${labOf(r.model)}">${logo(labOf(r.model))}</div>
+      <div class="nm">${nameOf(r.model)}</div><div class="rk">#${n+1}</div></div>`;
+  }).join('');
+  const leader=rows[0], cl=$('crowdLeader'), cs=$('crowdSub');
+  if(cl) cl.textContent=nameOf(leader.model);
+  if(cs) cs.textContent=`from ${total.toLocaleString()} vote${total===1?'':'s'} so far`;
+  // agreement: does the crowd's cleanest sit in the machine's cleanest half?
+  const machineClean=[...DATA.models].sort((a,b)=>a.overall-b.overall).slice(0,9).map(m=>m.id);
+  const agree=machineClean.includes(leader.model);
+  $('crowdMeta').innerHTML=`<b>${total.toLocaleString()}</b> human vote${total===1?'':'s'} and counting · `+
+    (total<40?`still warming up. <a href="/">Add yours →</a>`
+             :`the crowd's cleanest (<b>${nameOf(leader.model)}</b>) is ${agree?'in':'<i>not</i> in'} the machine's cleanest half`);
+}
+
+Promise.all([
+  fetch('/bench.json').then(r=>r.json()),
+  fetch('/logos.json').then(r=>r.json()).catch(()=>({}))
+]).then(([d,lg])=>{
+  DATA=d; LOGOS=lg; d.models.forEach(m=>byId[m.id]=m);
+  renderStats(); renderTabs(); renderChart(); renderTable(); renderScatter(); renderCrowd();
+  setInterval(renderCrowd, 20000);   // keep the crowd panel live
+}).catch(e=>{$('chart').innerHTML='<div style="margin:auto;color:#999">couldn’t load data</div>';});
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "source": "Sentiment140 (Go, Bhayani, Huang; Stanford 2009), collected via Twitter Search API 2009",
+  "source_url": "https://huggingface.co/datasets/stanfordnlp/sentiment140",
+  "seed": 20260114,
+  "min_words": 3,
+  "target_ceiling": 120000,
+  "era_caveat": "2009 tweets are 140-char-limit era (pre-Nov-2017 280-char change); length norms here are a lower-bound/floor reference, not a modern ceiling. 43.5% of the raw corpus (696,753/1,600,000) opens with a leading @handle -- 2009's reply convention -- so this baseline skews toward reply-register bursts, not standalone announcement posts.",
+  "funnel": {
+    "1_raw_tweets": 1600000,
+    "2_kept_not_retweet": 1599874,
+    "3_kept_word_count": 1567112,
+    "4_kept_english": 1550240,
+    "5_kept_not_spam": 1530444,
+    "6_kept_exact_unique": 1505665,
+    "7_kept_near_unique": 1501287,
+    "4_dropped_non_english": 16872,
+    "5_dropped_spam_dump": 19796,
+    "3_dropped_word_count": 32762,
+    "7_dropped_near_dup": 4378,
+    "2_dropped_retweet": 126,
+    "6_dropped_exact_dup": 24779,
+    "8_pre_downsample_total": 1501287,
+    "9_downsampled_to_ceiling": 120000
+  },
+  "final_count": 120000
+}

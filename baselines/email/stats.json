@@ -1,0 +1,235 @@
+{
+  "corpus": "EnronSent v1.0 (Styler 2011), sent/sent_items only, public domain",
+  "source_url": "https://wstyler.ucsd.edu/enronsent/",
+  "domain": "email",
+  "n_messages": 50046,
+  "n_words_total": 5983393,
+  "length_distribution": {
+    "overall": {
+      "p10": 38,
+      "p25": 54,
+      "p50": 90,
+      "p75": 160,
+      "p90": 253,
+      "n": 50046
+    },
+    "by_rough_intent_bucket": {
+      "scheduling": {
+        "p10": 45,
+        "p25": 69,
+        "p50": 120,
+        "p75": 204,
+        "p90": 297,
+        "n": 21795
+      },
+      "decline_negative": {
+        "p10": 45,
+        "p25": 65,
+        "p50": 111,
+        "p75": 192,
+        "p90": 283,
+        "n": 1647
+      },
+      "other": {
+        "p10": 35,
+        "p25": 44,
+        "p50": 66,
+        "p75": 107,
+        "p90": 175,
+        "n": 14511
+      },
+      "update_fyi": {
+        "p10": 37,
+        "p25": 52,
+        "p50": 84,
+        "p75": 137,
+        "p90": 213,
+        "n": 3450
+      },
+      "request": {
+        "p10": 36,
+        "p25": 49,
+        "p50": 77,
+        "p75": 128,
+        "p90": 200,
+        "n": 5878
+      },
+      "thanks": {
+        "p10": 38,
+        "p25": 52,
+        "p50": 87,
+        "p75": 157,
+        "p90": 245,
+        "n": 2765
+      }
+    },
+    "bucket_note": "Cheap regex classifier over the cleaned text, NOT validated against human-labeled categories. Order of precedence: thanks (first line only) > scheduling > decline_negative > request > update_fyi > other. A message can match multiple patterns; only the first in precedence order is used. For rigor, treat 'overall' as authoritative and buckets as directional color."
+  },
+  "tells_per_1k_words": {
+    "finds_you_well": {
+      "pooled_rate_per_1k_words": 0.00016712925258294083,
+      "mean_per_message_rate_per_1k_words": 0.00017225531821069446,
+      "pct_messages_with_hit": 1.9981616912440556e-05,
+      "total_hits": 1
+    },
+    "reach_out": {
+      "pooled_rate_per_1k_words": 0.0016712925258294082,
+      "mean_per_message_rate_per_1k_words": 0.0010208094712946378,
+      "pct_messages_with_hit": 0.00019981616912440555,
+      "total_hits": 10
+    },
+    "circle_back": {
+      "pooled_rate_per_1k_words": 0.02306383685644583,
+      "mean_per_message_rate_per_1k_words": 0.02743857392145165,
+      "pct_messages_with_hit": 0.0027174999000919155,
+      "total_hits": 138
+    },
+    "not_just_but": {
+      "pooled_rate_per_1k_words": 0.0025069387887441123,
+      "mean_per_message_rate_per_1k_words": 0.002754989963848933,
+      "pct_messages_with_hit": 0.0002997242536866083,
+      "total_hits": 15
+    },
+    "delve": {
+      "pooled_rate_per_1k_words": 0.0010027755154976448,
+      "mean_per_message_rate_per_1k_words": 0.000577292183351663,
+      "pct_messages_with_hit": 0.00011988970147464332,
+      "total_hits": 6
+    },
+    "tapestry_testament": {
+      "pooled_rate_per_1k_words": 0.001838421778412349,
+      "mean_per_message_rate_per_1k_words": 0.0018169731807300955,
+      "pct_messages_with_hit": 0.00017983455221196498,
+      "total_hits": 11
+    },
+    "thrilled_excited": {
+      "pooled_rate_per_1k_words": 0.0008356462629147041,
+      "mean_per_message_rate_per_1k_words": 0.0003872939669699396,
+      "pct_messages_with_hit": 9.990808456220277e-05,
+      "total_hits": 5
+    },
+    "elevate_seamless": {
+      "pooled_rate_per_1k_words": 0.030083265464929346,
+      "mean_per_message_rate_per_1k_words": 0.02119288002928394,
+      "pct_messages_with_hit": 0.003376893258202454,
+      "total_hits": 180
+    },
+    "dont_hesitate": {
+      "pooled_rate_per_1k_words": 0.032088816495924634,
+      "mean_per_message_rate_per_1k_words": 0.03572083930814593,
+      "pct_messages_with_hit": 0.0038364704471885863,
+      "total_hits": 192
+    },
+    "let_that_sink": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "signoff": {
+      "pooled_rate_per_1k_words": 0.2610558925345536,
+      "mean_per_message_rate_per_1k_words": 0.3421970341493911,
+      "pct_messages_with_hit": 0.030831634895895774,
+      "total_hits": 1562
+    },
+    "greeting": {
+      "pooled_rate_per_1k_words": 0.6599934184500332,
+      "mean_per_message_rate_per_1k_words": 0.9848494218000565,
+      "pct_messages_with_hit": 0.07826799344602965,
+      "total_hits": 3949
+    },
+    "em_dash": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "any_dash": {
+      "pooled_rate_per_1k_words": 5.409472518352046,
+      "mean_per_message_rate_per_1k_words": 5.415643730438741,
+      "pct_messages_with_hit": 0.305379051272829,
+      "total_hits": 32367
+    },
+    "rule_of_three": {
+      "pooled_rate_per_1k_words": 0.0056823945878199875,
+      "mean_per_message_rate_per_1k_words": 0.0037886802541084114,
+      "pct_messages_with_hit": 0.0006593933581105383,
+      "total_hits": 34
+    },
+    "as_an_ai": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "apology": {
+      "pooled_rate_per_1k_words": 0.1716417424026802,
+      "mean_per_message_rate_per_1k_words": 0.23096500567268655,
+      "pct_messages_with_hit": 0.020041561763177878,
+      "total_hits": 1027
+    }
+  },
+  "tells_note": "pooled_rate_per_1k_words = total regex hits across the whole corpus / total corpus words * 1000 -- this is the denominator for every 'Nx over human baseline' ratio claim. mean_per_message_rate is the average of each message's own per-1k rate (more sensitive to short high-rate outliers); pct_messages_with_hit is the simplest 'how common is this tell at all' number.",
+  "dash_breakdown_per_1k_words": {
+    "em_dash": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "en_dash": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "ascii_double_dash": {
+      "total_hits": 5860,
+      "pooled_rate_per_1k_words": 0.9793774201360332
+    },
+    "spaced_hyphen": {
+      "total_hits": 26507,
+      "pooled_rate_per_1k_words": 4.430095098216012
+    },
+    "any_dash": {
+      "total_hits": 32367,
+      "pooled_rate_per_1k_words": 5.409472518352046
+    }
+  },
+  "dash_breakdown_note": "Report dash usage BY FORM, not just the em-dash glyph -- the email/EnronSent baseline found 0 em dashes in 5.98M words (1999-2002 plain-text email literally could not encode U+2014) but 5.41/1k words in other dash forms combined. A near-zero em_dash rate here may be a typography-era/encoding artifact of THIS corpus, not evidence the writers avoided the rhetorical dash move -- always read em_dash next to any_dash and the individual en_dash/ascii_double_dash/spaced_hyphen rates before concluding anything about em-dash usage.",
+  "mtld": {
+    "mean": 101.49036438619892,
+    "median": 94.13600000000001,
+    "q1": 73.96000000000002,
+    "q3": 118.96137931034484,
+    "n": 50046
+  },
+  "burstiness_sentence_len_std": {
+    "mean": 9.549801530767473,
+    "median": 8.286535263104035,
+    "q1": 6.075908711186061,
+    "q3": 11.284207253207171,
+    "n": 49717
+  },
+  "paragraph_length_variance": {
+    "mean": 22.492895166325443,
+    "median": 18.624953392931992,
+    "q1": 12.537443918119834,
+    "q3": 28.0,
+    "n": 47411
+  },
+  "sentence_length_words": {
+    "mean": 14.177111025812351,
+    "median": 12,
+    "q1": 6,
+    "q3": 19,
+    "n": 422046
+  },
+  "paragraph_length_words": {
+    "mean": 23.664740547381744,
+    "median": 14,
+    "q1": 3,
+    "q3": 33,
+    "n": 252840
+  },
+  "greeting_rate": 0.07826799344602965,
+  "signoff_rate": 0.030831634895895774,
+  "em_dash_per_1k_words": 0.0,
+  "corpus_notes": {}
+}

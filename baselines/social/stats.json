@@ -1,0 +1,189 @@
+{
+  "corpus": "Sentiment140 (Go, Bhayani, Huang; Stanford 2009), collected via Twitter Search API 2009",
+  "source_url": "https://huggingface.co/datasets/stanfordnlp/sentiment140",
+  "domain": "social",
+  "n_messages": 120000,
+  "n_words_total": 1628253,
+  "length_distribution": {
+    "overall": {
+      "p10": 5,
+      "p25": 8,
+      "p50": 13,
+      "p75": 19,
+      "p90": 24,
+      "n": 120000
+    },
+    "by_rough_intent_bucket": null,
+    "bucket_note": "No intent-bucket classifier for this domain -- the email classifier's categories (scheduling/thanks/decline/request/update) are email-register-specific and not meaningful here. 'overall' is the only length-distribution cut for this domain."
+  },
+  "tells_per_1k_words": {
+    "finds_you_well": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "reach_out": {
+      "pooled_rate_per_1k_words": 0.006141551712172494,
+      "mean_per_message_rate_per_1k_words": 0.004330531343274971,
+      "pct_messages_with_hit": 8.333333333333333e-05,
+      "total_hits": 10
+    },
+    "circle_back": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "not_just_but": {
+      "pooled_rate_per_1k_words": 0.0012283103424344988,
+      "mean_per_message_rate_per_1k_words": 0.0008417508417508417,
+      "pct_messages_with_hit": 1.6666666666666667e-05,
+      "total_hits": 2
+    },
+    "delve": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "tapestry_testament": {
+      "pooled_rate_per_1k_words": 0.0012283103424344988,
+      "mean_per_message_rate_per_1k_words": 0.000759144237405107,
+      "pct_messages_with_hit": 1.6666666666666667e-05,
+      "total_hits": 2
+    },
+    "thrilled_excited": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "elevate_seamless": {
+      "pooled_rate_per_1k_words": 0.006141551712172494,
+      "mean_per_message_rate_per_1k_words": 0.0061004965579240945,
+      "pct_messages_with_hit": 8.333333333333333e-05,
+      "total_hits": 10
+    },
+    "dont_hesitate": {
+      "pooled_rate_per_1k_words": 0.0012283103424344988,
+      "mean_per_message_rate_per_1k_words": 0.0008235294117647058,
+      "pct_messages_with_hit": 1.6666666666666667e-05,
+      "total_hits": 2
+    },
+    "let_that_sink": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "signoff": {
+      "pooled_rate_per_1k_words": 0.0036849310273034965,
+      "mean_per_message_rate_per_1k_words": 0.004154842071508738,
+      "pct_messages_with_hit": 5e-05,
+      "total_hits": 6
+    },
+    "greeting": {
+      "pooled_rate_per_1k_words": 0.17749084448178507,
+      "mean_per_message_rate_per_1k_words": 0.21231909762137352,
+      "pct_messages_with_hit": 0.0024083333333333335,
+      "total_hits": 289
+    },
+    "em_dash": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "any_dash": {
+      "pooled_rate_per_1k_words": 2.8619630978723825,
+      "mean_per_message_rate_per_1k_words": 3.0496647389519014,
+      "pct_messages_with_hit": 0.03521666666666667,
+      "total_hits": 4660
+    },
+    "rule_of_three": {
+      "pooled_rate_per_1k_words": 0.0055273965409552445,
+      "mean_per_message_rate_per_1k_words": 0.007189789377289377,
+      "pct_messages_with_hit": 7.5e-05,
+      "total_hits": 9
+    },
+    "as_an_ai": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "apology": {
+      "pooled_rate_per_1k_words": 0.12221687907223264,
+      "mean_per_message_rate_per_1k_words": 0.12671230834738226,
+      "pct_messages_with_hit": 0.0016583333333333333,
+      "total_hits": 199
+    }
+  },
+  "tells_note": "pooled_rate_per_1k_words = total regex hits across the whole corpus / total corpus words * 1000 -- this is the denominator for every 'Nx over human baseline' ratio claim. mean_per_message_rate is the average of each message's own per-1k rate (more sensitive to short high-rate outliers); pct_messages_with_hit is the simplest 'how common is this tell at all' number.",
+  "dash_breakdown_per_1k_words": {
+    "em_dash": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "en_dash": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "ascii_double_dash": {
+      "total_hits": 426,
+      "pooled_rate_per_1k_words": 0.26163010293854827
+    },
+    "spaced_hyphen": {
+      "total_hits": 4234,
+      "pooled_rate_per_1k_words": 2.600332994933834
+    },
+    "any_dash": {
+      "total_hits": 4660,
+      "pooled_rate_per_1k_words": 2.8619630978723825
+    }
+  },
+  "dash_breakdown_note": "Report dash usage BY FORM, not just the em-dash glyph -- the email/EnronSent baseline found 0 em dashes in 5.98M words (1999-2002 plain-text email literally could not encode U+2014) but 5.41/1k words in other dash forms combined. A near-zero em_dash rate here may be a typography-era/encoding artifact of THIS corpus, not evidence the writers avoided the rhetorical dash move -- always read em_dash next to any_dash and the individual en_dash/ascii_double_dash/spaced_hyphen rates before concluding anything about em-dash usage.",
+  "mtld": {
+    "mean": 78.1635494451968,
+    "median": 63.09333333333332,
+    "q1": 37.333333333333336,
+    "q3": 111.99999999999991,
+    "n": 27394
+  },
+  "burstiness_sentence_len_std": {
+    "mean": 2.9269837722136725,
+    "median": 2.5,
+    "q1": 1.247219128924647,
+    "q3": 4.0,
+    "n": 60531
+  },
+  "paragraph_length_variance": {
+    "mean": null,
+    "median": null,
+    "q1": null,
+    "q3": null,
+    "n": 0,
+    "null_reason": "analyze.py's para_variance() splits strictly on a literal '\\n\\n' -- every document in this cleaned corpus has 0 or 1 such boundary, so pstdev() is undefined for all of them (pstdev needs >=2 values) and every row contributes None. This is an honest null, not a bug: the source register/export has no recoverable paragraph structure for this domain (see filter.py docstring for why). Do NOT treat this null as '0 variance' -- it is 'not measurable from this source', a different claim."
+  },
+  "sentence_length_words": {
+    "mean": 7.671862116407601,
+    "median": 6,
+    "q1": 4,
+    "q3": 10,
+    "n": 212237
+  },
+  "paragraph_length_words": {
+    "mean": 13.568775,
+    "median": 13,
+    "q1": 8,
+    "q3": 19,
+    "n": 120000
+  },
+  "greeting_rate": 0.0024083333333333335,
+  "signoff_rate": 5e-05,
+  "em_dash_per_1k_words": 0.0,
+  "corpus_notes": {
+    "era_caveat": "2009 tweets are 140-char-limit era (pre-Nov-2017 280-char change); length norms here are a lower-bound/floor reference, not a modern ceiling. 43.5% of the raw corpus (696,753/1,600,000) opens with a leading @handle -- 2009's reply convention -- so this baseline skews toward reply-register bursts, not standalone announcement posts."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "source": "DISCO (Subash, Kumar, Vadlamani, Chatterjee, Baysal; MSR 2022)",
+  "source_url": "https://zenodo.org/records/5886240",
+  "seed": 20260114,
+  "min_turn_words": 3,
+  "target_ceiling": 250000,
+  "target_band_note": "brief target was 150-250k turns; ceiling is the band's top edge",
+  "gap_max_minutes": 10.0,
+  "funnel": {
+    "1_raw_messages": 1508065,
+    "2_kept_message": 1457752,
+    "2_dropped_url_only": 11670,
+    "2_dropped_code_only": 25740,
+    "3_segmented_turns": 1101833,
+    "4_kept_word_count": 911393,
+    "5_kept_english": 903235,
+    "6_kept_not_spam": 894086,
+    "7_kept_exact_unique": 865659,
+    "8_kept_near_unique": 862202,
+    "4_dropped_word_count": 190440,
+    "6_dropped_spam_logdump": 9149,
+    "5_dropped_non_english": 8158,
+    "2_dropped_bot_command": 12823,
+    "2_dropped_bot_template": 80,
+    "7_dropped_exact_dup": 28427,
+    "8_dropped_near_dup": 3457,
+    "9_pre_downsample_total": 862202,
+    "10_downsampled_to_ceiling": 250000
+  },
+  "final_count": 250000
+}

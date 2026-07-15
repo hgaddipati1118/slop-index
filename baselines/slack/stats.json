@@ -1,0 +1,190 @@
+{
+  "corpus": "DISCO (Subash, Kumar, Vadlamani, Chatterjee, Baysal; MSR 2022)",
+  "source_url": "https://zenodo.org/records/5886240",
+  "domain": "slack",
+  "n_messages": 250000,
+  "n_words_total": 3509540,
+  "length_distribution": {
+    "overall": {
+      "p10": 4,
+      "p25": 6,
+      "p50": 10,
+      "p75": 17,
+      "p90": 28,
+      "n": 250000
+    },
+    "by_rough_intent_bucket": null,
+    "bucket_note": "No intent-bucket classifier for this domain -- the email classifier's categories (scheduling/thanks/decline/request/update) are email-register-specific and not meaningful here. 'overall' is the only length-distribution cut for this domain."
+  },
+  "tells_per_1k_words": {
+    "finds_you_well": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "reach_out": {
+      "pooled_rate_per_1k_words": 0.001994563390073913,
+      "mean_per_message_rate_per_1k_words": 0.0007913450079517422,
+      "pct_messages_with_hit": 2.8e-05,
+      "total_hits": 7
+    },
+    "circle_back": {
+      "pooled_rate_per_1k_words": 0.00028493762715341614,
+      "mean_per_message_rate_per_1k_words": 0.00014285714285714287,
+      "pct_messages_with_hit": 4e-06,
+      "total_hits": 1
+    },
+    "not_just_but": {
+      "pooled_rate_per_1k_words": 0.007978253560295651,
+      "mean_per_message_rate_per_1k_words": 0.0068424451169551495,
+      "pct_messages_with_hit": 0.000112,
+      "total_hits": 28
+    },
+    "delve": {
+      "pooled_rate_per_1k_words": 0.010542692204676397,
+      "mean_per_message_rate_per_1k_words": 0.008563792944910914,
+      "pct_messages_with_hit": 0.000128,
+      "total_hits": 37
+    },
+    "tapestry_testament": {
+      "pooled_rate_per_1k_words": 0.03561720339417702,
+      "mean_per_message_rate_per_1k_words": 0.03954838487332431,
+      "pct_messages_with_hit": 0.00046,
+      "total_hits": 125
+    },
+    "thrilled_excited": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "elevate_seamless": {
+      "pooled_rate_per_1k_words": 0.022225134917966457,
+      "mean_per_message_rate_per_1k_words": 0.01622508995876575,
+      "pct_messages_with_hit": 0.000296,
+      "total_hits": 78
+    },
+    "dont_hesitate": {
+      "pooled_rate_per_1k_words": 0.001994563390073913,
+      "mean_per_message_rate_per_1k_words": 0.001659296714214747,
+      "pct_messages_with_hit": 2.8e-05,
+      "total_hits": 7
+    },
+    "let_that_sink": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "signoff": {
+      "pooled_rate_per_1k_words": 0.0014246881357670806,
+      "mean_per_message_rate_per_1k_words": 0.0007087186715093692,
+      "pct_messages_with_hit": 2e-05,
+      "total_hits": 5
+    },
+    "greeting": {
+      "pooled_rate_per_1k_words": 0.12366293018458259,
+      "mean_per_message_rate_per_1k_words": 0.1587668481836847,
+      "pct_messages_with_hit": 0.001732,
+      "total_hits": 434
+    },
+    "em_dash": {
+      "pooled_rate_per_1k_words": 0.04046114305578509,
+      "mean_per_message_rate_per_1k_words": 0.026898403479068363,
+      "pct_messages_with_hit": 0.000228,
+      "total_hits": 142
+    },
+    "any_dash": {
+      "pooled_rate_per_1k_words": 0.045020145090239744,
+      "mean_per_message_rate_per_1k_words": 0.03001052941996694,
+      "pct_messages_with_hit": 0.00028,
+      "total_hits": 158
+    },
+    "rule_of_three": {
+      "pooled_rate_per_1k_words": 0.0,
+      "mean_per_message_rate_per_1k_words": 0.0,
+      "pct_messages_with_hit": 0.0,
+      "total_hits": 0
+    },
+    "as_an_ai": {
+      "pooled_rate_per_1k_words": 0.0005698752543068323,
+      "mean_per_message_rate_per_1k_words": 0.00028792569659442723,
+      "pct_messages_with_hit": 8e-06,
+      "total_hits": 2
+    },
+    "apology": {
+      "pooled_rate_per_1k_words": 0.09203485357055341,
+      "mean_per_message_rate_per_1k_words": 0.10468396505586272,
+      "pct_messages_with_hit": 0.001284,
+      "total_hits": 323
+    }
+  },
+  "tells_note": "pooled_rate_per_1k_words = total regex hits across the whole corpus / total corpus words * 1000 -- this is the denominator for every 'Nx over human baseline' ratio claim. mean_per_message_rate is the average of each message's own per-1k rate (more sensitive to short high-rate outliers); pct_messages_with_hit is the simplest 'how common is this tell at all' number.",
+  "dash_breakdown_per_1k_words": {
+    "em_dash": {
+      "total_hits": 142,
+      "pooled_rate_per_1k_words": 0.04046114305578509
+    },
+    "en_dash": {
+      "total_hits": 16,
+      "pooled_rate_per_1k_words": 0.004559002034454658
+    },
+    "ascii_double_dash": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "spaced_hyphen": {
+      "total_hits": 0,
+      "pooled_rate_per_1k_words": 0.0
+    },
+    "any_dash": {
+      "total_hits": 158,
+      "pooled_rate_per_1k_words": 0.045020145090239744
+    }
+  },
+  "dash_breakdown_note": "Report dash usage BY FORM, not just the em-dash glyph -- the email/EnronSent baseline found 0 em dashes in 5.98M words (1999-2002 plain-text email literally could not encode U+2014) but 5.41/1k words in other dash forms combined. A near-zero em_dash rate here may be a typography-era/encoding artifact of THIS corpus, not evidence the writers avoided the rhetorical dash move -- always read em_dash next to any_dash and the individual en_dash/ascii_double_dash/spaced_hyphen rates before concluding anything about em-dash usage.",
+  "mtld": {
+    "mean": 75.64059947299546,
+    "median": 63.00000000000002,
+    "q1": 42.000000000000014,
+    "q3": 94.64000000000007,
+    "n": 50548
+  },
+  "burstiness_sentence_len_std": {
+    "mean": 4.59891619496483,
+    "median": 3.39934634239519,
+    "q1": 1.5,
+    "q3": 6.0,
+    "n": 41801
+  },
+  "paragraph_length_variance": {
+    "mean": 3.5903950788074703,
+    "median": 2.5,
+    "q1": 1.0897247358851685,
+    "q3": 4.5,
+    "n": 67289
+  },
+  "sentence_length_words": {
+    "mean": 11.416813868530031,
+    "median": 9,
+    "q1": 5,
+    "q3": 15,
+    "n": 307401
+  },
+  "paragraph_length_words": {
+    "mean": 10.012353040188747,
+    "median": 7,
+    "q1": 4,
+    "q3": 12,
+    "n": 350521
+  },
+  "greeting_rate": 0.001732,
+  "signoff_rate": 2e-05,
+  "em_dash_per_1k_words": 0.04046114305578509,
+  "corpus_notes": {
+    "min_turn_words": 3,
+    "target_band_note": "brief target was 150-250k turns; ceiling is the band's top edge",
+    "gap_max_minutes": 10.0
+  }
+}
