@@ -22,8 +22,9 @@ export default async function handler(req, res) {
     const rows = Object.entries(elo)
       .map(([model, rating]) => ({ model, elo: Number(rating), games: Number(games[model] || 0) }))
       .sort((a, b) => b.elo - a.elo);
+    const counted = Number(tally[`${mode}:counted`] || 0), ties = Number(tally[`${mode}:both`] || 0);
     res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
-    return res.status(200).json({ mode, rows, totalVotes: Number(tally[`${mode}:counted`] || 0), store: true });
+    return res.status(200).json({ mode, rows, totalVotes: counted + ties, decided: counted, ties, store: true });
   } catch (e) {
     return res.status(500).json({ error: String(e).slice(0, 200) });
   }

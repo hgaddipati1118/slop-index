@@ -39,7 +39,8 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
   try {
     const { winner, loser, scenario, mode, attention, fingerprint, dwell,
-            session, pair } = req.body || {};
+            session, pair, outcome } = req.body || {};
+    const tie = outcome === 'both';   // "both are slop" = a draw, no Elo movement
     if (!winner || !loser || winner === loser) {
       return res.status(400).json({ error: 'need distinct winner and loser' });
     }
@@ -118,22 +119,29 @@ export default async function handler(req, res) {
     const expW = 1 / (1 + 10 ** ((el - ew) / 400));
 
     // permanent raw record: includes the salted IP hash + fingerprint so a flood
-    // can be identified and excised at recompute time.
+    // can be identified and excised at recompute time. `o` = outcome ('win' | 'both').
     const raw = JSON.stringify({
-      t: now, m, w: winner, l: loser, s: scenario || null,
+      t: now, m, w: winner, l: loser, o: tie ? 'both' : 'win', s: scenario || null,
       fp, iph, d: serverDwell || null,
     });
 
-    await redis([
-      ['RPUSH', 'votes:log', raw],
+    // "both are slop" is a tie: log + count it, keep both on the board, but move no Elo.
+    const eloOps = tie ? [
+      ['HSET', board, winner, String(Math.round(ew))],
+      ['HSET', board, loser, String(Math.round(el))],
+    ] : [
       ['HSET', board, winner, String(Math.round(ew + K * (1 - expW)))],
       ['HSET', board, loser, String(Math.round(el - K * (1 - expW)))],
+    ];
+    await redis([
+      ['RPUSH', 'votes:log', raw],
+      ...eloOps,
       ['HINCRBY', `games:${m}`, winner, 1],
       ['HINCRBY', `games:${m}`, loser, 1],
-      ['HINCRBY', 'tally', `${m}:counted`, 1],
+      ['HINCRBY', 'tally', tie ? `${m}:both` : `${m}:counted`, 1],
       ...(scenario ? [['HINCRBY', 'scenario_votes', scenario, 1]] : []),
     ]);
-    return res.status(200).json({ ok: true, counted: true });
+    return res.status(200).json({ ok: true, counted: true, tie });
   } catch (e) {
     return res.status(500).json({ error: String(e).slice(0, 200) });
   }
