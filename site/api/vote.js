@@ -125,13 +125,13 @@ export default async function handler(req, res) {
       fp, iph, d: serverDwell || null,
     });
 
-    // "both are slop" is a tie: log + count it, keep both on the board, but move no Elo.
-    const eloOps = tie ? [
-      ['HSET', board, winner, String(Math.round(ew))],
-      ['HSET', board, loser, String(Math.round(el))],
-    ] : [
-      ['HSET', board, winner, String(Math.round(ew + K * (1 - expW)))],
-      ['HSET', board, loser, String(Math.round(el - K * (1 - expW)))],
+    // "both are slop" is a DRAW (standard Elo): each scores 0.5, so the ratings
+    // converge — ~0 change when they're already equal, but a higher-rated model
+    // that only tied a lower one drops toward it. A decisive vote scores 1 / 0.
+    const sW = tie ? 0.5 : 1;                     // score for the "winner" slot
+    const eloOps = [
+      ['HSET', board, winner, String(Math.round(ew + K * (sW - expW)))],
+      ['HSET', board, loser,  String(Math.round(el + K * ((1 - sW) - (1 - expW))))],
     ];
     await redis([
       ['RPUSH', 'votes:log', raw],

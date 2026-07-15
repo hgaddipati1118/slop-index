@@ -284,7 +284,8 @@ function pick(side){
   sendVote({winner,loser,scenario:cur.scenario,dwell:now-shownAt});
 }
 
-// "Both are slop" — a tie. Recorded and counted, but no Elo movement (delta 0).
+// "Both are slop" — a draw. The two ratings converge (0 change when already equal;
+// a higher-rated model that only tied a lower one drops toward it).
 function bothSlop(){
   if($('cards').classList.contains('reveal'))return;
   const now=Date.now();
