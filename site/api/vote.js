@@ -80,6 +80,8 @@ export default async function handler(req, res) {
     const ip = clientIp(req);
     const iph = ipHash(ip);
     const fp = (fingerprint || 'nofp').slice(0, 80);
+    // coarse geo only (2-letter country from Vercel's edge) — not PII, for the live feed
+    const country = (req.headers['x-vercel-ip-country'] || '').slice(0, 2).toUpperCase() || null;
     const now = Date.now();
     const day = new Date(now).toISOString().slice(0, 10);
 
@@ -122,7 +124,7 @@ export default async function handler(req, res) {
     // can be identified and excised at recompute time. `o` = outcome ('win' | 'both').
     const raw = JSON.stringify({
       t: now, m, w: winner, l: loser, o: tie ? 'both' : 'win', s: scenario || null,
-      fp, iph, d: serverDwell || null,
+      fp, iph, c: country, d: serverDwell || null,
     });
 
     // "both are slop" is a DRAW (standard Elo): each scores 0.5, so the ratings
