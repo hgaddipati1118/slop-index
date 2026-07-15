@@ -133,8 +133,9 @@
   .cta h2{font-size:clamp(24px,3.4vw,34px);margin:0 0 10px}
   .cta p{color:var(--muted);max-width:520px;margin:0 auto 22px}
   .btn{display:inline-block;background:var(--dark);color:#fff;border-radius:12px;padding:14px 30px;
-    font-size:15px;font-weight:600;text-decoration:none;transition:opacity .15s,transform .12s}
+    margin:6px;font-size:15px;font-weight:600;text-decoration:none;transition:opacity .15s,transform .12s}
   .btn:hover{opacity:.88;transform:scale(1.02)}
+  .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
   footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--faint);padding:34px 0 60px;line-height:1.9}
 </style>
 </head>
@@ -207,8 +208,10 @@
 
   <section>
     <h2 class="sec-h">How it works</h2>
-    <p class="sec-sub">Open method, open data. No LLM judges scoring other LLMs. Every number is a
-      mechanical measurement against writing that provably predates ChatGPT.</p>
+    <p class="sec-sub">Open method, open data. No LLM judges scoring other LLMs — every number is a
+      mechanical measurement against writing that provably predates ChatGPT. The full harness,
+      scenarios, and all 19,928 raw generations are
+      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">on GitHub →</a></p>
     <div class="method">
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from
         genuine human writing collected before generative AI existed, so no model can have shaped it:
@@ -231,12 +234,14 @@
     <p>The board above is the machine's verdict. The companion game collects the crowd's, blind, one
       pair at a time. Play a round and see if humans agree.</p>
     <a class="btn" href="/">Play “Spot the Slop” →</a>
+    <a class="btn ghost" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">View the code &amp; data →</a>
   </div>
 
   <footer>
     a research report from <a href="https://slashy.com">Slashy</a>, the email client that saves you
     time instead of generating more AI slop<br>
-    18 models · 112 scenarios · 19,928 generations · methodology &amp; raw outputs published
+    18 models · 112 scenarios · 19,928 generations · fully open-sourced
+    <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">on GitHub</a>
   </footer>
 </div>
 
