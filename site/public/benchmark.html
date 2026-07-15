@@ -66,7 +66,8 @@
     color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
   .col .logo svg{width:15px;height:15px;display:block}
   .col .logo .mono{font-family:var(--mono);font-size:9px;font-weight:600}
-  .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px}
+  /* fixed height so 1-line and 2-line names don't stagger the bar baselines */
+  .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px;height:26px;overflow:hidden}
   .col .rk{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
   .legend{display:flex;align-items:center;gap:10px;justify-content:center;margin:20px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
   .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,var(--clean),var(--heat-soft),var(--heat))}
@@ -153,49 +154,51 @@
 
   <section>
     <h2 class="sec-h">The board</h2>
-    <p class="sec-sub">Slop Index = how far each model's writing drifts from a pre-AI human baseline
-      (0 = writes like a human). Lower is better. Switch domains to see who slips where.</p>
+    <p class="sec-sub">Human Score (0–100): how much each model writes like a real person and not a
+      chatbot. 100 = human. It blends the live human vote (40%) with four mechanical axes (15% each).
+      Higher is better. Switch domains to see who slips where.</p>
     <div class="tabs" id="tabs"></div>
     <div class="chart" id="chart"></div>
-    <div class="legend"><span>cleaner</span><span class="ramp"></span><span>sloppier</span></div>
+    <div class="legend"><span>more human</span><span class="ramp"></span><span>more slop</span></div>
   </section>
 
   <section>
     <h2 class="sec-h">Every model, every axis</h2>
-    <p class="sec-sub">Ranked 1–18 by overall Slop Index (sloppiest first), with the four axes it's
-      built from broken out. Toward the middle the scores run close, so small gaps in rank mean less
-      than the axis numbers themselves.</p>
+    <p class="sec-sub">Ranked 1–18 by Human Score (most human first). The score is the human vote (40%)
+      plus four mechanical axes at 15% each, every axis on a 0–100 scale where 100 = writes like a
+      human. Toward the middle the scores run close, so small rank gaps mean less than the axes.</p>
     <div class="twrap">
       <table>
         <thead><tr>
           <th class="l">#</th><th class="l">model</th>
-          <th>slop index</th>
-          <th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
+          <th>human score</th>
+          <th>human 40%</th><th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
           <th>$/M</th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
     <p class="axis-hint">
-      <b>Conciseness</b> = length inflation vs a human doing the same task ·
-      <b>Templating</b> = reused openers &amp; skeletons across prompts (homogeneity) ·
-      <b>Rhythm</b> = flattened paragraph-length variance ·
-      <b>Tells</b> = over-used AI words &amp; constructions. Each 0–100; 0 = human-like.</p>
+      <b>Human</b> = the crowd vote (live Elo, 40%) ·
+      <b>Conciseness</b> = resisting length inflation vs a human on the same task ·
+      <b>Templating</b> = avoiding reused openers &amp; skeletons across prompts ·
+      <b>Rhythm</b> = natural paragraph-length variance ·
+      <b>Tells</b> = avoiding over-used AI words. Each 0–100; 100 = human-like.</p>
   </section>
 
   <section>
-    <h2 class="sec-h">Does paying more buy less slop?</h2>
-    <p class="sec-sub">Price per million tokens (blended) against Slop Index. If cost bought quality,
-      this would trend down-right. It doesn't.</p>
-    <div class="scatter"><svg id="scatter" viewBox="0 0 900 440" role="img" aria-label="price vs slop scatter"></svg></div>
+    <h2 class="sec-h">Does paying more buy a more human writer?</h2>
+    <p class="sec-sub">Blended price per million tokens against the Human Score. If cost bought a more
+      human writer, this would trend up and to the right. It doesn't.</p>
+    <div class="scatter"><svg id="scatter" viewBox="0 0 920 470" role="img" aria-label="price vs human score scatter"></svg></div>
     <p class="sc-note" id="scnote"></p>
   </section>
 
   <section>
-    <h2 class="sec-h">The other axis: what humans actually pick</h2>
-    <p class="sec-sub">The board above is the machine's verdict. This is the crowd's: a live Elo from
-      the companion game, where people flag the sloppier of two blind samples one pair at a time.
-      Least-flagged (cleanest) rises to the top, and it updates as votes come in.</p>
+    <h2 class="sec-h">The human axis (40% of the score)</h2>
+    <p class="sec-sub">The biggest single input to the Human Score is people. This is a live Elo from
+      the companion game, where players flag the sloppier of two blind samples one pair at a time.
+      Least-flagged (most human) rises to the top, and it updates the board above as votes come in.</p>
     <div id="crowdWrap">
       <div class="chart" id="crowdChart"><div class="lbempty" style="margin:auto;color:var(--muted);align-self:center">loading the crowd vote…</div></div>
       <div class="crowd-meta" id="crowdMeta"></div>
@@ -210,10 +213,10 @@
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from
         genuine human writing collected before generative AI existed, so no model can have shaped it:
         Enron email, a blog-authorship corpus and student essays, archived tweets, and Discord chat.</p></div>
-      <div class="mcard"><h3>Four mechanical axes</h3><p>Conciseness, templating, rhythm, and tells,
-        each computed from token statistics, not opinions. Weights
-        <code>0.35 / 0.30 / 0.20 / 0.15</code>. Models are ranked on the blended index; the four raw
-        axes are published alongside so you can weigh them yourself.</p></div>
+      <div class="mcard"><h3>Five axes, one score</h3><p>Human vote <code>40%</code> plus four
+        mechanical axes — conciseness, templating, rhythm, tells — at <code>15%</code> each. Every
+        axis is put on a 0–100 human-likeness scale (100 = writes like a human) before blending, so
+        each one carries real spread and you can see exactly where a model wins or loses.</p></div>
       <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios
         across four domains, five samples each, for <b>19,928</b> real, unedited generations. Default
         settings per model (reasoning effort disclosed), no cherry-picking.</p></div>
@@ -255,20 +258,40 @@ function heat(t){ // t in 0..1 (0 clean, 1 sloppy)
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
 const fmt=v=>v==null?'n/a':(+v).toFixed(1);
+const r0=v=>v==null?'—':Math.round(v);
+const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells:0.15};
 
-function tierOf(model){
-  const g=DATA.tie_groups;
-  for(let i=0;i<g.length;i++) if(g[i].includes(model)) return i;
-  return -1;
+// Turn every axis into a 0-100 HUMAN-LIKENESS score (100 = writes most like a human)
+// and blend them. Mechanical axes: min-max invert the raw slop (cleanest -> 100).
+// Human axis: min-max the live crowd Elo (neutral 50 for models with no votes yet).
+function computeScores(crowd){
+  const rows=DATA.models;
+  const elo={}; ((crowd&&crowd.rows)||[]).forEach(r=>elo[r.model]=+r.elo);
+  const inv=key=>{const vs=rows.map(m=>m[key]); const mn=Math.min(...vs),mx=Math.max(...vs),sp=Math.max(1e-9,mx-mn);
+    return m=>100*(mx-m[key])/sp;};                 // lowest slop -> 100
+  const nC=inv('conciseness'),nT=inv('templating'),nR=inv('rhythm'),nTe=inv('tells');
+  const nd={}; ['email','social','essay','slack'].forEach(d=>nd[d]=inv(d));
+  const evs=Object.values(elo);
+  const emn=evs.length?Math.min(...evs):1500, emx=evs.length?Math.max(...evs):1500, esp=Math.max(1e-9,emx-emn);
+  rows.forEach(m=>{
+    m.hHuman  = (m.id in elo && evs.length>1) ? 100*(elo[m.id]-emn)/esp : 50;
+    m.hConcise=nC(m); m.hTempl=nT(m); m.hRhythm=nR(m); m.hTells=nTe(m);
+    ['email','social','essay','slack'].forEach(d=>m['h_'+d]=nd[d](m));
+    m.score = WEIGHTS.human*m.hHuman
+            + WEIGHTS.conciseness*m.hConcise + WEIGHTS.templating*m.hTempl
+            + WEIGHTS.rhythm*m.hRhythm + WEIGHTS.tells*m.hTells;
+  });
 }
 
 function renderStats(){
-  const rows=DATA.models;
-  const sloppiest=rows.find(r=>r.rank===1), cleanest=rows.reduce((a,b)=>b.overall<a.overall?b:a);
+  const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
+  const best=rows[0], worst=rows[rows.length-1];
+  const crowd=window.__crowd||{rows:[],totalVotes:0};
+  const leader=(crowd.rows&&crowd.rows[0])?nameOf(crowd.rows[0].model):'live';
   $('stats').innerHTML=[
-    ['hot','Sloppiest (machine)',sloppiest.name,`Slop Index ${fmt(sloppiest.overall)} · ${sloppiest.lab}`],
-    ['','Cleanest (machine)',cleanest.name,`Slop Index ${fmt(cleanest.overall)} · ${cleanest.lab}`],
-    ['crowd','Crowd’s cleanest','<span id="crowdLeader">live</span>','<span id="crowdSub">cast the first vote below</span>']
+    ['','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
+    ['hot','Most AI slop',worst.name,`Human Score ${r0(worst.score)} · ${worst.lab}`],
+    ['crowd','Crowd favourite',`<span id="crowdLeader">${leader}</span>`,`<span id="crowdSub">from ${(crowd.totalVotes||0).toLocaleString()} votes</span>`]
   ].map(([c,k,v,d])=>`<div class="stat ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
 }
 
@@ -279,66 +302,74 @@ function renderTabs(){
 }
 
 function renderChart(){
-  const key=dom==='overall'?'overall':dom;
-  const rows=[...DATA.models].filter(r=>r[key]!=null).sort((a,b)=>a[key]-b[key]); // cleanest first
-  const vals=rows.map(r=>r[key]), mn=Math.min(...vals), mx=Math.max(...vals), span=Math.max(1,mx-mn);
+  const key=dom==='overall'?'score':('h_'+dom);   // 0-100 human-likeness (100 = human)
+  const rows=[...DATA.models].filter(r=>r[key]!=null).sort((a,b)=>b[key]-a[key]); // best (most human) first
   $('chart').innerHTML=rows.map((r,n)=>{
-    const norm=(r[key]-mn)/span;           // 0 clean .. 1 sloppy
-    const h=Math.round(70+norm*220);
-    return `<div class="col${n===rows.length-1?' top':''}">
-      <div class="val">${fmt(r[key])}</div>
-      <div class="bar" style="height:${h}px;background:${heat(norm)}"></div>
+    const v=r[key];
+    const t=(100-v)/100;                   // colour: grey (human) -> terracotta (slop)
+    const h=Math.round(60+(v/100)*285);    // bar height tracks the 0-100 score
+    return `<div class="col${n===0?' top':''}">
+      <div class="val">${r0(v)}</div>
+      <div class="bar" style="height:${h}px;background:${heat(t)}"></div>
       <div class="logo" title="${r.lab}">${logo(r.lab)}</div>
       <div class="nm">${r.name}</div><div class="rk">#${n+1}</div></div>`;
   }).join('');
 }
 
 function renderTable(){
-  const rows=DATA.models; // already rank-sorted (sloppiest first)
+  const rows=[...DATA.models].sort((a,b)=>b.score-a.score);   // most human first
   $('tbody').innerHTML=rows.map((r,n)=>{
     return `<tr>
       <td class="rank l">${n+1}</td>
       <td class="l"><span class="mlogo">${logo(r.lab)}</span><span class="mname">${r.name}</span><span class="lab">${r.lab}</span></td>
-      <td class="si">${fmt(r.overall)}</td>
-      <td>${fmt(r.conciseness)}</td><td>${fmt(r.templating)}</td>
-      <td>${fmt(r.rhythm)}</td><td>${fmt(r.tells)}</td>
+      <td class="si">${r0(r.score)}</td>
+      <td>${r0(r.hHuman)}</td>
+      <td>${r0(r.hConcise)}</td><td>${r0(r.hTempl)}</td><td>${r0(r.hRhythm)}</td><td>${r0(r.hTells)}</td>
       <td><span class="chip">$${r.blended==null?'n/a':r.blended}</span></td></tr>`;
   }).join('');
 }
 
 function renderScatter(){
-  const W=900,H=440,pl=64,pr=24,pt=24,pb=54;
+  const W=920,H=470,pl=52,pr=118,pt=22,pb=54;
   const rows=DATA.models.filter(r=>r.blended!=null);
-  const xs=rows.map(r=>Math.log10(r.blended)), ys=rows.map(r=>r.overall);
+  const xs=rows.map(r=>Math.log10(r.blended)), ys=rows.map(r=>r.score);
   const xmin=Math.min(...xs)-.08, xmax=Math.max(...xs)+.08;
-  const ymin=Math.min(...ys)-2, ymax=Math.max(...ys)+2;
+  const ymin=Math.max(0,Math.min(...ys)-6), ymax=Math.min(100,Math.max(...ys)+6);
   const X=x=>pl+(x-xmin)/(xmax-xmin)*(W-pl-pr);
   const Y=y=>H-pb-(y-ymin)/(ymax-ymin)*(H-pt-pb);
-  let s=`<rect x="0" y="0" width="${W}" height="${H}" fill="none"/>`;
-  // gridlines + x ticks at $1,$3,$10,$30
+  let s='';
   [1,3,10,30].forEach(p=>{const x=X(Math.log10(p));
     s+=`<line x1="${x}" y1="${pt}" x2="${x}" y2="${H-pb}" stroke="#ECEAE5"/>`;
     s+=`<text x="${x}" y="${H-pb+22}" font-family="var(--mono)" font-size="12" fill="#565B64" text-anchor="middle">$${p}</text>`;});
-  [25,30,35,40].forEach(v=>{const y=Y(v);
+  const yt=[]; for(let v=Math.ceil(ymin/20)*20; v<=ymax; v+=20) yt.push(v);
+  yt.forEach(v=>{const y=Y(v);
     s+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="#ECEAE5"/>`;
     s+=`<text x="${pl-10}" y="${y+4}" font-family="var(--mono)" font-size="12" fill="#565B64" text-anchor="end">${v}</text>`;});
   s+=`<text x="${(pl+W-pr)/2}" y="${H-8}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle">blended price ($/M tokens, log scale) →</text>`;
-  s+=`<text x="16" y="${(pt+H-pb)/2}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle" transform="rotate(-90 16 ${(pt+H-pb)/2})">Slop Index →</text>`;
-  rows.forEach(r=>{const x=X(Math.log10(r.blended)),y=Y(r.overall);
-    const norm=(r.overall-21)/(41-21);
-    s+=`<circle cx="${x}" cy="${y}" r="6" fill="${heat(norm)}" stroke="#fff" stroke-width="1.5"/>`;
-    s+=`<text x="${x+9}" y="${y+4}" font-family="var(--sans)" font-size="11" fill="#33373E">${r.name}</text>`;});
+  s+=`<text x="14" y="${(pt+H-pb)/2}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle" transform="rotate(-90 14 ${(pt+H-pb)/2})">Human Score →</text>`;
+  // greedy vertical de-collision so labels don't cover each other or the dots
+  const pts=rows.map(r=>({r,x:X(Math.log10(r.blended)),y:Y(r.score)})).sort((a,b)=>a.y-b.y);
+  const used=[];
+  pts.forEach(p=>{
+    let ly=p.y, g=0; while(used.some(u=>Math.abs(u-ly)<12.5) && g<60){ ly+=12.5; g++; }
+    used.push(ly);
+    const room=(W-pr)-p.x>64, lx=room?p.x+9:p.x-9, anc=room?'start':'end';
+    const t=(100-p.r.score)/100;
+    if(Math.abs(ly-p.y)>2) s+=`<line x1="${p.x}" y1="${p.y}" x2="${room?p.x+6:p.x-6}" y2="${ly-3}" stroke="#DDD8D1" stroke-width="1"/>`;
+    s+=`<circle cx="${p.x}" cy="${p.y}" r="5.5" fill="${heat(t)}" stroke="#fff" stroke-width="1.5"/>`;
+    s+=`<text x="${lx}" y="${ly}" font-family="var(--sans)" font-size="11" fill="#33373E" text-anchor="${anc}">${p.r.name}</text>`;
+  });
   $('scatter').innerHTML=s;
-  $('scnote').innerHTML=`The priciest model on the board (<b>Fable 5, $30/M</b>) is the 2nd-sloppiest; one of the cheapest (<b>MiniMax, $0.75/M</b>) sits near the clean end. Slop doesn't track price.`;
+  const pricey=[...rows].sort((a,b)=>b.blended-a.blended)[0];
+  const bestCheap=[...rows].filter(r=>r.blended<=3).sort((a,b)=>b.score-a.score)[0];
+  $('scnote').innerHTML=`If cost bought quality this would trend up and to the right — it doesn't. The priciest model on the board (<b>${pricey.name}, $${pricey.blended}/M</b>) sits well below cheaper ones like <b>${bestCheap.name}</b> ($${bestCheap.blended}/M).`;
 }
 
 // ---- live crowd vote (Elo from the companion game) ----
 let byId={};
 const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
-async function renderCrowd(){
-  let rows=[], total=0;
-  try{ const d=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json());
-       rows=d.rows||[]; total=d.totalVotes||0; }catch(e){}
+function renderCrowdChart(crowd){
+  let rows=(crowd&&crowd.rows)||[], total=(crowd&&crowd.totalVotes)||0;
   const el=$('crowdChart');
   if(!rows.length){
     el.innerHTML='<div style="margin:auto;align-self:center;color:var(--muted);font-size:14px">No votes yet. <a href="/">Be the first to flag some slop →</a></div>';
@@ -360,12 +391,18 @@ async function renderCrowd(){
   const leader=rows[0], cl=$('crowdLeader'), cs=$('crowdSub');
   if(cl) cl.textContent=nameOf(leader.model);
   if(cs) cs.textContent=`from ${total.toLocaleString()} vote${total===1?'':'s'} so far`;
-  // agreement: does the crowd's cleanest sit in the machine's cleanest half?
-  const machineClean=[...DATA.models].sort((a,b)=>a.overall-b.overall).slice(0,9).map(m=>m.id);
-  const agree=machineClean.includes(leader.model);
   $('crowdMeta').innerHTML=`<b>${total.toLocaleString()}</b> human vote${total===1?'':'s'} and counting · `+
-    (total<40?`still warming up. <a href="/">Add yours →</a>`
-             :`the crowd's cleanest (<b>${nameOf(leader.model)}</b>) is ${agree?'in':'<i>not</i> in'} the machine's cleanest half`);
+    (total<200?`the human axis is <b>40% of the score above</b> and still warming up. <a href="/">Add yours →</a>`
+             :`this feeds 40% of the Human Score. <a href="/">Add yours →</a>`);
+}
+
+// one live refresh: pull the crowd Elo, recompute the composite, redraw everything
+async function refresh(){
+  let crowd={rows:[],totalVotes:0};
+  try{ crowd=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json()); }catch(e){}
+  window.__crowd=crowd;
+  computeScores(crowd);
+  renderStats(); renderChart(); renderTable(); renderScatter(); renderCrowdChart(crowd);
 }
 
 Promise.all([
@@ -373,8 +410,8 @@ Promise.all([
   fetch('/logos.json').then(r=>r.json()).catch(()=>({}))
 ]).then(([d,lg])=>{
   DATA=d; LOGOS=lg; d.models.forEach(m=>byId[m.id]=m);
-  renderStats(); renderTabs(); renderChart(); renderTable(); renderScatter(); renderCrowd();
-  setInterval(renderCrowd, 20000);   // keep the crowd panel live
+  renderTabs(); refresh();
+  setInterval(refresh, 20000);   // human axis is live
 }).catch(e=>{$('chart').innerHTML='<div style="margin:auto;color:#999">couldn’t load data</div>';});
 </script>
 </body>

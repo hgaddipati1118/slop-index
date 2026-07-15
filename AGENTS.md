@@ -77,9 +77,15 @@ python harness/score.py       --run-id full-merged     # per-domain + overall Sl
 python harness/rank_spread.py --run-id full-merged     # 500-bootstrap rank ranges + tie groups
 ```
 
-`runs/full-merged-score.log` is the committed output of exactly these two commands. Slop Index
-weights are `conciseness .35 / templating .30 / rhythm .20 / tells .15`; the ranking is
-weight-sensitive, so publish the four axes + tie groups, not one false-precision number.
+`runs/full-merged-score.log` is the committed output of exactly these two commands. This is the
+**mechanical** layer: four axes of raw slop distance from the human baseline (0 = human-like).
+
+**The published Human Score** (on the site) is a composite computed live in `site/public/benchmark.html`:
+each axis is put on a 0–100 human-likeness scale (100 = writes like a human), then blended
+**human vote 40% + conciseness/templating/rhythm/tells 15% each**. The human axis is the live crowd
+Elo from the game, so the public board updates as votes arrive; `score.py` above is the frozen
+mechanical 60%. Keep both — the mechanical scorer is fully reproducible offline; the human 40% needs
+real vote volume before it's meaningful.
 
 ## 4. (Optional) detector cross-check
 
