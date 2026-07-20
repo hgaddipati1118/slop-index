@@ -38,16 +38,17 @@
   .doc code{font-family:var(--mono);font-size:13.5px;background:var(--surface);padding:1.5px 6px;border-radius:5px;color:var(--ink)}
   .doc ul{margin:12px 0;padding-left:20px}
   .doc li{font-size:15.5px;color:var(--ink-2);line-height:1.6;margin:7px 0}
-  .doc-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-top:52px}
+  .doc-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:52px}
   .doc-eyebrow + h2{margin-top:6px}
 
   /* formula callout */
-  .formula{background:var(--dark);border-radius:18px;padding:32px 30px;margin:26px 0;text-align:center}
-  .formula .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8A8680;margin-bottom:16px}
-  .formula .eq{font-family:var(--mono);font-size:clamp(14px,2.4vw,18px);color:#EDEBE7;line-height:2;font-weight:500}
-  .formula .eq b{color:#fff}
-  .formula .h40{color:#fff;font-weight:700}
-  .formula .note{font-size:12.5px;color:#9A968F;margin-top:16px;line-height:1.5}
+  /* the score, set as a displayed equation between two hairlines - not a dark capsule */
+  .formula{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:24px 2px 22px;margin:26px 0;text-align:left}
+  .formula .lab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .formula .eq{font-family:var(--mono);font-size:clamp(14px,2.4vw,18px);color:var(--ink);line-height:1.9;font-weight:500}
+  .formula .eq b{color:var(--ink);font-weight:700}
+  .formula .h40{color:var(--blue);font-weight:700}
+  .formula .note{font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.55;max-width:60ch}
 
   /* axis grid */
   .axes{display:grid;grid-template-columns:1fr 1fr;gap:0 44px;margin:24px 0 8px}
@@ -100,7 +101,7 @@
         <defs><linearGradient id="sg1" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
           <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
       </svg>
-      <span class="wm">The Slop Index</span>
+      <span class="wm">The Slop Index</span><span class="byl">by <span class="sl">Slashy</span></span>
     </a>
     <div class="nav-links">
       <a href="/leaderboard">Leaderboard</a>
@@ -136,11 +137,11 @@
   <div class="formula">
     <div class="lab">Human Score</div>
     <div class="eq">
-      <span class="h40">0.40 · human vote</span><br>
+      <span class="h40">0.40 · the arena</span><br>
       + 0.15 · conciseness + 0.15 · templating<br>
       + 0.15 · rhythm + 0.15 · tells
     </div>
-    <div class="note">Each axis is first normalised to its own 0–100 human-likeness scale, then blended. The human vote
+    <div class="note">Each axis is first normalised to its own 0–100 human-likeness scale, then blended. The arena vote
       is a live crowd Elo; the other four are mechanical measurements against pre-AI human writing.</div>
   </div>
 
