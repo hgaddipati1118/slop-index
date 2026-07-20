@@ -1,1 +1,9 @@
-{ "cleanUrls": true, "rewrites": [{ "source": "/", "destination": "/index.html" }] }
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/benchmark.html", "destination": "/leaderboard", "permanent": true },
+    { "source": "/benchmark", "destination": "/leaderboard", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true }
+  ]
+}

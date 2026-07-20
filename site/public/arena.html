@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Arena — Spot the Slop · The Slop Index</title>
+<meta name="description" content="Two AIs got the same task. One wrote it sloppier. Can you spot which? Blind pairwise voting that powers the live human axis of The Slop Index.">
+<meta property="og:title" content="Spot the Slop — The Slop Index Arena">
+<meta property="og:description" content="Two AIs, same task, one sloppier. Flag it. Your blind votes power 40% of the benchmark.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<style>
+  .arena-wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  .ahead{padding:44px 0 0;text-align:center}
+  .ahead .eyebrow{display:inline-block;margin-bottom:14px}
+  .ahead h1{font-family:var(--sans);font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1}
+  .tag{font-size:15.5px;color:var(--muted);margin:14px auto 0;max-width:480px;line-height:1.45}
+
+  .domainbadge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    border-radius:20px;padding:4px 13px;font-weight:500}
+  .badgewrap{text-align:center;margin:34px 0 12px}
+  .domainbadge .ico{margin-right:6px}
+  #question{text-align:center;font-family:var(--sans);font-size:clamp(23px,3.9vw,31px);font-weight:700;
+    letter-spacing:-.02em;color:var(--ink);margin:0 auto 10px;max-width:640px;line-height:1.18}
+  .setup{text-align:center;font-size:13.5px;color:var(--muted);margin:0 auto 18px;max-width:560px;line-height:1.5}
+  .setup b{color:var(--body);font-weight:600}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.cards{grid-template-columns:1fr;gap:22px}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 22px 20px;
+    cursor:pointer;transition:opacity .15s,transform .12s,border-color .12s,box-shadow .15s;position:relative;
+    white-space:pre-wrap;font-size:15.5px;line-height:1.64;min-height:150px;color:#33373E}
+  .card:hover{border-color:var(--dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(29,27,23,.07)}
+  .card:focus-visible{outline:2px solid var(--dark);outline-offset:2px}
+  .card .num{position:absolute;top:-13px;left:20px;width:26px;height:26px;display:flex;
+    align-items:center;justify-content:center;background:var(--dark);color:#fff;font-family:var(--mono);
+    font-size:12px;font-weight:600;border-radius:50%;box-shadow:0 0 0 4px var(--bg)}
+  .kbd{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center;margin-top:14px}
+  .kbd b{color:var(--body);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .reveal .card{cursor:default}
+  .reveal .card:hover{transform:none;opacity:1}
+  .tagname{position:absolute;bottom:-11px;right:14px;background:var(--surface);border:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;color:var(--body)}
+  .tagname:empty{display:none}
+  .txt code{font-family:var(--mono);font-size:13px;background:var(--surface);padding:1px 4px;border-radius:3px}
+  .picked{border-color:var(--dark)!important}
+  .picked .tagname{border-color:var(--dark);color:var(--ink);font-weight:600}
+  .next{display:block;margin:22px auto 0;background:var(--dark);color:#fff;border:none;border-radius:11px;
+    font-family:var(--sans);font-size:14px;font-weight:600;padding:12px 28px;cursor:pointer;transition:opacity .15s,transform .12s}
+  .next:hover{opacity:.86;transform:scale(1.02)}
+  .both{display:block;margin:0 auto 22px;background:var(--card);color:var(--muted);
+    border:1px solid var(--divider);border-radius:11px;font-family:var(--sans);font-size:13.5px;
+    font-weight:500;padding:10px 22px;cursor:pointer;transition:opacity .15s,transform .12s,border-color .12s,color .12s}
+  .both:hover{border-color:var(--dark);color:var(--body);transform:scale(1.01)}
+  .me{font-size:13px;color:var(--muted);text-align:center;margin-top:20px}
+  .me b{color:var(--ink);font-weight:600}
+
+  .lb{margin:52px 0 10px}
+  .lb h2{font-family:var(--sans);font-size:23px;text-align:center;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin:0 0 4px}
+  .lb .sub{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:16px}
+  .lbtabs{display:flex;gap:8px;justify-content:center;margin:0 0 18px}
+  .lbtab{background:var(--card);color:var(--muted);border:1px solid var(--divider);border-radius:20px;
+    font-family:var(--sans);font-size:12.5px;font-weight:500;padding:6px 16px;cursor:pointer;transition:opacity .15s}
+  .lbtab:hover{opacity:.82}
+  .lbtab.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .lbchart{display:flex;align-items:flex-end;justify-content:flex-start;gap:7px;overflow-x:auto;padding:10px 2px 0;min-height:286px}
+  .lbcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:0 0 auto;width:56px}
+  .lbval{font-family:var(--mono);font-size:11px;color:var(--body);margin-bottom:6px;font-variant-numeric:tabular-nums}
+  .lbbar{width:36px;border-radius:7px 7px 0 0;background:var(--surface);border:1px solid var(--line);
+    border-bottom:none;transition:height .5s cubic-bezier(.2,.7,.2,1)}
+  .lbcol.top .lbbar{background:var(--dark);border-color:var(--dark)}
+  .lbcol.top .lbval{color:var(--ink);font-weight:600}
+  .lblogo{margin-top:9px;width:25px;height:25px;border-radius:8px;background:var(--card);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--ink)}
+  .lblogo svg{width:14px;height:14px;display:block}
+  .lblogo:empty{display:none}
+  .lbname{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:60px;height:26px;overflow:hidden}
+  .lbrank{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
+  .lbempty{margin:0 auto;color:var(--muted);font-size:13px;align-self:center}
+  .tlogo{display:inline-flex;vertical-align:-3px;margin-right:8px;color:var(--ink)}
+  .tlogo svg{width:14px;height:14px;display:block}
+  .tlogo .mono{font-family:var(--mono);font-size:9px;font-weight:600;color:var(--muted)}
+  .tlogo:empty{display:none}
+  table{border-collapse:collapse;width:100%;max-width:520px;margin:0 auto;font-size:14px}
+  th,td{padding:9px 12px;border-bottom:1px solid var(--divider);text-align:left}
+  th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  td{color:var(--ink)}
+  td.n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--body)}
+  .lbmore{text-align:center;margin:24px 0 0}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg1)"/>
+        <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg1)"/>
+        <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg1)"/>
+        <defs><linearGradient id="sg1" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
+      </svg>
+      <span class="wm">The Slop Index</span>
+    </a>
+    <div class="nav-links">
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/arena" class="on">Arena</a>
+      <a href="/methodology">Method</a>
+      <a class="gh" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">GitHub</a>
+      <a class="nav-cta" href="/leaderboard">See the board</a>
+    </div>
+  </div>
+</nav>
+
+<div class="arena-wrap">
+  <header class="ahead">
+    <span class="eyebrow">The arena</span>
+    <h1>Spot the Slop</h1>
+    <div class="tag">Two AIs got the same task. One wrote it sloppier. Can you spot which?</div>
+  </header>
+
+  <div class="badgewrap"><span class="domainbadge" id="domainbadge"></span></div>
+  <div id="question">Which feels more like AI slop?</div>
+  <div class="setup" id="setup"></div>
+  <button class="both" id="bothbtn">Both are slop</button>
+  <div class="cards" id="cards">
+    <div class="card" id="ca" tabindex="0" role="button"><span class="num">1</span><span class="txt"></span><span class="tagname"></span></div>
+    <div class="card" id="cb" tabindex="0" role="button"><span class="num">2</span><span class="txt"></span><span class="tagname"></span></div>
+  </div>
+  <button class="next" id="next" style="display:none">Next &rarr;</button>
+  <div class="kbd">tap <b>1</b> or <b>2</b> to flag the slop &middot; <b>3</b> if both are &middot; tap again for the next pair</div>
+
+  <div class="me" id="me"></div>
+  <!-- id must NOT be "turnstile": a global named element shadows window.turnstile
+       and stops Cloudflare's API from installing (widget never renders, no session). -->
+  <div id="cfslot" style="display:flex;justify-content:center;margin-top:14px"></div>
+
+  <div class="lb">
+    <h2>Which model writes the least slop?</h2>
+    <div class="sub" id="lbsub">crowd-voted &middot; least AI slop at the top &middot; the more a model gets flagged, the lower it sinks</div>
+    <div class="lbtabs">
+      <button class="lbtab on" id="tabChart">Chart</button>
+      <button class="lbtab" id="tabTable">Table</button>
+    </div>
+    <div id="lbchart" class="lbchart"><div class="lbempty">loading…</div></div>
+    <table id="lbtable" style="display:none"><thead><tr><th>#</th><th>model</th><th class="n">elo</th><th class="n">votes</th></tr></thead>
+      <tbody id="lbbody"><tr><td colspan="4" style="text-align:center;color:var(--muted)">loading…</td></tr></tbody>
+    </table>
+    <div class="lbmore"><a class="btn ghost sm" href="/leaderboard">See the full benchmark &amp; every axis <span class="arr">→</span></a></div>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-brand">
+      <div class="b">
+        <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg2)"/>
+          <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg2)"/>
+          <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg2)"/>
+          <defs><linearGradient id="sg2" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
+        </svg>
+        <span class="wm">The Slop Index</span>
+      </div>
+      <p>Models write, humans judge, nobody is told which is which. Every message is real, unedited model output.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Explore</h4>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/arena">Play the arena</a>
+      <a href="/methodology">Methodology</a>
+      <a href="/stats">Live votes</a>
+    </div>
+    <div class="foot-col">
+      <h4>Open source</h4>
+      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Code &amp; data</a>
+      <a href="https://slashy.com" target="_blank" rel="noopener">Slashy</a>
+    </div>
+  </div>
+  <div class="foot-legal">18 models · 112 scenarios · 19,928 generations · fully open-sourced. A research project from Slashy.</div>
+</footer>
+
+<script>
+let PAIRS=[], PROMPTS={}, i=0, voted=0, cur=null, swap=false, shownAt=0, lastVote=0;
+const mode='v1';
+const $=id=>document.getElementById(id);
+const MIN_GAP=1500;
+function fingerprint(){
+  let id=localStorage.getItem('slopFp');
+  if(!id){id=Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2);localStorage.setItem('slopFp',id);}
+  const sig=[navigator.userAgent,navigator.language,screen.width+'x'+screen.height,new Date().getTimezoneOffset()].join('|');
+  let h=0; for(let k=0;k<sig.length;k++){h=(h*31+sig.charCodeAt(k))|0;}
+  return id+'.'+(h>>>0).toString(36);
+}
+const FP=fingerprint();
+function md(t){
+  let s=(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+     .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1<i>$2</i>')
+     .replace(/`([^`]+)`/g,'<code>$1</code>');
+  return s;
+}
+function questionFor(dom){
+  return {email:'Which email feels more like AI slop?',slack:'Which message feels more like AI slop?',
+          social:'Which post feels more like AI slop?',essay:'Which essay feels more like AI slop?'}[dom]||'Which feels more like AI slop?';
+}
+
+let SESSION=null, PAIRTOKEN=null, CFG={};
+async function getSession(turnstileToken){
+  try{
+    const r=await fetch('/api/session',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({turnstile:turnstileToken||null})});
+    const d=await r.json(); if(d.session){SESSION=d.session;}
+  }catch(e){}
+}
+function ensureSession(){ try{ if(window.turnstile && CFG.turnstileSiteKey) window.turnstile.reset(); }catch(e){} }
+window.onTurnstile=(tok)=>getSession(tok);
+
+async function boot(){
+  [PAIRS,PROMPTS,CFG,LOGOS]=await Promise.all([
+    fetch('/pairs.json').then(r=>r.json()),
+    fetch('/prompts.json').then(r=>r.json()).catch(()=>({})),
+    fetch('/api/config').then(r=>r.json()).catch(()=>({})),
+    fetch('/logos.json').then(r=>r.json()).catch(()=>({}))
+  ]);
+  for(let k=PAIRS.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[PAIRS[k],PAIRS[j]]=[PAIRS[j],PAIRS[k]];}
+  if(CFG.turnstileSiteKey){
+    const s=document.createElement('script');
+    s.src='https://challenges.cloudflare.com/turnstile/v0/api.js';s.async=true;document.head.appendChild(s);
+    const w=document.createElement('div');w.className='cf-turnstile';
+    w.dataset.sitekey=CFG.turnstileSiteKey;w.dataset.callback='onTurnstile';w.dataset.appearance='interaction-only';
+    $('cfslot').appendChild(w);
+  } else { getSession(null); }
+  show(); loadBoard();
+}
+async function signPair(){
+  PAIRTOKEN=null;
+  if(!CFG.tokensRequired) return;
+  try{
+    const r=await fetch('/api/sign',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({scenario:cur.scenario,a:cur.a.model,b:cur.b.model})});
+    const d=await r.json(); PAIRTOKEN=d.pair||null;
+  }catch(e){}
+}
+
+function show(){
+  cur=PAIRS[i%PAIRS.length];
+  swap=Math.random()<.5;
+  const A=swap?cur.b:cur.a, B=swap?cur.a:cur.b;
+  $('cards').classList.remove('reveal');
+  $('next').style.display='none';
+  $('ca').classList.remove('picked'); $('cb').classList.remove('picked');
+  $('ca').querySelector('.txt').innerHTML=md(A.text);
+  $('cb').querySelector('.txt').innerHTML=md(B.text);
+  $('ca').querySelector('.tagname').textContent='';
+  $('cb').querySelector('.tagname').textContent='';
+  const DOM={email:['✉️','Email'],slack:['💬','Slack'],social:['📱','Social'],essay:['📝','Essay']};
+  const d=DOM[cur.domain]||['',cur.domain];
+  $('domainbadge').innerHTML='<span class="ico">'+d[0]+'</span>'+d[1];
+  const setup=(cur.setup||'').replace(/^(You're [^.]+\.)/,'<b>$1</b>');
+  $('setup').innerHTML=setup;
+  $('question').textContent=questionFor(cur.domain);
+  cur._A=A; cur._B=B;
+  shownAt=Date.now();
+  signPair();
+}
+
+function pick(side){
+  if($('cards').classList.contains('reveal'))return;
+  const now=Date.now();
+  if(now-lastVote<MIN_GAP){$('me').innerHTML='one sec';return;}
+  lastVote=now;
+  const flagged=side==='a'?cur._A:cur._B, cleaner=side==='a'?cur._B:cur._A;
+  const winner=cleaner.model, loser=flagged.model;
+  $('cards').classList.add('reveal');
+  $('ca').querySelector('.tagname').textContent=cur._A.model;
+  $('cb').querySelector('.tagname').textContent=cur._B.model;
+  (side==='a'?$('ca'):$('cb')).classList.add('picked');
+  $('next').style.display='block';
+  sendVote({winner,loser,scenario:cur.scenario,dwell:now-shownAt});
+}
+
+function bothSlop(){
+  if($('cards').classList.contains('reveal'))return;
+  const now=Date.now();
+  if(now-lastVote<MIN_GAP){$('me').innerHTML='one sec';return;}
+  lastVote=now;
+  $('cards').classList.add('reveal');
+  $('ca').querySelector('.tagname').textContent=cur._A.model;
+  $('cb').querySelector('.tagname').textContent=cur._B.model;
+  $('ca').classList.add('picked'); $('cb').classList.add('picked');
+  $('next').style.display='block';
+  sendVote({winner:cur._A.model,loser:cur._B.model,outcome:'both',scenario:cur.scenario,dwell:now-shownAt});
+}
+
+async function sendVote(v){
+  $('me').innerHTML='<span style="opacity:.6">saving your vote…</span>';
+  let d={};
+  try{
+    const r=await fetch('/api/vote',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({...v,mode,fingerprint:FP,session:SESSION,pair:PAIRTOKEN})});
+    d=await r.json().catch(()=>({}));
+  }catch(e){ $('me').innerHTML='⚠ couldn’t reach the server, so that vote wasn’t saved.'; return; }
+  if(d.counted){
+    voted++; localStorage.setItem('slopVotes',voted);
+    $('me').innerHTML='you have judged <b>'+voted+'</b> matchups';
+    loadBoard();
+  }else{
+    $('me').innerHTML=notCountedMsg(d.reason);
+    if(d.reason==='verifying') ensureSession();
+  }
+}
+function notCountedMsg(reason){
+  return ({
+    verifying:'⚠ not counted yet. Still verifying you’re human; give it a second and your next vote will count.',
+    stale:'⚠ that matchup expired, so your next vote will count.',
+    too_fast:'⚠ not counted. That was too fast to have read both.',
+    slow_down:'⏳ one moment, that vote came too quickly to count.',
+    daily_cap:'you’ve hit today’s vote limit. Thanks for playing!',
+    no_store:'⚠ storage is offline, vote not saved.',
+  })[reason] || ('⚠ vote not counted'+(reason?' ('+reason+')':''));
+}
+
+function cardClick(side){ if($('cards').classList.contains('reveal')){i++;show();} else pick(side); }
+$('ca').onclick=()=>cardClick('a'); $('cb').onclick=()=>cardClick('b');
+$('bothbtn').onclick=()=>{ if($('cards').classList.contains('reveal')){i++;show();} else bothSlop(); };
+$('next').onclick=()=>{i++;show()};
+document.addEventListener('keydown',e=>{
+  const revealed=$('cards').classList.contains('reveal');
+  if(!revealed && (e.key==='1'||e.key==='2')){e.preventDefault();pick(e.key==='1'?'a':'b');}
+  else if(!revealed && e.key==='3'){e.preventDefault();bothSlop();}
+  else if(revealed && (e.key==='1'||e.key==='2'||e.key==='3'||e.key==='Enter'||e.key==='ArrowRight'||e.key===' ')){e.preventDefault();i++;show();}
+});
+
+const NAMES={'claude-sonnet-5':'Sonnet 5','claude-opus-4-8':'Opus 4.8','claude-haiku-4-5':'Haiku 4.5',
+  'claude-fable-5':'Fable 5','gpt-5.6-luna':'GPT-5.6 Luna','gpt-5.6-sol':'GPT-5.6 Sol','gpt-5.6-terra':'GPT-5.6 Terra',
+  'gpt-5.4-mini':'GPT-5.4 Mini','gemini-3.1-pro-preview':'Gemini 3.1 Pro','gemini-3.5-flash':'Gemini 3.5 Flash',
+  'grok-4.5':'Grok 4.5','kimi-k2p6':'Kimi K2.6','deepseek-v4-pro':'DeepSeek V4','glm-5.2':'GLM-5.2',
+  'qwen3.7-max':'Qwen3.7 Max','minimax-m3':'MiniMax M3','mistral-large':'Mistral Large','muse-spark-1.1':'Muse Spark'};
+const shortName=m=>NAMES[m]||m;
+const LABS={'claude-sonnet-5':'Anthropic','claude-opus-4-8':'Anthropic','claude-haiku-4-5':'Anthropic',
+  'claude-fable-5':'Anthropic','gpt-5.6-luna':'OpenAI','gpt-5.6-sol':'OpenAI','gpt-5.6-terra':'OpenAI',
+  'gpt-5.4-mini':'OpenAI','gemini-3.1-pro-preview':'Google','gemini-3.5-flash':'Google','grok-4.5':'xAI',
+  'kimi-k2p6':'Moonshot','deepseek-v4-pro':'DeepSeek','glm-5.2':'Zhipu','qwen3.7-max':'Alibaba',
+  'minimax-m3':'MiniMax','mistral-large':'Mistral','muse-spark-1.1':'Meta'};
+const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','DeepSeek':'DS',
+  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
+let LOGOS={};
+const logo=m=>LOGOS[LABS[m]]||`<span class="mono">${CODE[LABS[m]]||'?'}</span>`;
+
+function renderChart(rows){
+  const el=$('lbchart');
+  if(!rows.length){el.innerHTML='<div class="lbempty">be the first to flag some slop</div>';return;}
+  const elos=rows.map(r=>+r.elo), mn=Math.min(...elos), mx=Math.max(...elos), span=Math.max(1,mx-mn);
+  el.innerHTML=rows.map((r,n)=>{
+    const h=Math.round(96+((+r.elo-mn)/span)*250);
+    return `<div class="lbcol${n===0?' top':''}"><div class="lbval">${r.elo}</div>`+
+           `<div class="lbbar" style="height:${h}px"></div>`+
+           `<div class="lblogo" title="${LABS[r.model]||''}">${logo(r.model)}</div>`+
+           `<div class="lbname">${shortName(r.model)}</div><div class="lbrank">#${n+1}</div></div>`;
+  }).join('');
+}
+
+async function loadBoard(){
+  try{
+    const d=await fetch('/api/leaderboard?mode='+mode).then(r=>r.json());
+    const rows=(d.rows||[]);
+    renderChart(rows);
+    $('lbbody').innerHTML = rows.length ? rows.map((r,n)=>
+      `<tr><td class="n">${n+1}</td><td><span class="tlogo">${logo(r.model)}</span>${shortName(r.model)}</td><td class="n">${r.elo}</td><td class="n">${r.games}</td></tr>`
+    ).join('') : `<tr><td colspan="4" style="text-align:center;color:var(--muted)">be the first to flag some slop</td></tr>`;
+  }catch(e){}
+}
+$('tabChart').onclick=()=>{$('tabChart').classList.add('on');$('tabTable').classList.remove('on');
+  $('lbchart').style.display='flex';$('lbtable').style.display='none';};
+$('tabTable').onclick=()=>{$('tabTable').classList.add('on');$('tabChart').classList.remove('on');
+  $('lbchart').style.display='none';$('lbtable').style.display='table';};
+
+voted=+(localStorage.getItem('slopVotes')||0);
+if(voted)$('me').innerHTML='you have judged <b>'+voted+'</b> matchups';
+boot();
+</script>
+</body>
+</html>

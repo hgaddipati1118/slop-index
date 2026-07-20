@@ -9,6 +9,10 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
 <style>
   :root{
     --bg:#FBFAF9; --card:#FFFFFF; --surface:#F5F3F0; --ink:rgba(0,0,0,.9);
@@ -24,8 +28,7 @@
   header{padding:38px 0 6px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px}
   h1{font-size:clamp(24px,4vw,32px);margin:0;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
   .live{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(63,122,91,.5);animation:pulse 2s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,122,91,.45)}70%{box-shadow:0 0 0 7px rgba(63,122,91,0)}100%{box-shadow:0 0 0 0 rgba(63,122,91,0)}}
+  /* .dot + pulse come from site.css (Slashy blue) */
   .sub{font-family:var(--mono);font-size:12px;color:var(--faint);margin:2px 0 22px}
 
   .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
@@ -64,12 +67,33 @@
 </style>
 </head>
 <body>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg1)"/>
+        <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg1)"/>
+        <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg1)"/>
+        <defs><linearGradient id="sg1" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
+      </svg>
+      <span class="wm">The Slop Index</span>
+    </a>
+    <div class="nav-links">
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/arena">Arena</a>
+      <a href="/methodology">Method</a>
+      <a class="gh" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">GitHub</a>
+      <a class="nav-cta" href="/arena">Play the arena</a>
+    </div>
+  </div>
+</nav>
 <div class="wrap">
   <header>
     <h1>Live votes</h1>
     <div class="live"><span class="dot"></span><span id="upd">connecting…</span></div>
   </header>
-  <div class="sub">Spot the Slop &middot; auto-refreshing &middot; <a href="/">play</a> &middot; <a href="/benchmark.html">the board</a></div>
+  <div class="sub">Spot the Slop &middot; auto-refreshing &middot; <a href="/arena">play</a> &middot; <a href="/leaderboard">the board</a></div>
 
   <div class="cards">
     <div class="stat"><div class="k">Total votes</div><div class="v" id="total">–</div><div class="d" id="totalDelta">since you opened: 0</div></div>
