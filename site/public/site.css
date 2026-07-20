@@ -4,9 +4,14 @@
    off-white, Geist + Libertinus Serif). No red/terracotta anywhere: blue is the brand.
    ========================================================================== */
 
+/* signature display face — self-hosted, not off the Google shelf. Used for headings site-wide. */
+@font-face{font-family:'Cabinet Grotesk';src:url('/fonts/cabinet-grotesk.woff2') format('woff2');
+  font-weight:100 900;font-style:normal;font-display:swap}
+
 :root{
+  --display:'Cabinet Grotesk','Geist',system-ui,sans-serif;
   /* grounds */
-  --bg:#FAFAF9; --card:#FFFFFF; --surface:#F5F5F5; --surface-2:#FBFBFA;
+  --bg:#F4F3F1; --card:#FFFFFF; --surface:#EFEEEB; --surface-2:#F7F6F4;
   /* ink — Bruised Charcoal family + brand greys */
   --ink:#2D2B36; --ink-2:#3F3D47; --body:#565B64; --muted:#706D79; --faint:#9A97A1;
   /* lines */
@@ -29,8 +34,9 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);
-  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background-color:var(--bg);color:var(--body);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
 h1,h2,h3,h4{color:var(--ink);letter-spacing:-.02em;text-wrap:balance;margin:0;font-weight:800}
 a{color:var(--ink);text-decoration:none}
 p{margin:0}
@@ -43,8 +49,7 @@ img,svg{max-width:100%}
 .wrap-narrow{max-width:760px;margin:0 auto;padding:0 24px}
 
 /* ---------- kickers / eyebrows ---------- */
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--blue);font-weight:600}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--muted);font-weight:500}
 .serif{font-family:var(--serif)}
 .mono{font-family:var(--mono)}
 
@@ -57,22 +62,17 @@ img,svg{max-width:100%}
 .brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .brand .mark{width:22px;height:22px;display:block;flex:0 0 auto}
 .brand .wm{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
-.nav-links{display:flex;align-items:center;gap:2px}
-.nav-links a{font-size:14px;font-weight:500;color:var(--body);padding:8px 12px;border-radius:8px;
-  position:relative;transition:color .14s;white-space:nowrap}
-.nav-links a::after{content:'';position:absolute;left:12px;right:12px;bottom:5px;height:1.5px;
-  transform:scaleX(0);transform-origin:left;background:var(--blue);border-radius:1px;transition:transform .2s ease}
+.nav-links{display:flex;align-items:center;gap:4px}
+/* active state from the type itself (weight + ink), not an underline-reveal or a dot */
+.nav-links a{font-size:14px;font-weight:450;color:var(--muted);padding:8px 11px;border-radius:8px;
+  transition:color .14s;white-space:nowrap}
 .nav-links a:hover{color:var(--ink)}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-links a.on{color:var(--blue);font-weight:600}
-.nav-links a.on::after{transform:scaleX(1)}
+.nav-links a.on{color:var(--ink);font-weight:600}
 .nav-links a.gh{color:var(--muted)}
-.nav-cta{display:inline-flex;align-items:center;gap:7px;background:var(--blue-press);color:#fff;
-  font-size:13.5px;font-weight:600;padding:9px 17px;border-radius:9px;margin-left:8px;
-  transition:transform .12s,box-shadow .15s,background .15s;box-shadow:0 1px 2px rgba(58,73,168,.3)}
-.nav-cta::after{display:none}
-.nav-cta:hover{transform:scale(1.03);background:var(--blue);box-shadow:0 4px 14px rgba(68,87,196,.34)}
-/* beat `.nav-links a` (higher specificity) so the button text is actually white */
+.nav-cta{display:inline-flex;align-items:center;gap:7px;background:var(--dark);color:#fff;
+  font-size:13.5px;font-weight:550;padding:9px 16px;border-radius:8px;margin-left:8px;transition:background .15s}
+.nav-cta:hover{background:#3b3944}
+/* beat `.nav-links a` (higher specificity) so the button text stays white (Slashy CTA = charcoal) */
 .nav-links a.nav-cta,.nav-links a.nav-cta:hover{color:#fff}
 @media(max-width:720px){
   .nav-in{height:56px;gap:8px}
@@ -84,17 +84,16 @@ img,svg{max-width:100%}
 @media(max-width:460px){ .nav-links a{padding:10px 6px} }
 
 /* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;border:1px solid var(--dark);
-  border-radius:11px;padding:13px 26px;font-family:var(--sans);font-size:15px;font-weight:600;
-  cursor:pointer;text-decoration:none;transition:opacity .15s,transform .12s,box-shadow .15s;min-height:44px}
-.btn:hover{opacity:.88;transform:scale(1.02);color:#fff}
-.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
-.btn.ghost:hover{border-color:var(--dark);opacity:1;color:var(--ink)}
-.btn.blue{background:var(--blue);border-color:var(--blue);box-shadow:0 1px 2px rgba(68,87,196,.25)}
-.btn.blue:hover{box-shadow:0 6px 18px rgba(68,87,196,.3)}
-.btn.sm{padding:9px 18px;font-size:13.5px;border-radius:9px;min-height:0}
-.btn .arr{transition:transform .15s}
-.btn:hover .arr{transform:translateX(3px)}
+/* buttons: one clear action, no glow, no hover-boop. state changes by fill only. */
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--dark);color:#fff;border:1px solid var(--dark);
+  border-radius:10px;padding:13px 24px;font-family:var(--sans);font-size:15px;font-weight:550;
+  cursor:pointer;text-decoration:none;transition:background .15s,color .15s,border-color .15s;min-height:44px}
+.btn:hover{background:#3b3944;color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--ink);background:transparent;color:var(--ink)}
+.btn.sm{padding:9px 16px;font-size:13.5px;border-radius:8px;min-height:0}
+.btn .arr{transition:transform .18s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .arr{transform:translate(2px,-2px)}
 
 /* shared editorial text link — cobalt, underline, opacity hover */
 .textlink{font-size:15px;font-weight:600;color:var(--blue);text-decoration:underline;
@@ -107,15 +106,13 @@ img,svg{max-width:100%}
 /* ---------- live pill ---------- */
 .livepill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;
   color:var(--body);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 14px}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex:0 0 auto;
-  box-shadow:0 0 0 0 rgba(68,87,196,.45);animation:pulse 2.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(68,87,196,.4)}70%{box-shadow:0 0 0 7px rgba(68,87,196,0)}100%{box-shadow:0 0 0 0 rgba(68,87,196,0)}}
+/* static mark, no pulsing glow ring (that ring is a slop tell) */
+.dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex:0 0 auto}
 
 /* ---------- shared stat band ---------- */
 .band{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:680px){.band{grid-template-columns:1fr}}
-.scard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px;text-align:left;
-  box-shadow:var(--shadow-sm);position:relative}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px;text-align:left;position:relative}
 .scard .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
   display:flex;align-items:center;gap:8px}
 .scard .v{font-size:26px;font-weight:800;color:var(--ink);margin-top:10px;letter-spacing:-.01em;line-height:1.1}
@@ -127,9 +124,8 @@ img,svg{max-width:100%}
 
 /* ---------- section scaffolding ---------- */
 section{padding:52px 0}
-.sec-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);font-weight:600;margin-bottom:14px}
-.sec-h{font-family:var(--sans);font-size:clamp(27px,3.7vw,40px);font-weight:800;letter-spacing:-.025em;line-height:1.08;margin:0 0 10px}
+.sec-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted);font-weight:500;margin-bottom:12px}
+.sec-h{font-family:var(--display);font-size:clamp(27px,3.7vw,40px);font-weight:700;letter-spacing:-.015em;line-height:1.05;margin:0 0 10px}
 .sec-sub{font-size:15.5px;color:var(--muted);max-width:640px;margin:0;line-height:1.55}
 .rule{height:1px;background:var(--divider);border:none;margin:0}
 

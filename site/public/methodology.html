@@ -25,11 +25,11 @@
 <style>
   .phead{padding:52px 0 6px;text-align:center}
   .phead .eyebrow{display:inline-block;margin-bottom:16px}
-  .phead h1{font-family:var(--sans);font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--ink)}
+  .phead h1{font-family:var(--display);font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--ink)}
   .phead .thesis{font-size:clamp(16px,2.2vw,19px);color:var(--ink-2);max-width:640px;margin:18px auto 0;line-height:1.5}
 
   .doc{max-width:780px;margin:0 auto;padding:0 24px}
-  .doc h2{font-family:var(--sans);font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:52px 0 6px;color:var(--ink)}
+  .doc h2{font-family:var(--display);font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:52px 0 6px;color:var(--ink)}
   .doc h3{font-size:17px;font-weight:600;margin:26px 0 6px;color:var(--ink)}
   .doc p{font-size:16px;color:var(--ink-2);line-height:1.68;margin:12px 0}
   .doc .lead{font-size:17px;color:var(--body)}
@@ -52,16 +52,16 @@
   /* axis grid */
   .axes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
   @media(max-width:620px){.axes{grid-template-columns:1fr}}
-  .ax{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px;box-shadow:var(--shadow-sm)}
+  .ax{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px}
   .ax .w{font-family:var(--mono);font-size:11px;color:var(--body);font-weight:600;float:right;
     background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2px 10px}
   .ax h3{margin:0 0 8px;font-size:16px}
   .ax p{font-size:13.5px;color:var(--body);line-height:1.6;margin:0}
-  .ax.human{border-color:var(--blue-line);border-left:3px solid var(--blue);background:linear-gradient(var(--card),var(--blue-tint))}
+  .ax.human{border-color:var(--blue-line);background:linear-gradient(var(--card),var(--blue-tint))}
   .ax.human .w{background:var(--blue);border-color:var(--blue);color:#fff}
 
   /* dataset table */
-  .dtwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin:20px 0;box-shadow:var(--shadow-sm)}
+  .dtwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin:20px 0}
   .dt{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
   .dt th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
     text-align:left;font-weight:500;padding:12px 16px;border-bottom:1px solid var(--divider);background:var(--surface-2)}
@@ -70,18 +70,18 @@
   .dt td .src{font-weight:600;color:var(--ink);display:block}
   .dt td .yr{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
 
-  .callout-soft{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--blue);
+  .callout-soft{background:var(--surface-2);border:1px solid var(--line);
     border-radius:12px;padding:22px 26px;margin:26px 0}
   .callout-soft p{margin:0;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);line-height:1.5}
   .callout-soft b{font-style:normal}
 
-  .repro{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px;margin:22px 0;box-shadow:var(--shadow-sm)}
+  .repro{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px;margin:22px 0}
   .repro pre{background:var(--dark);color:#EDEBE7;border-radius:10px;padding:16px 18px;overflow-x:auto;
     font-family:var(--mono);font-size:13px;line-height:1.7;margin:14px 0 0}
   .repro pre .c{color:#8A8680}
 
   .cta{text-align:center;padding:44px 0 6px}
-  .cta h2{font-family:var(--sans);font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:0 0 12px;color:var(--ink)}
+  .cta h2{font-family:var(--display);font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin:0 0 12px;color:var(--ink)}
   .cta p{color:var(--muted);max-width:520px;margin:0 auto 22px}
 </style>
 </head>
