@@ -120,19 +120,34 @@ section{padding:52px 0}
 .sec-sub{font-size:15.5px;color:var(--muted);max-width:640px;margin:0;line-height:1.55}
 .rule{height:1px;background:var(--divider);border:none;margin:0}
 
-/* ---------- footer ---------- */
+/* ---------- footer (Slashy-branded) ---------- */
 .foot{border-top:1px solid var(--line);background:var(--surface-2);margin-top:20px}
-.foot-in{max-width:var(--maxw);margin:0 auto;padding:44px 24px 52px;
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
-.foot-brand .b{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding:50px 24px 42px;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:32px}
+.foot-brand .b{display:flex;align-items:center;gap:9px;margin-bottom:14px}
 .foot-brand .mark{width:24px;height:24px}
 .foot-brand .wm{font-size:16px;font-weight:700;color:var(--ink)}
-.foot-brand p{font-size:13px;color:var(--muted);line-height:1.6;max-width:300px}
+.foot-brand p{font-size:13px;color:var(--muted);line-height:1.6;max-width:330px}
+.foot-brand p a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.foot-brand .social{display:flex;gap:18px;margin:18px 0 0}
+.foot-brand .social a{color:var(--muted);display:inline-flex;transition:color .14s}
+.foot-brand .social a:hover{color:var(--ink)}
+.foot-brand .social svg{width:18px;height:18px;display:block;fill:currentColor}
+.foot-brand .copy{font-size:12px;color:var(--faint);margin-top:20px;max-width:none}
 .foot-col h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--faint);font-weight:600;margin:0 0 12px}
-.foot-col a{display:block;font-size:13.5px;color:var(--body);padding:4px 0;transition:color .14s}
-.foot-col a{transition:opacity .14s}
-.foot-col a:hover{opacity:.6}
+/* Slashy-signature underline-reveal hover */
+.foot-col a{display:block;width:fit-content;font-size:13.5px;color:var(--body);padding:3px 0;position:relative;transition:color .14s}
+.foot-col a::after{content:'';position:absolute;left:0;bottom:1px;height:1.5px;width:0;background:currentColor;border-radius:1px;transition:width .22s ease}
+.foot-col a:hover{color:var(--ink)}
+.foot-col a:hover::after{width:100%}
 .foot-legal{max-width:var(--maxw);margin:0 auto;padding:0 24px 40px;
   font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.9}
 @media(max-width:680px){.foot-in{grid-template-columns:1fr 1fr;gap:26px}.foot-brand{grid-column:1/-1}}
+
+/* ---------- Slashy pull-quote (serif — the one sanctioned serif use, per brand guide) ---------- */
+.pquote{border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);padding:44px 0;margin:8px 0}
+.pquote blockquote{margin:0;max-width:820px;font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:clamp(23px,3.2vw,33px);line-height:1.28;color:var(--ink);letter-spacing:-.01em}
+.pquote cite{display:block;margin-top:18px;font-family:var(--mono);font-style:normal;font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}

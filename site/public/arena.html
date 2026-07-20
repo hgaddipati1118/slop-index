@@ -164,36 +164,8 @@
   </div>
 </div>
 
-<footer class="foot">
-  <div class="foot-in">
-    <div class="foot-brand">
-      <div class="b">
-        <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg2)"/>
-          <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg2)"/>
-          <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg2)"/>
-          <defs><linearGradient id="sg2" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
-        </svg>
-        <span class="wm">The Slop Index</span>
-      </div>
-      <p>Models write, humans judge, nobody is told which is which. Every message is real, unedited model output.</p>
-    </div>
-    <div class="foot-col">
-      <h4>Explore</h4>
-      <a href="/leaderboard">Leaderboard</a>
-      <a href="/arena">Play the arena</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/stats">Live votes</a>
-    </div>
-    <div class="foot-col">
-      <h4>Open source</h4>
-      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Code &amp; data</a>
-      <a href="https://slashy.com" target="_blank" rel="noopener">Slashy</a>
-    </div>
-  </div>
-  <div class="foot-legal">18 models · 112 scenarios · 19,928 generations · fully open-sourced. A research project from Slashy.</div>
-</footer>
+<footer class="foot" id="site-footer"></footer>
+<script src="/footer.js"></script>
 
 <script>
 let PAIRS=[], PROMPTS={}, i=0, voted=0, cur=null, swap=false, shownAt=0, lastVote=0;
@@ -269,9 +241,8 @@ function show(){
   $('cb').querySelector('.txt').innerHTML=md(B.text);
   $('ca').querySelector('.tagname').textContent='';
   $('cb').querySelector('.tagname').textContent='';
-  const DOM={email:['✉️','Email'],slack:['💬','Slack'],social:['📱','Social'],essay:['📝','Essay']};
-  const d=DOM[cur.domain]||['',cur.domain];
-  $('domainbadge').innerHTML='<span class="ico">'+d[0]+'</span>'+d[1];
+  const DOM={email:'Email',slack:'Slack',social:'Social',essay:'Essay'};
+  $('domainbadge').textContent=(DOM[cur.domain]||cur.domain);
   const setup=(cur.setup||'').replace(/^(You're [^.]+\.)/,'<b>$1</b>');
   $('setup').innerHTML=setup;
   $('question').textContent=questionFor(cur.domain);

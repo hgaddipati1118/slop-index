@@ -6,7 +6,7 @@
 <title>The Slop Index — which AI writes the least like AI?</title>
 <meta name="description" content="A benchmark ranking 18 frontier LLMs by how much recognizable 'AI slop' they write, measured against real pre-AI human writing and by blind human vote. Open method, open data.">
 <meta property="og:title" content="The Slop Index">
-<meta property="og:description" content="18 frontier models, ranked by how much they write like AI slop — measured mechanically against pre-AI human writing and by blind human vote.">
+<meta property="og:description" content="18 frontier models, ranked by how much they write like AI slop, measured mechanically against pre-AI human writing and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com">
 <meta property="og:image" content="https://theslopindex.com/og.png">
@@ -23,22 +23,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
-  /* ---- hero ---- */
-  .hero{padding:72px 0 44px;text-align:center;position:relative;overflow:hidden}
-  .hero .glow{position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:760px;height:420px;
-    background:radial-gradient(closest-side,rgba(120,115,105,.12),transparent 72%);pointer-events:none;z-index:0}
-  .hero>*{position:relative;z-index:1}
-  .hero .eyebrow{margin-bottom:20px;display:inline-block}
-  .hero h1{font-family:var(--sans);font-size:clamp(46px,9vw,92px);font-weight:800;line-height:1;
-    letter-spacing:-.035em;color:var(--ink)}
-  .hero h1 .ital{font-weight:800}
-  .thesis{font-size:clamp(17px,2.3vw,21px);color:var(--ink-2);max-width:600px;margin:24px auto 0;line-height:1.5}
+  /* ---- hero: editorial, left-aligned, data-forward ---- */
+  .hero{padding:60px 0 40px;border-bottom:1px solid var(--divider)}
+  .kicker{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .kicker .kd{width:28px;height:1px;background:var(--ink);opacity:.45}
+  .kicker a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+  .hero h1{font-family:var(--sans);font-size:clamp(44px,7.6vw,84px);font-weight:800;line-height:1;
+    letter-spacing:-.035em;color:var(--ink);margin:22px 0 0;max-width:15ch}
+  .thesis{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:610px;margin:22px 0 0;line-height:1.5}
   .thesis b{font-weight:600;color:var(--ink)}
-  .hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:34px 0 20px}
-  .hero-live{margin-top:6px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 0;align-items:center}
+  .textlink{font-size:15px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;transition:opacity .14s}
+  .textlink:hover{opacity:.62}
+  .strap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:30px 0 0;
+    font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .strap .sep{opacity:.42}
+  .strap .live{display:inline-flex;align-items:center;gap:8px;color:var(--body)}
 
-  /* ---- ranking snapshot (horizontal bars) ---- */
-  .snap{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 8px 14px;box-shadow:var(--shadow-sm);overflow:hidden}
+  /* ---- live board: stat band + ranking snapshot ---- */
+  #band{margin:0 0 16px}
+  .snap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 8px 14px;box-shadow:var(--shadow-sm);overflow:hidden}
   .srow{display:grid;grid-template-columns:30px 30px 1fr 46px;align-items:center;gap:12px;
     padding:8px 16px;border-radius:10px;transition:background .14s}
   .srow:hover{background:var(--surface)}
@@ -53,42 +58,60 @@
   .srow .track{height:9px;background:var(--surface);border-radius:6px;margin-top:6px;overflow:hidden}
   .srow .fill{height:100%;border-radius:6px;transition:width .7s cubic-bezier(.2,.7,.2,1)}
   .srow .sc{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
-  .srow.lead .nm{color:var(--ink)}
   .snap-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
     padding:14px 16px 6px;margin-top:6px;border-top:1px solid var(--divider)}
   .snap-foot .lg-legend{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--muted)}
   .snap-foot .ramp{height:8px;width:120px;border-radius:5px;background:linear-gradient(90deg,var(--clean),var(--heat-soft),var(--heat))}
 
-  /* ---- how it works ---- */
-  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  @media(max-width:860px){.how{grid-template-columns:1fr 1fr}}
-  @media(max-width:480px){.how{grid-template-columns:1fr}}
-  .hcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
-  .hcard .n{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600}
-  .hcard h3{font-size:16px;margin:12px 0 7px;color:var(--ink)}
-  .hcard p{font-size:13.5px;color:var(--body);line-height:1.55}
-  .hcard code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:1px 5px;border-radius:4px;color:var(--ink)}
+  /* ---- the thing we measure: annotated slop vs human ---- */
+  .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  @media(max-width:720px){.ex-grid{grid-template-columns:1fr}}
+  .ex{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--card)}
+  .ex-slop{background:linear-gradient(var(--card),#FBF2EC);border-color:var(--heat-soft)}
+  .ex-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+    margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .ex-tag .d{width:7px;height:7px;border-radius:50%}
+  .ex-slop .ex-tag{color:var(--heat)} .ex-slop .ex-tag .d{background:var(--heat)}
+  .ex-human .ex-tag{color:var(--good)} .ex-human .ex-tag .d{background:var(--good)}
+  .ex p{font-size:15px;line-height:1.65;color:#33373E;margin:0}
+  .ex mark{background:rgba(194,103,62,.16);color:#8f4526;border-radius:3px;padding:0 3px;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .ex-note{font-size:13px;color:var(--muted);margin-top:18px;line-height:1.6;max-width:720px}
+  .ex-note b{color:var(--body);font-weight:600}
 
-  /* ---- arena teaser ---- */
-  .arena-t{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;
-    background:var(--card);border:1px solid var(--line);border-radius:22px;padding:40px 40px;box-shadow:var(--shadow-sm)}
-  @media(max-width:760px){.arena-t{grid-template-columns:1fr;gap:24px;padding:30px 26px}}
-  .arena-t h2{font-family:var(--sans);font-size:clamp(25px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0 0 12px}
-  .arena-t p{font-size:15px;color:var(--body);line-height:1.55;margin:0 0 22px}
-  .mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .mini .mc{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:15px 15px;
-    font-size:12.5px;color:#4A4E56;line-height:1.5;position:relative;min-height:118px}
-  .mini .mc .tag{position:absolute;top:-9px;left:13px;width:22px;height:22px;border-radius:50%;background:var(--dark);
-    color:#fff;font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--card)}
-  .mini .q{grid-column:1/-1;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:4px}
+  /* ---- how it works: numbered editorial method ---- */
+  .steps{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--divider)}
+  .steps li{display:grid;grid-template-columns:66px 1fr;gap:22px;padding:24px 0;border-bottom:1px solid var(--divider);align-items:start}
+  @media(max-width:560px){.steps li{grid-template-columns:40px 1fr;gap:14px;padding:20px 0}}
+  .steps .si{font-family:var(--mono);font-size:23px;font-weight:600;color:var(--faint);line-height:1;padding-top:3px}
+  .steps h3{font-size:18px;margin:0 0 6px;color:var(--ink)}
+  .steps p{font-size:14.5px;color:var(--body);line-height:1.62;margin:0;max-width:660px}
+  .steps code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;color:var(--ink)}
+  .method-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:26px;align-items:center}
 
-  /* ---- closing CTA ---- */
-  .close{background:var(--dark);border-radius:24px;padding:56px 40px;text-align:center;margin:8px 0 0}
-  .close h2{font-family:var(--sans);color:#fff;font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.08;margin:0 0 14px}
-  .close p{color:#B9B6B0;max-width:520px;margin:0 auto 26px;font-size:16px;line-height:1.55}
+  /* ---- arena teaser: show the interaction, not another example ---- */
+  .arena-t{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;
+    border:1px solid var(--line);border-radius:20px;padding:40px 42px;background:var(--surface-2)}
+  @media(max-width:720px){.arena-t{grid-template-columns:1fr;gap:26px;padding:30px 28px}}
+  .arena-t h2{font-family:var(--sans);font-size:clamp(24px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0 0 12px}
+  .arena-t p{font-size:15px;color:var(--body);line-height:1.55;margin:0 0 24px}
+  .keys{display:flex;flex-direction:column;gap:12px}
+  .key{display:flex;align-items:center;gap:15px}
+  .key .cap{width:40px;height:40px;border-radius:9px;background:var(--card);border:1px solid var(--line);
+    border-bottom-width:3px;font-family:var(--mono);font-size:16px;font-weight:600;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .key .kl{font-size:14.5px;color:var(--body)}
+  .key .kl b{color:var(--ink);font-weight:600}
+
+  /* ---- close ---- */
+  .close{background:var(--dark);border-radius:22px;padding:52px 46px;margin:8px 0 0}
+  .close h2{font-family:var(--sans);color:#fff;font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0 0 14px;max-width:17ch}
+  .close p{color:#B9B6B0;max-width:560px;margin:0 0 28px;font-size:16px;line-height:1.55}
+  .close-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .close .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
   .close .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
   .close .btn.light{background:#fff;color:var(--dark);border-color:#fff}
+  .close .textlink{color:#fff;opacity:.82}
 </style>
 </head>
 <body>
@@ -116,59 +139,101 @@
 </nav>
 
 <header class="hero">
-  <div class="glow"></div>
   <div class="wrap">
-    <span class="eyebrow">A Slashy research project</span>
-    <h1>The Slop <span class="ital">Index</span></h1>
-    <p class="thesis">Every frontier model can write. The real question is whether it writes like a
-      <b>person</b> — or like <b>AI slop</b>. We ranked 18 of them two ways: mechanically, against real
-      writing that predates ChatGPT, and by <b>blind human vote</b>.</p>
+    <span class="kicker"><span class="kd"></span>A Slashy research project ·
+      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">open source</a></span>
+    <h1>Which AI writes the least like AI?</h1>
+    <p class="thesis">Every frontier model can write. The real question is whether it writes like a <b>person</b>,
+      or like <b>AI slop</b>. We ranked 18 of them against real writing that predates ChatGPT, and by
+      <b>blind human vote</b>.</p>
     <div class="hero-cta">
       <a class="btn" href="/leaderboard">See the rankings <span class="arr">→</span></a>
       <a class="btn ghost" href="/arena">Play the arena <span class="arr">→</span></a>
+      <a class="textlink" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">View the code &amp; data</a>
     </div>
-    <div class="hero-live"><span class="livepill"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span></div>
+    <div class="strap">
+      <span class="live"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span>
+      <span class="sep">·</span><span>18 models</span>
+      <span class="sep">·</span><span>112 scenarios</span>
+      <span class="sep">·</span><span>19,928 generations</span>
+    </div>
   </div>
 </header>
-
-<div class="wrap">
-  <div class="band" id="band"></div>
-</div>
 
 <section>
   <div class="wrap">
     <div class="sec-eyebrow">The board · live</div>
     <h2 class="sec-h">Which model writes the least like AI?</h2>
     <p class="sec-sub" style="margin-bottom:26px">Ranked by Human Score (0–100, higher = writes more like a person).
-      It blends the live human vote (40%) with four mechanical axes at 15% each. Updates as votes come in.</p>
+      It blends the live human vote (40%) with four mechanical axes at 15% each, and moves as votes come in.</p>
+    <div class="band" id="band"></div>
     <div class="snap" id="snap"><div style="padding:40px;text-align:center;color:var(--muted)">loading the board…</div></div>
-    <div style="text-align:center;margin-top:22px">
-      <a class="btn ghost sm" href="/leaderboard">Full rankings, every axis &amp; the price scatter <span class="arr">→</span></a>
+    <div style="margin-top:22px">
+      <a class="textlink" href="/leaderboard">Full rankings, every axis &amp; the price scatter →</a>
     </div>
   </div>
 </section>
 
-<section style="padding-top:16px">
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="sec-eyebrow">The thing we measure</div>
+    <h2 class="sec-h">You already know it when you read it.</h2>
+    <p class="sec-sub">Same request, two replies. One reaches for the reflexes: the throat-clearing opener, the tidy
+      contrast, the eager sign-off. The other just answers.</p>
+    <div class="ex-grid">
+      <div class="ex ex-slop">
+        <div class="ex-tag"><span class="d"></span>Reads like AI</div>
+        <p>Hi Sarah, <mark>I hope this email finds you well!</mark> I wanted to <mark>reach out and touch base</mark>
+          about the timeline. <mark>It's not just about hitting the date — it's about doing it right.</mark>
+          <mark>Please don't hesitate to let me know</mark> if you have any questions.
+          <mark>Looking forward to collaborating!</mark></p>
+      </div>
+      <div class="ex ex-human">
+        <div class="ex-tag"><span class="d"></span>Reads like a person</div>
+        <p>Sarah, can we push a week? I'm still waiting on the design files and don't want to rush QA. Works either
+          way, just let me know.</p>
+      </div>
+    </div>
+    <p class="ex-note">The highlighted phrases are among the <b>tells</b> the index counts, each measured against
+      how often real people actually used it before 2022, not against a model's guess.</p>
+  </div>
+</section>
+
+<section class="pq-sec" style="padding:10px 0 44px">
+  <div class="wrap">
+    <div class="pquote">
+      <blockquote>Good writing disappears. You come away thinking about the person, not the machine they wrote with.</blockquote>
+      <cite>The thesis behind The Slop Index</cite>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
   <div class="wrap">
     <div class="sec-eyebrow">How it works</div>
     <h2 class="sec-h">No LLM judges. No vibes. Just measurement.</h2>
-    <p class="sec-sub" style="margin-bottom:26px">Every number is a mechanical measurement against human writing that
-      provably predates generative AI — plus a live crowd vote. Open method, open data.</p>
-    <div class="how">
-      <div class="hcard"><div class="n">01</div><h3>Pre-AI human baselines</h3>
-        <p>Slop is distance from genuine human writing collected before ChatGPT existed — Enron email, a blog corpus,
-          student essays, archived tweets, Discord chat — so no model could have shaped the yardstick.</p></div>
-      <div class="hcard"><div class="n">02</div><h3>Five axes, one score</h3>
+    <p class="sec-sub">Every number is a mechanical measurement against human writing that provably predates generative
+      AI, plus a live crowd vote. Open method, open data.</p>
+    <ol class="steps">
+      <li><span class="si">01</span><div><h3>Start from pre-AI human writing</h3>
+        <p>Slop is distance from genuine human text collected before ChatGPT existed: Enron email, a blog corpus,
+          student essays, archived tweets, Discord chat. No model could have shaped the yardstick.</p></div></li>
+      <li><span class="si">02</span><div><h3>Score five axes, blend into one</h3>
         <p>Human vote <code>40%</code> plus conciseness, templating, rhythm and tells at <code>15%</code> each. Every
-          axis is put on a 0–100 human-likeness scale before blending.</p></div>
-      <div class="hcard"><div class="n">03</div><h3>Same task, real output</h3>
-        <p>All 18 models ran the identical 112 scenarios across email, social, essays and chat — five samples each, for
-          <b>19,928</b> real, unedited generations.</p></div>
-      <div class="hcard"><div class="n">04</div><h3>Humans break the ties</h3>
-        <p>The companion arena turns blind pairwise picks into a live Elo. That crowd verdict is 40% of the score and
-          the reason the board keeps moving.</p></div>
+          axis is normalised to a 0–100 human-likeness scale before blending.</p></div></li>
+      <li><span class="si">03</span><div><h3>Run every model on the same task</h3>
+        <p>All 18 models ran the identical 112 scenarios across email, social, essays and chat, five samples each:
+          <b>19,928</b> real, unedited generations. Default settings, no cherry-picking.</p></div></li>
+      <li><span class="si">04</span><div><h3>Let humans break the ties</h3>
+        <p>The companion arena turns blind pairwise picks into a live Elo. That crowd verdict is 40% of the score, and
+          the reason the board keeps moving.</p></div></li>
+    </ol>
+    <div class="method-links">
+      <a class="textlink" href="/methodology">Read the full methodology →</a>
+      <a class="textlink" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Reproduce it on GitHub →</a>
     </div>
-    <div style="margin-top:24px"><a class="btn ghost sm" href="/methodology">Read the full methodology <span class="arr">→</span></a></div>
   </div>
 </section>
 
@@ -178,14 +243,14 @@
       <div>
         <div class="sec-eyebrow" style="margin-bottom:12px">The arena</div>
         <h2>Think you can spot the slop?</h2>
-        <p>The board is the machine's verdict. The arena collects yours — two blind samples from the same task, one
+        <p>The board is the machine's verdict. The arena collects yours: two blind samples from the same task, one
           sloppier than the other. Flag it. Every vote nudges the live Elo that powers 40% of the score.</p>
         <a class="btn" href="/arena">Play a round <span class="arr">→</span></a>
       </div>
-      <div class="mini" aria-hidden="true">
-        <div class="mc"><span class="tag">1</span>Hi team — just circling back to touch base on the deck. Wanted to make sure we're aligned before EOD. Let me know if that works!</div>
-        <div class="mc"><span class="tag">2</span>deck's basically done, missing the Q3 numbers. can you send those over when you get a sec? no rush</div>
-        <div class="q">Which one feels more like AI slop?</div>
+      <div class="keys" aria-hidden="true">
+        <div class="key"><span class="cap">1</span><span class="kl">flag the <b>left</b> sample</span></div>
+        <div class="key"><span class="cap">2</span><span class="kl">flag the <b>right</b> sample</span></div>
+        <div class="key"><span class="cap">3</span><span class="kl"><b>both</b> are slop</span></div>
       </div>
     </div>
   </div>
@@ -195,44 +260,19 @@
   <div class="wrap">
     <div class="close">
       <h2>Built by people who read a lot of email.</h2>
-      <p>The Slop Index is a research project from Slashy — the email client that saves you time instead of generating
+      <p>The Slop Index is a research project from Slashy, the email client that saves you time instead of generating
         more AI slop. See who writes clean, then come see what we build.</p>
-      <a class="btn light" href="/leaderboard">Explore the rankings <span class="arr">→</span></a>
-      <a class="btn ghost" href="https://slashy.com" target="_blank" rel="noopener">Visit Slashy <span class="arr">→</span></a>
+      <div class="close-cta">
+        <a class="btn light" href="/leaderboard">Explore the rankings <span class="arr">→</span></a>
+        <a class="btn ghost" href="https://slashy.com" target="_blank" rel="noopener">Visit Slashy <span class="arr">→</span></a>
+        <a class="textlink" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Star it on GitHub</a>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="foot">
-  <div class="foot-in">
-    <div class="foot-brand">
-      <div class="b">
-        <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg2)"/>
-          <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg2)"/>
-          <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg2)"/>
-          <defs><linearGradient id="sg2" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
-        </svg>
-        <span class="wm">The Slop Index</span>
-      </div>
-      <p>A benchmark for how much frontier models write like AI. Measured against pre-AI human writing and by blind human vote.</p>
-    </div>
-    <div class="foot-col">
-      <h4>Explore</h4>
-      <a href="/leaderboard">Leaderboard</a>
-      <a href="/arena">Play the arena</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/stats">Live votes</a>
-    </div>
-    <div class="foot-col">
-      <h4>Open source</h4>
-      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Code &amp; data</a>
-      <a href="https://slashy.com" target="_blank" rel="noopener">Slashy</a>
-    </div>
-  </div>
-  <div class="foot-legal">18 models · 112 scenarios · 19,928 generations · fully open-sourced. A research project from Slashy.</div>
-</footer>
+<footer class="foot" id="site-footer"></footer>
+<script src="/footer.js"></script>
 
 <script>
 const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells:0.15};
@@ -299,7 +339,7 @@ async function refresh(){
   computeScores(crowd);
   const total=(crowd&&crowd.totalVotes)||0;
   $('votecount').textContent = total>0
-    ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' cast — and counting'
+    ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' and counting'
     : 'be the first to cast a human vote';
   renderBand(crowd); renderSnap();
 }
