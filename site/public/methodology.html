@@ -50,15 +50,18 @@
   .formula .note{font-size:12.5px;color:#9A968F;margin-top:16px;line-height:1.5}
 
   /* axis grid */
-  .axes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
-  @media(max-width:620px){.axes{grid-template-columns:1fr}}
-  .ax{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px}
-  .ax .w{font-family:var(--mono);font-size:11px;color:var(--body);font-weight:600;float:right;
-    background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2px 10px}
-  .ax h3{margin:0 0 8px;font-size:16px}
+  .axes{display:grid;grid-template-columns:1fr 1fr;gap:0 44px;margin:24px 0 8px}
+  @media(max-width:620px){.axes{grid-template-columns:1fr;gap:0}}
+  /* de-slopped: hairline-separated ledger rows. weight is a plain mono number over a
+     proportional cobalt meter that actually shows the split - no cards, shadows, pills or tint. */
+  .ax{border-top:1px solid var(--ink);padding:15px 0 18px}
+  .ax .axhd{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .ax h3{margin:0;font-family:var(--display);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+  .ax .w{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .ax .meter{height:2px;background:var(--line);margin:10px 0 12px}
+  .ax .meter i{display:block;height:100%;width:var(--wt,37.5%);background:var(--blue)}
   .ax p{font-size:13.5px;color:var(--body);line-height:1.6;margin:0}
-  .ax.human{border-color:var(--blue-line);background:linear-gradient(var(--card),var(--blue-tint))}
-  .ax.human .w{background:var(--blue);border-color:var(--blue);color:#fff}
+  .ax.human h3,.ax.human .w{color:var(--blue)}
 
   /* dataset table */
   .dtwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin:20px 0}
@@ -148,19 +151,19 @@
   <div class="doc-eyebrow">The five axes</div>
   <h2>What each axis measures</h2>
   <div class="axes">
-    <div class="ax human"><span class="w">40%</span><h3>The arena</h3>
+    <div class="ax human" style="--wt:100%"><div class="axhd"><h3>The arena</h3><span class="w">40%</span></div><div class="meter"><i></i></div>
       <p>A live Elo from the <a href="/arena">arena</a>, where people flag the sloppier of two blind samples one pair at
         a time. The least-flagged model rises. This is the only axis humans control directly, and it is the largest.</p></div>
-    <div class="ax"><span class="w">15%</span><h3>Conciseness</h3>
+    <div class="ax" style="--wt:37.5%"><div class="axhd"><h3>Conciseness</h3><span class="w">15%</span></div><div class="meter"><i></i></div>
       <p>Does the model resist length inflation? We compare each response's length to what a human wrote for the same
         task. Padding a two-line reply into six paragraphs is one of the most reliable tells.</p></div>
-    <div class="ax"><span class="w">15%</span><h3>Templating</h3>
+    <div class="ax" style="--wt:37.5%"><div class="axhd"><h3>Templating</h3><span class="w">15%</span></div><div class="meter"><i></i></div>
       <p>Reuse of openers and skeletons across unrelated prompts. Humans vary how they start; models fall back to the
         same scaffolds, "I hope this finds you well," "Here are a few thoughts," the same three-beat structure.</p></div>
-    <div class="ax"><span class="w">15%</span><h3>Rhythm</h3>
+    <div class="ax" style="--wt:37.5%"><div class="axhd"><h3>Rhythm</h3><span class="w">15%</span></div><div class="meter"><i></i></div>
       <p>Natural variance in paragraph and sentence length. Human writing is lumpy, a one-word line next to a long one.
         AI writing tends toward an even, metronomic cadence that reads smooth and lifeless.</p></div>
-    <div class="ax"><span class="w">15%</span><h3>Tells</h3>
+    <div class="ax" style="--wt:37.5%"><div class="axhd"><h3>Tells</h3><span class="w">15%</span></div><div class="meter"><i></i></div>
       <p>Over-used AI vocabulary and constructions measured against their pre-AI base rate: "delve," "tapestry,"
         "it's not just X — it's Y," the reflexive em-dash, the closing "let me know if you'd like…"</p></div>
   </div>
