@@ -62,10 +62,10 @@ img,svg{max-width:100%}
 .brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .brand .mark{width:22px;height:22px;display:block;flex:0 0 auto}
 .brand .wm{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
-/* "by Slashy" attribution: hairline divider then the Slashy wordmark in cobalt */
-.brand .byl{font-size:13px;color:var(--faint);font-weight:400;white-space:nowrap;align-self:center;
-  padding-left:11px;border-left:1px solid var(--line);line-height:1.1}
-.brand .byl .sl{color:var(--blue);font-weight:600}
+/* "by Slashy" attribution: hairline divider then the real Slashy wordmark (from slashyemail, cobalt) */
+.brand .byl{font-size:13px;color:var(--faint);font-weight:400;white-space:nowrap;display:inline-flex;
+  align-items:center;gap:5px;align-self:center;padding-left:11px;border-left:1px solid var(--line);line-height:1}
+.brand .byl .sl-logo{height:14px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:4px}
 /* active state from the type itself (weight + ink), not an underline-reveal or a dot */
 .nav-links a{font-size:14px;font-weight:450;color:var(--muted);padding:8px 11px;border-radius:8px;
