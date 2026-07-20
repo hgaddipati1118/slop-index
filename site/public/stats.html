@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slop Index, live votes</title>
+<title>Live votes · The Slop Index</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,13 +14,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
-  :root{
-    --bg:#FBFAF9; --card:#FFFFFF; --surface:#F5F3F0; --ink:rgba(0,0,0,.9);
-    --body:#565B64; --muted:rgba(0,0,0,.55); --faint:rgba(0,0,0,.4);
-    --line:#E6E6E6; --divider:#ECEAE5; --dark:#2D2B36; --heat:#917ED6; --good:#4457C4;
-    --sans:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
-  }
+  /* inherit the brand tokens (Geist, cobalt, charcoal, off-white) from site.css;
+     only the two stats-local accents live here */
+  :root{ --heat:#917ED6; --good:#4457C4; }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
   .wrap{max-width:820px;margin:0 auto;padding:0 20px 60px}
@@ -39,7 +35,7 @@
   .stat .d{font-size:12px;color:var(--muted);margin-top:5px}
   .stat.hi .v{color:var(--good)}
   .flash{animation:flash .9s ease-out}
-  @keyframes flash{0%{background:rgba(63,122,91,.12)}100%{background:var(--card)}}
+  @keyframes flash{0%{background:rgba(68,87,196,.1)}100%{background:var(--card)}}
 
   .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;margin-top:20px;align-items:start}
   @media(max-width:680px){.grid{grid-template-columns:1fr}}
