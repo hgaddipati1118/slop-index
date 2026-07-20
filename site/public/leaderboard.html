@@ -23,10 +23,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
-  .phead{padding:52px 0 8px;text-align:center}
-  .phead .eyebrow{display:inline-block;margin-bottom:16px}
+  .phead{padding:56px 0 8px;text-align:left}
+  .phead .eyebrow{display:inline-block;margin-bottom:14px}
   .phead h1{font-family:var(--display);font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--ink)}
-  .phead .thesis{font-size:clamp(16px,2.2vw,19px);color:var(--ink-2);max-width:620px;margin:18px auto 0;line-height:1.5}
+  .phead .thesis{font-size:clamp(16px,2.2vw,19px);color:var(--ink-2);max-width:620px;margin:18px 0 0;line-height:1.5}
   .phead .thesis b{font-weight:600;color:var(--ink)}
   .phead .livepill{margin-top:22px}
 
@@ -50,7 +50,7 @@
   .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px;height:26px;overflow:hidden}
   .col .rk{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
   .legend{display:flex;align-items:center;gap:10px;justify-content:center;margin:20px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,var(--blue),var(--blue-soft),var(--blue-pale))}
+  .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,#4457C4,#8a94b8,#cdccd2)}
 
   /* table */
   .twrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
@@ -130,7 +130,7 @@
     <span class="eyebrow">The board · live</span>
     <h1>Every model, ranked</h1>
     <p class="thesis">18 frontier models scored by <b>Human Score</b>, how much each writes like a person and not a
-      chatbot. It blends the live human vote (40%) with four mechanical axes against pre-AI writing. Higher is better.</p>
+      chatbot. It blends the live arena vote (40%) with four mechanical axes against pre-AI writing. Higher is better.</p>
     <span class="livepill"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span>
   </div>
 </header>
@@ -162,14 +162,14 @@
         <thead><tr>
           <th class="l">#</th><th class="l">model</th>
           <th>human score</th>
-          <th>human 40%</th><th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
+          <th>arena 40%</th><th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
           <th>$/M</th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
     <p class="axis-hint">
-      <b>Human</b> = the crowd vote (live Elo, 40%) ·
+      <b>Arena</b> = the crowd vote (live Elo, 40%) ·
       <b>Conciseness</b> = resisting length inflation vs a human on the same task ·
       <b>Templating</b> = avoiding reused openers &amp; skeletons across prompts ·
       <b>Rhythm</b> = natural paragraph-length variance ·
@@ -216,7 +216,7 @@
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from genuine human writing
         collected before generative AI existed: Enron email, a blog-authorship corpus and student essays, archived
         tweets, and Discord chat.</p></div>
-      <div class="mcard"><h3>Five axes, one score</h3><p>Human vote <code>40%</code> plus conciseness, templating, rhythm
+      <div class="mcard"><h3>Five axes, one score</h3><p>The arena <code>40%</code> plus conciseness, templating, rhythm
         and tells at <code>15%</code> each. Every axis is normalised to a 0–100 human-likeness scale before blending.</p></div>
       <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios across four
         domains, five samples each, for <b>19,928</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
@@ -254,8 +254,8 @@ const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
 
 // cobalt (human) -> soft -> pale blue (slop). t: 0 human .. 1 slop.
 function heat(t){
-  const stops=[[68,87,196],[142,161,226],[218,226,253]];
-  const seg=t<.5?0:1, f=t<.5?t/.5:(t-.5)/.5, a=stops[seg], b=stops[seg+1];
+  const s=[[68,87,196],[126,138,190],[178,182,198],[205,207,214]];   // shared cobalt->grey ramp (matches the home board)
+  const seg=Math.min(2,Math.floor(t*3)), f=(t*3)-seg, a=s[seg], b=s[seg+1];
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
 const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells:0.15};

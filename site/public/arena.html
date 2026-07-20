@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Spot the Slop · The Arena · The Slop Index</title>
-<meta name="description" content="Two AIs got the same task. One wrote it sloppier. Can you spot which? Blind pairwise voting that powers the live human axis of The Slop Index.">
+<meta name="description" content="Two AIs got the same task. Which is more slop? Blind pairwise voting that powers the live human axis of The Slop Index.">
 <meta property="og:title" content="Spot the Slop · The Slop Index Arena">
 <meta property="og:description" content="Two AIs, same task, one sloppier. Flag it. Your blind votes power 40% of the benchmark.">
 <meta property="og:type" content="website">
@@ -79,9 +79,7 @@
   .lbchart{display:flex;align-items:flex-end;justify-content:flex-start;gap:7px;overflow-x:auto;padding:10px 2px 0;min-height:286px}
   .lbcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:0 0 auto;width:56px}
   .lbval{font-family:var(--mono);font-size:11px;color:var(--body);margin-bottom:6px;font-variant-numeric:tabular-nums}
-  .lbbar{width:36px;border-radius:7px 7px 0 0;background:var(--surface);border:1px solid var(--line);
-    border-bottom:none;transition:height .5s cubic-bezier(.2,.7,.2,1)}
-  .lbcol.top .lbbar{background:var(--dark);border-color:var(--dark)}
+  .lbbar{width:36px;border-radius:4px 4px 0 0;transition:height .5s cubic-bezier(.2,.7,.2,1)}
   .lbcol.top .lbval{color:var(--ink);font-weight:600}
   .lblogo{margin-top:9px;width:25px;height:25px;border-radius:8px;background:var(--card);border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--ink)}
@@ -130,7 +128,7 @@
   <header class="ahead">
     <span class="eyebrow">The arena</span>
     <h1>Spot the Slop</h1>
-    <div class="tag">Two AIs got the same task. One wrote it sloppier. Can you spot which?</div>
+    <div class="tag">Two AIs got the same task. Which is more slop?</div>
   </header>
 
   <div class="badgewrap"><span class="domainbadge" id="domainbadge"></span></div>
@@ -334,6 +332,10 @@ const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','
 let LOGOS={};
 const logo=m=>LOGOS[LABS[m]]||`<span class="mono">${CODE[LABS[m]]||'?'}</span>`;
 
+// shared cobalt->grey ramp (matches the home + leaderboard boards)
+function tone(t){const s=[[68,87,196],[126,138,190],[178,182,198],[205,207,214]];
+  const seg=Math.min(2,Math.floor(t*3)),f=(t*3)-seg,a=s[seg],b=s[seg+1];
+  return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;}
 function renderChart(rows){
   const el=$('lbchart');
   if(!rows.length){el.innerHTML='<div class="lbempty">be the first to flag some slop</div>';return;}
@@ -341,7 +343,7 @@ function renderChart(rows){
   el.innerHTML=rows.map((r,n)=>{
     const h=Math.round(96+((+r.elo-mn)/span)*250);
     return `<div class="lbcol${n===0?' top':''}"><div class="lbval">${r.elo}</div>`+
-           `<div class="lbbar" style="height:${h}px"></div>`+
+           `<div class="lbbar" style="height:${h}px;background:${tone(n/Math.max(1,rows.length-1))}"></div>`+
            `<div class="lblogo" title="${LABS[r.model]||''}">${logo(r.model)}</div>`+
            `<div class="lbname">${shortName(r.model)}</div><div class="lbrank">#${n+1}</div></div>`;
   }).join('');

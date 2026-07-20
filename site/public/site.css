@@ -84,13 +84,14 @@ img,svg{max-width:100%}
 @media(max-width:460px){ .nav-links a{padding:10px 6px} }
 
 /* ---------- buttons ---------- */
-/* buttons: one clear action, no glow, no hover-boop. state changes by fill only. */
-.btn{display:inline-flex;align-items:center;gap:9px;background:var(--dark);color:#fff;border:1px solid var(--dark);
+/* buttons: one clear action, no glow, no hover-boop. state changes by fill only.
+   colour + no-underline are !important so a page's link styles can never make a button unreadable. */
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--dark);color:#fff!important;border:1px solid var(--dark);
   border-radius:10px;padding:13px 24px;font-family:var(--sans);font-size:15px;font-weight:550;
-  cursor:pointer;text-decoration:none;transition:background .15s,color .15s,border-color .15s;min-height:44px}
-.btn:hover{background:#3b3944;color:#fff}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--ink);background:transparent;color:var(--ink)}
+  cursor:pointer;text-decoration:none!important;transition:background .15s,color .15s,border-color .15s;min-height:44px}
+.btn:hover{background:#3b3944}
+.btn.ghost{background:transparent;color:var(--ink)!important;border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--ink);background:transparent}
 .btn.sm{padding:9px 16px;font-size:13.5px;border-radius:8px;min-height:0}
 .btn .arr{transition:transform .18s cubic-bezier(.2,.7,.2,1)}
 .btn:hover .arr{transform:translate(2px,-2px)}
@@ -103,24 +104,22 @@ img,svg{max-width:100%}
 /* ---------- generic cards ---------- */
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px}
 
-/* ---------- live pill ---------- */
-.livepill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;
-  color:var(--body);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 14px}
+/* ---------- live indicator (plain, not a pill chip) ---------- */
+.livepill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
 /* static mark, no pulsing glow ring (that ring is a slop tell) */
 .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex:0 0 auto}
 
-/* ---------- shared stat band ---------- */
-.band{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:680px){.band{grid-template-columns:1fr}}
-.scard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px;text-align:left;position:relative}
-.scard .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
-  display:flex;align-items:center;gap:8px}
-.scard .v{font-size:26px;font-weight:800;color:var(--ink);margin-top:10px;letter-spacing:-.01em;line-height:1.1}
+/* ---------- shared stat band: borderless blocks under a hairline, not cards ---------- */
+.band{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+@media(max-width:680px){.band{grid-template-columns:1fr;gap:22px}}
+.scard{border-top:1px solid var(--ink);padding:14px 0 0;text-align:left;position:relative}
+.scard .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--muted);
+  display:flex;align-items:center;gap:7px}
+.scard .v{font-family:var(--display);font-size:27px;font-weight:700;color:var(--ink);margin-top:10px;letter-spacing:-.01em;line-height:1.05}
 .scard .d{font-size:13px;color:var(--muted);margin-top:6px}
-.scard.top{border-color:var(--blue-line)} .scard.top .v{color:var(--blue)}
-.scard.hot{border-color:var(--purple-line)} .scard.hot .v{color:var(--purple-ink)}
-.scard.live .k::after{content:'live';font-family:var(--mono);font-size:9px;color:var(--blue);letter-spacing:.05em;
-  border:1px solid var(--blue-line);border-radius:10px;padding:1px 6px}
+.scard.top .v{color:var(--blue)}
+.scard.hot .v{color:var(--purple-ink)}
+.scard.live .k::after{content:'live';font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:.02em}
 
 /* ---------- section scaffolding ---------- */
 section{padding:52px 0}
