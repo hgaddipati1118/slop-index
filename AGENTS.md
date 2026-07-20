@@ -1,4 +1,4 @@
-# AGENTS.md — reproduce The Slop Index end to end
+# AGENTS.md, reproduce The Slop Index end to end
 
 > This file is the machine-readable playbook. An agent (Claude Code, Codex, etc.) should be
 > able to rebuild every result in this repo from it. `CLAUDE.md` is a symlink to this file, so
@@ -7,7 +7,7 @@
 The Slop Index ranks frontier LLMs by how much recognizable **"AI slop"** their writing contains,
 measured mechanically against **pre-AI human baselines** (all text provably written before
 Oct 2022) across four domains: **email, social, essay, chat**. A companion web app collects a
-human-preference Elo. No LLM judges score other LLMs — every number is a token statistic.
+human-preference Elo. No LLM judges score other LLMs, every number is a token statistic.
 
 ## Repo layout
 
@@ -23,7 +23,7 @@ harness/           the pipeline (pure stdlib + LiteLLM). Run everything from rep
   export_votes.py    dump the live vote log from Redis to jsonl
 scenarios/pilot/   the 112 hand-written scenarios (email/social/essay/slack) + per-scenario setups
 baselines/         DERIVED human-baseline stats only (stats.json). Raw corpora are NOT shipped
-                   (1.4GB, third-party licenses) — see baselines/README.md to rebuild them.
+                   (1.4GB, third-party licenses), see baselines/README.md to rebuild them.
 runs/full-merged/  outputs.jsonl = the 19,928 real generations behind the published board
 runs/full-merged-score.log  = the exact score.py + rank_spread.py output (the results)
 site/              the deployed app (Vercel + Upstash Redis + Cloudflare Turnstile)
@@ -84,7 +84,7 @@ python harness/rank_spread.py --run-id full-merged     # 500-bootstrap rank rang
 each axis is put on a 0–100 human-likeness scale (100 = writes like a human), then blended
 **human vote 40% + conciseness/templating/rhythm/tells 15% each**. The human axis is the live crowd
 Elo from the game, so the public board updates as votes arrive; `score.py` above is the frozen
-mechanical 60%. Keep both — the mechanical scorer is fully reproducible offline; the human 40% needs
+mechanical 60%. Keep both, the mechanical scorer is fully reproducible offline; the human 40% needs
 real vote volume before it's meaningful.
 
 ## 4. (Optional) detector cross-check
@@ -93,7 +93,7 @@ real vote volume before it's meaningful.
 PANGRAM_API_KEY=... python harness/detect.py --run-id full-merged
 ```
 
-Finding: Pangram flags **every** frontier model at ~100% AI / high confidence — it saturates and
+Finding: Pangram flags **every** frontier model at ~100% AI / high confidence, it saturates and
 cannot rank models. It's a control that motivates the mechanical index, never a ranking axis.
 (The published site intentionally omits it.)
 
@@ -123,11 +123,11 @@ model loses Elo, so least-slop rises to the top.
 
 ## Gotchas we already hit (don't relearn them)
 
-- **`id="turnstile"` collision**: never name a DOM element `turnstile` — it shadows the global
+- **`id="turnstile"` collision**: never name a DOM element `turnstile`, it shadows the global
   Cloudflare installs and silently kills every vote. The container is `id="cfslot"`.
-- **Never wipe the vote board** except on explicit request — `admin` wipe deletes real votes.
-- **No em dashes in site copy** — the benchmark scores em-dash usage as a typography tell; the
+- **Never wipe the vote board** except on explicit request, `admin` wipe deletes real votes.
+- **No em dashes in site copy**, the benchmark scores em-dash usage as a typography tell; the
   honest claim is "em dash = typography-era signal, not an AI signal" (pre-AI Discord humans
   who *could* type them still didn't).
 - **Reasoning effort** is left at each model's default and disclosed per-model, not forced.
-- **Detectors saturate** (see step 4) — this is expected, not a bug.
+- **Detectors saturate** (see step 4), this is expected, not a bug.

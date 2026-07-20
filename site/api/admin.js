@@ -1,4 +1,4 @@
-// Admin recovery endpoint — token-protected. Lets you reset or rebuild the
+// Admin recovery endpoint, token-protected. Lets you reset or rebuild the
 // board in one call if the game gets botted. The raw vote log is the source of
 // truth; the Elo board is a derived cache you can always recompute.
 //

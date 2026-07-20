@@ -1,4 +1,4 @@
-// Minimal Upstash Redis REST client — no npm dependency, no build step.
+// Minimal Upstash Redis REST client, no npm dependency, no build step.
 // Reads UPSTASH_REDIS_REST_URL/TOKEN (Upstash integration) or KV_REST_API_URL/
 // TOKEN (Vercel KV). Returns a `configured` flag so the game degrades
 // gracefully (still playable, votes just not persisted) before a store is added.

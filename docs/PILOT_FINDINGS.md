@@ -1,6 +1,6 @@
 # Pilot Findings (2026-07-14)
 
-Two runs. **Pilot-001 is superseded — its roster was months stale (gpt-5.1, gemini-2.5). Do not publish its numbers.** Pilot-002 is the live result set.
+Two runs. **Pilot-001 is superseded, its roster was months stale (gpt-5.1, gemini-2.5). Do not publish its numbers.** Pilot-002 is the live result set.
 
 | | pilot-001 | pilot-002 |
 |---|---|---|
@@ -23,7 +23,7 @@ Pangram's number is a *composition* score ("% of this text that is AI"), which p
 **9 of 10 axes separate the models with disjoint CIs:**
 MTLD lexical diversity · sentence burstiness · paragraph-length variance · length inflation (overall **and** in all four domains separately) · opener repetition (within-scenario).
 
-**Dropped:** compression ratio (overlapped in 001), raw word count (separated in 001, **overlaps in 002** — models now differ less in absolute length than in how they respond to each task's band; length-inflation-over-band is the correct metric and still separates).
+**Dropped:** compression ratio (overlapped in 001), raw word count (separated in 001, **overlaps in 002**, models now differ less in absolute length than in how they respond to each task's band; length-inflation-over-band is the correct metric and still separates).
 
 ## 3. THE BIG ONE: findings are model-VERSION properties, not lab properties
 
@@ -37,7 +37,7 @@ MTLD lexical diversity · sentence burstiness · paragraph-length variance · le
 
 Verified not an artifact: no truncation, no empty retries, median 72 words, well-formed outputs. OpenAI evidently tuned verbosity down between 5.1 and 5.6.
 
-**This is the benchmark's identity argument.** Slop is a property of a *model version*, not of a lab — and only a benchmark that re-runs on every release can see that. It is the strongest possible case for the recurring-franchise design.
+**This is the benchmark's identity argument.** Slop is a property of a *model version*, not of a lab, and only a benchmark that re-runs on every release can see that. It is the strongest possible case for the recurring-franchise design.
 
 ### Current verbosity crown: length inflation over the human band
 
@@ -69,7 +69,7 @@ Same prompt, 5 samples, share sharing the identical 5-word opener (1/n = 0.20 fl
 
 **gpt-5.6-sol 0.67 · claude-sonnet-5 0.65 · gpt-5.4-mini 0.65 · gemini-3.1-pro 0.52 · gemini-3.5-flash 0.48 · kimi-k2p6 0.45 · deepseek-v4-pro 0.40**
 
-Claude-high and DeepSeek-low replicate across both pilots. New: **gpt-5.6-sol is simultaneously the most concise AND the most templated** — it stopped padding but converged harder on one opening. "Terse and identical" is a distinct slop mode worth naming.
+Claude-high and DeepSeek-low replicate across both pilots. New: **gpt-5.6-sol is simultaneously the most concise AND the most templated**, it stopped padding but converged harder on one opening. "Terse and identical" is a distinct slop mode worth naming.
 
 ## 6. Hidden reasoning is a cost axis nobody sees
 
@@ -95,7 +95,7 @@ Our intended launch banger. **0% formal sign-offs across all models**, lengths i
 
 ## 8. Full-run economics
 
-**$6.63 per 1,000 outputs.** Full publishable run (~110 scenarios × 10 samples × 7 models ≈ 7,700 outputs) ≈ **$51**. Cheap enough to re-run within 24–48h of every model release — the franchise premise holds.
+**$6.63 per 1,000 outputs.** Full publishable run (~110 scenarios × 10 samples × 7 models ≈ 7,700 outputs) ≈ **$51**. Cheap enough to re-run within 24–48h of every model release, the franchise premise holds.
 
 ## 9. DESIGN DECISION: publish a scorecard, not a ranking
 
@@ -105,7 +105,7 @@ Stable across reweightings:
 - **sloppiest** = gpt-5.4-mini (78% of trials)
 - **cleanest** = deepseek-v4-pro (62% of trials)
 
-The extremes are the data's. The middle order is the weights'. Shipping a single "model X is #3" number would let any critic reproduce our harness with equally reasonable weights and get a different board — a self-inflicted credibility hit.
+The extremes are the data's. The middle order is the weights'. Shipping a single "model X is #3" number would let any critic reproduce our harness with equally reasonable weights and get a different board, a self-inflicted credibility hit.
 
 **Therefore:**
 1. The board is a **four-column scorecard** (conciseness · templating · rhythm · tells), each anchored on the human baseline, each defensible alone, each its own chart.
@@ -133,9 +133,9 @@ This is also better content: four axis-charts start four conversations; one lead
 **Why default, not forced-uniform:**
 1. It is what real users experience out of the box (the benchmark's whole premise is everyday use).
 2. **Reasoning cannot be fully disabled on several 2026 models** (measured): Gemini 3.x retains ~400 tokens even with "disable"; Grok 4.5 has no off, only "low" (floors ~168); Muse ignores the param entirely (thought *more* when asked to stop). True zero-reasoning parity is impossible, so "reasoning off for everyone" is not an achievable board.
-3. Forcing max effort ≈ 2x cost on OpenAI, 3–5x on Claude (enabling thinking from zero at $50/M), ~$170–210 for a full re-run — not worth it to move a board that's already sound.
+3. Forcing max effort ≈ 2x cost on OpenAI, 3–5x on Claude (enabling thinking from zero at $50/M), ~$170–210 for a full re-run, not worth it to move a board that's already sound.
 
-**This sharpens the headline, it doesn't weaken it:** Claude Fable 5 is the sloppiest model in the field (rank 1, isolated CI) *with zero reasoning tokens* — it didn't think at all and still produced the most slop. Gemini, despite thinking harder than any model, lands mid-pack. So "think harder" is not obviously the fix for slop, which is itself a finding.
+**This sharpens the headline, it doesn't weaken it:** Claude Fable 5 is the sloppiest model in the field (rank 1, isolated CI) *with zero reasoning tokens*, it didn't think at all and still produced the most slop. Gemini, despite thinking harder than any model, lands mid-pack. So "think harder" is not obviously the fix for slop, which is itself a finding.
 
 **Companion experiment (optional, ~$12):** run 3–4 models on the pilot at default vs max effort to measure whether more reasoning reduces slop. Not required for v1; a good follow-up post.
 

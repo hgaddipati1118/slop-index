@@ -1,4 +1,4 @@
-"""Rank Spread — confidence-interval rank ranges for the Slop Index board.
+"""Rank Spread, confidence-interval rank ranges for the Slop Index board.
 
 The LMArena credibility pattern: never publish a false-precise "#3". Instead
 report the RANGE of ranks a model plausibly occupies, and call two models a
@@ -174,7 +174,7 @@ def main():
         return lo, hi
 
     print("=" * 70)
-    print(f"SLOP INDEX — RANK SPREAD   run={args.run_id}   {B} bootstraps")
+    print(f"SLOP INDEX, RANK SPREAD   run={args.run_id}   {B} bootstraps")
     print("higher Slop Index = sloppier. rank 1 = sloppiest.")
     print("=" * 70)
     print(f"{'rank':>10}  {'model':<24}{'slop':>7}   spread")

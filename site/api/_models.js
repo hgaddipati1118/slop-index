@@ -1,4 +1,4 @@
-// The valid model roster — votes for anything not on this list are rejected,
+// The valid model roster, votes for anything not on this list are rejected,
 // which blocks fake-model injection into the leaderboard. Regenerated whenever
 // the benchmark roster changes (kept in sync with public/pairs.json).
 export const MODELS = new Set([

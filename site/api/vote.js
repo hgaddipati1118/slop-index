@@ -3,12 +3,12 @@
 //
 // Anti-gaming layers (open voting can never be fully botproof, so this is
 // defense-in-depth + a clean audit trail to filter bad actors AFTER the fact):
-//   1. Roster allowlist   — reject fake/garbage model names (no leaderboard injection).
-//   2. Field length caps   — no storage-bloat abuse.
-//   3. Dwell check         — a vote < 1.2s after the pair was shown doesn't count.
-//   4. Per-voter + per-IP floor (1.5s) and daily caps — rotating fingerprints
+//   1. Roster allowlist  , reject fake/garbage model names (no leaderboard injection).
+//   2. Field length caps  , no storage-bloat abuse.
+//   3. Dwell check        , a vote < 1.2s after the pair was shown doesn't count.
+//   4. Per-voter + per-IP floor (1.5s) and daily caps, rotating fingerprints
 //      from one IP still hit the IP limit; rotating IPs is the residual hole.
-//   5. Permanent raw log with a SALTED IP HASH — groupable for bot detection
+//   5. Permanent raw log with a SALTED IP HASH, groupable for bot detection
 //      (same IP -> same hash) but not reversible PII, so a flood can be excised
 //      and the board recomputed (see harness/recompute_votes.py).
 import { createHmac } from 'node:crypto';
@@ -23,7 +23,7 @@ const K = 32;
 const MIN_GAP_MS = 1500;
 const MIN_DWELL_MS = 1200;
 const DAILY_CAP_FP = 400;   // per fingerprint
-const DAILY_CAP_IP = 800;   // per IP (higher — NAT/shared networks are legit)
+const DAILY_CAP_IP = 800;   // per IP (higher, NAT/shared networks are legit)
 const SALT = process.env.IP_SALT || 'slop-default-salt';
 
 function clientIp(req) {
@@ -80,7 +80,7 @@ export default async function handler(req, res) {
     const ip = clientIp(req);
     const iph = ipHash(ip);
     const fp = (fingerprint || 'nofp').slice(0, 80);
-    // coarse geo only (2-letter country from Vercel's edge) — not PII, for the live feed
+    // coarse geo only (2-letter country from Vercel's edge), not PII, for the live feed
     const country = (req.headers['x-vercel-ip-country'] || '').slice(0, 2).toUpperCase() || null;
     const now = Date.now();
     const day = new Date(now).toISOString().slice(0, 10);
@@ -128,7 +128,7 @@ export default async function handler(req, res) {
     });
 
     // "both are slop" is a DRAW (standard Elo): each scores 0.5, so the ratings
-    // converge — ~0 change when they're already equal, but a higher-rated model
+    // converge, ~0 change when they're already equal, but a higher-rated model
     // that only tied a lower one drops toward it. A decisive vote scores 1 / 0.
     const sW = tie ? 0.5 : 1;                     // score for the "winner" slot
     const eloOps = [

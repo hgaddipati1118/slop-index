@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Slop Index — which AI writes the least like AI?</title>
+<title>The Slop Index, which AI writes the least like AI?</title>
 <meta name="description" content="A benchmark ranking 18 frontier LLMs by how much recognizable 'AI slop' they write, measured against real pre-AI human writing and by blind human vote. Open method, open data.">
 <meta property="og:title" content="The Slop Index">
 <meta property="og:description" content="18 frontier models, ranked by how much they write like AI slop, measured mechanically against pre-AI human writing and by blind human vote.">
@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
   /* ---- hero: editorial, left-aligned, data-forward ---- */
@@ -28,14 +28,14 @@
   .kicker{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
   .kicker .kd{width:28px;height:1px;background:var(--ink);opacity:.45}
-  .kicker a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+  .kicker a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
   .hero h1{font-family:var(--sans);font-size:clamp(44px,7.6vw,84px);font-weight:800;line-height:1;
     letter-spacing:-.035em;color:var(--ink);margin:22px 0 0;max-width:15ch}
   .thesis{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:610px;margin:22px 0 0;line-height:1.5}
   .thesis b{font-weight:600;color:var(--ink)}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 0;align-items:center}
-  .textlink{font-size:15px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;transition:opacity .14s}
-  .textlink:hover{opacity:.62}
+  .textlink{font-size:15px;font-weight:600;color:var(--blue);text-decoration:underline;text-underline-offset:3px;transition:opacity .14s}
+  .textlink:hover{opacity:.66}
   .strap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:30px 0 0;
     font-family:var(--mono);font-size:12.5px;color:var(--muted)}
   .strap .sep{opacity:.42}
@@ -61,20 +61,21 @@
   .snap-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
     padding:14px 16px 6px;margin-top:6px;border-top:1px solid var(--divider)}
   .snap-foot .lg-legend{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .snap-foot .ramp{height:8px;width:120px;border-radius:5px;background:linear-gradient(90deg,var(--clean),var(--heat-soft),var(--heat))}
+  .snap-foot .ramp{height:8px;width:120px;border-radius:5px;background:linear-gradient(90deg,var(--blue),var(--blue-soft),var(--blue-pale))}
 
   /* ---- the thing we measure: annotated slop vs human ---- */
   .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
   @media(max-width:720px){.ex-grid{grid-template-columns:1fr}}
   .ex{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--card)}
-  .ex-slop{background:linear-gradient(var(--card),#FBF2EC);border-color:var(--heat-soft)}
+  .ex-slop{background:linear-gradient(var(--card),#F6F3FC);border-color:var(--purple-line)}
+  .ex-human{background:linear-gradient(var(--card),#F1FAF8);border-color:#CDE9E5}
   .ex-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
     margin-bottom:14px;display:flex;align-items:center;gap:8px}
   .ex-tag .d{width:7px;height:7px;border-radius:50%}
-  .ex-slop .ex-tag{color:var(--heat)} .ex-slop .ex-tag .d{background:var(--heat)}
-  .ex-human .ex-tag{color:var(--good)} .ex-human .ex-tag .d{background:var(--good)}
+  .ex-slop .ex-tag{color:var(--purple-ink)} .ex-slop .ex-tag .d{background:var(--purple)}
+  .ex-human .ex-tag{color:var(--mint-ink)} .ex-human .ex-tag .d{background:var(--mint)}
   .ex p{font-size:15px;line-height:1.65;color:#33373E;margin:0}
-  .ex mark{background:rgba(194,103,62,.16);color:#8f4526;border-radius:3px;padding:0 3px;
+  .ex mark{background:var(--purple-tint);color:var(--purple-ink);border-radius:3px;padding:0 3px;
     -webkit-box-decoration-break:clone;box-decoration-break:clone}
   .ex-note{font-size:13px;color:var(--muted);margin-top:18px;line-height:1.6;max-width:720px}
   .ex-note b{color:var(--body);font-weight:600}
@@ -83,7 +84,7 @@
   .steps{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--divider)}
   .steps li{display:grid;grid-template-columns:66px 1fr;gap:22px;padding:24px 0;border-bottom:1px solid var(--divider);align-items:start}
   @media(max-width:560px){.steps li{grid-template-columns:40px 1fr;gap:14px;padding:20px 0}}
-  .steps .si{font-family:var(--mono);font-size:23px;font-weight:600;color:var(--faint);line-height:1;padding-top:3px}
+  .steps .si{font-family:var(--mono);font-size:23px;font-weight:600;color:var(--blue);line-height:1;padding-top:3px}
   .steps h3{font-size:18px;margin:0 0 6px;color:var(--ink)}
   .steps p{font-size:14.5px;color:var(--body);line-height:1.62;margin:0;max-width:660px}
   .steps code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;color:var(--ink)}
@@ -281,11 +282,12 @@ const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','
 let LOGOS={};
 const logo=lab=>(LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`);
 const $=id=>document.getElementById(id);
-const r0=v=>v==null?'—':Math.round(v);
+const r0=v=>v==null?'-':Math.round(v);
 
 // clean grey -> soft -> terracotta, by normalized slop (0 clean .. 1 sloppy)
+// cobalt (human) -> soft -> pale blue (slop). t: 0 human .. 1 slop.
 function heat(t){
-  const stops=[[220,216,209],[229,196,174],[194,103,62]];
+  const stops=[[68,87,196],[142,161,226],[218,226,253]];
   const seg=t<.5?0:1, f=t<.5?t/.5:(t-.5)/.5, a=stops[seg], b=stops[seg+1];
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
@@ -307,10 +309,10 @@ function computeScores(crowd){
 function renderBand(crowd){
   const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
   const best=rows[0], worst=rows[rows.length-1];
-  const leader=(crowd.rows&&crowd.rows[0])?(byId[crowd.rows[0].model]||{}).name||crowd.rows[0].model:'—';
+  const leader=(crowd.rows&&crowd.rows[0])?(byId[crowd.rows[0].model]||{}).name||crowd.rows[0].model:'-';
   const total=(crowd&&crowd.totalVotes)||0;
   $('band').innerHTML=[
-    ['','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
+    ['top','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
     ['hot','Most AI slop',worst.name,`Human Score ${r0(worst.score)} · ${worst.lab}`],
     ['live','Crowd favourite',leader,`from ${total.toLocaleString()} human vote${total===1?'':'s'}`]
   ].map(([c,k,v,d])=>`<div class="scard ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
@@ -320,8 +322,8 @@ function renderSnap(){
   const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
   const vs=rows.map(r=>r.score), mn=Math.min(...vs), mx=Math.max(...vs);
   $('snap').innerHTML=rows.map((r,n)=>{
-    const t=(100-r.score)/100;                       // colour by slop
-    const w=8+((r.score-mn)/Math.max(1e-9,mx-mn))*92; // bar width across the visible range
+    const t=n/Math.max(1,rows.length-1);             // colour by rank: #1 cobalt -> last pale (order reads at a glance)
+    const w=14+((r.score-mn)/Math.max(1e-9,mx-mn))*86; // bar width tracks the score
     return `<div class="srow${n===0?' lead':''}">
       <div class="rk">${n+1}</div>
       <div class="lg" title="${r.lab}">${logo(r.lab)}</div>

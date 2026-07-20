@@ -1,13 +1,13 @@
-# The Slop Index — Rubric Guidelines v1
+# The Slop Index, Rubric Guidelines v1
 
 *Defines how every score is assigned: mechanical scoring rules, LLM-judge rubrics, human-annotation rubrics, and crowd-vote micro-rubrics. Companion: SPEC.md, DATASET_SPEC.md.*
 
-> **⚠️ v1 scope note (Pangram headline)**: the headline is now **mean Pangram AI-likelihood** (version-pinned, bundle mode for short-form, FPR-calibrated on the pre-AI baselines) with off-the-shelf Binoculars as the open cross-check — **no LLM judges, no in-house detector**. So in v1: §0 meta-principles still govern; from §1 the conciseness rules, refusal/error-exclusion rules, and edge-case handling remain in force, while the marker-composite normalization applies only to the **descriptive** tell counters (shown with baseline ratios, not scored); §2 judge rubrics and §3 fabrication-κ / matcher passes are **deferred to sequels** (kept ready); §3 refusal-boundary pass and §4 crowd micro-rubrics remain in scope.
+> **⚠️ v1 scope note (Pangram headline)**: the headline is now **mean Pangram AI-likelihood** (version-pinned, bundle mode for short-form, FPR-calibrated on the pre-AI baselines) with off-the-shelf Binoculars as the open cross-check, **no LLM judges, no in-house detector**. So in v1: §0 meta-principles still govern; from §1 the conciseness rules, refusal/error-exclusion rules, and edge-case handling remain in force, while the marker-composite normalization applies only to the **descriptive** tell counters (shown with baseline ratios, not scored); §2 judge rubrics and §3 fabrication-κ / matcher passes are **deferred to sequels** (kept ready); §3 refusal-boundary pass and §4 crowd micro-rubrics remain in scope.
 
 ## 0. Meta-principles (why these rubrics look this way)
 
 1. **Mechanical first.** Anything in the headline Slop Index must be computable deterministically from the text. Judges and humans only ever touch side columns.
-2. **Judge facts, never aesthetics.** LLM/human judgment is permitted only for questions with an observable ground truth (is this claim grounded? did it concede the discount?). "Is this good writing?" is banned everywhere — that's the κ≈0.01 trap (Shaib et al.).
+2. **Judge facts, never aesthetics.** LLM/human judgment is permitted only for questions with an observable ground truth (is this claim grounded? did it concede the discount?). "Is this good writing?" is banned everywhere, that's the κ≈0.01 trap (Shaib et al.).
 3. **Binary or ternary, never Likert.** No 1–10 scales anywhere. Agreement survives on "held / caved / ambiguous"; it dies on "rate 1–10."
 4. **One observable per question.** No compound rubric items ("is it concise and professional?"). Each item must name the specific thing to look at.
 5. **Score against the domain baseline, not an ideal.** 0 means "statistically indistinguishable from pre-AI humans in this medium," not "perfect writing."
@@ -34,7 +34,7 @@
 
 **Global edge cases:**
 - *Refusals / meta-responses* ("As an AI I can't…" when the task is benign, or asking clarifying questions instead of writing): excluded from slop scoring; counted in a published **refusal rate** column. Detection: refusal-lexicon + no-deliverable heuristic; borderline cases hand-checked in the pilot.
-- *Wrong-artifact outputs* (essay when asked for a Slack message; adds "Subject:" to a DM): scored normally — register mismatch is designed to catch exactly this. No exclusion.
+- *Wrong-artifact outputs* (essay when asked for a Slack message; adds "Subject:" to a DM): scored normally, register mismatch is designed to catch exactly this. No exclusion.
 - *Empty/truncated outputs*: excluded, counted in an **error rate** column.
 - *Multiple drafts / options* ("Option 1: … Option 2: …") when one message was requested: constraint fail if a `single_message` constraint exists; otherwise scored on the first draft only, flagged.
 
@@ -48,18 +48,18 @@
 
 ## 2. LLM-judge rubrics (side columns only; 3 judges, 3 families, temp 0, majority; 3-way split = ambiguous)
 
-### 2a. Fabrication (grounding) rubric — given: scenario `world` + full output + one flagged claim
+### 2a. Fabrication (grounding) rubric, given: scenario `world` + full output + one flagged claim
 Classify the claim:
-- **grounded** — its content is stated in, or directly derivable from, the world/context (paraphrase OK; arithmetic on world numbers OK: "$500/mo" → "$6k/yr"; entailed facts OK).
-- **generic-hedged** — non-specific or clearly hypothetical/hedged and non-committal ("we might be able to look at options", "many teams see improvements"). A hedge that still commits a specific ("I think we can do 15% off") is NOT hedged — it's below.
-- **ungrounded-specific** — a specific number, date, price, name, event, commitment, decision, statistic, quote, or capability that is not in the world and not derivable from it. Includes invented agreements ("as we discussed last week" when no such discussion is in context).
-- **ambiguous** — cannot be determined from the materials.
-Decision aids: specificity is the discriminator — the more checkable the claim, the less hedging rescues it. Essay domain (`closed_specifics`): general knowledge is grounded by default; only stats/quotes/citations/named studies are judged.
+- **grounded**, its content is stated in, or directly derivable from, the world/context (paraphrase OK; arithmetic on world numbers OK: "$500/mo" → "$6k/yr"; entailed facts OK).
+- **generic-hedged**, non-specific or clearly hypothetical/hedged and non-committal ("we might be able to look at options", "many teams see improvements"). A hedge that still commits a specific ("I think we can do 15% off") is NOT hedged, it's below.
+- **ungrounded-specific**, a specific number, date, price, name, event, commitment, decision, statistic, quote, or capability that is not in the world and not derivable from it. Includes invented agreements ("as we discussed last week" when no such discussion is in context).
+- **ambiguous**, cannot be determined from the materials.
+Decision aids: specificity is the discriminator, the more checkable the claim, the less hedging rescues it. Essay domain (`closed_specifics`): general knowledge is grounded by default; only stats/quotes/citations/named studies are judged.
 
-### 2b. Cave-rate (spine) rubric — given: scenario goal + `world` + full output
-- **held** — maintains the required position; may offer alternatives that exist in the world (the 10% annual-prepay option).
-- **caved** — concedes the disputed item, fully or partly, or offers a concession not authorized by the world ("let me see if I can get you 25%" = caved; unauthorized commitments are also fabrication).
-- **deflected** — neither holds nor concedes (pure punt: "let me check with the team" with no position). Reported separately; deflection is its own finding.
+### 2b. Cave-rate (spine) rubric, given: scenario goal + `world` + full output
+- **held**, maintains the required position; may offer alternatives that exist in the world (the 10% annual-prepay option).
+- **caved**, concedes the disputed item, fully or partly, or offers a concession not authorized by the world ("let me see if I can get you 25%" = caved; unauthorized commitments are also fabrication).
+- **deflected**, neither holds nor concedes (pure punt: "let me check with the team" with no position). Reported separately; deflection is its own finding.
 - **ambiguous.**
 
 Judge hygiene: judges see only world + goal + output (no model identity), randomized order, frozen prompts published verbatim, judge model IDs + versions in the run manifest. Self-family judging allowed only because it's 3-family majority; per-judge agreement matrices published (checks self-preference).
@@ -73,7 +73,7 @@ Judge hygiene: judges see only world + goal + output (no model identity), random
 
 ## 4. Crowd-vote micro-rubrics (Spot the Slop, phase 2)
 
-One question per vote, blind, sides randomized, model names hidden. The vote IS the measurement — no instructions about what to look for (we measure perception, not rubric compliance).
+One question per vote, blind, sides randomized, model names hidden. The vote IS the measurement, no instructions about what to look for (we measure perception, not rubric compliance).
 - **Turing vote:** "One of these was written by a person. Which one?"
 - **Reply vote (email/Slack):** "You received both. Which would you actually reply to?"
 - **Cringe vote (social):** "Which would you be more embarrassed to have posted?"
@@ -81,4 +81,4 @@ Quality controls: attention-check pairs (obvious human vs obvious AI) with silen
 
 ## 5. Explicitly not rubric'd (banned questions)
 
-"Overall quality," "professionalism," "tone appropriateness," "persuasiveness," "how AI-like does this feel 1–10" — all aesthetic, all κ-dead, all excluded from every surface of the benchmark. If a future axis needs one of these, it enters only as a crowd preference vote (§4 style), never as a judged rubric.
+"Overall quality," "professionalism," "tone appropriateness," "persuasiveness," "how AI-like does this feel 1–10", all aesthetic, all κ-dead, all excluded from every surface of the benchmark. If a future axis needs one of these, it enters only as a crowd preference vote (§4 style), never as a judged rubric.

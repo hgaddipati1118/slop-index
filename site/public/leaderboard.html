@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Leaderboard — The Slop Index</title>
+<title>The Leaderboard, The Slop Index</title>
 <meta name="description" content="Live ranking of 18 frontier LLMs by Human Score: how much each writes like a person, not a chatbot. Blends a live human vote with four mechanical axes.">
-<meta property="og:title" content="The Slop Index — Leaderboard">
+<meta property="og:title" content="The Slop Index, Leaderboard">
 <meta property="og:description" content="18 frontier models ranked by how much they write like AI slop, by machine and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com/leaderboard">
@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
   .phead{padding:52px 0 8px;text-align:center}
@@ -41,7 +41,7 @@
   .chart{display:flex;align-items:flex-end;gap:8px;overflow-x:auto;padding:14px 2px 0;min-height:340px}
   .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:0 0 auto;width:56px}
   .col .val{font-family:var(--mono);font-size:11px;color:var(--body);margin-bottom:6px;font-variant-numeric:tabular-nums}
-  .col.top .val{color:var(--heat);font-weight:700}
+  .col.top .val{color:var(--blue);font-weight:700}
   .bar{width:38px;border-radius:6px 6px 0 0;transition:height .6s cubic-bezier(.2,.7,.2,1),background .3s}
   .col .logo{margin-top:10px;width:26px;height:26px;border-radius:8px;background:var(--card);border:1px solid var(--line);
     color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -50,7 +50,7 @@
   .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px;height:26px;overflow:hidden}
   .col .rk{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
   .legend{display:flex;align-items:center;gap:10px;justify-content:center;margin:20px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,var(--clean),var(--heat-soft),var(--heat))}
+  .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,var(--blue),var(--blue-soft),var(--blue-pale))}
 
   /* table */
   .twrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow-sm)}
@@ -84,9 +84,9 @@
   /* crowd axis */
   .crowd-meta{text-align:center;font-size:13.5px;color:var(--muted);margin-top:18px}
   .crowd-meta b{color:var(--ink);font-weight:600}
-  .crowd-meta a{font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+  .crowd-meta a{font-weight:600;color:var(--blue);text-decoration:underline;text-underline-offset:2px}
   .lbempty{margin:auto;align-self:center;color:var(--muted);font-size:14px}
-  .lbempty a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .lbempty a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 
   /* method summary */
   .method{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -129,7 +129,7 @@
   <div class="wrap">
     <span class="eyebrow">The board · live</span>
     <h1>Every model, ranked</h1>
-    <p class="thesis">18 frontier models scored by <b>Human Score</b> — how much each writes like a person and not a
+    <p class="thesis">18 frontier models scored by <b>Human Score</b>, how much each writes like a person and not a
       chatbot. It blends the live human vote (40%) with four mechanical axes against pre-AI writing. Higher is better.</p>
     <span class="livepill"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span>
   </div>
@@ -141,7 +141,7 @@
   <div class="wrap">
     <div class="sec-eyebrow">The board</div>
     <h2 class="sec-h">Who writes the least slop?</h2>
-    <p class="sec-sub" style="margin-bottom:22px">Human Score, 0–100, most human first. Switch domains to see who slips where —
+    <p class="sec-sub" style="margin-bottom:22px">Human Score, 0–100, most human first. Switch domains to see who slips where -
       the model that writes clean email is not always the one that writes clean essays.</p>
     <div class="tabs" id="tabs"></div>
     <div class="chart" id="chart"></div>
@@ -211,7 +211,7 @@
     <h2 class="sec-h">Open method, open data</h2>
     <p class="sec-sub" style="margin-bottom:22px">No LLM judges scoring other LLMs. Every mechanical number is measured
       against writing that provably predates ChatGPT. The full harness, scenarios and all 19,928 raw generations are
-      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px">on GitHub →</a></p>
+      <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">on GitHub →</a></p>
     <div class="method">
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from genuine human writing
         collected before generative AI existed: Enron email, a blog-authorship corpus and student essays, archived
@@ -221,7 +221,7 @@
       <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios across four
         domains, five samples each, for <b>19,928</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
       <div class="mcard"><h3>Two independent lenses</h3><p>The mechanical index measures slop by rule; the arena measures
-        it by vote. Where they agree, the signal is strong. <a href="/methodology" style="color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px">Full methodology →</a></p></div>
+        it by vote. Where they agree, the signal is strong. <a href="/methodology" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">Full methodology →</a></p></div>
     </div>
   </div>
 </section>
@@ -230,7 +230,7 @@
   <div class="wrap">
     <div class="cta">
       <h2>Think you can spot the slop?</h2>
-      <p>The board is the machine's verdict. The arena collects the crowd's — blind, one pair at a time. Play a round and
+      <p>The board is the machine's verdict. The arena collects the crowd's, blind, one pair at a time. Play a round and
         see if humans agree.</p>
       <a class="btn" href="/arena">Play “Spot the Slop” <span class="arr">→</span></a>
       <a class="btn ghost" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">View the code &amp; data <span class="arr">→</span></a>
@@ -249,11 +249,12 @@ let LOGOS={};
 const logo=lab=>(LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`);
 let DATA=null, dom='overall', byId={};
 const $=id=>document.getElementById(id);
-const r0=v=>v==null?'—':Math.round(v);
+const r0=v=>v==null?'-':Math.round(v);
 const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
 
+// cobalt (human) -> soft -> pale blue (slop). t: 0 human .. 1 slop.
 function heat(t){
-  const stops=[[220,216,209],[229,196,174],[194,103,62]];
+  const stops=[[68,87,196],[142,161,226],[218,226,253]];
   const seg=t<.5?0:1, f=t<.5?t/.5:(t-.5)/.5, a=stops[seg], b=stops[seg+1];
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
@@ -276,10 +277,10 @@ function computeScores(crowd){
 function renderBand(crowd){
   const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
   const best=rows[0], worst=rows[rows.length-1];
-  const leader=(crowd.rows&&crowd.rows[0])?nameOf(crowd.rows[0].model):'—';
+  const leader=(crowd.rows&&crowd.rows[0])?nameOf(crowd.rows[0].model):'-';
   const total=(crowd&&crowd.totalVotes)||0;
   $('band').innerHTML=[
-    ['','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
+    ['top','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
     ['hot','Most AI slop',worst.name,`Human Score ${r0(worst.score)} · ${worst.lab}`],
     ['live','Crowd favourite',leader,`from ${total.toLocaleString()} human vote${total===1?'':'s'}`]
   ].map(([c,k,v,d])=>`<div class="scard ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
@@ -346,7 +347,7 @@ function renderScatter(){
   $('scatter').innerHTML=s;
   const pricey=[...rows].sort((a,b)=>b.blended-a.blended)[0];
   const bestCheap=[...rows].filter(r=>r.blended<=3).sort((a,b)=>b.score-a.score)[0];
-  $('scnote').innerHTML=`If cost bought quality this would trend up and to the right — it doesn't. The priciest model on the board (<b>${pricey.name}, $${pricey.blended}/M</b>) sits well below cheaper ones like <b>${bestCheap.name}</b> ($${bestCheap.blended}/M).`;
+  $('scnote').innerHTML=`If cost bought quality this would trend up and to the right, it doesn't. The priciest model on the board (<b>${pricey.name}, $${pricey.blended}/M</b>) sits well below cheaper ones like <b>${bestCheap.name}</b> ($${bestCheap.blended}/M).`;
 }
 
 function renderCrowdChart(crowd){
@@ -375,7 +376,7 @@ async function refresh(){
   try{ crowd=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json()); }catch(e){}
   computeScores(crowd);
   const total=(crowd&&crowd.totalVotes)||0;
-  $('votecount').textContent = total>0 ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' cast — and counting'
+  $('votecount').textContent = total>0 ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' cast, and counting'
                                        : 'be the first to cast a human vote';
   renderBand(crowd); renderChart(); renderTable(); renderScatter(); renderCrowdChart(crowd);
 }

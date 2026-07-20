@@ -2,7 +2,7 @@
 
 The Slop Index measures each model against **real human writing that provably predates ChatGPT
 (before Oct 2022)**, so no model could have shaped the reference. This directory ships only the
-**derived statistics** the scorer reads — `<domain>/stats.json` (word-frequency tables, tell rates,
+**derived statistics** the scorer reads, `<domain>/stats.json` (word-frequency tables, tell rates,
 paragraph-variance means, etc.). The raw corpora are **not** redistributed: they are large (~1.4GB)
 and carry their own third-party licenses. Rebuild them from source with the steps below.
 
@@ -38,6 +38,6 @@ For each domain:
 - **Pre-Oct-2022 only.** If you can't prove a text predates ChatGPT, drop it.
 - **Never redistribute corpus text.** Commit derived stats only; the raw `clean.jsonl` and `raw/`
   are gitignored on purpose.
-- **No `wordfreq` / no post-2022 frequency tables** as the reference — they are contaminated with
+- **No `wordfreq` / no post-2022 frequency tables** as the reference, they are contaminated with
   model output and will silently deflate the tell signal. This bit us once; see
   `docs/PILOT_FINDINGS.md`.

@@ -286,7 +286,7 @@ def main():
         sep, spread = table(f"[{name}]", per)
         mech_verdicts[name] = (sep, spread)
 
-    # length inflation vs the scenario band (Conciseness axis) — overall
+    # length inflation vs the scenario band (Conciseness axis), overall
     per = defaultdict(list)
     for r in model_rows:
         band = r.get("length_target")
@@ -297,7 +297,7 @@ def main():
                         "0 = within human-norm band; 1.0 = double the ceiling")
     mech_verdicts["length inflation (overall)"] = (sep, spread)
 
-    # length inflation vs the scenario band — per domain
+    # length inflation vs the scenario band, per domain
     for dom in domains_list:
         per = defaultdict(list)
         for r in model_rows:

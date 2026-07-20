@@ -1,7 +1,7 @@
 """Provider adapter: single entrypoint over LiteLLM's unified interface, with
 cost tracking.
 
-Requires `litellm` (see harness/.venv — `python3 -m venv .venv && .venv/bin/pip
+Requires `litellm` (see harness/.venv, `python3 -m venv .venv && .venv/bin/pip
 install litellm`, or `pip3 install --user litellm` if you'd rather skip the
 venv). Reads OPENAI_API_KEY / ANTHROPIC_API_KEY / GEMINI_API_KEY /
 FIREWORKS_API_KEY (or FIREWORKS_AI_API_KEY) from the environment; LiteLLM
@@ -28,7 +28,7 @@ if os.environ.get("FIREWORKS_API_KEY") and not os.environ.get("FIREWORKS_AI_API_
 # viable tier per family, plus a couple of flagships for the price-vs-slop
 # chart. All seven were smoke-tested (1-token calls) against the live APIs
 # and against litellm.completion_cost() before this file was used for a real
-# run — see the deliverable report for the results.
+# run, see the deliverable report for the results.
 MODELS = {
     "gpt-5.6-sol":            "gpt-5.6-sol",
     "gpt-5.4-mini":           "gpt-5.4-mini",
@@ -66,11 +66,11 @@ EXTRA = {
 
 # Manual fallback prices, $ per 1M tokens (input, output). ONLY used when
 # litellm.completion_cost() raises or comes back falsy (0/None) for a given
-# response — brand-new model IDs sometimes aren't in LiteLLM's bundled price
+# response, brand-new model IDs sometimes aren't in LiteLLM's bundled price
 # map yet. Values below are each provider's published list price as of
 # 2026-07-13; verified they are NOT needed for pilot-002 (all seven model
 # strings above resolved via LiteLLM's own price map in the pre-flight smoke
-# test — this table exists as a safety net for whichever family drifts out
+# test, this table exists as a safety net for whichever family drifts out
 # of LiteLLM's map next, or a future roster swap).
 PRICES = {
     "gpt-5.6-sol":            (5.00, 30.00),   # openai.com/api/pricing
@@ -108,7 +108,7 @@ def _manual_cost(alias, prompt_tokens, completion_tokens):
 def generate(alias, system, user, max_tokens=4000):
     """Call `alias` via LiteLLM. Returns (text, usage_dict) where usage_dict has:
     prompt_tokens, completion_tokens, reasoning_tokens (None if not reported),
-    cost_usd (None if genuinely unknown), cost_estimated (bool — True if
+    cost_usd (None if genuinely unknown), cost_estimated (bool, True if
     cost_usd came from the manual PRICES fallback rather than LiteLLM's own
     price map), model_id, latency_s, retried_8k (bool).
     """

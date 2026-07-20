@@ -1,7 +1,7 @@
 // Issues a signed pair token when the client is shown a matchup. The token
 // binds (scenario, the two models, a server timestamp). The vote must return
 // it, which proves: (a) the voter was actually served THIS pair by our server,
-// and (b) how long they looked at it — the dwell is measured server-side from
+// and (b) how long they looked at it, the dwell is measured server-side from
 // the token timestamp, so the client can't forge a fast/slow read.
 import { makeToken } from './_sign.js';
 import { MODELS } from './_models.js';

@@ -1,4 +1,4 @@
-# Spot the Slop — the vote-collecting game
+# Spot the Slop, the vote-collecting game
 
 Blind pairwise game: two models wrote the same message, the crowd picks which
 is worse. Votes feed a live Elo per model, per question ("would reply to",
@@ -15,8 +15,8 @@ No accounts, no PII. All message text is real unedited model output, baked into
 `public/pairs.json` (regenerate from a newer run with the builder in the parent repo).
 
 ## Data
-- `public/pairs.json` — blind matchups (scenario + two models' outputs)
-- `public/prompts.json` — the task prompt shown as context
+- `public/pairs.json`, blind matchups (scenario + two models' outputs)
+- `public/prompts.json`, the task prompt shown as context
 Regenerate both after a new benchmark run so the game reflects the latest models.
 
 ## Methodology notes (for the writeup)

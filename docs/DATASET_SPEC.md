@@ -1,14 +1,14 @@
-# The Slop Index — Dataset Specification v1
+# The Slop Index, Dataset Specification v1
 
 *The benchmark "dataset" is five artifacts, versioned together. Companion docs: SPEC.md (benchmark design), DATASETS.md (source corpora research).*
 
-> **⚠️ v1 scope note (Pangram headline, lean axes)**: v1 axes are **Slop Score (Pangram AI-likelihood, version-pinned) · Open cross-check (off-the-shelf Binoculars) · Conciseness · Homogeneity · Human pass/Cringe Elo (phase 2)** — no LLM judges, and nothing of our own to maintain (no in-house detector, no self-built calibration corpora — the run's own outputs are the known-AI calibration set by construction). Consequences for this spec: scenario packs need only **one prompt style**; the `constraints[]`, `facts[]`, and `world` annotations plus the constraint-checker registry (artifact #2) are **deferred to sequels**; **marker lists (artifact #3) are demoted to descriptive tell counters** — they power red-pen views and Tell Counter charts with baseline ratios shown for context, but no longer produce a scored composite, so the ≥5×/≥3-family validation gate is informational rather than score-gating. Baseline bundles (artifact #4) now serve detector-FPR calibration, conciseness length norms, and tell base rates. Generation matrix: 112 scenarios × 10 samples × ~7 models ≈ **7,800 outputs per run**. Splits, run artifacts, and versioning stand as written.
+> **⚠️ v1 scope note (Pangram headline, lean axes)**: v1 axes are **Slop Score (Pangram AI-likelihood, version-pinned) · Open cross-check (off-the-shelf Binoculars) · Conciseness · Homogeneity · Human pass/Cringe Elo (phase 2)**, no LLM judges, and nothing of our own to maintain (no in-house detector, no self-built calibration corpora, the run's own outputs are the known-AI calibration set by construction). Consequences for this spec: scenario packs need only **one prompt style**; the `constraints[]`, `facts[]`, and `world` annotations plus the constraint-checker registry (artifact #2) are **deferred to sequels**; **marker lists (artifact #3) are demoted to descriptive tell counters**, they power red-pen views and Tell Counter charts with baseline ratios shown for context, but no longer produce a scored composite, so the ≥5×/≥3-family validation gate is informational rather than score-gating. Baseline bundles (artifact #4) now serve detector-FPR calibration, conciseness length norms, and tell base rates. Generation matrix: 112 scenarios × 10 samples × ~7 models ≈ **7,800 outputs per run**. Splits, run artifacts, and versioning stand as written.
 
 ## Artifact overview
 
 | # | Artifact | Path | What it is |
 |---|---|---|---|
-| 1 | **Scenario packs** | `scenarios/` | The benchmark tasks — one JSON per scenario, the heart of the dataset |
+| 1 | **Scenario packs** | `scenarios/` | The benchmark tasks, one JSON per scenario, the heart of the dataset |
 | 2 | **Constraint/checker registry** | `constraints/` | Enum of machine-checkable constraint types + checker code + unit tests |
 | 3 | **Marker lists** | `markers/` | Per-domain validated slop markers with frequency-ratio evidence |
 | 4 | **Baseline bundles** | `baselines/` | Processing scripts + filter specs + derived n-gram tables per human corpus |
@@ -31,7 +31,7 @@ Plus `calibration/`: self-generated AI corpora per domain (detector calibration 
 | **Total** | | **112** | |
 
 - **Split**: 80/20 public/held-out, stratified so every category contributes ≥1 held-out scenario. Held-out batch rotated quarterly; retired held-outs graduate to public (proves they were ordinary).
-- **Subsets (flags)**: `spine` (decline/pushback scenarios across domains — cave-rate scored) · `voice` (~20% carry persona voice samples — voice-fidelity scored) · `temptation` (fabrication traps — all scenarios have a closed world, but these are designed to tempt).
+- **Subsets (flags)**: `spine` (decline/pushback scenarios across domains, cave-rate scored) · `voice` (~20% carry persona voice samples, voice-fidelity scored) · `temptation` (fabrication traps, all scenarios have a closed world, but these are designed to tempt).
 - **Every scenario** has both prompt styles (lazy + detailed) → generation matrix: 112 × 2 styles × 10 samples × ~7 models ≈ **15,700 outputs per full run**.
 
 ### Scenario JSON schema (annotated example)
@@ -79,12 +79,12 @@ Plus `calibration/`: self-generated AI corpora per domain (detector calibration 
 
   "prompts": {
     "lazy": "reply to dana saying no to the discount",
-    "detailed": "Reply to Dana declining the 40% discount but offer the annual-prepay option. Keep it to 3 sentences, don't apologize, and write like a human — no corporate speak."
+    "detailed": "Reply to Dana declining the 40% discount but offer the annual-prepay option. Keep it to 3 sentences, don't apologize, and write like a human, no corporate speak."
   },
   "constraints": [                         // → Steerability axis (detailed prompt only)
     { "id": "c1", "type": "max_sentences", "param": 3, "surface": "Keep it to 3 sentences" },
     { "id": "c2", "type": "ban_lexicon", "param": "apology", "surface": "don't apologize" },
-    { "id": "c3", "type": "anti_slop_steer", "surface": "write like a human — no corporate speak" }
+    { "id": "c3", "type": "anti_slop_steer", "surface": "write like a human, no corporate speak" }
   ],
 
   "length_target": { "words": [40, 120] }, // from domain baseline norms
@@ -93,7 +93,7 @@ Plus `calibration/`: self-generated AI corpora per domain (detector calibration 
 ```
 
 Notes:
-- `constraints[c3].type=anti_slop_steer` is present in EVERY detailed prompt — it powers slop-elasticity and is never obedience-scored.
+- `constraints[c3].type=anti_slop_steer` is present in EVERY detailed prompt, it powers slop-elasticity and is never obedience-scored.
 - `facts[]` ⊆ information derivable from `world` + `context_thread`; every fact has surface patterns AND a semantic ref for the validated matcher.
 - `world.policy="closed_specifics"` (essay): general knowledge allowed; only specific checkable claims (stats, quotes, citations) outside the world are fabrication-flagged.
 
@@ -113,16 +113,16 @@ Every constraint type = deterministic checker + unit tests. v1 enum:
 |---|---|---|
 | `max_words` / `max_chars` | int | count |
 | `max_sentences` | int | pySBD splitter |
-| `ban_markdown_lists` / `ban_headers` / `ban_bold` | — | regex |
-| `ban_emoji` | — | unicode ranges |
-| `ban_hashtags` | — | regex |
+| `ban_markdown_lists` / `ban_headers` / `ban_bold` |, | regex |
+| `ban_emoji` |, | unicode ranges |
+| `ban_hashtags` |, | regex |
 | `ban_lexicon` | lexicon name (apology, pricing, greeting, signoff) | lexicon match |
 | `require_string` | alias list | string/alias presence |
-| `first_person_only` | — | pronoun check |
-| `single_message` (social: not a thread) | — | structure check |
-| `no_interrogative_opener` | — | first-sentence check |
+| `first_person_only` |, | pronoun check |
+| `single_message` (social: not a thread) |, | structure check |
+| `no_interrogative_opener` |, | first-sentence check |
 | `no_prompt_restate` | ngram overlap τ | overlap of output's first para vs prompt |
-| `anti_slop_steer` | — | NOT obedience-scored; marks slop-elasticity prompts |
+| `anti_slop_steer` |, | NOT obedience-scored; marks slop-elasticity prompts |
 
 Rule: if it can't be checked deterministically, it can't be a scored constraint.
 
@@ -144,14 +144,14 @@ Per marker record:
 }
 ```
 - Candidates seeded from EQ-Bench slop lists + Wikipedia AI-catchphrases + community lists (~300).
-- **Validation rule**: `ratio ≥ 5` vs the domain baseline AND elevated in ≥3 model families → `validated` (enters scoring). Everything else stays `candidate` or `busted` — busted folklore published (em-dash verdict per domain).
+- **Validation rule**: `ratio ≥ 5` vs the domain baseline AND elevated in ≥3 model families → `validated` (enters scoring). Everything else stays `candidate` or `busted`, busted folklore published (em-dash verdict per domain).
 - Rebuilt each major version from the pilot/full runs; marker tables are release artifacts.
 
 ---
 
 ## 4. Baseline bundles (`baselines/{domain}/`)
 
-Each bundle = `source.md` (corpus + link + license) + `filter.py` (deterministic, seeded) + `stats.json` (published derived artifacts). **Where a license blocks redistribution (Blog corpus NC, Reddit), we ship the script + the derived n-gram frequency tables, not the raw text** — scoring stays reproducible without redistributing corpora.
+Each bundle = `source.md` (corpus + link + license) + `filter.py` (deterministic, seeded) + `stats.json` (published derived artifacts). **Where a license blocks redistribution (Blog corpus NC, Reddit), we ship the script + the derived n-gram frequency tables, not the raw text**, scoring stays reproducible without redistributing corpora.
 
 | Domain | Source → filter | Target n |
 |---|---|---|
@@ -167,7 +167,7 @@ Each bundle = `source.md` (corpus + link + license) + `filter.py` (deterministic
 ## 5. Run artifacts (`runs/{run_id}/`)
 
 - `manifest.json`: run_id, date, harness version, scenario-set version, marker-set version, model list with exact API model IDs + api-date, scaffold text hash, detector versions (Pangram model/date, Binoculars commit).
-- `{model}.{domain}.jsonl` — one record per output:
+- `{model}.{domain}.jsonl`, one record per output:
 ```json
 {
   "scenario_id": "email.decline.007", "style": "detailed", "sample": 4,
@@ -183,13 +183,13 @@ Each bundle = `source.md` (corpus + link + license) + `filter.py` (deterministic
   }
 }
 ```
-- All raw outputs published (repo + HF dataset). `slopbench score` recomputes every metric from `raw_output` alone — metrics in the file are convenience, not authority.
+- All raw outputs published (repo + HF dataset). `slopbench score` recomputes every metric from `raw_output` alone, metrics in the file are convenience, not authority.
 
 ---
 
 ## 6. Calibration corpora (`calibration/`)
 
-- **Self-generated AI sets per domain** (confirmed gap — nothing public exists for email/social/Slack): same scenario suite, broader free generation, labeled by model/date. Used ONLY for detector calibration and marker discovery — never leaderboard-scored.
+- **Self-generated AI sets per domain** (confirmed gap, nothing public exists for email/social/Slack): same scenario suite, broader free generation, labeled by model/date. Used ONLY for detector calibration and marker discovery, never leaderboard-scored.
 - External: RAID (MIT) + MAGE (Apache) slices for essay/general; HC3 as Dec-2022 "generation-zero" anchor.
 - Human-side calibration: 1,000 held-out baseline items per domain for detector FPR reports.
 

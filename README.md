@@ -4,13 +4,13 @@
 recognizable *AI slop* their writing contains, across email, social posts, essays, and chat.
 
 The published **Human Score** (0–100, where **100 = writes like a real person**) blends two
-independent signals: **human preference (40%)** — a live crowd Elo from a blind pairwise game —
+independent signals: **human preference (40%)**, a live crowd Elo from a blind pairwise game -
 and **four mechanical axes (15% each)** measured against real human writing that provably predates
 ChatGPT. No LLM judges scoring other LLMs; every mechanical number is a token statistic against a
 pre-AI baseline.
 
 - **The report:** https://slop-game.vercel.app/benchmark.html
-- **The game (Spot the Slop):** https://slop-game.vercel.app — flag the sloppier of two blind
+- **The game (Spot the Slop):** https://slop-game.vercel.app, flag the sloppier of two blind
   samples (or "both are slop"); the vote feeds 40% of the score.
 
 ## How the score is calculated
@@ -34,7 +34,7 @@ The **mechanical 60%** is fully reproducible offline (below); the **human 40%** 
 real vote volume before it's meaningful, so the public board updates as votes arrive. `score.py`
 computes the four mechanical axes as raw *slop distance* from the human baseline (0 = human-like);
 the site inverts and blends them with the crowd Elo. A leading AI *detector* (Pangram) was tried
-only as a control — it flags all 18 models at ~100% AI, which is exactly why a mechanical **and**
+only as a control, it flags all 18 models at ~100% AI, which is exactly why a mechanical **and**
 human measure is needed to tell them apart.
 
 ## The mechanical layer (reproducible offline)
@@ -54,7 +54,7 @@ more slop). This is what `score.py` reproduces exactly from the committed output
 
 Full board, per-axis, per-domain splits, tie groups, and a price-vs-slop scatter are in
 `runs/full-merged-score.log` and rendered at the report link. Headline finding beyond the ranking:
-**slop does not track price** — the priciest model on the board is near the sloppy end, one of the
+**slop does not track price**, the priciest model on the board is near the sloppy end, one of the
 cheapest is near the clean end.
 
 ## Reproduce it
@@ -70,7 +70,7 @@ python harness/rank_spread.py --run-id full-merged   # recompute rank ranges + t
 
 `runs/full-merged/outputs.jsonl` holds all 19,928 raw, unedited model generations. To generate
 new outputs you'll need model API keys (`cp harness/.run-keys.env.example harness/.run-keys.env`);
-see `AGENTS.md`. The human baselines are shipped as **derived statistics only** — the raw corpora
+see `AGENTS.md`. The human baselines are shipped as **derived statistics only**, the raw corpora
 (Enron, Blog Authorship, ASAP, Sentiment140, DISCO) are third-party licensed; `baselines/README.md`
 tells you how to fetch and rebuild them.
 
@@ -85,5 +85,5 @@ outputs + results), `site/` (the game and report), `docs/` (methodology).
 Code and derived statistics: MIT (see `LICENSE`). The raw human corpora are **not** redistributed
 here and remain under their own licenses. Model outputs in `runs/` are published as research data.
 
-Built by [Slashy](https://slashy.com) — the email client that saves you time instead of generating
+Built by [Slashy](https://slashy.com), the email client that saves you time instead of generating
 more AI slop.

@@ -1,6 +1,6 @@
 // Public, read-only vote stats for the live dashboard (/stats.html).
 // Aggregate counts + a recent-matchup feed. Strips all PII: the raw log's IP
-// hash and fingerprint are NEVER returned — only model/outcome/time.
+// hash and fingerprint are NEVER returned, only model/outcome/time.
 import { redis, configured } from './_redis.js';
 
 export default async function handler(req, res) {

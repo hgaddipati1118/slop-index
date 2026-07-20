@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Methodology — The Slop Index</title>
+<title>Methodology, The Slop Index</title>
 <meta name="description" content="How the Slop Index is measured: five axes, one score, blind human vote at 40%, all against human writing that predates ChatGPT. Open method, open data, no LLM judges.">
-<meta property="og:title" content="The Slop Index — Methodology">
+<meta property="og:title" content="The Slop Index, Methodology">
 <meta property="og:description" content="Five axes, one score, blind human vote at 40%, measured against pre-AI human writing. No LLM judges.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://theslopindex.com/methodology">
@@ -20,7 +20,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500..800;1,500..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Libertinus+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
 <style>
   .phead{padding:52px 0 6px;text-align:center}
@@ -33,12 +33,12 @@
   .doc h3{font-size:17px;font-weight:600;margin:26px 0 6px;color:var(--ink)}
   .doc p{font-size:16px;color:var(--ink-2);line-height:1.68;margin:12px 0}
   .doc .lead{font-size:17px;color:var(--body)}
-  .doc a{color:#1D1B17;font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:opacity .14s}
+  .doc a{color:var(--blue);font-weight:500;text-decoration:underline;text-underline-offset:2px;transition:opacity .14s}
   .doc a:hover{opacity:.7}
   .doc code{font-family:var(--mono);font-size:13.5px;background:var(--surface);padding:1.5px 6px;border-radius:5px;color:var(--ink)}
   .doc ul{margin:12px 0;padding-left:20px}
   .doc li{font-size:15.5px;color:var(--ink-2);line-height:1.6;margin:7px 0}
-  .doc-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:52px}
+  .doc-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-top:52px}
   .doc-eyebrow + h2{margin-top:6px}
 
   /* formula callout */
@@ -57,8 +57,8 @@
     background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2px 10px}
   .ax h3{margin:0 0 8px;font-size:16px}
   .ax p{font-size:13.5px;color:var(--body);line-height:1.6;margin:0}
-  .ax.human{border-color:var(--line);border-left:3px solid #1D1B17;background:linear-gradient(var(--card),var(--surface-2))}
-  .ax.human .w{background:var(--dark);border-color:var(--dark);color:#fff}
+  .ax.human{border-color:var(--blue-line);border-left:3px solid var(--blue);background:linear-gradient(var(--card),var(--blue-tint))}
+  .ax.human .w{background:var(--blue);border-color:var(--blue);color:#fff}
 
   /* dataset table */
   .dtwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card);margin:20px 0;box-shadow:var(--shadow-sm)}
@@ -70,7 +70,7 @@
   .dt td .src{font-weight:600;color:var(--ink);display:block}
   .dt td .yr{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
 
-  .callout-soft{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid #1D1B17;
+  .callout-soft{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--blue);
     border-radius:12px;padding:22px 26px;margin:26px 0}
   .callout-soft p{margin:0;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);line-height:1.5}
   .callout-soft b{font-style:normal}
@@ -113,7 +113,7 @@
   <div class="wrap">
     <span class="eyebrow">Methodology</span>
     <h1>How we measure slop</h1>
-    <p class="thesis">Five axes, one score, a blind human vote at its centre — all measured against writing that
+    <p class="thesis">Five axes, one score, a blind human vote at its centre, all measured against writing that
       provably predates ChatGPT. No LLM grading another LLM. Here is exactly how the number is built.</p>
   </div>
 </header>
@@ -122,8 +122,8 @@
 
   <p class="lead">Everyone can feel AI slop when they read it: the throat-clearing opener, the tidy rule-of-three, the
     "it's not just X, it's Y," the closing offer to help further. But feeling it isn't measuring it. The Slop Index turns
-    that instinct into a reproducible number by asking a single question — <b>does this read like a person, or like a
-    chatbot?</b> — and answering it two independent ways.</p>
+    that instinct into a reproducible number by asking a single question, <b>does this read like a person, or like a
+    chatbot?</b>, and answering it two independent ways.</p>
 
   <div class="doc-eyebrow">The score</div>
   <h2>One number, on a human scale</h2>
@@ -142,7 +142,7 @@
   </div>
 
   <p>We put the human vote at 40% deliberately. Mechanical axes catch the tells you can count; people catch the ones you
-    can't. Weighting them together means a model can't win by gaming one rule — it has to actually read as human to both
+    can't. Weighting them together means a model can't win by gaming one rule, it has to actually read as human to both
     a measurement and a crowd.</p>
 
   <div class="doc-eyebrow">The five axes</div>
@@ -156,9 +156,9 @@
         task. Padding a two-line reply into six paragraphs is one of the most reliable tells.</p></div>
     <div class="ax"><span class="w">15%</span><h3>Templating</h3>
       <p>Reuse of openers and skeletons across unrelated prompts. Humans vary how they start; models fall back to the
-        same scaffolds — "I hope this finds you well," "Here are a few thoughts," the same three-beat structure.</p></div>
+        same scaffolds, "I hope this finds you well," "Here are a few thoughts," the same three-beat structure.</p></div>
     <div class="ax"><span class="w">15%</span><h3>Rhythm</h3>
-      <p>Natural variance in paragraph and sentence length. Human writing is lumpy — a one-word line next to a long one.
+      <p>Natural variance in paragraph and sentence length. Human writing is lumpy, a one-word line next to a long one.
         AI writing tends toward an even, metronomic cadence that reads smooth and lifeless.</p></div>
     <div class="ax"><span class="w">15%</span><h3>Tells</h3>
       <p>Over-used AI vocabulary and constructions measured against their pre-AI base rate: "delve," "tapestry,"
@@ -168,32 +168,32 @@
   <div class="doc-eyebrow">The yardstick</div>
   <h2>Measured against writing from before AI</h2>
   <p>A slop score is only meaningful relative to something. Ours is <b>genuine human writing collected before generative
-    AI existed</b> — everything predates October 2022, so no model could have trained on it, shaped it, or been tuned to
+    AI existed</b>, everything predates October 2022, so no model could have trained on it, shaped it, or been tuned to
     imitate it. Each domain has its own human baseline:</p>
 
   <div class="dtwrap">
     <table class="dt">
       <thead><tr><th>Domain</th><th>Human baseline</th><th>Vintage</th></tr></thead>
       <tbody>
-        <tr><td><span class="src">Email</span></td><td>The Enron email corpus — real workplace mail</td><td class="yr">2000–2002</td></tr>
+        <tr><td><span class="src">Email</span></td><td>The Enron email corpus, real workplace mail</td><td class="yr">2000–2002</td></tr>
         <tr><td><span class="src">Essays</span></td><td>Blog-authorship corpus + student essay sets</td><td class="yr">pre-2012</td></tr>
         <tr><td><span class="src">Social</span></td><td>Archived public tweets</td><td class="yr">pre-2022</td></tr>
         <tr><td><span class="src">Chat</span></td><td>Public Discord / IM conversation logs</td><td class="yr">pre-2022</td></tr>
       </tbody>
     </table>
   </div>
-  <p>For each domain we build the distribution of human behaviour — how long replies run, how starts vary, how cadence
-    moves — and measure how far each model drifts from it. Drift toward the human distribution scores high; drift toward
+  <p>For each domain we build the distribution of human behaviour, how long replies run, how starts vary, how cadence
+    moves, and measure how far each model drifts from it. Drift toward the human distribution scores high; drift toward
     the AI extreme scores low.</p>
 
   <div class="doc-eyebrow">Generation</div>
   <h2>Same task, real output, no cherry-picking</h2>
-  <p>Every model faced the <b>identical 112 scenarios</b> across the four domains, <b>five samples each</b> — for
+  <p>Every model faced the <b>identical 112 scenarios</b> across the four domains, <b>five samples each</b>, for
     <b>19,928 real, unedited generations</b> in total. Models ran at their default settings (reasoning effort disclosed
     per model), and we never picked the best of a batch. What the model produced is what got scored.</p>
   <p>The four mechanical axes are computed per-sample and averaged; each is then min-max normalised across the 18 models
     so the cleanest becomes 100 and the sloppiest 0 on that axis. This is what gives every axis real spread instead of a
-    cluster of near-identical numbers — you can see exactly where a model wins or loses.</p>
+    cluster of near-identical numbers, you can see exactly where a model wins or loses.</p>
 
   <div class="doc-eyebrow">The human axis</div>
   <h2>How the crowd vote works</h2>
@@ -221,14 +221,14 @@
       which slices, so you can challenge or extend them.</li>
   </ul>
 
-  <div class="callout-soft"><p>Where the two lenses agree — the mechanical index and the human vote landing on the same
-    model — the signal is strong. Where they diverge is often the most interesting thing on the board, and it is all
+  <div class="callout-soft"><p>Where the two lenses agree, the mechanical index and the human vote landing on the same
+    model, the signal is strong. Where they diverge is often the most interesting thing on the board, and it is all
     there to inspect.</p></div>
 
   <div class="doc-eyebrow">Reproduce it</div>
   <h2>Open method, open data</h2>
   <p>Everything is public: the harness, the 112 scenarios, the scoring code, and all 19,928 raw generations. The repo
-    ships an agent playbook (<code>AGENTS.md</code>) that walks an agent — or you — through sourcing the datasets and
+    ships an agent playbook (<code>AGENTS.md</code>) that walks an agent, or you, through sourcing the datasets and
     reproducing every number end to end.</p>
   <div class="repro">
     <pre><span class="c"># clone and reproduce the board</span>
@@ -242,7 +242,7 @@ python harness/score.py runs/full-merged/outputs.jsonl</pre>
 
   <div class="cta">
     <h2>Now go see the board.</h2>
-    <p>The method is the boring part. The rankings are where it gets interesting — including the most expensive model
+    <p>The method is the boring part. The rankings are where it gets interesting, including the most expensive model
       that writes some of the sloppiest prose.</p>
     <a class="btn" href="/leaderboard">See the rankings <span class="arr">→</span></a>
     <a class="btn ghost" href="/arena">Play the arena <span class="arr">→</span></a>
