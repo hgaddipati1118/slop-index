@@ -189,8 +189,11 @@
   <div class="doc-eyebrow">Generation</div>
   <h2>Same task, real output, no cherry-picking</h2>
   <p>Every model faced the <b>identical 112 scenarios</b> across the four domains, <b>five samples each</b>, for
-    <b>19,928 real, unedited generations</b> in total. Models ran at their default settings (reasoning effort disclosed
-    per model), and we never picked the best of a batch. What the model produced is what got scored.</p>
+    <b>19,928 real, unedited generations</b> in total. Each scenario is a hand-written brief with a persona, a recipient
+    and the prior context of the exchange, so the model writes to a real situation (a specific email to answer, a launch
+    post to draft, an essay prompt) instead of a bare instruction. Models ran at their default settings (reasoning effort
+    disclosed per model), and we never picked the best of a batch. What the model produced is what got scored, and every
+    scenario, prompt and generation is published in the repo (<code>runs/full-merged/outputs.jsonl</code>).</p>
   <p>The four mechanical axes are computed per-sample and averaged; each is then min-max normalised across the 18 models
     so the cleanest becomes 100 and the sloppiest 0 on that axis. This is what gives every axis real spread instead of a
     cluster of near-identical numbers, you can see exactly where a model wins or loses.</p>
