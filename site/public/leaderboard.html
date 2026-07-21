@@ -50,6 +50,9 @@
   .col .nm{font-size:9.5px;color:var(--body);margin-top:6px;text-align:center;line-height:1.18;width:62px;height:26px;overflow:hidden}
   .col .rk{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px}
   .legend{display:flex;align-items:center;gap:10px;justify-content:center;margin:20px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .tabnote{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);margin:10px auto 0;max-width:640px;line-height:1.8}
+  .tabnote b{color:var(--blue);font-weight:400}
   .legend .ramp{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,#4457C4,#8a94b8,#cdccd2)}
 
   /* table */
@@ -145,10 +148,12 @@
     <div class="sec-eyebrow">The board</div>
     <h2 class="sec-h">Who writes the least slop?</h2>
     <p class="sec-sub" style="margin-bottom:22px">Human Score, 0–100, most human first. Switch domains to see who slips where -
-      the model that writes clean email is not always the one that writes clean essays.</p>
+      the model that writes clean email is not always the one that writes clean essays. Domain boards are machine-only
+      measurements against the pre-AI baseline; the arena vote enters only the overall Human Score.</p>
     <div class="tabs" id="tabs"></div>
     <div class="chart" id="chart"></div>
     <div class="legend"><span>more human</span><span class="ramp"></span><span>more slop</span></div>
+    <div class="tabnote" id="tabnote"></div>
   </div>
 </section>
 
@@ -271,15 +276,17 @@ function computeScores(crowd){
   // DIRECTION CONTRACT (per SPEC.md + harness/score.py): every raw bench.json number is a
   // SLOP measure where higher = sloppier. That covers the four axis columns AND the four
   // domain Slop Scores AND `overall` (mean of domains). Display is human-likeness, so ALL
-  // of them get the inverting normaliser. Never "fix" this to a forward normalise again.
+  // of them flip direction. Never "fix" this to a forward normalise again.
   const inv=key=>{const vs=rows.map(m=>m[key]),mn=Math.min(...vs),mx=Math.max(...vs),sp=Math.max(1e-9,mx-mn);return m=>100*(mx-m[key])/sp;};
   const nC=inv('conciseness'),nT=inv('templating'),nR=inv('rhythm'),nTe=inv('tells');
-  const nd={}; ['email','social','essay','slack'].forEach(d=>nd[d]=inv(d));
   const evs=Object.values(elo), emn=evs.length?Math.min(...evs):1500, emx=evs.length?Math.max(...evs):1500, esp=Math.max(1e-9,emx-emn);
   rows.forEach(m=>{
     m.hHuman=(m.id in elo && evs.length>1)?100*(elo[m.id]-emn)/esp:50;
     m.hConcise=nC(m); m.hTempl=nT(m); m.hRhythm=nR(m); m.hTells=nTe(m);
-    ['email','social','essay','slack'].forEach(d=>m['h_'+d]=nd[d](m));
+    // Domain tabs show the ABSOLUTE scale: 100 - domain Slop Score, so 100 = matches the
+    // pre-AI human baseline and nobody gets a free min-max 100. Machine axes only: the
+    // arena vote is NOT in the domain numbers, it only enters the blended Human Score.
+    ['email','social','essay','slack'].forEach(d=>m['h_'+d]=Math.max(0,Math.min(100,100-m[d])));
     m.score=WEIGHTS.human*m.hHuman+WEIGHTS.conciseness*m.hConcise+WEIGHTS.templating*m.hTempl+WEIGHTS.rhythm*m.hRhythm+WEIGHTS.tells*m.hTells;
   });
 }
@@ -312,6 +319,11 @@ function renderChart(){
       <div class="logo" title="${r.lab}">${logo(r.lab)}</div>
       <div class="nm">${r.name}</div><div class="rk">#${n+1}</div></div>`;
   }).join('');
+  // each section says exactly what its number is, so a domain board never reads as the overall ranking
+  const dlabel=(DOMAINS.find(([k])=>k===dom)||['',''])[1];
+  $('tabnote').innerHTML = dom==='overall'
+    ? '<b>Human Score</b> &middot; blends the 40% arena vote with the four machine axes &middot; relative across the 18 models'
+    : `<b>${dlabel} only</b> &middot; machine measurement against the pre-AI human baseline &middot; the arena vote is not factored in &middot; 100 = human-level`;
 }
 
 function renderTable(){
