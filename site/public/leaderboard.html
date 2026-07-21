@@ -148,8 +148,8 @@
     <div class="sec-eyebrow">The board</div>
     <h2 class="sec-h">Who writes the least slop?</h2>
     <p class="sec-sub" style="margin-bottom:22px">Human Score, 0–100, most human first. Switch domains to see who slips where -
-      the model that writes clean email is not always the one that writes clean essays. Domain boards are machine-only
-      measurements against the pre-AI baseline; the arena vote enters only the overall Human Score.</p>
+      the model that writes clean email is not always the one that writes clean essays. Every board blends the same way:
+      40% the arena votes cast on that domain&rsquo;s pairs, 60% the machine measurement against the pre-AI baseline.</p>
     <div class="tabs" id="tabs"></div>
     <div class="chart" id="chart"></div>
     <div class="legend"><span>more human</span><span class="ramp"></span><span>more slop</span></div>
@@ -255,7 +255,7 @@ const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','
   'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
 let LOGOS={};
 const logo=lab=>(LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`);
-let DATA=null, dom='overall', byId={};
+let DATA=null, dom='overall', byId={}, DOMVOTES={};
 const $=id=>document.getElementById(id);
 const r0=v=>v==null?'-':Math.round(v);
 const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
@@ -283,11 +283,25 @@ function computeScores(crowd){
   rows.forEach(m=>{
     m.hHuman=(m.id in elo && evs.length>1)?100*(elo[m.id]-emn)/esp:50;
     m.hConcise=nC(m); m.hTempl=nT(m); m.hRhythm=nR(m); m.hTells=nTe(m);
-    // Domain tabs show the ABSOLUTE scale: 100 - domain Slop Score, so 100 = matches the
-    // pre-AI human baseline and nobody gets a free min-max 100. Machine axes only: the
-    // arena vote is NOT in the domain numbers, it only enters the blended Human Score.
-    ['email','social','essay','slack'].forEach(d=>m['h_'+d]=Math.max(0,Math.min(100,100-m[d])));
     m.score=WEIGHTS.human*m.hHuman+WEIGHTS.conciseness*m.hConcise+WEIGHTS.templating*m.hTempl+WEIGHTS.rhythm*m.hRhythm+WEIGHTS.tells*m.hTells;
+  });
+  // Domain tabs mirror the overall recipe: 40% the arena votes CAST ON THAT DOMAIN'S PAIRS
+  // (per-domain Elo, normalised across models that have any domain votes; neutral 50 with
+  // none yet) + 60% the machine measurement (100 - domain Slop Score, absolute vs the
+  // pre-AI baseline). Small samples are noisy early on; the tabnote shows the vote count.
+  DOMVOTES={};
+  ['email','social','essay','slack'].forEach(d=>{
+    const db=((crowd&&crowd.domains)||{})[d]||{rows:[]};
+    const de={}, dg={};
+    (db.rows||[]).forEach(r=>{de[r.model]=+r.elo; dg[r.model]=+r.games;});
+    DOMVOTES[d]=Math.round((db.rows||[]).reduce((a,r)=>a+(+r.games||0),0)/2);
+    const evs2=Object.values(de), dmn=evs2.length?Math.min(...evs2):1500,
+          dmx=evs2.length?Math.max(...evs2):1500, dsp=Math.max(1e-9,dmx-dmn);
+    rows.forEach(m=>{
+      const mech=Math.max(0,Math.min(100,100-m[d]));
+      const dh=(m.id in de && evs2.length>1)?100*(de[m.id]-dmn)/dsp:50;
+      m['h_'+d]=WEIGHTS.human*dh+(1-WEIGHTS.human)*mech;
+    });
   });
 }
 
@@ -321,9 +335,10 @@ function renderChart(){
   }).join('');
   // each section says exactly what its number is, so a domain board never reads as the overall ranking
   const dlabel=(DOMAINS.find(([k])=>k===dom)||['',''])[1];
+  const dv=DOMVOTES[dom]||0;
   $('tabnote').innerHTML = dom==='overall'
     ? '<b>Human Score</b> &middot; blends the 40% arena vote with the four machine axes &middot; relative across the 18 models'
-    : `<b>${dlabel} only</b> &middot; machine measurement against the pre-AI human baseline &middot; the arena vote is not factored in &middot; 100 = human-level`;
+    : `<b>${dlabel}</b> &middot; 40% the <b>${dv}</b> arena vote${dv===1?'':'s'} cast on ${dlabel.toLowerCase()} pairs + 60% machine measurement vs the pre-AI baseline${dv<100?' &middot; early votes, still noisy':''}`;
 }
 
 function renderTable(){
@@ -395,7 +410,7 @@ function renderCrowdChart(crowd){
 
 async function refresh(){
   let crowd={rows:[],totalVotes:0};
-  try{ crowd=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json()); }catch(e){}
+  try{ crowd=await fetch('/api/leaderboard?mode=v1&domain=all&cb='+Date.now()).then(r=>r.json()); }catch(e){}
   computeScores(crowd);
   const total=(crowd&&crowd.totalVotes)||0;
   $('votecount').textContent = total>0 ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' cast, and counting'

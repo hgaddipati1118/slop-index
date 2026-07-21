@@ -15,6 +15,7 @@ import { createHmac } from 'node:crypto';
 import { redis, one, configured } from './_redis.js';
 import { MODELS } from './_models.js';
 import { readToken } from './_sign.js';
+import { domainOf } from './_domains.js';
 
 const REQUIRE_TOKENS = Boolean(process.env.TOKEN_SECRET);   // on once secrets are set
 const MAX_PAIR_AGE_MS = 30 * 60 * 1000;
@@ -116,7 +117,13 @@ export default async function handler(req, res) {
                  ['SET', `lastip:${iph}`, String(now), 'EX', 3600]]);
 
     const board = `elo:${m}`;
-    const [rw, rl] = await redis([['HGET', board, winner], ['HGET', board, loser]]);
+    // per-domain Elo runs alongside the main board; the domain comes from the scenario id
+    // server-side ("email.cold.002" -> email), never from a client-supplied field.
+    const dm = domainOf(scenario);
+    const dboard = dm ? `elo:${m}:d:${dm}` : null;
+    const reads = [['HGET', board, winner], ['HGET', board, loser]];
+    if (dboard) reads.push(['HGET', dboard, winner], ['HGET', dboard, loser]);
+    const [rw, rl, drw, drl] = await redis(reads);
     const ew = rw != null ? Number(rw) : 1500, el = rl != null ? Number(rl) : 1500;
     const expW = 1 / (1 + 10 ** ((el - ew) / 400));
 
@@ -135,11 +142,22 @@ export default async function handler(req, res) {
       ['HSET', board, winner, String(Math.round(ew + K * (sW - expW)))],
       ['HSET', board, loser,  String(Math.round(el + K * ((1 - sW) - (1 - expW))))],
     ];
+    if (dboard) {
+      const dew = drw != null ? Number(drw) : 1500, dell = drl != null ? Number(drl) : 1500;
+      const dexp = 1 / (1 + 10 ** ((dell - dew) / 400));
+      eloOps.push(
+        ['HSET', dboard, winner, String(Math.round(dew + K * (sW - dexp)))],
+        ['HSET', dboard, loser,  String(Math.round(dell + K * ((1 - sW) - (1 - dexp))))]);
+    }
     await redis([
       ['RPUSH', 'votes:log', raw],
       ...eloOps,
       ['HINCRBY', `games:${m}`, winner, 1],
       ['HINCRBY', `games:${m}`, loser, 1],
+      ...(dboard ? [
+        ['HINCRBY', `games:${m}:d:${dm}`, winner, 1],
+        ['HINCRBY', `games:${m}:d:${dm}`, loser, 1],
+      ] : []),
       ['HINCRBY', 'tally', tie ? `${m}:both` : `${m}:counted`, 1],
       ...(scenario ? [['HINCRBY', 'scenario_votes', scenario, 1]] : []),
     ]);
