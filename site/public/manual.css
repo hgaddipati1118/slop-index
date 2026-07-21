@@ -1,0 +1,196 @@
+/* ============================================================================
+   MANUAL.CSS — the technical-reference-manual system (matched to
+   makingsoftware.com) rolled across all inner pages. Load AFTER site.css.
+   Paper ground, black justified EB Garamond body, Departure Mono pixel
+   labels/headings in ultramarine, dot-texture figure panels.
+   ========================================================================== */
+@font-face{font-family:'Departure Mono';src:url('/fonts/departure-mono.woff2') format('woff2');
+  font-weight:400;font-style:normal;font-display:swap}
+
+:root{
+  --paper:#FBFBFB; --ink:#000;
+  --blue:#0435FF; --blue:oklch(50.58% 0.2886 264.84);
+  --blue-soft:#97A3F1; --blue-soft:oklch(76.12% 0.1218 272.4);
+  --blue-pale:#E4E7F9; --blue-pale:oklch(94.22% 0.0275 274.66);
+  --px:'Departure Mono',ui-monospace,monospace;
+  --bookserif:'EB Garamond',Georgia,'Times New Roman',serif;
+  --tex:url("data:image/svg+xml,%3Csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%230435FF' fill-opacity='0.15'/%3E%3C/svg%3E");
+  /* remap the old palette so site.css components inherit the manual look */
+  --bg:#FBFBFB; --card:#FBFBFB; --surface:#F1F2F7; --surface-2:#FBFBFB;
+  --ink-2:#000; --body:#000; --muted:rgba(0,0,0,.5); --faint:rgba(0,0,0,.4);
+  --line:#000; --divider:rgba(0,0,0,.22); --dark:#000;
+  --blue-press:#0435FF; --blue-tint:var(--blue-pale); --blue-line:var(--blue-soft);
+  --sans:'EB Garamond',Georgia,serif;
+  --serif:'EB Garamond',Georgia,serif;
+  --mono:'Departure Mono',ui-monospace,monospace;
+  --display:'Departure Mono',ui-monospace,monospace;
+  --shadow-sm:none; --shadow-md:none; --shadow-lg:none;
+}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--bookserif);background-image:none;font-size:16.5px}
+
+/* ---- nav: hairline manual header ---- */
+.nav{background:var(--paper);border-bottom:1px solid var(--ink);backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-in{height:52px}
+.brand .mark{width:18px;height:18px}
+.brand .mark path{fill:#0435FF}
+.brand .wm{font-family:var(--px);font-size:13px;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+.nav-links{gap:22px}
+.nav-links a{font-family:var(--px);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+  padding:0;border-radius:0;font-weight:400;background:none}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a.on{color:var(--blue);font-weight:400}
+.nav-links a.nav-cta,.nav-links a.nav-cta:hover{background:none;color:var(--blue);padding:0;margin-left:2px;border-radius:0;font-size:11px;min-height:0}
+@media(max-width:720px){.nav-links{gap:12px}}
+
+/* ---- headings become pixel chapter titles ---- */
+h1,h2,h3,h4{letter-spacing:0}
+.phead h1,.cta h2,h2.sec,.doc h2{font-family:var(--px)!important;font-weight:400!important;
+  text-transform:uppercase;color:var(--blue);letter-spacing:.01em!important;line-height:1.2!important}
+.phead h1{font-size:clamp(24px,4.6vw,44px)!important}
+.doc h2,.cta h2{font-size:clamp(17px,2.6vw,26px)!important}
+.phead .eyebrow,.eyebrow,.doc-eyebrow,.sec-eyebrow{font-family:var(--px);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(0,0,0,.5);font-weight:400}
+.phead .thesis,.doc p,.sec-sub,.cta p{font-family:var(--bookserif);color:var(--ink);text-align:justify;hyphens:auto}
+.phead .thesis b,.doc p b{font-weight:700;color:var(--ink)}
+.phead{text-align:left}
+.phead .thesis{margin-left:0}
+
+/* ---- buttons -> mono bracket links ---- */
+.btn,.btn.ghost{background:none!important;border:none!important;color:var(--blue)!important;
+  font-family:var(--px);font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  padding:2px 4px;border-radius:0;min-height:0;font-weight:400}
+.btn::before{content:'[ '}
+.btn::after{content:' ]'}
+.btn:hover{background:var(--blue)!important;color:#fff!important}
+.btn .arr{display:none}
+.textlink,.plainlink{font-family:var(--px);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--blue);text-decoration:none}
+.textlink:hover,.plainlink:hover{background:var(--blue);color:#fff;opacity:1}
+
+/* ---- live pill / stat band ---- */
+.livepill{font-family:var(--px);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.5)}
+.dot{width:6px;height:6px;border-radius:0;background:var(--blue)}
+.scard{border-top:1px solid var(--ink)}
+.scard .k{font-family:var(--px);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.scard .v{font-family:var(--px);font-weight:400;font-size:22px}
+.scard.top .v{color:var(--blue)}
+.scard.hot .v{color:var(--blue)}
+.scard.live .k::after{color:var(--blue)}
+.scard .d{font-family:var(--bookserif);font-size:14px}
+
+/* ---- tables: manual spec tables ---- */
+.twrap,.dtwrap{border:1px solid var(--ink);border-radius:0;background:var(--paper)}
+thead th,.dt th{font-family:var(--px)!important;font-size:9.5px!important;letter-spacing:.1em;
+  color:rgba(0,0,0,.55)!important;background:var(--paper)!important;border-bottom:1px solid var(--ink)!important}
+tbody td,.dt td{font-family:var(--px);font-size:11px;border-bottom:1px solid rgba(0,0,0,.18)!important;color:var(--ink)}
+tbody td.l{font-family:var(--px)}
+tbody tr:hover td{background:var(--blue-pale)}
+.mname{font-family:var(--px);font-size:11px;text-transform:uppercase;font-weight:400}
+.lab{font-family:var(--px);font-size:9px;color:rgba(0,0,0,.45)}
+.si{color:var(--blue);font-weight:400}
+.chip{border-radius:0;border:1px solid var(--blue);background:var(--paper);color:var(--blue);font-family:var(--px)}
+.rank{font-family:var(--px)}
+
+/* ---- cards / panels -> texture figure panels ---- */
+.card,.mcard,.scatter,.callout-soft,.repro{background-image:var(--tex);background-repeat:repeat;background-color:transparent;
+  border:none;border-radius:0;position:relative}
+.mcard{border-top:1px solid var(--ink);padding:16px 14px 18px}
+.mcard h3{font-family:var(--px);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--blue)}
+.mcard p{font-family:var(--bookserif);font-size:14.5px;color:var(--ink);text-align:justify;hyphens:auto}
+.mcard code{font-family:var(--px);color:var(--blue);background:none}
+.callout-soft{padding:22px 26px}
+.callout-soft p{font-family:var(--bookserif);font-style:italic}
+.repro{padding:22px}
+.repro pre{background:var(--ink);border-radius:0;color:#EDEBE7}
+
+/* ---- tabs -> mono toggles ---- */
+.tabs .tab,.lbtab{font-family:var(--px);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:0;border:1px solid var(--ink);background:var(--paper);color:var(--ink);padding:5px 12px}
+.tabs .tab.on,.lbtab.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.tabs .tab:hover,.lbtab:hover{opacity:1;color:var(--blue)}
+.tabs .tab.on:hover,.lbtab.on:hover{color:#fff}
+
+/* ---- chart cosmetics (leaderboard vertical bars, arena mini board) ---- */
+.col .val{font-family:var(--px);font-size:10px}
+.col.top .val{color:var(--blue);font-weight:400}
+.bar,.lbbar{border-radius:0;border:1px solid var(--blue)}
+.col .logo{border-radius:0;background:var(--paper);border:1px solid rgba(0,0,0,.35)}
+.col .nm{font-family:var(--px);font-size:8.5px;text-transform:uppercase}
+.col .rk{font-family:var(--px)}
+.legend{font-family:var(--px);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.legend .ramp{border-radius:0;background:linear-gradient(90deg,#0A35F0,#97A3F1,#E4E7F9)}
+.axis-hint{font-family:var(--bookserif);font-size:14px;color:var(--ink)}
+.crowd-meta{font-family:var(--px);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.5)}
+.crowd-meta a{color:var(--blue)}
+.lbempty{font-family:var(--px);font-size:11px}
+
+/* ---- methodology doc specifics ---- */
+.doc a{color:var(--blue)}
+.doc code{font-family:var(--px);font-size:12px;background:var(--blue-pale);border-radius:0;color:var(--ink)}
+.doc li{font-family:var(--bookserif);color:var(--ink)}
+.doc h3{font-family:var(--px);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--ink)}
+.formula{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.formula .lab{font-family:var(--px)}
+.formula .eq{font-family:var(--px);font-size:clamp(12px,2vw,15px);text-transform:uppercase}
+.formula .h40{color:var(--blue)}
+.formula .note{font-family:var(--bookserif);font-size:13.5px;text-transform:none}
+.ax{border-top:1px solid var(--ink)}
+.ax h3{font-family:var(--px);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:400}
+.ax .w{font-family:var(--px)}
+.ax .meter{background:rgba(0,0,0,.14)}
+.ax .meter i{background:var(--blue)}
+.ax p{font-family:var(--bookserif);font-size:14.5px;color:var(--ink);text-align:justify;hyphens:auto}
+.ax.human h3,.ax.human .w{color:var(--blue)}
+.dt td .src{font-family:var(--px);font-size:10.5px;text-transform:uppercase;font-weight:400}
+.dt td{font-family:var(--bookserif);font-size:14px}
+.dt td .yr{font-family:var(--px);font-size:10px}
+
+/* ---- footer: flat paper + hairline, mono links ---- */
+.foot{background:var(--paper);border-top:1px solid var(--ink)}
+.foot-brand .wm{font-family:var(--px);font-size:13px;text-transform:uppercase;font-weight:400}
+.foot-brand p{font-family:var(--bookserif);font-size:13.5px}
+.foot-col h4{font-family:var(--px);letter-spacing:.1em;font-weight:400}
+.foot-col a{font-family:var(--px);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.foot-col a::after{background:var(--blue)}
+.foot-legal{font-family:var(--px);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.45)}
+.foot-legal a{color:rgba(0,0,0,.6)}
+.pquote blockquote{font-family:var(--bookserif)}
+
+/* generic figure-panel helpers for inner pages */
+.panel{position:relative;background-image:var(--tex);background-repeat:repeat;padding:30px 40px 24px}
+.panel .bt,.panel .bb{position:absolute;left:0;right:0;height:2px;background-image:var(--tex);background-repeat:repeat}
+.panel .bl,.panel .br{position:absolute;top:0;bottom:0;width:2px;background-image:var(--tex);background-repeat:repeat}
+.panel .bt{top:0}.panel .bb{bottom:0}.panel .bl{left:0}.panel .br{right:0}
+.edge{position:absolute;font-family:var(--px);font-size:10px;letter-spacing:.12em;color:rgba(0,0,0,.5);
+  text-transform:uppercase;white-space:nowrap}
+.edge.l{left:10px;top:26px;writing-mode:vertical-rl;transform:rotate(180deg)}
+.edge.r{right:10px;top:26px;writing-mode:vertical-rl}
+.fig-tag{font-family:var(--px);font-size:10px;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.drule{height:5px;background-image:
+  url("data:image/svg+xml,%3Csvg width='6' height='5' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23000' fill-opacity='.34'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000' fill-opacity='.34'/%3E%3C/svg%3E");
+  background-repeat:repeat-x}
+
+/* ---- page titles & section heads: pixel blue chapters everywhere ---- */
+h1:not(.ms-title){font-family:var(--px)!important;font-weight:400!important;text-transform:uppercase;
+  color:var(--blue)!important;letter-spacing:.01em!important;font-size:clamp(24px,4.6vw,44px)!important;line-height:1.15!important}
+.sec-h,main h2,.cta h2{font-family:var(--px)!important;font-weight:400!important;text-transform:uppercase;
+  color:var(--blue)!important;letter-spacing:.01em!important;font-size:clamp(16px,2.4vw,24px)!important;line-height:1.3!important}
+.tag{font-family:var(--bookserif);color:var(--ink)}
+
+/* ---- arena controls: square, mono, manual-blue ---- */
+.domainbadge{border-radius:0!important;border:1px solid var(--blue)!important;color:var(--blue)!important;
+  font-family:var(--px)!important;background:var(--paper)!important}
+.both{border-radius:0!important;font-family:var(--px)!important;font-size:11px!important;letter-spacing:.08em;
+  text-transform:uppercase;background:var(--paper)!important;border:1px solid var(--ink)!important;
+  color:var(--ink)!important;box-shadow:none!important;padding:8px 16px!important}
+.both:hover{border-color:var(--blue)!important;color:var(--blue)!important}
+.next{border-radius:0!important;font-family:var(--px)!important;font-size:12px!important;letter-spacing:.08em;
+  text-transform:uppercase;background:var(--blue)!important;color:#fff!important;box-shadow:none!important}
+.next:hover{background:var(--ink)!important}
+.card{border-radius:0!important;border:1px solid rgba(0,0,0,.28)}
+.card:hover{border-color:var(--blue)}
+.card .num{border-radius:0!important;background:var(--blue)!important;color:#fff!important;
+  font-family:var(--px)!important;font-size:12px!important}
+.card .tagname{font-family:var(--px)!important;border-radius:0!important}
+.card .txt{font-family:var(--bookserif)}

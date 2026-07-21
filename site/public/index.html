@@ -20,102 +20,134 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/manual.css">
 <style>
-  /* signature display face — self-hosted, not a Google-shelf font */
-  @font-face{font-family:'Cabinet Grotesk';src:url('/fonts/cabinet-grotesk.woff2') format('woff2');
-    font-weight:100 900;font-style:normal;font-display:swap}
-  :root{--display:'Cabinet Grotesk','Geist',system-ui,sans-serif}
+  /* ============================================================
+     TECHNICAL MANUAL RESTYLE, matched to makingsoftware.com:
+     paper #FBFBFB, black justified serif body (EB Garamond, the
+     declared fallback of their ABC Arizona), Departure Mono pixel
+     labels, ultramarine oklch blue, and figure panels backed and
+     bordered by a 3px dot texture tile (their texture.svg).
+     ============================================================ */
+  @font-face{font-family:'Departure Mono';src:url('/fonts/departure-mono.woff2') format('woff2');
+    font-weight:400;font-style:normal;font-display:swap}
 
-  /* grain on the ground (premium noise): felt, not seen. sections are transparent so it shows through. */
-  body{background:#F4F3F1}
-  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
-  .nav,main,footer{position:relative;z-index:1}
-  .wrap{max-width:1080px}
-
-  /* ---- masthead ---- */
-  .top{padding:62px 0 26px;position:relative;overflow:hidden}
-  /* Slashy atmosphere: the brand /// slash, bleeding in from the top-right, masked off the
-     left so the headline always sits on clean off-white. Subtle, never over text. */
-  .top::before{content:'';position:absolute;inset:-10% -6% auto auto;width:64%;height:150%;z-index:0;
-    pointer-events:none;background:url(/bg-slash1.jpg) right top/cover no-repeat;opacity:.6;
-    -webkit-mask-image:linear-gradient(105deg,transparent 30%,#000 82%);
-            mask-image:linear-gradient(105deg,transparent 30%,#000 82%)}
-  .top .wrap{position:relative;z-index:1}
-  @media(max-width:760px){.top::before{display:none}}
-  .lede .over{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--muted);margin:0 0 18px;
-    display:flex;align-items:center;gap:9px}
-  .lede .over .n{color:var(--ink);font-weight:500}
-  h1.mast{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.6vw,82px);line-height:.94;
-    letter-spacing:-.025em;color:var(--ink);margin:0;text-wrap:balance}
-  h1.mast em{font-style:normal;color:var(--blue)}
-  .deck{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:42ch;margin:24px 0 0;line-height:1.5;font-weight:400}
-  .deck b{font-weight:600;color:var(--ink)}
-  .top-act{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin:30px 0 0}
-  .plainlink{font-size:15px;font-weight:500;color:var(--ink);text-underline-offset:4px;text-decoration-thickness:1px}
-  .plainlink:hover{text-decoration-color:var(--ink)}
-
-  /* ---- the living board: the signature artifact ---- */
-  .board{padding:8px 0 60px}
-  .board-hd{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    padding:0 0 12px;border-bottom:1px solid var(--ink);margin:0 0 4px}
-  .board-hd .t{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);letter-spacing:-.01em}
-  .board-hd .scale{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-  .board-hd .scale b{color:var(--ink);font-weight:500}
-  .row{display:grid;grid-template-columns:32px 190px 1fr 62px;align-items:center;gap:16px;
-    padding:9px 4px;border-bottom:1px solid var(--divider)}
-  .row:last-child{border-bottom:none}
-  .row .rk{font-family:var(--mono);font-size:12.5px;color:var(--faint);text-align:right;font-variant-numeric:tabular-nums}
-  .row .who{display:flex;align-items:center;gap:10px;min-width:0}
-  .row .who .lg{display:inline-flex;align-items:center;color:var(--ink);flex:0 0 auto}
-  .row .who .lg svg{width:16px;height:16px;display:block}
-  .row .who .lg .mono{font-family:var(--mono);font-size:9px;color:var(--muted)}
-  .row .who .nm{font-size:15px;font-weight:550;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .row .track{height:11px;position:relative}
-  .row .fill{position:absolute;left:0;top:0;height:100%;width:0;border-radius:0 3px 3px 0;
-    transition:width 1.05s cubic-bezier(.2,.75,.25,1)}
-  .row .sc{font-family:var(--display);font-weight:700;font-size:21px;color:var(--ink);text-align:right;
-    font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-  .row.lead .nm{color:var(--blue)} .row.lead .sc{color:var(--blue)}
-  .row:hover{background:rgba(45,43,54,.025)}
-  @media(max-width:640px){
-    .row{grid-template-columns:26px 1fr 44px;gap:11px}
-    .row .track{display:none}
-    .row .sc{font-size:18px}
+  :root{
+    --paper:#FBFBFB; --ink:#000;
+    --blue:#0435FF; --blue:oklch(50.58% 0.2886 264.84);
+    --blue-soft:#97A3F1; --blue-soft:oklch(76.12% 0.1218 272.4);
+    --blue-pale:#E4E7F9; --blue-pale:oklch(94.22% 0.0275 274.66);
+    --px:'Departure Mono',ui-monospace,monospace;
+    --serif:'EB Garamond',Georgia,'Times New Roman',serif;
+    /* their texture.svg verbatim: 3x3 tile, one 1px blue dot at 15% */
+    --tex:url("data:image/svg+xml,%3Csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%230435FF' fill-opacity='0.15'/%3E%3C/svg%3E");
   }
-  .board-ft{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:18px 0 0}
-  .facts{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
-  .facts .sep{opacity:.4}
+  html{background:var(--paper)}
+  body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16.5px;line-height:1.6;background-image:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 
-  /* ---- the proof: slop vs human, real type, tonal marks ---- */
-  .proof{padding:64px 0;border-top:1px solid var(--divider)}
-  h2.sec{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.015em;
-    color:var(--ink);margin:0;line-height:1.05}
-  .sec-lede{font-size:16px;color:var(--body);max-width:56ch;margin:14px 0 0;line-height:1.55}
-  .pair{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin:34px 0 0}
-  @media(max-width:720px){.pair{grid-template-columns:1fr;gap:30px}}
-  .samp .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin:0 0 12px;
-    padding:0 0 10px;border-bottom:1px solid var(--divider)}
-  .samp p{font-size:15.5px;line-height:1.68;color:#3a3844;margin:0}
-  .samp mark{background:none;color:inherit;border-bottom:2px solid var(--purple);padding-bottom:1px}
-  .proof-note{font-size:13.5px;color:var(--muted);margin:26px 0 0;max-width:70ch;line-height:1.6}
-  .proof-note b{color:var(--ink);font-weight:600}
+  /* ---- nav: hairline manual header ---- */
+  .nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--ink);backdrop-filter:none}
+  .nav-in{max-width:1120px;margin:0 auto;padding:0 28px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;align-items:center;gap:9px}
+  .brand .mark{width:18px;height:18px}
+  .brand .wm{font-family:var(--px);font-size:13px;letter-spacing:.04em;color:var(--ink);text-transform:uppercase;font-weight:400}
+  .nav-links{display:flex;align-items:center;gap:22px}
+  .nav-links a{font-family:var(--px);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+    padding:0;border-radius:0;font-weight:400;background:none}
+  .nav-links a:hover{color:var(--blue)}
+  .nav-links a.on{color:var(--blue)}
+  .nav-links a.nav-cta,.nav-links a.nav-cta:hover{background:none;color:var(--blue);padding:0;margin-left:2px;border-radius:0;font-size:11px}
+  @media(max-width:720px){.nav-links{gap:12px}.nav-links a.gh{display:none}}
 
-  /* ---- how it's measured: prose + formula, no numbered rail ---- */
-  .measure{padding:60px 0;border-top:1px solid var(--divider)}
-  .measure .lede2{font-size:clamp(18px,2.1vw,22px);line-height:1.5;color:var(--ink-2);max-width:40ch;font-weight:400}
-  .measure .lede2 b{color:var(--ink);font-weight:600}
-  .formula{font-family:var(--mono);font-size:14.5px;color:var(--body);margin:26px 0 0;line-height:2.1}
-  .formula b{color:var(--ink)} .formula .h{color:var(--blue)}
-  .measure .more{display:flex;gap:24px;flex-wrap:wrap;margin:28px 0 0}
+  /* ---- masthead: pixel wordmark + right-aligned serif tagline ---- */
+  .top{padding:52px 0 0}
+  .masthead{display:flex;align-items:flex-start;justify-content:space-between;gap:34px;flex-wrap:wrap}
+  .ms-title{font-family:var(--px);font-weight:400;color:var(--blue);text-transform:uppercase;
+    font-size:clamp(34px,7.6vw,96px);line-height:.92;letter-spacing:-.01em;margin:0;word-spacing:.18em}
+  .ms-tag{text-align:right;font-family:var(--serif);max-width:34ch;margin-left:auto}
+  .ms-tag p{font-size:clamp(15px,1.65vw,19px);color:var(--ink);line-height:1.35;margin:0}
+  .ms-tag .by{font-weight:700;margin-top:2px}
+  @media(max-width:720px){.ms-tag{text-align:left;margin-left:0}}
 
-  /* ---- close ---- */
-  .close{padding:62px 0 70px;border-top:1px solid var(--divider)}
-  .close h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.015em;
-    color:var(--ink);margin:0;max-width:20ch;line-height:1.05}
-  .close p{font-size:16px;color:var(--body);max-width:52ch;margin:16px 0 26px;line-height:1.55}
+  /* dither rule: a thin band of the dot texture, denser (their border strips) */
+  .drule{height:5px;margin:26px 0 0;background-image:
+    url("data:image/svg+xml,%3Csvg width='6' height='5' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23000' fill-opacity='.34'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000' fill-opacity='.34'/%3E%3C/svg%3E");
+    background-repeat:repeat-x}
+
+  /* ---- chapter layout: justified serif column + figure panel ---- */
+  .chapter{display:grid;grid-template-columns:5fr 7fr;gap:46px;padding:44px 0 26px;align-items:start}
+  @media(max-width:860px){.chapter{grid-template-columns:1fr;gap:30px}}
+  .copy p{font-family:var(--serif);font-size:16.5px;line-height:1.62;color:var(--ink);
+    text-align:justify;hyphens:auto;margin:0 0 16px}
+  .copy p b{font-weight:700}
+  .dropcap{float:left;font-family:var(--serif);font-weight:400;font-size:56px;line-height:.8;
+    padding:6px 10px 0 0;color:var(--ink)}
+  .mlinks{margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
+  .mlink{font-family:var(--px);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);width:fit-content}
+  .mlink:hover{background:var(--blue);color:#fff}
+  .votes{font-family:var(--px);font-size:10.5px;letter-spacing:.1em;color:rgba(0,0,0,.5);
+    text-transform:uppercase;margin:26px 0 0}
+
+  /* ---- figure panels: texture ground, texture-strip borders, rotated edge labels ---- */
+  .panel{position:relative;background-image:var(--tex);background-repeat:repeat;padding:30px 40px 24px}
+  .panel .bt,.panel .bb{position:absolute;left:0;right:0;height:2px;background-image:var(--tex);background-repeat:repeat}
+  .panel .bl,.panel .br{position:absolute;top:0;bottom:0;width:2px;background-image:var(--tex);background-repeat:repeat}
+  .panel .bt{top:0}.panel .bb{bottom:0}.panel .bl{left:0}.panel .br{right:0}
+  .edge{position:absolute;font-family:var(--px);font-size:10px;letter-spacing:.12em;color:rgba(0,0,0,.5);
+    text-transform:uppercase;white-space:nowrap}
+  .edge.l{left:10px;top:26px;writing-mode:vertical-rl;transform:rotate(180deg)}
+  .edge.r{right:10px;top:26px;writing-mode:vertical-rl}
+  .figcap{font-family:var(--px);font-size:10px;letter-spacing:.12em;color:rgba(0,0,0,.5);
+    text-transform:uppercase;margin:18px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .figcap b{color:var(--blue);font-weight:400}
+
+  /* the live board, drawn like a manual bar chart */
+  .bhead{display:flex;justify-content:space-between;gap:12px;font-family:var(--px);font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 14px}
+  .row{display:grid;grid-template-columns:24px 158px 1fr 40px;align-items:center;gap:12px;padding:5.5px 0}
+  .row .rk{font-family:var(--px);font-size:10px;color:rgba(0,0,0,.45);text-align:right}
+  .row .who{display:flex;align-items:center;gap:8px;min-width:0}
+  .row .who .lg{display:inline-flex;color:var(--ink);flex:0 0 auto}
+  .row .who .lg svg{width:12px;height:12px;display:block}
+  .row .who .lg .mono{font-family:var(--px);font-size:8px;color:rgba(0,0,0,.5)}
+  .row .who .nm{font-family:var(--px);font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;
+    color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .track{height:11px;position:relative}
+  .row .fill{position:absolute;left:0;top:0;height:100%;width:0;border:1px solid var(--blue);
+    transition:width .9s cubic-bezier(.2,.75,.25,1)}
+  .row .sc{font-family:var(--px);font-size:12px;color:var(--blue);text-align:right}
+  .row.lead .nm{color:var(--blue)}
+  @media(max-width:640px){.row{grid-template-columns:20px 1fr 34px}.row .track{display:none}}
+
+  /* ---- section heads: pixel chapter titles ---- */
+  .schead{font-family:var(--px);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.5);margin:0 0 8px}
+  h2.sec{font-family:var(--px);font-weight:400;font-size:clamp(17px,2.6vw,26px);letter-spacing:.01em;
+    text-transform:uppercase;color:var(--blue);margin:0 0 18px;line-height:1.25}
+
+  section.block{padding:40px 0 8px}
+  .sep{height:1px;background:var(--ink);margin:34px 0 0;border:none}
+
+  /* proof pair inside panels */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:6px 0 0}
+  @media(max-width:760px){.pair{grid-template-columns:1fr}}
+  .samp p{font-family:var(--serif);font-size:15.5px;line-height:1.62;color:var(--ink);text-align:justify;hyphens:auto;margin:0}
+  .samp mark{background:none;color:inherit;border-bottom:1.5px solid var(--blue);padding-bottom:1px}
+  .samp .cap{font-family:var(--px);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 12px}
+  .proof-note{font-family:var(--serif);font-size:15px;color:var(--ink);margin:22px 0 0;max-width:74ch;text-align:justify;hyphens:auto}
+
+  /* formula, set like a spec table in the manual */
+  .formula{font-family:var(--px);font-size:12.5px;line-height:2.3;color:var(--ink);margin:18px 0 0;letter-spacing:.02em;text-transform:uppercase}
+  .formula .h{color:var(--blue)}
+  .formula .dim{color:rgba(0,0,0,.45);text-transform:none;letter-spacing:0}
+
+  .close-blk{padding:46px 0 66px}
+  .close-blk p{max-width:64ch}
+
+  /* footer harmonizes: flat paper, hairline top */
+  .foot{background:var(--paper);border-top:1px solid var(--ink)}
 </style>
 </head>
 <body>
@@ -124,11 +156,9 @@
   <div class="nav-in">
     <a class="brand" href="/">
       <svg class="mark" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="url(#sg1)"/>
-        <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="url(#sg1)"/>
-        <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="url(#sg1)"/>
-        <defs><linearGradient id="sg1" x1="332" y1="152" x2="332" y2="506" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#8EA1E2"/><stop offset="1" stop-color="#4457C4"/></linearGradient></defs>
+        <path d="M150 506L261.435 152H305.697L194.25 506H150Z" fill="#0435FF"/>
+        <path d="M247.982 506L359.418 152H403.679L292.232 506H247.982Z" fill="#0435FF"/>
+        <path d="M349.125 506L460.56 152H504.822L393.375 506H349.125Z" fill="#0435FF"/>
       </svg>
       <span class="wm">The Slop Index</span>
     </a>
@@ -137,7 +167,7 @@
       <a href="/arena">Arena</a>
       <a href="/methodology">Method</a>
       <a class="gh" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">GitHub</a>
-      <a class="nav-cta" href="/arena">Play the arena</a>
+      <a class="nav-cta" href="/arena">[ Play &rarr; ]</a>
     </div>
   </div>
 </nav>
@@ -145,83 +175,120 @@
 <main>
   <section class="top">
     <div class="wrap">
-      <div class="lede">
-        <p class="over"><span id="votecount">a live benchmark</span></p>
-        <h1 class="mast">Which AI writes the<br>least like <em>AI?</em></h1>
-        <p class="deck">Every frontier model can write. The question is whether it writes like a <b>person</b> or like
-          <b>AI slop</b>. Below is the live answer, by machine and by blind human vote.</p>
-        <div class="top-act">
-          <a class="btn" href="/leaderboard">The full board <span class="arr" aria-hidden="true">&#8599;</span></a>
-          <a class="plainlink" href="/methodology">How it&rsquo;s measured</a>
+      <header class="masthead">
+        <h1 class="ms-title">The Slop<br>Index</h1>
+        <div class="ms-tag">
+          <p>A reference benchmark of how much each AI writes like AI slop.</p>
+          <p class="by">Measured by machine and by blind human vote.</p>
         </div>
-      </div>
+      </header>
+      <div class="drule"></div>
     </div>
   </section>
 
-  <section class="board">
+  <section>
     <div class="wrap">
-      <div class="board-hd">
-        <div class="t">The board, live</div>
-        <div class="scale">bar = human-likeness &middot; longer is <b>less slop</b></div>
-      </div>
-      <div id="board"><div style="padding:40px 4px;color:var(--muted);font-size:14px">reading the board&hellip;</div></div>
-      <div class="board-ft">
-        <div class="facts">
-          <span>18 models</span><span class="sep">/</span><span>112 scenarios</span>
-          <span class="sep">/</span><span>19,928 generations</span>
+      <div class="chapter">
+        <div class="copy">
+          <p><span class="dropcap">H</span>ave you ever gotten an email that opened with &ldquo;I hope this finds you
+            well,&rdquo; offered exactly three tidy bullet points, and closed by inviting you to not hesitate? You knew.
+            Everyone knows. Every frontier model can write; the question is whether it writes like a <b>person</b> or
+            like <b>AI slop</b>.</p>
+          <p>The index at right is the live answer. Eighteen frontier models, scored against genuine human writing
+            collected <b>before ChatGPT existed</b>, and by a blind human vote that anyone can join. Higher means the
+            writing reads more like a person. No LLM judges anything.</p>
+          <div class="mlinks">
+            <a class="mlink" href="/leaderboard">[ The full board &rarr; ]</a>
+            <a class="mlink" href="/methodology">[ How it&rsquo;s measured &rarr; ]</a>
+            <a class="mlink" href="/arena">[ Play the arena &rarr; ]</a>
+          </div>
+          <p class="votes"><span id="votecount">a live benchmark</span></p>
         </div>
-        <a class="plainlink" href="/leaderboard">Every axis &amp; the price scatter &#8599;</a>
+
+        <figure class="panel">
+          <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
+          <span class="edge l">FIG_001</span>
+          <span class="edge r">[ 18 FRONTIER MODELS ]</span>
+          <div class="bhead"><span>The board, live</span><span>&larr; more slop &middot; less slop &rarr;</span></div>
+          <div id="board" style="font-family:var(--px);font-size:11px;color:rgba(0,0,0,.5)">READING THE BOARD&hellip;</div>
+          <figcaption class="figcap">
+            <span>18 MODELS &middot; 112 SCENARIOS &middot; 19,928 GENERATIONS</span>
+            <span><b>SCORE = HUMAN-LIKENESS, 0&ndash;100</b></span>
+          </figcaption>
+        </figure>
       </div>
+      <hr class="sep">
     </div>
   </section>
 
-  <section class="proof">
+  <section class="block">
     <div class="wrap">
-      <h2 class="sec">You already know it when you read it.</h2>
-      <p class="sec-lede">Same request, two replies. One reaches for the reflexes. The other just answers.</p>
+      <div class="schead">SEC_002 &middot; THE TELLS</div>
+      <h2 class="sec">You already know it when you read it</h2>
       <div class="pair">
-        <div class="samp">
-          <div class="cap">reads like AI</div>
+        <figure class="panel samp">
+          <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
+          <div class="cap">[ FIG_002 &middot; READS LIKE AI ]</div>
           <p>Hi Sarah, <mark>I hope this email finds you well!</mark> I wanted to <mark>reach out and touch base</mark>
             about the timeline. <mark>It&rsquo;s not just about hitting the date, it&rsquo;s about doing it right.</mark>
             <mark>Please don&rsquo;t hesitate to let me know</mark> if you have any questions.
             <mark>Looking forward to collaborating!</mark></p>
-        </div>
-        <div class="samp">
-          <div class="cap">reads like a person</div>
+        </figure>
+        <figure class="panel samp">
+          <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
+          <div class="cap">[ FIG_003 &middot; READS LIKE A PERSON ]</div>
           <p>Sarah, can we push a week? I&rsquo;m still waiting on the design files and don&rsquo;t want to rush QA.
             Works either way, just let me know.</p>
-        </div>
+        </figure>
       </div>
-      <p class="proof-note">The underlined phrases are among the <b>tells</b> the index counts, each measured against
-        how often real people actually used it before 2022, not against a model&rsquo;s guess.</p>
+      <p class="proof-note">The underlined phrases are among the <b>tells</b> the index counts, each measured against how
+        often real people actually used it before 2022, not against a model&rsquo;s guess.</p>
+      <hr class="sep">
     </div>
   </section>
 
-  <section class="measure">
+  <section class="block">
     <div class="wrap">
+      <div class="schead">SEC_003 &middot; THE MEASUREMENT</div>
       <h2 class="sec">No LLM judges. No vibes. Just measurement.</h2>
-      <p class="lede2" style="margin-top:20px">Slop is distance from genuine human writing collected <b>before ChatGPT
-        existed</b>, so no model could have shaped the yardstick. Every number is mechanical, plus one big input:
-        <b>people</b>.</p>
-      <div class="formula">
-        <span class="h"><b>40%</b> the arena vote</span><br>
-        <b>15%</b> conciseness &nbsp; <b>15%</b> templating &nbsp; <b>15%</b> rhythm &nbsp; <b>15%</b> tells<br>
-        <span style="color:var(--muted)">each normalised to a 0&ndash;100 human-likeness scale, then blended.</span>
+      <div class="chapter" style="padding:0">
+        <div class="copy">
+          <p>Slop is distance from genuine human writing collected <b>before ChatGPT existed</b>, so no model could have
+            shaped the yardstick. The corpus: real workplace email from 2000&ndash;2002, tweets from before 2022, essays
+            and chat logs that predate generative AI entirely. Every number is mechanical, plus one big input:
+            <b>people</b>.</p>
+          <div class="mlinks">
+            <a class="mlink" href="/methodology">[ Read the full method &rarr; ]</a>
+            <a class="mlink" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">[ Reproduce it on GitHub &rarr; ]</a>
+          </div>
+        </div>
+        <figure class="panel">
+          <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
+          <span class="edge l">FIG_004</span>
+          <span class="edge r">[ HUMAN SCORE ]</span>
+          <div class="formula">
+            <span class="h">40% &middot; the arena vote</span><br>
+            15% conciseness &nbsp; 15% templating<br>
+            15% rhythm &nbsp; 15% tells<br>
+            <span class="dim">each normalised to a 0&ndash;100 human-likeness scale, then blended.</span>
+          </div>
+        </figure>
       </div>
-      <div class="more">
-        <a class="plainlink" href="/methodology">Read the full method</a>
-        <a class="plainlink" href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener">Reproduce it on GitHub &#8599;</a>
-      </div>
+      <hr class="sep">
     </div>
   </section>
 
-  <section class="close">
+  <section class="close-blk">
     <div class="wrap">
-      <h2>Think you can spot the slop?</h2>
-      <p>The board is the machine&rsquo;s verdict. The arena collects yours, two blind samples from the same task, one
-        sloppier than the other. Every vote moves the live human axis.</p>
-      <a class="btn" href="/arena">Play a round <span class="arr" aria-hidden="true">&#8599;</span></a>
+      <div class="schead">SEC_004 &middot; THE ARENA</div>
+      <h2 class="sec">Think you can spot the slop?</h2>
+      <div class="copy">
+        <p>The board is the machine&rsquo;s verdict. The arena collects yours: two blind samples from the same task, one
+          sloppier than the other. Every vote moves the live human axis of the score.</p>
+      </div>
+      <div class="mlinks" style="margin-top:18px">
+        <a class="mlink" style="font-size:14px" href="/arena">[ Play a round &rarr; ]</a>
+      </div>
     </div>
   </section>
 </main>
@@ -234,15 +301,14 @@ const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells
 const $=id=>document.getElementById(id);
 const r0=v=>v==null?'n/a':Math.round(v);
 let DATA=null, byId={}, animated=false, LOGOS={};
-// real provider marks, bare (no tile), monogram fallback
 const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','DeepSeek':'DS',
   'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
 const logo=lab=>LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`;
 
-// tonal ramp: strong cobalt (most human) desaturating to a pale blue-grey (most slop). one hue, value-led.
+// manual-blue ramp: ultramarine (most human) -> soft periwinkle -> pale wash (most slop)
 function tone(t){
-  const s=[[68,87,196],[126,138,190],[178,182,198],[205,207,214]];
-  const seg=Math.min(2,Math.floor(t*3)), f=(t*3)-seg, a=s[seg], b=s[seg+1];
+  const s=[[10,53,240],[151,163,241],[228,231,249]];
+  const seg=Math.min(1,Math.floor(t*2)), f=(t*2)-seg, a=s[seg], b=s[seg+1];
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
 function computeScores(crowd){
@@ -258,12 +324,12 @@ function computeScores(crowd){
 function renderBoard(){
   const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
   const vs=rows.map(r=>r.score),mn=Math.min(...vs),mx=Math.max(...vs);
-  // rows + numbers are visible immediately; only the bar WIDTH animates (never hides content)
   $('board').innerHTML=rows.map((r,n)=>{
     const t=n/Math.max(1,rows.length-1);
-    const w=18+((r.score-mn)/Math.max(1e-9,mx-mn))*82;
+    const w=16+((r.score-mn)/Math.max(1e-9,mx-mn))*84;
+    const pad=String(n+1).padStart(2,'0');
     return `<div class="row${n===0?' lead':''}">
-      <div class="rk">${n+1}</div>
+      <div class="rk">${pad}</div>
       <div class="who"><span class="lg" title="${r.lab}">${logo(r.lab)}</span><span class="nm">${r.name}</span></div>
       <div class="track"><div class="fill" data-w="${w}" style="width:${animated?w+'%':'0'};background:${tone(t)}"></div></div>
       <div class="sc">${r0(r.score)}</div></div>`;
@@ -276,14 +342,12 @@ async function refresh(){
   try{ crowd=await fetch('/api/leaderboard?mode=v1&cb='+Date.now()).then(r=>r.json()); }catch(e){}
   computeScores(crowd);
   const total=(crowd&&crowd.totalVotes)||0;
-  $('votecount').innerHTML = total>0
-    ? `<span class="n">${total.toLocaleString()}</span> human votes and counting`
-    : 'a live benchmark';
+  $('votecount').textContent = total>0 ? `${total.toLocaleString()} human votes and counting` : 'a live benchmark';
   renderBoard();
 }
 Promise.all([fetch('/bench.json').then(r=>r.json()), fetch('/logos.json').then(r=>r.json()).catch(()=>({}))])
   .then(([d,lg])=>{ DATA=d; LOGOS=lg; d.models.forEach(m=>byId[m.id]=m); refresh(); setInterval(refresh,20000); })
-  .catch(()=>{ $('board').innerHTML='<div style="padding:40px 4px;color:var(--muted)">couldn&rsquo;t load the board</div>'; });
+  .catch(()=>{ $('board').innerHTML='COULDN&rsquo;T LOAD THE BOARD'; });
 </script>
 </body>
 </html>
