@@ -265,12 +265,13 @@ const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells
 
 function computeScores(crowd){
   const rows=DATA.models, elo={}; ((crowd&&crowd.rows)||[]).forEach(r=>elo[r.model]=+r.elo);
+  // DIRECTION CONTRACT (per SPEC.md + harness/score.py): every raw bench.json number is a
+  // SLOP measure where higher = sloppier. That covers the four axis columns AND the four
+  // domain Slop Scores AND `overall` (mean of domains). Display is human-likeness, so ALL
+  // of them get the inverting normaliser. Never "fix" this to a forward normalise again.
   const inv=key=>{const vs=rows.map(m=>m[key]),mn=Math.min(...vs),mx=Math.max(...vs),sp=Math.max(1e-9,mx-mn);return m=>100*(mx-m[key])/sp;};
   const nC=inv('conciseness'),nT=inv('templating'),nR=inv('rhythm'),nTe=inv('tells');
-  // domain columns are ALREADY human-likeness (higher = better): normalise forward, do NOT invert.
-  // (inv() here once flipped every domain tab upside down, making the worst writers look best.)
-  const fwd=key=>{const vs=rows.map(m=>m[key]),mn=Math.min(...vs),mx=Math.max(...vs),sp=Math.max(1e-9,mx-mn);return m=>100*(m[key]-mn)/sp;};
-  const nd={}; ['email','social','essay','slack'].forEach(d=>nd[d]=fwd(d));
+  const nd={}; ['email','social','essay','slack'].forEach(d=>nd[d]=inv(d));
   const evs=Object.values(elo), emn=evs.length?Math.min(...evs):1500, emx=evs.length?Math.max(...evs):1500, esp=Math.max(1e-9,emx-emn);
   rows.forEach(m=>{
     m.hHuman=(m.id in elo && evs.length>1)?100*(elo[m.id]-emn)/esp:50;
