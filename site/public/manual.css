@@ -194,3 +194,18 @@ h1:not(.ms-title){font-family:var(--px)!important;font-weight:400!important;text
   font-family:var(--px)!important;font-size:12px!important}
 .card .tagname{font-family:var(--px)!important;border-radius:0!important}
 .card .txt{font-family:var(--bookserif)}
+
+/* ---- small-screen guards: nothing may widen the page and stretch justified text ---- */
+html,body{overflow-x:hidden}
+.chapter > *,.grid > *,.pair > *{min-width:0}
+@media(max-width:520px){
+  .nav-in{padding:0 14px;gap:8px}
+  .brand .wm{font-size:10.5px}
+  .nav-links{gap:9px}
+  .nav-links a{font-size:9.5px;letter-spacing:.04em}
+  .panel{padding:22px 14px 18px}
+  .bhead{flex-wrap:wrap;row-gap:4px}
+  .edge{display:none}                 /* rotated figure labels crowd a phone screen */
+  .wrap,.wrap-narrow{padding:0 18px}
+  .copy p,.doc p,.phead .thesis,.samp p{text-align:left;hyphens:none}  /* justify looks gappy in narrow columns */
+}
