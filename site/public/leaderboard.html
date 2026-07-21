@@ -255,10 +255,13 @@ const $=id=>document.getElementById(id);
 const r0=v=>v==null?'-':Math.round(v);
 const nameOf=id=>(byId[id]||{}).name||id, labOf=id=>(byId[id]||{}).lab||'';
 
-// cobalt (human) -> soft -> pale blue (slop). t: 0 human .. 1 slop.
+// ultramarine (human) -> soft -> pale wash (slop), the manual ramp (matches the home board).
+// t is CLAMPED so a stray NaN/out-of-range value can never index past the stops and throw,
+// which would silently abort the whole chart render (the "tab click does nothing" failure).
 function heat(t){
-  const s=[[68,87,196],[126,138,190],[178,182,198],[205,207,214]];   // shared cobalt->grey ramp (matches the home board)
-  const seg=Math.min(2,Math.floor(t*3)), f=(t*3)-seg, a=s[seg], b=s[seg+1];
+  t=Math.max(0,Math.min(1,Number(t)||0));
+  const s=[[10,53,240],[151,163,241],[228,231,249]];
+  const seg=Math.min(1,Math.floor(t*2)), f=(t*2)-seg, a=s[seg], b=s[seg+1];
   return `rgb(${a.map((c,i)=>Math.round(c+(b[i]-c)*f)).join(',')})`;
 }
 const WEIGHTS={human:0.40, conciseness:0.15, templating:0.15, rhythm:0.15, tells:0.15};
