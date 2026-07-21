@@ -150,6 +150,7 @@ section{padding:52px 0}
 .foot-col a:hover::after{width:100%}
 .foot-legal{max-width:var(--maxw);margin:0 auto;padding:0 24px 40px;
   font-family:var(--mono);font-size:11px;color:var(--faint);line-height:1.9}
+.foot-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 @media(max-width:680px){.foot-in{grid-template-columns:1fr 1fr;gap:26px}.foot-brand{grid-column:1/-1}}
 
 /* ---------- Slashy pull-quote (Libertinus Serif — the one sanctioned serif use) ---------- */
