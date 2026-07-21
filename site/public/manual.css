@@ -200,6 +200,7 @@ html,body{overflow-x:hidden}
 .chapter > *,.grid > *,.pair > *{min-width:0}
 @media(max-width:520px){
   .nav-in{padding:0 14px;gap:8px}
+  .nav-links a.nav-cta{display:none}
   .brand .wm{font-size:10.5px}
   .nav-links{gap:9px}
   .nav-links a{font-size:9.5px;letter-spacing:.04em}

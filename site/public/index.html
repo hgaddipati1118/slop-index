@@ -148,6 +148,17 @@
 
   /* footer harmonizes: flat paper, hairline top */
   .foot{background:var(--paper);border-top:1px solid var(--ink)}
+  @media(max-width:520px){
+    .nav-links a.nav-cta{display:none}
+    .nav-links{gap:9px}
+    .nav-links a{font-size:9.5px}
+    .brand .wm{font-size:10.5px}
+    .nav-in{padding:0 14px}
+    .panel{padding:22px 14px 18px}
+    .bhead{flex-wrap:wrap;row-gap:4px}
+    .edge{display:none}
+    .copy p{text-align:left;hyphens:none}
+  }
 </style>
 </head>
 <body>
