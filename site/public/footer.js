@@ -42,6 +42,6 @@
         '<a href="https://cal.com/slashy/onboarding" target="_blank" rel="noopener">Book a call</a>',
       '</div>',
     '</div>',
-    '<div class="foot-legal">32 models · 112 scenarios · 35,578 generations · fully open-sourced. A research project from <a href="https://slashy.com" target="_blank" rel="noopener">Slashy</a>, the email client for people who read a lot of email. Design language inspired by Dan Hollick&rsquo;s <a href="https://www.makingsoftware.com" target="_blank" rel="noopener">Making Software</a>.</div>'
+    '<div class="foot-legal">39 models · 112 scenarios · 43,364 generations · fully open-sourced. A research project from <a href="https://slashy.com" target="_blank" rel="noopener">Slashy</a>, the email client for people who read a lot of email. Design language inspired by Dan Hollick&rsquo;s <a href="https://www.makingsoftware.com" target="_blank" rel="noopener">Making Software</a>.</div>'
   ].join('');
 })();

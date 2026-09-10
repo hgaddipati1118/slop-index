@@ -8,10 +8,12 @@
 export const MODELS = new Set([
   "claude-fable-5", "claude-fable-5.1", "claude-haiku-4-5",
   "claude-opus-4-8", "claude-opus-5", "claude-sonnet-5", "deepseek-v4-pro",
-  "deepseek-v4-pro-0813", "gemini-3.1-pro-preview", "gemini-3.5-flash",
-  "gemini-3.6-flash", "gemini-3.7-flash", "gemini-3.8-flash", "glm-5.2",
-  "glm-5.3", "gpt-5.4-mini", "gpt-5.6-luna", "gpt-5.6-sol", "gpt-5.6-terra",
-  "gpt-6-astra", "grok-4.5", "grok-4.6", "kimi-k2p6", "kimi-k3",
-  "minimax-m3", "mistral-large", "muse-spark-1.1", "muse-spark-1.3",
-  "qwen3.7-flash", "qwen3.7-max", "qwen3.8-flash", "qwen3.8-max" 
+  "deepseek-v4-pro-0813", "deepseek-v4.1-flash", "gemini-3.1-pro-preview",
+  "gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.7-flash",
+  "gemini-3.8-flash", "glm-5.2", "glm-5.3", "gpt-5.4-mini", "gpt-5.6-luna",
+  "gpt-5.6-sol", "gpt-5.6-terra", "gpt-6-astra", "gpt-6-astra-pro",
+  "grok-4.5", "grok-4.6", "hy4-preview", "inkling-small", "kimi-k2p6",
+  "kimi-k3", "mercury-2.5", "minimax-m3", "mistral-large", "muse-spark-1.1",
+  "muse-spark-1.3", "nemotron-3.5-lightning", "qwen3.7-flash", "qwen3.7-max",
+  "qwen3.8-flash", "qwen3.8-max", "seed-2.1-turbo" 
 ]);

@@ -6,7 +6,7 @@
 <title>The Leaderboard · The Slop Index</title>
 <meta name="description" content="Live ranking of 22 frontier LLMs by Slop Score: how much each writes like a chatbot, not a person. #1 is the sloppiest. Blends a live human vote with four mechanical axes.">
 <meta property="og:title" content="The Slop Index · Leaderboard">
-<meta property="og:description" content="32 frontier models ranked by how much they write like AI slop, by machine and by blind human vote.">
+<meta property="og:description" content="39 frontier models ranked by how much they write like AI slop, by machine and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com/leaderboard">
 <meta property="og:image" content="https://theslopindex.com/og.png">
@@ -135,7 +135,7 @@
   <div class="wrap">
     <span class="eyebrow">The board · live</span>
     <h1>Every model, ranked</h1>
-    <p class="thesis">32 frontier models scored by <b>Slop Score</b>, how much each writes like a chatbot and not a
+    <p class="thesis">39 frontier models scored by <b>Slop Score</b>, how much each writes like a chatbot and not a
       person. It blends the live arena vote (40%) with four mechanical axes against pre-AI writing. Higher is worse,
       and #1 is the sloppiest model on the board.</p>
     <span class="livepill"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span>
@@ -220,7 +220,7 @@
     <div class="sec-eyebrow">How it works</div>
     <h2 class="sec-h">Open method, open data</h2>
     <p class="sec-sub" style="margin-bottom:22px">No LLM judges scoring other LLMs. Every mechanical number is measured
-      against writing that provably predates ChatGPT. The full harness, scenarios and all 35,578 raw generations are
+      against writing that provably predates ChatGPT. The full harness, scenarios and all 43,364 raw generations are
       <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">on GitHub →</a></p>
     <div class="method">
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from genuine human writing
@@ -230,7 +230,7 @@
         and tells at <code>15%</code> each. Every axis is normalised to a 0–100 slop scale, higher = sloppier, before
         blending.</p></div>
       <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios across four
-        domains, ten samples each, for <b>35,578</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
+        domains, ten samples each, for <b>43,364</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
       <div class="mcard"><h3>Two independent lenses</h3><p>The mechanical index measures slop by rule; the arena measures
         it by vote. Where they agree, the signal is strong. <a href="/methodology" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">Full methodology →</a></p></div>
     </div>
@@ -255,7 +255,7 @@
 <script>
 const DOMAINS=[['overall','Overall'],['email','Email'],['social','Social'],['essay','Essay'],['slack','Chat']];
 const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','DeepSeek':'DS',
-  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
+  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M','Tencent':'TC','Thinking Machines':'TM','ByteDance':'BD','Inception':'IN','Nvidia':'NV'};
 let LOGOS={};
 const logo=lab=>(LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`);
 let DATA=null, dom='overall', byId={}, DOMVOTES={};

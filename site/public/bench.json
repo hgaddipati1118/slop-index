@@ -18,6 +18,26 @@
    "blended": 4.0,
    "pangram": 100,
    "rank": 1,
+   "spread": "1\u20133"
+  },
+  {
+   "id": "seed-2.1-turbo",
+   "name": "Seed 2.1 Turbo",
+   "lab": "ByteDance",
+   "overall": 40.6,
+   "email": 50.9,
+   "social": 57.5,
+   "essay": 25.7,
+   "slack": 28.2,
+   "conciseness": 62.0,
+   "templating": 30.3,
+   "rhythm": 0.0,
+   "tells": 37.6,
+   "price_in": 0.5,
+   "price_out": 2.5,
+   "blended": 1.5,
+   "pangram": null,
+   "rank": 2,
    "spread": "1\u20132"
   },
   {
@@ -37,8 +57,8 @@
    "price_out": 25.0,
    "blended": 15.0,
    "pangram": null,
-   "rank": 2,
-   "spread": "1\u20133"
+   "rank": 3,
+   "spread": "2\u20134"
   },
   {
    "id": "claude-fable-5",
@@ -57,8 +77,8 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": 100,
-   "rank": 3,
-   "spread": "2\u20134"
+   "rank": 4,
+   "spread": "3\u20135"
   },
   {
    "id": "claude-fable-5.1",
@@ -77,8 +97,8 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": null,
-   "rank": 4,
-   "spread": "3\u20139"
+   "rank": 5,
+   "spread": "4\u201311"
   },
   {
    "id": "gpt-6-astra",
@@ -97,8 +117,8 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": null,
-   "rank": 5,
-   "spread": "4\u201310"
+   "rank": 6,
+   "spread": "5\u201311"
   },
   {
    "id": "gpt-5.6-terra",
@@ -117,8 +137,8 @@
    "price_out": 15.0,
    "blended": 8.75,
    "pangram": 100,
-   "rank": 6,
-   "spread": "3\u201310"
+   "rank": 7,
+   "spread": "4\u201312"
   },
   {
    "id": "claude-opus-4-8",
@@ -137,8 +157,8 @@
    "price_out": 25.0,
    "blended": 15.0,
    "pangram": 100,
-   "rank": 7,
-   "spread": "5\u201312"
+   "rank": 8,
+   "spread": "6\u201313"
   },
   {
    "id": "gpt-5.6-luna",
@@ -157,8 +177,8 @@
    "price_out": 6.0,
    "blended": 3.5,
    "pangram": 100,
-   "rank": 8,
-   "spread": "4\u201312"
+   "rank": 9,
+   "spread": "5\u201314"
   },
   {
    "id": "gpt-5.6-sol",
@@ -177,8 +197,28 @@
    "price_out": 30.0,
    "blended": 17.5,
    "pangram": 100,
-   "rank": 9,
-   "spread": "4\u201312"
+   "rank": 10,
+   "spread": "5\u201314"
+  },
+  {
+   "id": "gpt-6-astra-pro",
+   "name": "GPT-6 Astra Pro",
+   "lab": "OpenAI",
+   "overall": 31.5,
+   "email": 33.7,
+   "social": 31.1,
+   "essay": 31.1,
+   "slack": 30.1,
+   "conciseness": 3.5,
+   "templating": 71.3,
+   "rhythm": 13.5,
+   "tells": 29.5,
+   "price_in": 10.0,
+   "price_out": 50.0,
+   "blended": 30.0,
+   "pangram": null,
+   "rank": 11,
+   "spread": "5\u201315"
   },
   {
    "id": "qwen3.8-flash",
@@ -197,8 +237,8 @@
    "price_out": 0.47,
    "blended": 0.31,
    "pangram": null,
-   "rank": 10,
-   "spread": "5\u201313"
+   "rank": 12,
+   "spread": "6\u201315"
   },
   {
    "id": "glm-5.2",
@@ -217,8 +257,8 @@
    "price_out": 4.4,
    "blended": 2.9,
    "pangram": 100,
-   "rank": 11,
-   "spread": "6\u201313"
+   "rank": 13,
+   "spread": "7\u201315"
   },
   {
    "id": "claude-sonnet-5",
@@ -237,8 +277,8 @@
    "price_out": 10.0,
    "blended": 6.0,
    "pangram": 100,
-   "rank": 12,
-   "spread": "8\u201313"
+   "rank": 14,
+   "spread": "9\u201315"
   },
   {
    "id": "gemini-3.8-flash",
@@ -257,8 +297,8 @@
    "price_out": 3.75,
    "blended": 2.25,
    "pangram": null,
-   "rank": 13,
-   "spread": "12\u201318"
+   "rank": 15,
+   "spread": "14\u201320"
   },
   {
    "id": "qwen3.7-max",
@@ -277,8 +317,8 @@
    "price_out": 7.5,
    "blended": 5.0,
    "pangram": 100,
-   "rank": 14,
-   "spread": "12\u201319"
+   "rank": 16,
+   "spread": "14\u201321"
   },
   {
    "id": "qwen3.8-max",
@@ -297,8 +337,8 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": null,
-   "rank": 15,
-   "spread": "12\u201319"
+   "rank": 17,
+   "spread": "14\u201321"
   },
   {
    "id": "gemini-3.7-flash",
@@ -317,8 +357,8 @@
    "price_out": 3.75,
    "blended": 2.25,
    "pangram": null,
-   "rank": 16,
-   "spread": "13\u201320"
+   "rank": 18,
+   "spread": "15\u201322"
   },
   {
    "id": "gemini-3.5-flash",
@@ -337,8 +377,8 @@
    "price_out": 9.0,
    "blended": 5.25,
    "pangram": 100,
-   "rank": 17,
-   "spread": "13\u201320"
+   "rank": 19,
+   "spread": "15\u201322"
   },
   {
    "id": "gpt-5.4-mini",
@@ -357,8 +397,8 @@
    "price_out": 4.5,
    "blended": 2.62,
    "pangram": 100,
-   "rank": 18,
-   "spread": "14\u201321"
+   "rank": 20,
+   "spread": "16\u201323"
   },
   {
    "id": "kimi-k3",
@@ -377,8 +417,8 @@
    "price_out": 15.0,
    "blended": 9.0,
    "pangram": null,
-   "rank": 19,
-   "spread": "14\u201321"
+   "rank": 21,
+   "spread": "16\u201324"
   },
   {
    "id": "gemini-3.6-flash",
@@ -397,8 +437,8 @@
    "price_out": 7.5,
    "blended": 4.5,
    "pangram": null,
-   "rank": 20,
-   "spread": "17\u201322"
+   "rank": 22,
+   "spread": "19\u201324"
   },
   {
    "id": "claude-haiku-4-5",
@@ -417,8 +457,8 @@
    "price_out": 5.0,
    "blended": 3.0,
    "pangram": 100,
-   "rank": 21,
-   "spread": "19\u201328"
+   "rank": 23,
+   "spread": "21\u201332"
   },
   {
    "id": "muse-spark-1.3",
@@ -437,8 +477,8 @@
    "price_out": 4.25,
    "blended": 2.75,
    "pangram": null,
-   "rank": 22,
-   "spread": "20\u201328"
+   "rank": 24,
+   "spread": "22\u201331"
   },
   {
    "id": "gemini-3.1-pro-preview",
@@ -457,8 +497,8 @@
    "price_out": 12.0,
    "blended": 7.0,
    "pangram": 100,
-   "rank": 23,
-   "spread": "21\u201328"
+   "rank": 25,
+   "spread": "23\u201332"
   },
   {
    "id": "glm-5.3",
@@ -477,8 +517,28 @@
    "price_out": 4.4,
    "blended": 2.9,
    "pangram": null,
-   "rank": 24,
-   "spread": "20\u201329"
+   "rank": 26,
+   "spread": "23\u201332"
+  },
+  {
+   "id": "hy4-preview",
+   "name": "Hunyuan 4 Preview",
+   "lab": "Tencent",
+   "overall": 24.2,
+   "email": 25.9,
+   "social": 30.1,
+   "essay": 25.4,
+   "slack": 15.4,
+   "conciseness": 17.2,
+   "templating": 34.4,
+   "rhythm": 4.1,
+   "tells": 31.2,
+   "price_in": 0.83,
+   "price_out": 2.5,
+   "blended": 1.67,
+   "pangram": null,
+   "rank": 27,
+   "spread": "21\u201332"
   },
   {
    "id": "grok-4.5",
@@ -497,8 +557,8 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": 100,
-   "rank": 25,
-   "spread": "22\u201330"
+   "rank": 28,
+   "spread": "24\u201333"
   },
   {
    "id": "deepseek-v4-pro",
@@ -517,8 +577,8 @@
    "price_out": 3.48,
    "blended": 2.61,
    "pangram": 100,
-   "rank": 26,
-   "spread": "13\u201332"
+   "rank": 29,
+   "spread": "15\u201338"
   },
   {
    "id": "qwen3.7-flash",
@@ -537,8 +597,8 @@
    "price_out": 0.13,
    "blended": 0.08,
    "pangram": null,
-   "rank": 27,
-   "spread": "22\u201330"
+   "rank": 30,
+   "spread": "25\u201335"
   },
   {
    "id": "grok-4.6",
@@ -557,8 +617,8 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": null,
-   "rank": 28,
-   "spread": "22\u201330"
+   "rank": 31,
+   "spread": "24\u201334"
   },
   {
    "id": "minimax-m3",
@@ -577,8 +637,8 @@
    "price_out": 1.2,
    "blended": 0.75,
    "pangram": 100,
-   "rank": 29,
-   "spread": "23\u201331"
+   "rank": 32,
+   "spread": "26\u201335"
   },
   {
    "id": "muse-spark-1.1",
@@ -597,8 +657,28 @@
    "price_out": 4.25,
    "blended": 2.75,
    "pangram": 100,
-   "rank": 30,
-   "spread": "22\u201331"
+   "rank": 33,
+   "spread": "25\u201335"
+  },
+  {
+   "id": "deepseek-v4.1-flash",
+   "name": "DeepSeek V4.1 Flash",
+   "lab": "DeepSeek",
+   "overall": 22.3,
+   "email": 25.1,
+   "social": 27.5,
+   "essay": 23.0,
+   "slack": 13.5,
+   "conciseness": 11.9,
+   "templating": 33.3,
+   "rhythm": 9.2,
+   "tells": 31.3,
+   "price_in": 0.15,
+   "price_out": 0.6,
+   "blended": 0.38,
+   "pangram": null,
+   "rank": 34,
+   "spread": "27\u201335"
   },
   {
    "id": "kimi-k2p6",
@@ -617,8 +697,28 @@
    "price_out": 4.0,
    "blended": 2.48,
    "pangram": 100,
-   "rank": 31,
-   "spread": "28\u201332"
+   "rank": 35,
+   "spread": "31\u201338"
+  },
+  {
+   "id": "mercury-2.5",
+   "name": "Mercury 2.5",
+   "lab": "Inception",
+   "overall": 21.1,
+   "email": 29.9,
+   "social": 17.9,
+   "essay": 17.6,
+   "slack": 18.8,
+   "conciseness": 1.4,
+   "templating": 35.2,
+   "rhythm": 19.0,
+   "tells": 42.2,
+   "price_in": 0.04,
+   "price_out": 0.15,
+   "blended": 0.1,
+   "pangram": null,
+   "rank": 36,
+   "spread": "32\u201337"
   },
   {
    "id": "deepseek-v4-pro-0813",
@@ -637,13 +737,54 @@
    "price_out": 1.74,
    "blended": 1.16,
    "pangram": null,
-   "rank": 32,
-   "spread": "30\u201332"
+   "rank": 37,
+   "spread": "35\u201338"
+  },
+  {
+   "id": "inkling-small",
+   "name": "Inkling Small",
+   "lab": "Thinking Machines",
+   "overall": 19.4,
+   "email": 22.4,
+   "social": 24.8,
+   "essay": 15.9,
+   "slack": 14.4,
+   "conciseness": 6.0,
+   "templating": 29.3,
+   "rhythm": 9.8,
+   "tells": 36.4,
+   "price_in": 0.45,
+   "price_out": 1.2,
+   "blended": 0.82,
+   "pangram": null,
+   "rank": 38,
+   "spread": "36\u201339"
+  },
+  {
+   "id": "nemotron-3.5-lightning",
+   "name": "Nemotron 3.5 Lightning",
+   "lab": "Nvidia",
+   "overall": 18.2,
+   "email": 21.2,
+   "social": 19.4,
+   "essay": 16.6,
+   "slack": 15.5,
+   "conciseness": 5.8,
+   "templating": 18.7,
+   "rhythm": 9.2,
+   "tells": 52.0,
+   "price_in": 0.08,
+   "price_out": 0.2,
+   "blended": 0.14,
+   "pangram": null,
+   "rank": 39,
+   "spread": "38\u201339"
   }
  ],
  "tie_groups": [
   [
    "mistral-large",
+   "seed-2.1-turbo",
    "claude-opus-5",
    "claude-fable-5"
   ],
@@ -654,6 +795,7 @@
    "claude-opus-4-8",
    "gpt-5.6-luna",
    "gpt-5.6-sol",
+   "gpt-6-astra-pro",
    "qwen3.8-flash",
    "glm-5.2",
    "claude-sonnet-5"
@@ -674,17 +816,25 @@
    "muse-spark-1.3",
    "gemini-3.1-pro-preview",
    "glm-5.3",
+   "hy4-preview",
    "grok-4.5",
    "qwen3.7-flash",
    "grok-4.6",
    "minimax-m3",
    "muse-spark-1.1",
-   "kimi-k2p6"
+   "deepseek-v4.1-flash",
+   "kimi-k2p6",
+   "mercury-2.5"
+  ],
+  [
+   "deepseek-v4-pro-0813",
+   "inkling-small",
+   "nemotron-3.5-lightning"
   ]
  ],
  "meta": {
-  "n_models": 32,
-  "n_outputs": 35578,
+  "n_models": 39,
+  "n_outputs": 43364,
   "scenarios": 112,
   "domains": [
    "email",
@@ -698,7 +848,7 @@
    "rhythm": 0.2,
    "tells": 0.15
   },
-  "run_id": "full-merged-v3",
-  "pangram_note": "18 of 32 models carry a pangram.com (v3.3.2) browser score; every scored one = 100% AI, High confidence. Models added after that pass show null and have NOT been run through the detector."
+  "run_id": "full-merged-v4",
+  "pangram_note": "18 of 39 models carry a pangram.com (v3.3.2) browser score; every scored one = 100% AI, High confidence. Models added after that pass show null and have NOT been run through the detector."
  }
 }

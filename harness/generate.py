@@ -45,6 +45,14 @@ COST_PER_GEN = {
     "grok-4.6": 0.0045,             # 4.5 measured 0.0038
     "glm-5.3": 0.0030,              # 5.2 measured 0.0024
     "deepseek-v4-pro-0813": 0.0015, # v4-pro measured 0.0026 at a higher price
+    # 2026-09-10 additions, rounded UP from the nearest measured model.
+    "deepseek-v4.1-flash": 0.0010,
+    "gpt-6-astra-pro": 0.0200,      # gpt-6-astra measured 0.0121 at the same price; pro likely reasons more
+    "hy4-preview": 0.0040,
+    "inkling-small": 0.0025,
+    "seed-2.1-turbo": 0.0040,
+    "mercury-2.5": 0.0005,
+    "nemotron-3.5-lightning": 0.0008,
 }
 DEFAULT_COST_PER_GEN = 0.0100  # conservative for an unmeasured model
 

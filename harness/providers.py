@@ -75,6 +75,17 @@ MODELS = {
     "grok-4.6":             "openrouter/x-ai/grok-4.6",                   # 2026-08-12, succeeds Grok 4.5
     "glm-5.3":              "openrouter/z-ai/glm-5.3",                    # 2026-08-18, succeeds GLM-5.2 (not on Fireworks yet)
     "deepseek-v4-pro-0813": "openrouter/deepseek/deepseek-v4-pro-0813",   # 2026-08-12, dated refresh of V4 Pro
+    # Roster refresh (2026-09-10): the day-after release, the Pro tier that did not fit the
+    # first batch, and five labs with zero prior coverage. Cap raised $300 -> $350 for this.
+    # sakana/sakana-namazu is blocked by an OpenRouter account guardrail ("0 endpoints
+    # available matching your guardrail") and was skipped.
+    "deepseek-v4.1-flash":    "openrouter/deepseek/deepseek-v4.1-flash",        # 2026-09-09
+    "gpt-6-astra-pro":        "openrouter/openai/gpt-6-astra-pro",              # 2026-09-04, OpenRouter-only (not on api.openai.com)
+    "hy4-preview":            "openrouter/tencent/hy4-preview",                 # 2026-08-27, Tencent
+    "inkling-small":          "openrouter/thinkingmachines/inkling-small",      # 2026-07-30, Thinking Machines
+    "seed-2.1-turbo":         "openrouter/bytedance-seed/seed-2-1-turbo",       # 2026-08-12, ByteDance
+    "mercury-2.5":            "openrouter/inception/mercury-2.5",               # 2026-09-08, Inception (diffusion LM)
+    "nemotron-3.5-lightning": "openrouter/nvidia/nemotron-3.5-lightning",       # 2026-08-11, Nvidia
 }
 
 # Per-alias extra kwargs for models on custom (non-standard) endpoints. The key
@@ -135,6 +146,14 @@ PRICES = {
     "grok-4.6":               (2.00, 6.00),    # openrouter x-ai/grok-4.6
     "glm-5.3":                (1.40, 4.40),    # openrouter z-ai/glm-5.3
     "deepseek-v4-pro-0813":   (0.58, 1.74),    # openrouter deepseek/deepseek-v4-pro-0813
+    # 2026-09-10 additions, prices off openrouter.ai/api/v1/models:
+    "deepseek-v4.1-flash":    (0.15, 0.60),
+    "gpt-6-astra-pro":        (10.00, 50.00),
+    "hy4-preview":            (0.83, 2.50),
+    "inkling-small":          (0.45, 1.20),
+    "seed-2.1-turbo":         (0.50, 2.50),
+    "mercury-2.5":            (0.04, 0.15),
+    "nemotron-3.5-lightning": (0.08, 0.20),
 }
 
 

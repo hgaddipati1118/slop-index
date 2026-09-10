@@ -6,7 +6,7 @@
 <title>The Slop Index: which AI writes the least like AI?</title>
 <meta name="description" content="A benchmark ranking 22 frontier LLMs by how much recognizable AI slop they write, measured against real pre-AI human writing and by blind human vote. Open method, open data.">
 <meta property="og:title" content="The Slop Index">
-<meta property="og:description" content="32 frontier models, ranked by how much they write like AI slop, measured against pre-AI human writing and by blind human vote.">
+<meta property="og:description" content="39 frontier models, ranked by how much they write like AI slop, measured against pre-AI human writing and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com">
 <meta property="og:image" content="https://theslopindex.com/og.png">
@@ -205,7 +205,7 @@
             well,&rdquo; offered exactly three tidy bullet points, and closed by inviting you to not hesitate? You knew.
             Everyone knows. Every frontier model can write; the question is whether it writes like a <b>person</b> or
             like <b>AI slop</b>.</p>
-          <p>The index at right is the live answer. Thirty-two frontier models, scored against genuine human writing
+          <p>The index at right is the live answer. Thirty-nine frontier models, scored against genuine human writing
             collected <b>before ChatGPT existed</b>, and by a blind human vote that anyone can join. Higher means the
             writing reads more like a chatbot, so <b>#1 is the sloppiest model on the board</b>. No LLM judges anything.</p>
           <div class="mlinks">
@@ -219,11 +219,11 @@
         <figure class="panel">
           <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
           <span class="edge l">FIG_001</span>
-          <span class="edge r">[ 32 FRONTIER MODELS ]</span>
+          <span class="edge r">[ 39 FRONTIER MODELS ]</span>
           <div class="bhead"><span>The board, live</span><span>&darr; sloppiest first</span></div>
           <div id="board" style="font-family:var(--px);font-size:11px;color:rgba(0,0,0,.5)">READING THE BOARD&hellip;</div>
           <figcaption class="figcap">
-            <span>22 MODELS &middot; 112 SCENARIOS &middot; 35,578 GENERATIONS</span>
+            <span>22 MODELS &middot; 112 SCENARIOS &middot; 43,364 GENERATIONS</span>
             <span><b>SCORE = SLOP, 0&ndash;100, HIGHER IS WORSE</b></span>
           </figcaption>
         </figure>
@@ -313,7 +313,7 @@ const $=id=>document.getElementById(id);
 const r0=v=>v==null?'n/a':Math.round(v);
 let DATA=null, byId={}, animated=false, LOGOS={};
 const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','DeepSeek':'DS',
-  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
+  'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M','Tencent':'TC','Thinking Machines':'TM','ByteDance':'BD','Inception':'IN','Nvidia':'NV'};
 const logo=lab=>LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`;
 
 // manual-blue ramp, applied by RANK: ultramarine (#1, the sloppiest) -> soft periwinkle -> pale wash (the cleanest)
