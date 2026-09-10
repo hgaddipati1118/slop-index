@@ -52,6 +52,29 @@ MODELS = {
     "qwen3.7-max":      "openrouter/qwen/qwen3.7-max",    # Alibaba flagship (proprietary API, safe via OpenRouter)
     "mistral-large":    "openrouter/mistralai/mistral-large-2512",  # Mistral EU flank
     "minimax-m3":       "openrouter/minimax/minimax-m3",  # MiniMax
+    # Roster refresh (2026-07-31): four launches since the 2026-07-14 freeze. Two are direct
+    # successors to models in the board's top 4, which is the whole franchise argument (slop is
+    # a model-VERSION property, not a lab property, so only per-release reruns catch it).
+    "claude-opus-5":    "anthropic/claude-opus-5",             # Anthropic flagship, 2026-07-24
+    "kimi-k3":          "openrouter/moonshotai/kimi-k3",       # 2026-07-16, succeeds board-cleanest k2.6
+    "gemini-3.6-flash": "gemini/gemini-3.6-flash",             # 2026-07-21, succeeds 3.5-flash
+    "qwen3.7-flash":    "openrouter/qwen/qwen3.7-flash",       # 2026-07-27, cheap sibling of the Elo leader
+    # Roster refresh (2026-09-09): seven direct successors + three cheap refreshes shipped
+    # since the 2026-07-31 freeze. Every earlier model STAYS on the board (per-version history
+    # is the franchise). All ten smoke-tested with a 1-call probe before being added.
+    "gpt-6-astra":          "gpt-6-astra",                                # OpenAI flagship, 2026-08-27 (needs max_completion_tokens)
+    "claude-fable-5.1":     "anthropic/claude-fable-5-1",                 # 2026-08-28, succeeds Fable 5
+    "gemini-3.8-flash":     "gemini/gemini-3.8-flash",                    # 2026-09-02, succeeds 3.6-flash
+    "gemini-3.7-flash":     "gemini/gemini-3.7-flash",                    # 2026-08-13, fills the Google ladder
+    "qwen3.8-max":          "openrouter/qwen/qwen3.8-max-0902",           # 2026-09-03, succeeds the Elo leader
+    "qwen3.8-flash":        "openrouter/qwen/qwen3.8-flash",              # 2026-08-26
+    "muse-spark-1.3":       "openai/muse-spark-1.3",                      # 2026-09-02, Meta direct endpoint (OpenRouter copy is 18+ gated)
+    # grok-4.6 started on xai/ direct; the xAI team hit its monthly spend cap after 86 outputs
+    # (full-007), so the remaining 1,034 were generated through OpenRouter's x-ai/ route, which
+    # is served by xAI itself at the same list price. Same model, same default reasoning.
+    "grok-4.6":             "openrouter/x-ai/grok-4.6",                   # 2026-08-12, succeeds Grok 4.5
+    "glm-5.3":              "openrouter/z-ai/glm-5.3",                    # 2026-08-18, succeeds GLM-5.2 (not on Fireworks yet)
+    "deepseek-v4-pro-0813": "openrouter/deepseek/deepseek-v4-pro-0813",   # 2026-08-12, dated refresh of V4 Pro
 }
 
 # Per-alias extra kwargs for models on custom (non-standard) endpoints. The key
@@ -59,6 +82,10 @@ MODELS = {
 # committed). Set META_SPARK_API_KEY in the shell before running.
 EXTRA = {
     "muse-spark-1.1": lambda: {
+        "api_base": "https://api.meta.ai/v1",
+        "api_key": os.environ.get("META_SPARK_API_KEY", ""),
+    },
+    "muse-spark-1.3": lambda: {
         "api_base": "https://api.meta.ai/v1",
         "api_key": os.environ.get("META_SPARK_API_KEY", ""),
     },
@@ -92,6 +119,22 @@ PRICES = {
     "qwen3.7-max":            (2.50, 7.50),    # alibaba list (promo 1.25/3.75); conservative list used
     "minimax-m3":             (0.30, 1.20),    # openrouter
     "mistral-large":          (2.00, 6.00),    # openrouter mistral-large-2512 (Mistral Large tier)
+    # Roster additions 2026-07-31, prices read off the live provider/OpenRouter model endpoints:
+    "claude-opus-5":          (5.00, 25.00),   # anthropic.com/pricing
+    "kimi-k3":                (3.00, 15.00),   # openrouter moonshotai/kimi-k3
+    "gemini-3.6-flash":       (1.50, 7.50),    # ai.google.dev/pricing
+    "qwen3.7-flash":          (0.03, 0.13),    # openrouter qwen/qwen3.7-flash
+    # Roster additions 2026-09-09, prices read off the live provider/OpenRouter endpoints:
+    "gpt-6-astra":            (10.00, 50.00),  # openrouter openai/gpt-6-astra
+    "claude-fable-5.1":       (10.00, 50.00),  # openrouter anthropic/claude-fable-5.1
+    "gemini-3.8-flash":       (0.75, 3.75),    # openrouter google/gemini-3.8-flash
+    "gemini-3.7-flash":       (0.75, 3.75),    # openrouter google/gemini-3.7-flash
+    "qwen3.8-max":            (2.00, 6.00),    # openrouter qwen/qwen3.8-max-0902
+    "qwen3.8-flash":          (0.15, 0.47),    # openrouter qwen/qwen3.8-flash
+    "muse-spark-1.3":         (1.25, 4.25),    # openrouter meta/muse-spark-1.3
+    "grok-4.6":               (2.00, 6.00),    # openrouter x-ai/grok-4.6
+    "glm-5.3":                (1.40, 4.40),    # openrouter z-ai/glm-5.3
+    "deepseek-v4-pro-0813":   (0.58, 1.74),    # openrouter deepseek/deepseek-v4-pro-0813
 }
 
 
@@ -122,9 +165,11 @@ def generate(alias, system, user, max_tokens=4000):
 
     def call(mt):
         t0 = time.time()
+        # gpt-6 rejects `max_tokens` outright (400: use max_completion_tokens) and
+        # LiteLLM does not auto-map it for that family yet.
+        tok = {"max_completion_tokens": mt} if model_id.startswith("gpt-6") else {"max_tokens": mt}
         resp = litellm.completion(
-            model=model_id, messages=messages, max_tokens=mt, timeout=TIMEOUT,
-            **extra,
+            model=model_id, messages=messages, timeout=TIMEOUT, **tok, **extra,
         )
         return resp, time.time() - t0
 

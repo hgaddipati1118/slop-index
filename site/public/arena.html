@@ -150,7 +150,7 @@
   <div id="cfslot" style="display:flex;justify-content:center;margin-top:14px"></div>
 
   <div class="lb">
-    <h2>Which model writes the least slop?</h2>
+    <h2>Which model writes the most slop?</h2>
     <div class="sub" id="lbsub">crowd-voted &middot; least AI slop at the top &middot; the more a model gets flagged, the lower it sinks</div>
     <div class="lbtabs">
       <button class="lbtab on" id="tabChart">Chart</button>
@@ -204,12 +204,17 @@ function ensureSession(){ try{ if(window.turnstile && CFG.turnstileSiteKey) wind
 window.onTurnstile=(tok)=>getSession(tok);
 
 async function boot(){
-  [PAIRS,PROMPTS,CFG,LOGOS]=await Promise.all([
+  let BENCH;
+  [PAIRS,PROMPTS,CFG,LOGOS,BENCH]=await Promise.all([
     fetch('/pairs.json').then(r=>r.json()),
     fetch('/prompts.json').then(r=>r.json()).catch(()=>({})),
     fetch('/api/config').then(r=>r.json()).catch(()=>({})),
-    fetch('/logos.json').then(r=>r.json()).catch(()=>({}))
+    fetch('/logos.json').then(r=>r.json()).catch(()=>({})),
+    fetch('/bench.json').then(r=>r.json()).catch(()=>({}))
   ]);
+  // bench.json is the single source of truth for the roster; the inline NAMES/LABS
+  // maps below are only a fallback so the page still renders if it fails to load.
+  for(const m of (BENCH.models||[])){ if(m.name) NAMES[m.id]=m.name; if(m.lab) LABS[m.id]=m.lab; }
   for(let k=PAIRS.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[PAIRS[k],PAIRS[j]]=[PAIRS[j],PAIRS[k]];}
   if(CFG.turnstileSiteKey){
     const s=document.createElement('script');
@@ -343,7 +348,8 @@ function renderChart(rows){
   if(!rows.length){el.innerHTML='<div class="lbempty">be the first to flag some slop</div>';return;}
   const elos=rows.map(r=>+r.elo), mn=Math.min(...elos), mx=Math.max(...elos), span=Math.max(1,mx-mn);
   el.innerHTML=rows.map((r,n)=>{
-    const h=Math.round(96+((+r.elo-mn)/span)*250);
+    // rows arrive already reversed to sloppiest-first, so the tallest bar is the LOWEST Elo
+    const h=Math.round(96+(1-(+r.elo-mn)/span)*250);
     return `<div class="lbcol${n===0?' top':''}"><div class="lbval">${r.elo}</div>`+
            `<div class="lbbar" style="height:${h}px;background:${tone(n/Math.max(1,rows.length-1))}"></div>`+
            `<div class="lblogo" title="${LABS[r.model]||''}">${logo(r.model)}</div>`+
@@ -354,7 +360,9 @@ function renderChart(rows){
 async function loadBoard(){
   try{
     const d=await fetch('/api/leaderboard?mode='+mode).then(r=>r.json());
-    const rows=(d.rows||[]);
+    // API sorts Elo descending (most human first). The whole site reads sloppiest-first, so #1
+    // here is the model this crowd flagged most often.
+    const rows=[...(d.rows||[])].reverse();
     renderChart(rows);
     $('lbbody').innerHTML = rows.length ? rows.map((r,n)=>
       `<tr><td class="n">${n+1}</td><td><span class="tlogo">${logo(r.model)}</span>${shortName(r.model)}</td><td class="n">${r.elo}</td><td class="n">${r.games}</td></tr>`

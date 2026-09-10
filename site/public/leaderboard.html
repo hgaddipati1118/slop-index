@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Leaderboard · The Slop Index</title>
-<meta name="description" content="Live ranking of 18 frontier LLMs by Human Score: how much each writes like a person, not a chatbot. Blends a live human vote with four mechanical axes.">
+<meta name="description" content="Live ranking of 22 frontier LLMs by Slop Score: how much each writes like a chatbot, not a person. #1 is the sloppiest. Blends a live human vote with four mechanical axes.">
 <meta property="og:title" content="The Slop Index · Leaderboard">
-<meta property="og:description" content="18 frontier models ranked by how much they write like AI slop, by machine and by blind human vote.">
+<meta property="og:description" content="32 frontier models ranked by how much they write like AI slop, by machine and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com/leaderboard">
 <meta property="og:image" content="https://theslopindex.com/og.png">
@@ -135,8 +135,9 @@
   <div class="wrap">
     <span class="eyebrow">The board · live</span>
     <h1>Every model, ranked</h1>
-    <p class="thesis">18 frontier models scored by <b>Human Score</b>, how much each writes like a person and not a
-      chatbot. It blends the live arena vote (40%) with four mechanical axes against pre-AI writing. Higher is better.</p>
+    <p class="thesis">32 frontier models scored by <b>Slop Score</b>, how much each writes like a chatbot and not a
+      person. It blends the live arena vote (40%) with four mechanical axes against pre-AI writing. Higher is worse,
+      and #1 is the sloppiest model on the board.</p>
     <span class="livepill"><span class="dot"></span><span id="votecount">loading the crowd vote…</span></span>
   </div>
 </header>
@@ -146,13 +147,13 @@
 <section>
   <div class="wrap">
     <div class="sec-eyebrow">The board</div>
-    <h2 class="sec-h">Who writes the least slop?</h2>
-    <p class="sec-sub" style="margin-bottom:22px">Human Score, 0–100, most human first. Switch domains to see who slips where -
+    <h2 class="sec-h">Who writes the most slop?</h2>
+    <p class="sec-sub" style="margin-bottom:22px">Slop Score, 0–100, sloppiest first. Switch domains to see who slips where -
       the model that writes clean email is not always the one that writes clean essays. Every board blends the same way:
       40% the arena votes cast on that domain&rsquo;s pairs, 60% the machine measurement against the pre-AI baseline.</p>
     <div class="tabs" id="tabs"></div>
     <div class="chart" id="chart"></div>
-    <div class="legend"><span>more human</span><span class="ramp"></span><span>more slop</span></div>
+    <div class="legend"><span>more slop</span><span class="ramp"></span><span>more human</span></div>
     <div class="tabnote" id="tabnote"></div>
   </div>
 </section>
@@ -163,13 +164,14 @@
   <div class="wrap">
     <div class="sec-eyebrow">Full table</div>
     <h2 class="sec-h">Every model, every axis</h2>
-    <p class="sec-sub" style="margin-bottom:22px">Ranked by Human Score. Each axis is on a 0–100 scale where 100 = writes
-      like a human, so you can see exactly where a model wins or loses. Toward the middle the scores run close.</p>
+    <p class="sec-sub" style="margin-bottom:22px">Ranked by Slop Score, sloppiest first. Every axis runs the same
+      direction on a 0–100 scale where 100 = sloppiest on the board, so you can see exactly where a model loses it.
+      Toward the middle the scores run close.</p>
     <div class="twrap">
       <table>
         <thead><tr>
           <th class="l">#</th><th class="l">model</th>
-          <th>human score</th>
+          <th>slop score</th>
           <th>arena 40%</th><th>concise</th><th>templating</th><th>rhythm</th><th>tells</th>
           <th>$/M</th>
         </tr></thead>
@@ -177,11 +179,11 @@
       </table>
     </div>
     <p class="axis-hint">
-      <b>Arena</b> = the crowd vote (live Elo, 40%) ·
-      <b>Conciseness</b> = resisting length inflation vs a human on the same task ·
-      <b>Templating</b> = avoiding reused openers &amp; skeletons across prompts ·
-      <b>Rhythm</b> = natural paragraph-length variance ·
-      <b>Tells</b> = avoiding over-used AI words. Each 0–100; 100 = human-like.</p>
+      <b>Arena</b> = how often the crowd flagged it (live Elo, 40%) ·
+      <b>Conciseness</b> = length inflation vs a human on the same task ·
+      <b>Templating</b> = reused openers &amp; skeletons across unrelated prompts ·
+      <b>Rhythm</b> = flattened paragraph-length variance ·
+      <b>Tells</b> = over-used AI words. Each 0–100; 100 = sloppiest on the board.</p>
   </div>
 </section>
 
@@ -191,9 +193,9 @@
   <div class="wrap">
     <div class="sec-eyebrow">Price vs quality</div>
     <h2 class="sec-h">Does paying more buy a more human writer?</h2>
-    <p class="sec-sub" style="margin-bottom:22px">Blended price per million tokens against the Human Score. If cost bought
-      a more human writer, this would trend up and to the right. It doesn't.</p>
-    <div class="scatter"><svg id="scatter" viewBox="0 0 920 470" role="img" aria-label="price vs human score scatter"></svg></div>
+    <p class="sec-sub" style="margin-bottom:22px">Blended price per million tokens against the Slop Score. If cost bought
+      a more human writer, this would trend down and to the right. It doesn't.</p>
+    <div class="scatter"><svg id="scatter" viewBox="0 0 920 470" role="img" aria-label="price vs slop score scatter"></svg></div>
     <p class="sc-note" id="scnote"></p>
   </div>
 </section>
@@ -205,7 +207,7 @@
     <div class="sec-eyebrow">The human axis · 40% of the score</div>
     <h2 class="sec-h">What the crowd thinks</h2>
     <p class="sec-sub" style="margin-bottom:22px">The single biggest input is people. This is the live Elo from the arena,
-      where players flag the sloppier of two blind samples. Least-flagged rises; it updates the board above as votes land.</p>
+      where players flag the sloppier of two blind samples. Most-flagged leads; it updates the board above as votes land.</p>
     <div class="chart" id="crowdChart"><div class="lbempty">loading the crowd vote…</div></div>
     <div class="crowd-meta" id="crowdMeta"></div>
   </div>
@@ -218,16 +220,17 @@
     <div class="sec-eyebrow">How it works</div>
     <h2 class="sec-h">Open method, open data</h2>
     <p class="sec-sub" style="margin-bottom:22px">No LLM judges scoring other LLMs. Every mechanical number is measured
-      against writing that provably predates ChatGPT. The full harness, scenarios and all 19,928 raw generations are
+      against writing that provably predates ChatGPT. The full harness, scenarios and all 35,578 raw generations are
       <a href="https://github.com/hgaddipati1118/slop-index" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">on GitHub →</a></p>
     <div class="method">
       <div class="mcard"><h3>Human baselines, pre-Oct-2022</h3><p>Slop is measured as distance from genuine human writing
         collected before generative AI existed: Enron email, a blog-authorship corpus and student essays, archived
         tweets, and Discord chat.</p></div>
       <div class="mcard"><h3>Five axes, one score</h3><p>The arena <code>40%</code> plus conciseness, templating, rhythm
-        and tells at <code>15%</code> each. Every axis is normalised to a 0–100 human-likeness scale before blending.</p></div>
+        and tells at <code>15%</code> each. Every axis is normalised to a 0–100 slop scale, higher = sloppier, before
+        blending.</p></div>
       <div class="mcard"><h3>Same task, real output</h3><p>Every model got the identical 112 scenarios across four
-        domains, five samples each, for <b>19,928</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
+        domains, ten samples each, for <b>35,578</b> real, unedited generations. Default settings, no cherry-picking.</p></div>
       <div class="mcard"><h3>Two independent lenses</h3><p>The mechanical index measures slop by rule; the arena measures
         it by vote. Where they agree, the signal is strong. <a href="/methodology" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px">Full methodology →</a></p></div>
     </div>
@@ -275,8 +278,12 @@ function computeScores(crowd){
   const rows=DATA.models, elo={}; ((crowd&&crowd.rows)||[]).forEach(r=>elo[r.model]=+r.elo);
   // DIRECTION CONTRACT (per SPEC.md + harness/score.py): every raw bench.json number is a
   // SLOP measure where higher = sloppier. That covers the four axis columns AND the four
-  // domain Slop Scores AND `overall` (mean of domains). Display is human-likeness, so ALL
-  // of them flip direction. Never "fix" this to a forward normalise again.
+  // domain Slop Scores AND `overall` (mean of domains).
+  // The blend below is defined in HUMAN space, because the arena Elo is natively human-oriented
+  // (higher Elo = the crowd flagged it less) and the published 40/60 formula is written that way.
+  // So raw slop is inverted here, blended, and then flipped back to slop at the end of this
+  // function for display. Do not "simplify" this by deleting one of the two flips; delete both
+  // together and invert the Elo instead, or the arena axis silently ends up backwards.
   const inv=key=>{const vs=rows.map(m=>m[key]),mn=Math.min(...vs),mx=Math.max(...vs),sp=Math.max(1e-9,mx-mn);return m=>100*(mx-m[key])/sp;};
   const nC=inv('conciseness'),nT=inv('templating'),nR=inv('rhythm'),nTe=inv('tells');
   const evs=Object.values(elo), emn=evs.length?Math.min(...evs):1500, emx=evs.length?Math.max(...evs):1500, esp=Math.max(1e-9,emx-emn);
@@ -303,17 +310,30 @@ function computeScores(crowd){
       m['h_'+d]=WEIGHTS.human*dh+(1-WEIGHTS.human)*mech;
     });
   });
+
+  // DISPLAY ORIENTATION: the whole page presents SLOP, sloppiest first (#1 = sloppiest).
+  // The h* values above stay human-oriented because that is what the arena Elo and the
+  // 40/60 blend are naturally expressed in; this is the single place they are turned back
+  // into slop. Every renderer below reads the s* fields and NOTHING reads h* directly.
+  // Net effect: s* is bench.json's own direction again (higher = sloppier). Do not add a
+  // second inversion anywhere downstream.
+  rows.forEach(m=>{
+    m.slop=100-m.score;
+    m.sArena=100-m.hHuman; m.sConcise=100-m.hConcise; m.sTempl=100-m.hTempl;
+    m.sRhythm=100-m.hRhythm; m.sTells=100-m.hTells;
+    ['email','social','essay','slack'].forEach(d=>{ m['s_'+d]=100-m['h_'+d]; });
+  });
 }
 
 function renderBand(crowd){
-  const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
-  const best=rows[0], worst=rows[rows.length-1];
-  const leader=(crowd.rows&&crowd.rows[0])?nameOf(crowd.rows[0].model):'-';
+  const rows=[...DATA.models].sort((a,b)=>b.slop-a.slop);
+  const sloppiest=rows[0], cleanest=rows[rows.length-1];
+  const flagged=(crowd.rows&&crowd.rows.length)?nameOf(crowd.rows[crowd.rows.length-1].model):'-';
   const total=(crowd&&crowd.totalVotes)||0;
   $('band').innerHTML=[
-    ['top','Most human-like',best.name,`Human Score ${r0(best.score)} · ${best.lab}`],
-    ['hot','Most AI slop',worst.name,`Human Score ${r0(worst.score)} · ${worst.lab}`],
-    ['live','Crowd favourite',leader,`from ${total.toLocaleString()} human vote${total===1?'':'s'}`]
+    ['hot','Most AI slop',sloppiest.name,`Slop Score ${r0(sloppiest.slop)} · ${sloppiest.lab}`],
+    ['top','Least AI slop',cleanest.name,`Slop Score ${r0(cleanest.slop)} · ${cleanest.lab}`],
+    ['live','Crowd flags most',flagged,`from ${total.toLocaleString()} human vote${total===1?'':'s'}`]
   ].map(([c,k,v,d])=>`<div class="scard ${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
 }
 
@@ -323,7 +343,7 @@ function renderTabs(){
 }
 
 function renderChart(){
-  const key=dom==='overall'?'score':('h_'+dom);
+  const key=dom==='overall'?'slop':('s_'+dom);
   const rows=[...DATA.models].filter(r=>r[key]!=null).sort((a,b)=>b[key]-a[key]);
   $('chart').innerHTML=rows.map((r,n)=>{
     const v=r[key], t=(100-v)/100, h=Math.round(60+(v/100)*285);
@@ -337,25 +357,25 @@ function renderChart(){
   const dlabel=(DOMAINS.find(([k])=>k===dom)||['',''])[1];
   const dv=DOMVOTES[dom]||0;
   $('tabnote').innerHTML = dom==='overall'
-    ? '<b>Human Score</b> &middot; blends the 40% arena vote with the four machine axes &middot; relative across the 18 models'
+    ? '<b>Slop Score</b> &middot; blends the 40% arena vote with the four machine axes &middot; higher = sloppier &middot; relative across the '+DATA.models.length+' models'
     : `<b>${dlabel}</b> &middot; 40% the <b>${dv}</b> arena vote${dv===1?'':'s'} cast on ${dlabel.toLowerCase()} pairs + 60% machine measurement vs the pre-AI baseline${dv<100?' &middot; early votes, still noisy':''}`;
 }
 
 function renderTable(){
-  const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
+  const rows=[...DATA.models].sort((a,b)=>b.slop-a.slop);
   $('tbody').innerHTML=rows.map((r,n)=>`<tr>
       <td class="rank l">${n+1}</td>
       <td class="l"><span class="mlogo">${logo(r.lab)}</span><span class="mname">${r.name}</span><span class="lab">${r.lab}</span></td>
-      <td class="si">${r0(r.score)}</td>
-      <td>${r0(r.hHuman)}</td>
-      <td>${r0(r.hConcise)}</td><td>${r0(r.hTempl)}</td><td>${r0(r.hRhythm)}</td><td>${r0(r.hTells)}</td>
+      <td class="si">${r0(r.slop)}</td>
+      <td>${r0(r.sArena)}</td>
+      <td>${r0(r.sConcise)}</td><td>${r0(r.sTempl)}</td><td>${r0(r.sRhythm)}</td><td>${r0(r.sTells)}</td>
       <td><span class="chip">$${r.blended==null?'n/a':r.blended}</span></td></tr>`).join('');
 }
 
 function renderScatter(){
   const W=920,H=470,pl=52,pr=118,pt=22,pb=54;
   const rows=DATA.models.filter(r=>r.blended!=null);
-  const xs=rows.map(r=>Math.log10(r.blended)), ys=rows.map(r=>r.score);
+  const xs=rows.map(r=>Math.log10(r.blended)), ys=rows.map(r=>r.slop);
   const xmin=Math.min(...xs)-.08, xmax=Math.max(...xs)+.08;
   const ymin=Math.max(0,Math.min(...ys)-6), ymax=Math.min(100,Math.max(...ys)+6);
   const X=x=>pl+(x-xmin)/(xmax-xmin)*(W-pl-pr);
@@ -369,22 +389,22 @@ function renderScatter(){
     s+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="#ECEAE5"/>`;
     s+=`<text x="${pl-10}" y="${y+4}" font-family="var(--mono)" font-size="12" fill="#565B64" text-anchor="end">${v}</text>`;});
   s+=`<text x="${(pl+W-pr)/2}" y="${H-8}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle">blended price ($/M tokens, log scale) →</text>`;
-  s+=`<text x="14" y="${(pt+H-pb)/2}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle" transform="rotate(-90 14 ${(pt+H-pb)/2})">Human Score →</text>`;
-  const pts=rows.map(r=>({r,x:X(Math.log10(r.blended)),y:Y(r.score)})).sort((a,b)=>a.y-b.y);
+  s+=`<text x="14" y="${(pt+H-pb)/2}" font-family="var(--sans)" font-size="13" fill="#565B64" text-anchor="middle" transform="rotate(-90 14 ${(pt+H-pb)/2})">Slop Score →</text>`;
+  const pts=rows.map(r=>({r,x:X(Math.log10(r.blended)),y:Y(r.slop)})).sort((a,b)=>a.y-b.y);
   const used=[];
   pts.forEach(p=>{
     let ly=p.y, g=0; while(used.some(u=>Math.abs(u-ly)<12.5) && g<60){ ly+=12.5; g++; }
     used.push(ly);
     const room=(W-pr)-p.x>64, lx=room?p.x+9:p.x-9, anc=room?'start':'end';
-    const t=(100-p.r.score)/100;
+    const t=(100-p.r.slop)/100;
     if(Math.abs(ly-p.y)>2) s+=`<line x1="${p.x}" y1="${p.y}" x2="${room?p.x+6:p.x-6}" y2="${ly-3}" stroke="#DDD8D1" stroke-width="1"/>`;
     s+=`<circle cx="${p.x}" cy="${p.y}" r="5.5" fill="${heat(t)}" stroke="#fff" stroke-width="1.5"/>`;
     s+=`<text x="${lx}" y="${ly}" font-family="var(--sans)" font-size="11" fill="#33373E" text-anchor="${anc}">${p.r.name}</text>`;
   });
   $('scatter').innerHTML=s;
   const pricey=[...rows].sort((a,b)=>b.blended-a.blended)[0];
-  const bestCheap=[...rows].filter(r=>r.blended<=3).sort((a,b)=>b.score-a.score)[0];
-  $('scnote').innerHTML=`If cost bought quality this would trend up and to the right, it doesn't. The priciest model on the board (<b>${pricey.name}, $${pricey.blended}/M</b>) sits well below cheaper ones like <b>${bestCheap.name}</b> ($${bestCheap.blended}/M).`;
+  const bestCheap=[...rows].filter(r=>r.blended<=3).sort((a,b)=>a.slop-b.slop)[0];
+  $('scnote').innerHTML=`If cost bought quality this would trend down and to the right, it doesn't. The priciest model on the board (<b>${pricey.name}, $${pricey.blended}/M</b>) sits well above cheaper ones like <b>${bestCheap.name}</b> ($${bestCheap.blended}/M), meaning it writes more slop, not less.`;
 }
 
 function renderCrowdChart(crowd){
@@ -395,17 +415,21 @@ function renderCrowdChart(crowd){
     $('crowdMeta').innerHTML=''; return;
   }
   const elos=rows.map(r=>+r.elo), mn=Math.min(...elos), mx=Math.max(...elos), span=Math.max(1,mx-mn);
+  // The API sorts by Elo descending (most human first). The page reads sloppiest first, so
+  // reverse it: #1 here is the model the crowd flagged most. The Elo number itself stays raw
+  // and keeps its native direction (a rating, where lower = lost more often).
+  rows=[...rows].reverse();
   el.innerHTML=rows.map((r,n)=>{
-    const hNorm=(+r.elo-mn)/span, slopNorm=1-hNorm, h=Math.round(96+hNorm*250);
+    const hNorm=(+r.elo-mn)/span, slopNorm=1-hNorm, h=Math.round(96+slopNorm*250);
     return `<div class="col${n===0?' top':''}">
       <div class="val">${r.elo}</div>
-      <div class="bar" style="height:${h}px;background:${heat(slopNorm)}"></div>
+      <div class="bar" style="height:${h}px;background:${heat(hNorm)}"></div>
       <div class="logo" title="${labOf(r.model)}">${logo(labOf(r.model))}</div>
       <div class="nm">${nameOf(r.model)}</div><div class="rk">#${n+1}</div></div>`;
   }).join('');
   $('crowdMeta').innerHTML=`<b>${total.toLocaleString()}</b> human vote${total===1?'':'s'} and counting · `+
     (total<200?`the human axis is <b>40% of the score above</b> and still warming up. <a href="/arena">Add yours →</a>`
-             :`this feeds 40% of the Human Score. <a href="/arena">Add yours →</a>`);
+             :`this feeds 40% of the Slop Score. <a href="/arena">Add yours →</a>`);
 }
 
 async function refresh(){

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Slop Index: which AI writes the least like AI?</title>
-<meta name="description" content="A benchmark ranking 18 frontier LLMs by how much recognizable AI slop they write, measured against real pre-AI human writing and by blind human vote. Open method, open data.">
+<meta name="description" content="A benchmark ranking 22 frontier LLMs by how much recognizable AI slop they write, measured against real pre-AI human writing and by blind human vote. Open method, open data.">
 <meta property="og:title" content="The Slop Index">
-<meta property="og:description" content="18 frontier models, ranked by how much they write like AI slop, measured against pre-AI human writing and by blind human vote.">
+<meta property="og:description" content="32 frontier models, ranked by how much they write like AI slop, measured against pre-AI human writing and by blind human vote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theslopindex.com">
 <meta property="og:image" content="https://theslopindex.com/og.png">
@@ -205,9 +205,9 @@
             well,&rdquo; offered exactly three tidy bullet points, and closed by inviting you to not hesitate? You knew.
             Everyone knows. Every frontier model can write; the question is whether it writes like a <b>person</b> or
             like <b>AI slop</b>.</p>
-          <p>The index at right is the live answer. Eighteen frontier models, scored against genuine human writing
+          <p>The index at right is the live answer. Thirty-two frontier models, scored against genuine human writing
             collected <b>before ChatGPT existed</b>, and by a blind human vote that anyone can join. Higher means the
-            writing reads more like a person. No LLM judges anything.</p>
+            writing reads more like a chatbot, so <b>#1 is the sloppiest model on the board</b>. No LLM judges anything.</p>
           <div class="mlinks">
             <a class="mlink" href="/leaderboard">[ The full board &rarr; ]</a>
             <a class="mlink" href="/methodology">[ How it&rsquo;s measured &rarr; ]</a>
@@ -219,12 +219,12 @@
         <figure class="panel">
           <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
           <span class="edge l">FIG_001</span>
-          <span class="edge r">[ 18 FRONTIER MODELS ]</span>
-          <div class="bhead"><span>The board, live</span><span>&larr; more slop &middot; less slop &rarr;</span></div>
+          <span class="edge r">[ 32 FRONTIER MODELS ]</span>
+          <div class="bhead"><span>The board, live</span><span>&darr; sloppiest first</span></div>
           <div id="board" style="font-family:var(--px);font-size:11px;color:rgba(0,0,0,.5)">READING THE BOARD&hellip;</div>
           <figcaption class="figcap">
-            <span>18 MODELS &middot; 112 SCENARIOS &middot; 19,928 GENERATIONS</span>
-            <span><b>SCORE = HUMAN-LIKENESS, 0&ndash;100</b></span>
+            <span>22 MODELS &middot; 112 SCENARIOS &middot; 35,578 GENERATIONS</span>
+            <span><b>SCORE = SLOP, 0&ndash;100, HIGHER IS WORSE</b></span>
           </figcaption>
         </figure>
       </div>
@@ -276,12 +276,12 @@
         <figure class="panel">
           <i class="bt"></i><i class="bb"></i><i class="bl"></i><i class="br"></i>
           <span class="edge l">FIG_004</span>
-          <span class="edge r">[ HUMAN SCORE ]</span>
+          <span class="edge r">[ SLOP SCORE ]</span>
           <div class="formula">
             <span class="h">40% &middot; the arena vote</span><br>
             15% conciseness &nbsp; 15% templating<br>
             15% rhythm &nbsp; 15% tells<br>
-            <span class="dim">each normalised to a 0&ndash;100 human-likeness scale, then blended.</span>
+            <span class="dim">each normalised to a 0&ndash;100 slop scale, then blended. Higher is sloppier.</span>
           </div>
         </figure>
       </div>
@@ -316,7 +316,7 @@ const CODE={'Anthropic':'A','OpenAI':'O','Google':'G','xAI':'X','Moonshot':'K','
   'Zhipu':'Z','Alibaba':'Q','MiniMax':'MM','Mistral':'ML','Meta':'M'};
 const logo=lab=>LOGOS[lab]||`<span class="mono">${CODE[lab]||(lab||'?')[0]}</span>`;
 
-// manual-blue ramp: ultramarine (most human) -> soft periwinkle -> pale wash (most slop)
+// manual-blue ramp, applied by RANK: ultramarine (#1, the sloppiest) -> soft periwinkle -> pale wash (the cleanest)
 function tone(t){
   const s=[[10,53,240],[151,163,241],[228,231,249]];
   const seg=Math.min(1,Math.floor(t*2)), f=(t*2)-seg, a=s[seg], b=s[seg+1];
@@ -330,20 +330,24 @@ function computeScores(crowd){
   rows.forEach(m=>{
     m.hHuman=(m.id in elo && ev.length>1)?100*(elo[m.id]-emn)/esp:50;
     m.score=WEIGHTS.human*m.hHuman+WEIGHTS.conciseness*nC(m)+WEIGHTS.templating*nT(m)+WEIGHTS.rhythm*nR(m)+WEIGHTS.tells*nTe(m);
+    // Display orientation: the board shows SLOP, sloppiest first. m.score stays human-oriented
+    // (that is the direction the arena Elo and the 40/60 blend are built in); this is the only
+    // place it flips back to bench.json's native direction. Nothing downstream reads m.score.
+    m.slop=100-m.score;
   });
 }
 function renderBoard(){
-  const rows=[...DATA.models].sort((a,b)=>b.score-a.score);
-  const vs=rows.map(r=>r.score),mn=Math.min(...vs),mx=Math.max(...vs);
+  const rows=[...DATA.models].sort((a,b)=>b.slop-a.slop);
+  const vs=rows.map(r=>r.slop),mn=Math.min(...vs),mx=Math.max(...vs);
   $('board').innerHTML=rows.map((r,n)=>{
     const t=n/Math.max(1,rows.length-1);
-    const w=16+((r.score-mn)/Math.max(1e-9,mx-mn))*84;
+    const w=16+((r.slop-mn)/Math.max(1e-9,mx-mn))*84;
     const pad=String(n+1).padStart(2,'0');
     return `<div class="row${n===0?' lead':''}">
       <div class="rk">${pad}</div>
       <div class="who"><span class="lg" title="${r.lab}">${logo(r.lab)}</span><span class="nm">${r.name}</span></div>
       <div class="track"><div class="fill" data-w="${w}" style="width:${animated?w+'%':'0'};background:${tone(t)}"></div></div>
-      <div class="sc">${r0(r.score)}</div></div>`;
+      <div class="sc">${r0(r.slop)}</div></div>`;
   }).join('');
   if(!animated){ requestAnimationFrame(()=>requestAnimationFrame(()=>{
     document.querySelectorAll('#board .fill').forEach(f=>f.style.width=f.dataset.w+'%'); animated=true; })); }

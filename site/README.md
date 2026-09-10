@@ -26,3 +26,7 @@ Regenerate both after a new benchmark run so the game reflects the latest models
   vs obvious slop) are recorded but excluded from Elo, to filter low-quality voters.
 - Crowd Elo is the ENGAGEMENT + volume signal; correlate it with the mechanical
   Slop Index. Agreement validates the metric; divergence is a finding.
+
+## Cache headers (vercel.json)
+
+`bench.json` is the live board, so it is deliberately on a short cache (`max-age=60`). It previously used `max-age=3600, stale-while-revalidate=604800`, which meant a returning visitor kept seeing the PREVIOUS roster for an hour and could be served stale for a week. Adding four models on 2026-07-31 shipped correctly to the edge and still rendered the old 18 in real browsers for exactly that reason. `pairs.json` is ~1MB and gets 5 minutes, so returning voters see newly added models in the arena. Both are etagged, so revalidation costs a 304 rather than a re-download.

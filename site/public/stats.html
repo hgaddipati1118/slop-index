@@ -123,6 +123,8 @@ const NAMES={'claude-sonnet-5':'Sonnet 5','claude-opus-4-8':'Opus 4.8','claude-h
   'grok-4.5':'Grok 4.5','kimi-k2p6':'Kimi K2.6','deepseek-v4-pro':'DeepSeek V4','glm-5.2':'GLM-5.2',
   'qwen3.7-max':'Qwen3.7 Max','minimax-m3':'MiniMax M3','mistral-large':'Mistral Large','muse-spark-1.1':'Muse Spark'};
 const nm=m=>NAMES[m]||m;
+// bench.json is the roster's source of truth; the inline map above is only a fallback.
+fetch('/bench.json').then(r=>r.json()).then(b=>{for(const m of (b.models||[])) if(m.name) NAMES[m.id]=m.name;}).catch(()=>{});
 const $=id=>document.getElementById(id);
 let openTotal=null, lastSeenT=0;
 // 2-letter ISO country code -> flag emoji

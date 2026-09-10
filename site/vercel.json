@@ -7,7 +7,11 @@
     { "source": "/index.html", "destination": "/", "permanent": true }
   ],
   "headers": [
-    { "source": "/(pairs|prompts|logos|bench).json",
+    { "source": "/bench.json",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=300" }] },
+    { "source": "/(pairs|prompts).json",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=300, stale-while-revalidate=3600" }] },
+    { "source": "/logos.json",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=604800" }] },
     { "source": "/fonts/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }

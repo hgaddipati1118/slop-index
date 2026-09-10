@@ -81,8 +81,12 @@ class Guard:
 
     def __init__(self, run_id):
         self.run_id = run_id
-        self.run_cost = 0.0
-        self.baseline = spent()
+        # A RESUMED run must carry its own prior spend forward: commit() overwrites
+        # the ledger entry by run_id, so starting from 0 would erase what the
+        # earlier attempt already recorded (full-007 lost $51.84 that way).
+        prior = float(_load()["runs"].get(run_id, 0.0))
+        self.run_cost = prior
+        self.baseline = spent() - prior
         self._lock = threading.Lock()
         self.tripped = False
 
