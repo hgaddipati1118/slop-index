@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     const recent = parsed.slice(-18).reverse()
       .map((v) => ({ t: v.t, w: v.w, l: v.l, o: v.o || 'win', c: v.c || null, s: v.s || null }));
 
-    res.setHeader('Cache-Control', 's-maxage=5, stale-while-revalidate=15');
+    res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
     return res.status(200).json({
       store: true,
       total: decided + ties, decided, ties, lastHour,

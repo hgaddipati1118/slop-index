@@ -149,7 +149,7 @@ function renderFeed(recent){
 }
 
 async function tick(){
-  let d; try{ d=await fetch('/api/stats?cb='+Date.now()).then(r=>r.json()); }
+  let d; try{ d=await fetch('/api/stats').then(r=>r.json()); }
   catch(e){ $('upd').textContent='reconnecting…'; return; }
   if(!d.store){ $('upd').textContent='no store'; return; }
   if(openTotal===null) openTotal=d.total;
@@ -172,7 +172,7 @@ async function tick(){
 }
 // keep the "x ago" labels ticking without refetching
 setInterval(()=>document.querySelectorAll('.ago').forEach(e=>e.textContent=ago(+e.dataset.t)),1000);
-tick(); setInterval(tick, 7000);
+tick(); setInterval(()=>{ if(!document.hidden) tick(); }, 15000);
 </script>
 </body>
 </html>

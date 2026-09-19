@@ -17,6 +17,11 @@ export async function redis(cmds) {
   });
   if (!r.ok) throw new Error(`redis ${r.status}`);
   const out = await r.json();
+  // Upstash returns HTTP 200 with per-command {error} objects (e.g. "ERR max requests
+  // limit exceeded" when the plan quota is spent). Throw so callers fail loudly instead of
+  // treating the error object as data (empty board, votes silently not stored).
+  const bad = out.find((x) => x && typeof x === 'object' && 'error' in x && !('result' in x));
+  if (bad) throw new Error(`redis: ${String(bad.error).slice(0, 160)}`);
   return out.map((x) => (x && 'result' in x ? x.result : x));
 }
 

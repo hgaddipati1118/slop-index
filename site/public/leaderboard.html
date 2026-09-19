@@ -434,7 +434,7 @@ function renderCrowdChart(crowd){
 
 async function refresh(){
   let crowd={rows:[],totalVotes:0};
-  try{ crowd=await fetch('/api/leaderboard?mode=v1&domain=all&cb='+Date.now()).then(r=>r.json()); }catch(e){}
+  try{ crowd=await fetch('/api/leaderboard?mode=v1&domain=all').then(r=>r.json()); }catch(e){}
   computeScores(crowd);
   const total=(crowd&&crowd.totalVotes)||0;
   $('votecount').textContent = total>0 ? total.toLocaleString()+' human vote'+(total===1?'':'s')+' cast, and counting'
@@ -447,7 +447,7 @@ Promise.all([
   fetch('/logos.json').then(r=>r.json()).catch(()=>({}))
 ]).then(([d,lg])=>{
   DATA=d; LOGOS=lg; d.models.forEach(m=>byId[m.id]=m);
-  renderTabs(); refresh(); setInterval(refresh, 20000);
+  renderTabs(); refresh(); setInterval(()=>{ if(!document.hidden) refresh(); }, 60000);
 }).catch(()=>{$('chart').innerHTML='<div style="margin:auto;color:var(--muted)">couldn’t load data</div>';});
 </script>
 </body>

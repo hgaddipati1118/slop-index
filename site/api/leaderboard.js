@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       body.domains = {};
       VOTE_DOMAINS.forEach((d, i) => { body.domains[d] = { rows: toRows(out[3 + i * 2], out[4 + i * 2]) }; });
     }
-    res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=30');
+    res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=60');
     return res.status(200).json(body);
   } catch (e) {
     return res.status(500).json({ error: String(e).slice(0, 200) });
