@@ -55,6 +55,8 @@
   .tagname{position:absolute;bottom:-11px;right:14px;background:var(--surface);border:1px solid var(--line);
     font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:20px;color:var(--body)}
   .tagname:empty{display:none}
+  .txt b.h{font-size:16.5px}
+  .txt .hr{display:block;border-top:1px solid #D5D8DE;margin:4px 0}
   .txt code{font-family:var(--mono);font-size:13px;background:var(--surface);padding:1px 4px;border-radius:3px}
   .picked{border-color:var(--dark)!important}
   .picked .tagname{border-color:var(--dark);color:var(--ink);font-weight:600}
@@ -180,9 +182,44 @@ function fingerprint(){
   return id+'.'+(h>>>0).toString(36);
 }
 const FP=fingerprint();
+// The prompts never name anyone, so models leave blanks like "[Your Name]". Fill them with one fixed
+// cast at display time (outputs and scores are untouched) so a placeholder isn't a giveaway in the vote.
+const BIZ=[[/coffee/,'Corner Cup Coffee'],[/bakery/,'Rise Bakery'],[/farm/,'Hillside Farm'],[/salon/,'Halo Salon'],
+  [/studio/,'Studio North'],[/clinic/,'Northside Clinic'],[/hospital/,'Valley Health'],[/league/,'Tri-County League'],
+  [/venue/,'The Grove'],[/school/,'Lincoln High'],[/nonprofit|organization/,'Northside Community Fund'],
+  [/shop|business|company|product/,'Northside']];
+function fillOne(raw){
+  const k=raw.toLowerCase().replace(/^insert /,'');
+  if(/^(your|my) (full )?name$/.test(k)) return 'Sam Rivera';
+  if(/hiring manager|hiring team/.test(k)) return 'Ms. Chen';
+  if(/^(name|customer name|first name|homeowner name|recipient('s)? name)$/.test(k)) return 'Dana';
+  if(k==='last name') return 'Rivera';
+  if(/phone|number$/.test(k)&&!/email|link|website/.test(k)) return '(555) 014-2290';
+  if(/instagram/.test(k)) return '@northside.co';
+  if(/linkedin/.test(k)) return 'linkedin.com/in/samrivera';
+  if(/^(your )?(email|email address|email here)$/.test(k)) return 'sam@northside.co';
+  if(/link|website|contact information|reach out|get in touch|^email\/|\/email|phone\/email|email\/link/.test(k)) return 'northside.co';
+  if(/^address/.test(k)) return '214 Main St';
+  if(k==='date') return 'Oct 14';
+  if(k==='month') return 'October';
+  if(/neighboring town/.test(k)) return 'Fairview';
+  if(k==='county') return 'Marin County';
+  if(/^(your ?city|city, state)$/.test(k)) return 'Fairview, CA';
+  if(/name|^(your )?(company|business|organization|product|school|high school|hospital system|studio)$/.test(k)) for(const [re,v] of BIZ) if(re.test(k)) return v;
+  return null;
+}
+const fillBlanks=t=>(t||'').replace(/\[([^\]\n]{1,45})\](?!\()/g,(m,inner)=>fillOne(inner.trim())??m);
 function md(t){
-  let s=(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  s=s.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+  let s=fillBlanks(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Render block markdown too, so a model that writes "## Step 1" isn't shown raw next to one
+  // whose "**Step 1**" renders bold: raw syntax would be a giveaway that has nothing to do with slop.
+  s=s.replace(/^[ \t]*#{1,6}[ \t]+(.+?)[ \t#]*$/gm,(m,h)=>'<b class="h">'+h.replace(/\*\*/g,'')+'</b>')
+     .replace(/^([ \t]*)[-*+][ \t]+/gm,'$1• ')
+     .replace(/^[ \t]*(?:-{3,}|\*{3,}|_{3,})[ \t]*$/gm,'<span class="hr"></span>')
+     .replace(/\[([^\]]+)\]\((?:[^)\s]+)\)/g,'$1');
+  s=s.replace(/\*\*\*([^*]+)\*\*\*/g,'<b><i>$1</i></b>')
+     .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+     .replace(/__([^_\n]+)__/g,'<b>$1</b>')
      .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1<i>$2</i>')
      .replace(/`([^`]+)`/g,'<code>$1</code>');
   return s;
