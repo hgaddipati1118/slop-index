@@ -226,7 +226,7 @@ async function boot(){
   // bench.json is the single source of truth for the roster; the inline NAMES/LABS
   // maps below are only a fallback so the page still renders if it fails to load.
   for(const m of (BENCH.models||[])){ if(m.name) NAMES[m.id]=m.name; if(m.lab) LABS[m.id]=m.lab; }
-  for(let k=PAIRS.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[PAIRS[k],PAIRS[j]]=[PAIRS[j],PAIRS[k]];}
+  await loadBoard(); // fills GAMES so the very first matchup is already weighted
   if(CFG.turnstileSiteKey){
     const s=document.createElement('script');
     s.src='https://challenges.cloudflare.com/turnstile/v0/api.js';s.async=true;document.head.appendChild(s);
@@ -235,7 +235,24 @@ async function boot(){
     w.dataset.errorCallback='onTurnstileError';w.dataset.expiredCallback='onTurnstileExpired';
     $('cfslot').appendChild(w);
   } else { getSession(null); }
-  show(); loadBoard();
+  show();
+}
+// Matchup selection: under-voted models get shown more so new roster additions catch up
+// instead of sitting at a neutral Elo for weeks. Pick the featured model with weight
+// 1/(games+10) (0 games is ~19x a 180-game model), then a uniformly random unseen pair
+// containing it, so its opponent is usually an established model that anchors its Elo.
+let GAMES={}; const SEEN=new Set();
+const weightOf=m=>1/((GAMES[m]||0)+10);
+function nextPair(){
+  if(SEEN.size>=PAIRS.length) SEEN.clear();
+  const byModel={};
+  PAIRS.forEach((p,k)=>{ if(SEEN.has(k)) return;
+    (byModel[p.a.model]=byModel[p.a.model]||[]).push(k); (byModel[p.b.model]=byModel[p.b.model]||[]).push(k); });
+  const models=Object.keys(byModel), ws=models.map(weightOf);
+  let r=Math.random()*ws.reduce((a,b)=>a+b,0), m=models[models.length-1];
+  for(let n=0;n<models.length;n++){ r-=ws[n]; if(r<=0){ m=models[n]; break; } }
+  const ks=byModel[m], k=ks[Math.floor(Math.random()*ks.length)];
+  SEEN.add(k); return PAIRS[k];
 }
 async function signPair(){
   PAIRTOKEN=null;
@@ -248,7 +265,7 @@ async function signPair(){
 }
 
 function show(){
-  cur=PAIRS[i%PAIRS.length];
+  cur=nextPair();
   swap=Math.random()<.5;
   const A=swap?cur.b:cur.a, B=swap?cur.a:cur.b;
   $('cards').classList.remove('reveal');
@@ -375,6 +392,7 @@ async function loadBoard(){
     // API sorts Elo descending (most human first). The whole site reads sloppiest-first, so #1
     // here is the model this crowd flagged most often.
     const rows=[...(d.rows||[])].reverse();
+    GAMES={}; rows.forEach(r=>GAMES[r.model]=+r.games||0);
     renderChart(rows);
     $('lbbody').innerHTML = rows.length ? rows.map((r,n)=>
       `<tr><td class="n">${n+1}</td><td><span class="tlogo">${logo(r.model)}</span>${shortName(r.model)}</td><td class="n">${r.elo}</td><td class="n">${r.games}</td></tr>`

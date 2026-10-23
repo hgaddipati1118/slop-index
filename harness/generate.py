@@ -53,6 +53,26 @@ COST_PER_GEN = {
     "seed-2.1-turbo": 0.0040,
     "mercury-2.5": 0.0005,
     "nemotron-3.5-lightning": 0.0008,
+    # 2026-10-22 additions: 1.5x the measured single-call smoke test, rounded up.
+    "gemini-4-argon": 0.0040,
+    "gpt-6.1-sol": 0.0025,
+    "gpt-6.1-sol-pro": 0.0100,
+    "gpt-6-sol": 0.0050,
+    "gpt-6-sol-pro": 0.0160,
+    "gpt-6-luna": 0.0003,
+    "gpt-6-luna-pro": 0.0010,
+    "claude-opus-5.5": 0.0150,
+    "claude-sonnet-5.5": 0.0090,
+    "claude-haiku-5.5": 0.0006,
+    "grok-4.7": 0.0060,
+    "mistral-large-4": 0.0080,
+    "muse-wonder": 0.0270,
+    "muse-spark-open": 0.0120,
+    "glm-5.3-prime": 0.0330,
+    "qwen3.8-max-prime": 0.0100,
+    "deepseek-v4.1-flash-1017": 0.0010,
+    "minimax-m3.1-flash": 0.0005,
+    "mercury-3": 0.0008,
 }
 DEFAULT_COST_PER_GEN = 0.0100  # conservative for an unmeasured model
 

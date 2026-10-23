@@ -86,6 +86,26 @@ MODELS = {
     "seed-2.1-turbo":         "openrouter/bytedance-seed/seed-2-1-turbo",       # 2026-08-12, ByteDance
     "mercury-2.5":            "openrouter/inception/mercury-2.5",               # 2026-09-08, Inception (diffusion LM)
     "nemotron-3.5-lightning": "openrouter/nvidia/nemotron-3.5-lightning",       # 2026-08-11, Nvidia
+    # Roster refresh 2026-10-22: every flagship/point release since 9/10. Cap raised $350 -> $550.
+    "gemini-4-argon":           "openrouter/google/gemini-4-argon",  # 2026-10-13
+    "gpt-6.1-sol":              "openrouter/openai/gpt-6.1-sol",  # 2026-09-29
+    "gpt-6.1-sol-pro":          "openrouter/openai/gpt-6.1-sol-pro",  # 2026-09-29
+    "gpt-6-sol":                "openrouter/openai/gpt-6-sol",  # 2026-09-22
+    "gpt-6-sol-pro":            "openrouter/openai/gpt-6-sol-pro",  # 2026-09-22
+    "gpt-6-luna":               "openrouter/openai/gpt-6-luna",  # 2026-09-22
+    "gpt-6-luna-pro":           "openrouter/openai/gpt-6-luna-pro",  # 2026-09-22
+    "claude-opus-5.5":          "openrouter/anthropic/claude-opus-5.5",  # 2026-09-22
+    "claude-sonnet-5.5":        "openrouter/anthropic/claude-sonnet-5.5",  # 2026-09-28
+    "claude-haiku-5.5":         "openrouter/anthropic/claude-haiku-5.5",  # 2026-10-07
+    "grok-4.7":                 "openrouter/x-ai/grok-4.7",  # 2026-09-21
+    "mistral-large-4":          "openrouter/mistralai/mistral-large-4-0",  # 2026-10-06
+    "muse-wonder":              "openrouter/meta/muse-wonder",  # 2026-10-12
+    "muse-spark-open":          "openrouter/meta/muse-spark-open",  # 2026-10-15
+    "glm-5.3-prime":            "openrouter/z-ai/glm-5.3-prime",  # 2026-09-23
+    "qwen3.8-max-prime":        "openrouter/qwen/qwen3.8-max-prime",  # 2026-09-23
+    "deepseek-v4.1-flash-1017": "openrouter/deepseek/deepseek-v4.1-flash-1017",  # 2026-10-17
+    "minimax-m3.1-flash":       "openrouter/minimax/minimax-m3.1-flash",  # 2026-10-18
+    "mercury-3":                "openrouter/inception/mercury-3",  # 2026-10-16
 }
 
 # Per-alias extra kwargs for models on custom (non-standard) endpoints. The key
@@ -154,6 +174,26 @@ PRICES = {
     "seed-2.1-turbo":         (0.50, 2.50),
     "mercury-2.5":            (0.04, 0.15),
     "nemotron-3.5-lightning": (0.08, 0.20),
+    # 2026-10-22 additions, prices off openrouter.ai/api/v1/models:
+    "gemini-4-argon":          (2.00, 10.00),
+    "gpt-6.1-sol":             (2.00, 10.00),
+    "gpt-6.1-sol-pro":         (2.00, 10.00),
+    "gpt-6-sol":               (2.00, 10.00),
+    "gpt-6-sol-pro":           (2.00, 10.00),
+    "gpt-6-luna":              (0.10, 0.50),
+    "gpt-6-luna-pro":          (0.10, 0.50),
+    "claude-opus-5.5":         (4.00, 20.00),
+    "claude-sonnet-5.5":       (2.00, 10.00),
+    "claude-haiku-5.5":        (0.10, 0.50),
+    "grok-4.7":                (2.00, 6.00),
+    "mistral-large-4":         (1.36, 4.18),
+    "muse-wonder":             (4.00, 20.00),
+    "muse-spark-open":         (1.25, 4.25),
+    "glm-5.3-prime":           (2.80, 8.80),
+    "qwen3.8-max-prime":       (4.00, 12.00),
+    "deepseek-v4.1-flash-1017": (0.30, 1.20),
+    "minimax-m3.1-flash":      (0.15, 0.60),
+    "mercury-3":               (0.10, 0.35),
 }
 
 

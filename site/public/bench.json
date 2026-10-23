@@ -38,7 +38,47 @@
    "blended": 1.5,
    "pangram": null,
    "rank": 2,
-   "spread": "1\u20132"
+   "spread": "1\u20133"
+  },
+  {
+   "id": "claude-sonnet-5.5",
+   "name": "Sonnet 5.5",
+   "lab": "Anthropic",
+   "overall": 37.3,
+   "email": 48.1,
+   "social": 42.3,
+   "essay": 31.9,
+   "slack": 26.9,
+   "conciseness": 25.8,
+   "templating": 67.4,
+   "rhythm": 3.3,
+   "tells": 26.7,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 3,
+   "spread": "2\u20136"
+  },
+  {
+   "id": "claude-opus-5.5",
+   "name": "Opus 5.5",
+   "lab": "Anthropic",
+   "overall": 36.7,
+   "email": 41.3,
+   "social": 43.4,
+   "essay": 35.2,
+   "slack": 26.9,
+   "conciseness": 22.7,
+   "templating": 66.4,
+   "rhythm": 7.2,
+   "tells": 28.0,
+   "price_in": 4.0,
+   "price_out": 20.0,
+   "blended": 12.0,
+   "pangram": null,
+   "rank": 4,
+   "spread": "3\u20136"
   },
   {
    "id": "claude-opus-5",
@@ -57,8 +97,8 @@
    "price_out": 25.0,
    "blended": 15.0,
    "pangram": null,
-   "rank": 3,
-   "spread": "2\u20134"
+   "rank": 5,
+   "spread": "2\u20136"
   },
   {
    "id": "claude-fable-5",
@@ -77,8 +117,28 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": 100,
-   "rank": 4,
-   "spread": "3\u20135"
+   "rank": 6,
+   "spread": "4\u20138"
+  },
+  {
+   "id": "gemini-4-argon",
+   "name": "Gemini 4 Argon",
+   "lab": "Google",
+   "overall": 34.6,
+   "email": 40.3,
+   "social": 46.1,
+   "essay": 29.6,
+   "slack": 22.1,
+   "conciseness": 23.3,
+   "templating": 53.3,
+   "rhythm": 7.3,
+   "tells": 39.3,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 7,
+   "spread": "5\u201314"
   },
   {
    "id": "claude-fable-5.1",
@@ -97,8 +157,8 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": null,
-   "rank": 5,
-   "spread": "4\u201311"
+   "rank": 8,
+   "spread": "6\u201316"
   },
   {
    "id": "gpt-6-astra",
@@ -117,8 +177,8 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": null,
-   "rank": 6,
-   "spread": "5\u201311"
+   "rank": 9,
+   "spread": "7\u201317"
   },
   {
    "id": "gpt-5.6-terra",
@@ -137,8 +197,28 @@
    "price_out": 15.0,
    "blended": 8.75,
    "pangram": 100,
-   "rank": 7,
-   "spread": "4\u201312"
+   "rank": 10,
+   "spread": "7\u201317"
+  },
+  {
+   "id": "gpt-6.1-sol",
+   "name": "GPT-6.1 Sol",
+   "lab": "OpenAI",
+   "overall": 32.6,
+   "email": 36.1,
+   "social": 32.4,
+   "essay": 31.6,
+   "slack": 30.1,
+   "conciseness": 3.0,
+   "templating": 74.7,
+   "rhythm": 14.1,
+   "tells": 30.1,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 11,
+   "spread": "7\u201318"
   },
   {
    "id": "claude-opus-4-8",
@@ -157,8 +237,8 @@
    "price_out": 25.0,
    "blended": 15.0,
    "pangram": 100,
-   "rank": 8,
-   "spread": "6\u201313"
+   "rank": 12,
+   "spread": "10\u201319"
   },
   {
    "id": "gpt-5.6-luna",
@@ -177,8 +257,8 @@
    "price_out": 6.0,
    "blended": 3.5,
    "pangram": 100,
-   "rank": 9,
-   "spread": "5\u201314"
+   "rank": 13,
+   "spread": "8\u201320"
   },
   {
    "id": "gpt-5.6-sol",
@@ -197,8 +277,8 @@
    "price_out": 30.0,
    "blended": 17.5,
    "pangram": 100,
-   "rank": 10,
-   "spread": "5\u201314"
+   "rank": 14,
+   "spread": "8\u201320"
   },
   {
    "id": "gpt-6-astra-pro",
@@ -217,8 +297,48 @@
    "price_out": 50.0,
    "blended": 30.0,
    "pangram": null,
-   "rank": 11,
-   "spread": "5\u201315"
+   "rank": 15,
+   "spread": "8\u201321"
+  },
+  {
+   "id": "gpt-6.1-sol-pro",
+   "name": "GPT-6.1 Sol Pro",
+   "lab": "OpenAI",
+   "overall": 31.5,
+   "email": 34.2,
+   "social": 32.0,
+   "essay": 30.1,
+   "slack": 29.7,
+   "conciseness": 3.0,
+   "templating": 75.0,
+   "rhythm": 14.1,
+   "tells": 23.1,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 16,
+   "spread": "9\u201320"
+  },
+  {
+   "id": "minimax-m3.1-flash",
+   "name": "MiniMax M3.1 Flash",
+   "lab": "MiniMax",
+   "overall": 31.3,
+   "email": 39.1,
+   "social": 38.6,
+   "essay": 29.5,
+   "slack": 18.0,
+   "conciseness": 40.4,
+   "templating": 27.0,
+   "rhythm": 2.6,
+   "tells": 35.8,
+   "price_in": 0.15,
+   "price_out": 0.6,
+   "blended": 0.38,
+   "pangram": null,
+   "rank": 17,
+   "spread": "8\u201323"
   },
   {
    "id": "qwen3.8-flash",
@@ -237,8 +357,8 @@
    "price_out": 0.47,
    "blended": 0.31,
    "pangram": null,
-   "rank": 12,
-   "spread": "6\u201315"
+   "rank": 18,
+   "spread": "9\u201323"
   },
   {
    "id": "glm-5.2",
@@ -257,8 +377,8 @@
    "price_out": 4.4,
    "blended": 2.9,
    "pangram": 100,
-   "rank": 13,
-   "spread": "7\u201315"
+   "rank": 19,
+   "spread": "11\u201322"
   },
   {
    "id": "claude-sonnet-5",
@@ -277,8 +397,8 @@
    "price_out": 10.0,
    "blended": 6.0,
    "pangram": 100,
-   "rank": 14,
-   "spread": "9\u201315"
+   "rank": 20,
+   "spread": "13\u201321"
   },
   {
    "id": "gemini-3.8-flash",
@@ -297,8 +417,8 @@
    "price_out": 3.75,
    "blended": 2.25,
    "pangram": null,
-   "rank": 15,
-   "spread": "14\u201320"
+   "rank": 21,
+   "spread": "20\u201331"
   },
   {
    "id": "qwen3.7-max",
@@ -317,8 +437,8 @@
    "price_out": 7.5,
    "blended": 5.0,
    "pangram": 100,
-   "rank": 16,
-   "spread": "14\u201321"
+   "rank": 22,
+   "spread": "20\u201333"
   },
   {
    "id": "qwen3.8-max",
@@ -337,8 +457,28 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": null,
-   "rank": 17,
-   "spread": "14\u201321"
+   "rank": 23,
+   "spread": "20\u201333"
+  },
+  {
+   "id": "gpt-6-sol-pro",
+   "name": "GPT-6 Sol Pro",
+   "lab": "OpenAI",
+   "overall": 28.3,
+   "email": 31.9,
+   "social": 30.0,
+   "essay": 25.7,
+   "slack": 25.7,
+   "conciseness": 1.1,
+   "templating": 66.2,
+   "rhythm": 10.9,
+   "tells": 27.8,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 24,
+   "spread": "18\u201333"
   },
   {
    "id": "gemini-3.7-flash",
@@ -357,8 +497,48 @@
    "price_out": 3.75,
    "blended": 2.25,
    "pangram": null,
-   "rank": 18,
-   "spread": "15\u201322"
+   "rank": 25,
+   "spread": "21\u201334"
+  },
+  {
+   "id": "gpt-6-sol",
+   "name": "GPT-6 Sol",
+   "lab": "OpenAI",
+   "overall": 28.1,
+   "email": 31.8,
+   "social": 29.7,
+   "essay": 26.3,
+   "slack": 24.8,
+   "conciseness": 1.0,
+   "templating": 66.4,
+   "rhythm": 11.0,
+   "tells": 26.6,
+   "price_in": 2.0,
+   "price_out": 10.0,
+   "blended": 6.0,
+   "pangram": null,
+   "rank": 26,
+   "spread": "19\u201334"
+  },
+  {
+   "id": "qwen3.8-max-prime",
+   "name": "Qwen3.8 Max Prime",
+   "lab": "Alibaba",
+   "overall": 28.1,
+   "email": 34.3,
+   "social": 27.6,
+   "essay": 30.4,
+   "slack": 20.2,
+   "conciseness": 7.8,
+   "templating": 49.3,
+   "rhythm": 15.6,
+   "tells": 41.0,
+   "price_in": 4.0,
+   "price_out": 12.0,
+   "blended": 8.0,
+   "pangram": null,
+   "rank": 27,
+   "spread": "14\u201336"
   },
   {
    "id": "gemini-3.5-flash",
@@ -377,8 +557,68 @@
    "price_out": 9.0,
    "blended": 5.25,
    "pangram": 100,
-   "rank": 19,
-   "spread": "15\u201322"
+   "rank": 28,
+   "spread": "21\u201334"
+  },
+  {
+   "id": "claude-haiku-5.5",
+   "name": "Haiku 5.5",
+   "lab": "Anthropic",
+   "overall": 27.5,
+   "email": 34.0,
+   "social": 30.9,
+   "essay": 21.4,
+   "slack": 23.6,
+   "conciseness": 9.3,
+   "templating": 55.7,
+   "rhythm": 6.9,
+   "tells": 28.0,
+   "price_in": 0.1,
+   "price_out": 0.5,
+   "blended": 0.3,
+   "pangram": null,
+   "rank": 29,
+   "spread": "22\u201337"
+  },
+  {
+   "id": "muse-spark-open",
+   "name": "Muse Spark Open",
+   "lab": "Meta",
+   "overall": 27.4,
+   "email": 36.2,
+   "social": 31.5,
+   "essay": 22.8,
+   "slack": 18.9,
+   "conciseness": 13.1,
+   "templating": 41.2,
+   "rhythm": 15.7,
+   "tells": 40.8,
+   "price_in": 1.25,
+   "price_out": 4.25,
+   "blended": 2.75,
+   "pangram": null,
+   "rank": 30,
+   "spread": "23\u201338"
+  },
+  {
+   "id": "gpt-6-luna-pro",
+   "name": "GPT-6 Luna Pro",
+   "lab": "OpenAI",
+   "overall": 27.0,
+   "email": 31.9,
+   "social": 29.6,
+   "essay": 23.4,
+   "slack": 23.3,
+   "conciseness": 1.4,
+   "templating": 60.3,
+   "rhythm": 14.3,
+   "tells": 29.2,
+   "price_in": 0.1,
+   "price_out": 0.5,
+   "blended": 0.3,
+   "pangram": null,
+   "rank": 31,
+   "spread": "23\u201336"
   },
   {
    "id": "gpt-5.4-mini",
@@ -397,8 +637,8 @@
    "price_out": 4.5,
    "blended": 2.62,
    "pangram": 100,
-   "rank": 20,
-   "spread": "16\u201323"
+   "rank": 32,
+   "spread": "23\u201337"
   },
   {
    "id": "kimi-k3",
@@ -417,8 +657,8 @@
    "price_out": 15.0,
    "blended": 9.0,
    "pangram": null,
-   "rank": 21,
-   "spread": "16\u201324"
+   "rank": 33,
+   "spread": "24\u201338"
   },
   {
    "id": "gemini-3.6-flash",
@@ -437,8 +677,68 @@
    "price_out": 7.5,
    "blended": 4.5,
    "pangram": null,
-   "rank": 22,
-   "spread": "19\u201324"
+   "rank": 34,
+   "spread": "27\u201339"
+  },
+  {
+   "id": "grok-4.7",
+   "name": "Grok 4.7",
+   "lab": "xAI",
+   "overall": 26.2,
+   "email": 26.9,
+   "social": 27.3,
+   "essay": 27.1,
+   "slack": 23.4,
+   "conciseness": 2.7,
+   "templating": 57.4,
+   "rhythm": 11.9,
+   "tells": 27.3,
+   "price_in": 2.0,
+   "price_out": 6.0,
+   "blended": 4.0,
+   "pangram": null,
+   "rank": 35,
+   "spread": "26\u201341"
+  },
+  {
+   "id": "muse-wonder",
+   "name": "Muse Wonder",
+   "lab": "Meta",
+   "overall": 26.2,
+   "email": 31.5,
+   "social": 29.9,
+   "essay": 27.7,
+   "slack": 15.6,
+   "conciseness": 8.7,
+   "templating": 43.6,
+   "rhythm": 15.2,
+   "tells": 37.7,
+   "price_in": 4.0,
+   "price_out": 20.0,
+   "blended": 12.0,
+   "pangram": null,
+   "rank": 36,
+   "spread": "28\u201342"
+  },
+  {
+   "id": "gpt-6-luna",
+   "name": "GPT-6 Luna",
+   "lab": "OpenAI",
+   "overall": 25.5,
+   "email": 29.1,
+   "social": 24.9,
+   "essay": 23.7,
+   "slack": 24.2,
+   "conciseness": 1.4,
+   "templating": 56.6,
+   "rhythm": 14.7,
+   "tells": 27.5,
+   "price_in": 0.1,
+   "price_out": 0.5,
+   "blended": 0.3,
+   "pangram": null,
+   "rank": 37,
+   "spread": "29\u201343"
   },
   {
    "id": "claude-haiku-4-5",
@@ -457,8 +757,8 @@
    "price_out": 5.0,
    "blended": 3.0,
    "pangram": 100,
-   "rank": 23,
-   "spread": "21\u201332"
+   "rank": 38,
+   "spread": "33\u201348"
   },
   {
    "id": "muse-spark-1.3",
@@ -477,8 +777,8 @@
    "price_out": 4.25,
    "blended": 2.75,
    "pangram": null,
-   "rank": 24,
-   "spread": "22\u201331"
+   "rank": 39,
+   "spread": "36\u201348"
   },
   {
    "id": "gemini-3.1-pro-preview",
@@ -497,8 +797,8 @@
    "price_out": 12.0,
    "blended": 7.0,
    "pangram": 100,
-   "rank": 25,
-   "spread": "23\u201332"
+   "rank": 40,
+   "spread": "36\u201348"
   },
   {
    "id": "glm-5.3",
@@ -517,8 +817,8 @@
    "price_out": 4.4,
    "blended": 2.9,
    "pangram": null,
-   "rank": 26,
-   "spread": "23\u201332"
+   "rank": 41,
+   "spread": "36\u201349"
   },
   {
    "id": "hy4-preview",
@@ -537,8 +837,8 @@
    "price_out": 2.5,
    "blended": 1.67,
    "pangram": null,
-   "rank": 27,
-   "spread": "21\u201332"
+   "rank": 42,
+   "spread": "33\u201348"
   },
   {
    "id": "grok-4.5",
@@ -557,8 +857,8 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": 100,
-   "rank": 28,
-   "spread": "24\u201333"
+   "rank": 43,
+   "spread": "39\u201351"
   },
   {
    "id": "deepseek-v4-pro",
@@ -577,8 +877,8 @@
    "price_out": 3.48,
    "blended": 2.61,
    "pangram": 100,
-   "rank": 29,
-   "spread": "15\u201338"
+   "rank": 44,
+   "spread": "21\u201357"
   },
   {
    "id": "qwen3.7-flash",
@@ -597,8 +897,48 @@
    "price_out": 0.13,
    "blended": 0.08,
    "pangram": null,
-   "rank": 30,
-   "spread": "25\u201335"
+   "rank": 45,
+   "spread": "39\u201352"
+  },
+  {
+   "id": "deepseek-v4.1-flash-1017",
+   "name": "DeepSeek V4.1 Flash (1017)",
+   "lab": "DeepSeek",
+   "overall": 23.6,
+   "email": 22.4,
+   "social": 32.7,
+   "essay": 23.3,
+   "slack": 15.8,
+   "conciseness": 9.4,
+   "templating": 37.9,
+   "rhythm": 7.1,
+   "tells": 35.8,
+   "price_in": 0.3,
+   "price_out": 1.2,
+   "blended": 0.75,
+   "pangram": null,
+   "rank": 46,
+   "spread": "39\u201351"
+  },
+  {
+   "id": "glm-5.3-prime",
+   "name": "GLM-5.3 Prime",
+   "lab": "Zhipu",
+   "overall": 23.4,
+   "email": 28.4,
+   "social": 24.3,
+   "essay": 23.4,
+   "slack": 17.5,
+   "conciseness": 11.5,
+   "templating": 39.9,
+   "rhythm": 6.5,
+   "tells": 29.0,
+   "price_in": 2.8,
+   "price_out": 8.8,
+   "blended": 5.8,
+   "pangram": null,
+   "rank": 47,
+   "spread": "39\u201352"
   },
   {
    "id": "grok-4.6",
@@ -617,8 +957,8 @@
    "price_out": 6.0,
    "blended": 4.0,
    "pangram": null,
-   "rank": 31,
-   "spread": "24\u201334"
+   "rank": 48,
+   "spread": "39\u201352"
   },
   {
    "id": "minimax-m3",
@@ -637,8 +977,8 @@
    "price_out": 1.2,
    "blended": 0.75,
    "pangram": 100,
-   "rank": 32,
-   "spread": "26\u201335"
+   "rank": 49,
+   "spread": "42\u201352"
   },
   {
    "id": "muse-spark-1.1",
@@ -657,8 +997,8 @@
    "price_out": 4.25,
    "blended": 2.75,
    "pangram": 100,
-   "rank": 33,
-   "spread": "25\u201335"
+   "rank": 50,
+   "spread": "39\u201353"
   },
   {
    "id": "deepseek-v4.1-flash",
@@ -677,8 +1017,28 @@
    "price_out": 0.6,
    "blended": 0.38,
    "pangram": null,
-   "rank": 34,
-   "spread": "27\u201335"
+   "rank": 51,
+   "spread": "43\u201353"
+  },
+  {
+   "id": "mercury-3",
+   "name": "Mercury 3",
+   "lab": "Inception",
+   "overall": 21.6,
+   "email": 25.4,
+   "social": 21.0,
+   "essay": 20.9,
+   "slack": 19.3,
+   "conciseness": 7.9,
+   "templating": 32.1,
+   "rhythm": 12.2,
+   "tells": 37.2,
+   "price_in": 0.1,
+   "price_out": 0.35,
+   "blended": 0.22,
+   "pangram": null,
+   "rank": 52,
+   "spread": "46\u201354"
   },
   {
    "id": "kimi-k2p6",
@@ -697,8 +1057,8 @@
    "price_out": 4.0,
    "blended": 2.48,
    "pangram": 100,
-   "rank": 35,
-   "spread": "31\u201338"
+   "rank": 53,
+   "spread": "48\u201356"
   },
   {
    "id": "mercury-2.5",
@@ -717,8 +1077,8 @@
    "price_out": 0.15,
    "blended": 0.1,
    "pangram": null,
-   "rank": 36,
-   "spread": "32\u201337"
+   "rank": 54,
+   "spread": "49\u201355"
   },
   {
    "id": "deepseek-v4-pro-0813",
@@ -737,8 +1097,8 @@
    "price_out": 1.74,
    "blended": 1.16,
    "pangram": null,
-   "rank": 37,
-   "spread": "35\u201338"
+   "rank": 55,
+   "spread": "53\u201357"
   },
   {
    "id": "inkling-small",
@@ -757,8 +1117,28 @@
    "price_out": 1.2,
    "blended": 0.82,
    "pangram": null,
-   "rank": 38,
-   "spread": "36\u201339"
+   "rank": 56,
+   "spread": "53\u201357"
+  },
+  {
+   "id": "mistral-large-4",
+   "name": "Mistral Large 4",
+   "lab": "Mistral",
+   "overall": 18.8,
+   "email": 24.0,
+   "social": 23.6,
+   "essay": 13.8,
+   "slack": 13.9,
+   "conciseness": 7.2,
+   "templating": 26.0,
+   "rhythm": 14.2,
+   "tells": 34.9,
+   "price_in": 1.36,
+   "price_out": 4.18,
+   "blended": 2.77,
+   "pangram": null,
+   "rank": 57,
+   "spread": "55\u201358"
   },
   {
    "id": "nemotron-3.5-lightning",
@@ -777,28 +1157,39 @@
    "price_out": 0.2,
    "blended": 0.14,
    "pangram": null,
-   "rank": 39,
-   "spread": "38\u201339"
+   "rank": 58,
+   "spread": "56\u201358"
   }
  ],
  "tie_groups": [
   [
    "mistral-large",
    "seed-2.1-turbo",
-   "claude-opus-5",
-   "claude-fable-5"
+   "claude-sonnet-5.5",
+   "claude-opus-5.5",
+   "claude-opus-5"
   ],
   [
+   "claude-fable-5",
+   "gemini-4-argon",
    "claude-fable-5.1",
    "gpt-6-astra",
    "gpt-5.6-terra",
-   "claude-opus-4-8",
+   "gpt-6.1-sol",
    "gpt-5.6-luna",
    "gpt-5.6-sol",
    "gpt-6-astra-pro",
+   "minimax-m3.1-flash"
+  ],
+  [
+   "claude-opus-4-8",
+   "gpt-6.1-sol-pro",
    "qwen3.8-flash",
    "glm-5.2",
-   "claude-sonnet-5"
+   "claude-sonnet-5",
+   "gpt-6-sol-pro",
+   "gpt-6-sol",
+   "qwen3.8-max-prime"
   ],
   [
    "gemini-3.8-flash",
@@ -806,9 +1197,15 @@
    "qwen3.8-max",
    "gemini-3.7-flash",
    "gemini-3.5-flash",
+   "claude-haiku-5.5",
+   "muse-spark-open",
+   "gpt-6-luna-pro",
    "gpt-5.4-mini",
    "kimi-k3",
    "gemini-3.6-flash",
+   "grok-4.7",
+   "muse-wonder",
+   "gpt-6-luna",
    "deepseek-v4-pro"
   ],
   [
@@ -819,22 +1216,25 @@
    "hy4-preview",
    "grok-4.5",
    "qwen3.7-flash",
+   "deepseek-v4.1-flash-1017",
+   "glm-5.3-prime",
    "grok-4.6",
    "minimax-m3",
    "muse-spark-1.1",
    "deepseek-v4.1-flash",
-   "kimi-k2p6",
-   "mercury-2.5"
+   "mercury-3",
+   "kimi-k2p6"
   ],
   [
+   "mercury-2.5",
    "deepseek-v4-pro-0813",
    "inkling-small",
-   "nemotron-3.5-lightning"
+   "mistral-large-4"
   ]
  ],
  "meta": {
-  "n_models": 39,
-  "n_outputs": 43364,
+  "n_models": 58,
+  "n_outputs": 64636,
   "scenarios": 112,
   "domains": [
    "email",
@@ -848,7 +1248,7 @@
    "rhythm": 0.2,
    "tells": 0.15
   },
-  "run_id": "full-merged-v4",
-  "pangram_note": "18 of 39 models carry a pangram.com (v3.3.2) browser score; every scored one = 100% AI, High confidence. Models added after that pass show null and have NOT been run through the detector."
+  "run_id": "full-merged-v5",
+  "pangram_note": "18 of 58 models carry a pangram.com (v3.3.2) browser score; every scored one = 100% AI, High confidence. Models added after that pass show null and have NOT been run through the detector."
  }
 }
