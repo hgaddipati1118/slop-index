@@ -182,7 +182,7 @@ function fingerprint(){
   return id+'.'+(h>>>0).toString(36);
 }
 const FP=fingerprint();
-// The prompts never name anyone, so models leave blanks like "[Your Name]". Fill them with one fixed
+// The prompts never name the writer (and some recipients are generic), so models leave blanks like "[Your Name]". Fill them with one fixed
 // cast at display time (outputs and scores are untouched) so a placeholder isn't a giveaway in the vote.
 const BIZ=[[/coffee/,'Corner Cup Coffee'],[/bakery/,'Rise Bakery'],[/farm/,'Hillside Farm'],[/salon/,'Halo Salon'],
   [/studio/,'Studio North'],[/clinic/,'Northside Clinic'],[/hospital/,'Valley Health'],[/league/,'Tri-County League'],
