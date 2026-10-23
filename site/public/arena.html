@@ -202,6 +202,17 @@ async function getSession(turnstileToken){
 }
 function ensureSession(){ try{ if(window.turnstile && CFG.turnstileSiteKey) window.turnstile.reset(); }catch(e){} }
 window.onTurnstile=(tok)=>getSession(tok);
+// Without these the widget fails silently and every vote comes back 'verifying' forever.
+let TS_REPORTED=false;
+window.onTurnstileError=(code)=>{
+  if(!TS_REPORTED){
+    TS_REPORTED=true;
+    fetch('/api/session',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({turnstileError:String(code||'unknown')})}).catch(()=>{});
+  }
+  if(!SESSION) $('me').innerHTML='⚠ the human check couldn’t load ('+(code||'error')+'), so votes can’t count right now. Try refreshing.';
+};
+window.onTurnstileExpired=()=>ensureSession();
 
 async function boot(){
   let BENCH;
@@ -221,6 +232,7 @@ async function boot(){
     s.src='https://challenges.cloudflare.com/turnstile/v0/api.js';s.async=true;document.head.appendChild(s);
     const w=document.createElement('div');w.className='cf-turnstile';
     w.dataset.sitekey=CFG.turnstileSiteKey;w.dataset.callback='onTurnstile';w.dataset.appearance='interaction-only';
+    w.dataset.errorCallback='onTurnstileError';w.dataset.expiredCallback='onTurnstileExpired';
     $('cfslot').appendChild(w);
   } else { getSession(null); }
   show(); loadBoard();

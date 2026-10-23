@@ -5,6 +5,14 @@
 // If TURNSTILE_SECRET isn't set, sessions are issued freely (graceful dev mode).
 import { createHmac } from 'node:crypto';
 import { makeToken } from './_sign.js';
+import { one, configured } from './_redis.js';
+
+// Count Turnstile failures in the tally hash so /api/stats shows them. Without this a
+// misconfigured widget (e.g. 110200 = hostname not allowlisted) fails silently in the browser.
+async function countFailure(kind) {
+  if (!configured) return;
+  try { await one(['HINCRBY', 'tally', `turnstile:${kind}`, 1]); } catch (e) {}
+}
 
 const SALT = process.env.IP_SALT || 'slop-default-salt';
 const TTL_MS = 2 * 60 * 60 * 1000;
@@ -20,6 +28,14 @@ export default async function handler(req, res) {
   const iph = ipHash(req);
   const secret = process.env.TURNSTILE_SECRET;
 
+  // Client-side widget error report (no session issued).
+  const clientError = (req.body || {}).turnstileError;
+  if (clientError != null) {
+    const code = String(clientError).replace(/[^\w-]/g, '').slice(0, 16) || 'unknown';
+    await countFailure(`client:${code}`);
+    return res.status(200).json({ ok: false });
+  }
+
   if (secret) {
     const tok = (req.body || {}).turnstile;
     if (!tok) return res.status(400).json({ error: 'missing turnstile token' });
@@ -31,8 +47,12 @@ export default async function handler(req, res) {
       const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',
         { method: 'POST', body: form });
       const out = await r.json();
-      if (!out.success) return res.status(403).json({ error: 'turnstile failed', codes: out['error-codes'] });
+      if (!out.success) {
+        await countFailure(`verify:${(out['error-codes'] || ['unknown'])[0]}`);
+        return res.status(403).json({ error: 'turnstile failed', codes: out['error-codes'] });
+      }
     } catch (e) {
+      await countFailure('verify:unreachable');
       return res.status(502).json({ error: 'verify unreachable' });
     }
   }

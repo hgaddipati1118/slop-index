@@ -40,6 +40,8 @@ export default async function handler(req, res) {
         daily_cap: n('rejected:cap'), no_session: n('rejected:nosession'),
         bad_pair: n('rejected:badpair'),
       },
+      turnstile_errors: Object.fromEntries(Object.keys(tally)
+        .filter((k) => k.startsWith('turnstile:')).map((k) => [k.slice(10), n(k)])),
       seen: n(`${m}:seen`),
       models: rows,
       recent,
